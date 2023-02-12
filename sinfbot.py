@@ -1,5 +1,5 @@
 
-token = "MTA0ODcxNzE1NDkyMjU0MTIxNw.GQncs0.Gr1eDYBCRpa2SxEby78DeHFtSgxaZVAL8DBnVM"
+token = "TOKEN"
 
 import discord 
 from discord import app_commands
