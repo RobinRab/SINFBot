@@ -85,6 +85,7 @@ Le bot devrait maintenant être en ligne, vous pouvez le tester comme vous le so
 
 # 📡 Partager vos modifications
 
+HELP COMMENT FAIRE??
 ça je sais pas encore comment faire, mais je pense que chacun aura le droit de créer sa branche te la modifier en ajouter un dossier à son nom avec ses fonctions, ensuite il pourra proposer de merge, on check le code et il est ajouté au main si tout est bon
 
 ATTENTION: ne pas oublier que je sais pas quoi faire avec le fichier `json` entre chaque branche
