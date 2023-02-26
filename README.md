@@ -50,7 +50,7 @@ Le module dotenv permet de lire un fichier `.env` dans votre dépôt, celui-ci s
 > ### 5. Activez les 3 checks intents 
 > ### 6. Copiez le token de votre bot via le bouton "copy token"
 > ### 7. rejoingnez le serveur de [testing](https://discord.gg/5braTFUa8h)
-> ### 8. Invitez votre bot dessus via [ce lien](https://discord.com/oauth2/authorize?response_type=code&client_id=CLIENT_ID&scope=bot+applications.commands&permissions=8&guild_id=1078948017773756496), remplacez CLIENT_ID dans l'url par l'ID que vous trouverez dans "General Information" du portal
+> ### 8. Invitez votre bot dessus via [ce lien](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=8), remplacez CLIENT_ID dans l'url par l'ID que vous trouverez dans "General Information" du portal
 Vous voici désormais prêt avec votre bot pour tous les tests, ceci est nécessaire par sécurité pour le serveur principal ainsi que pour éviter les spams que certains tests peuvent provoquer. <br> Sur votre compte discord, je vous conseille d'aller dans settings/Advanced et d'activer le mode développeur, cela vous permettra de copier l'ID de vos messages, serveurs, etc.
 
 ## 2. cloner le projet
