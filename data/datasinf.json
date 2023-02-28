@@ -1,0 +1,163 @@
+{
+    "phrasesID": 52,
+    "phrases": [
+        {
+            "mot": "avatar",
+            "text": "best movie ever",
+            "time": 5,
+            "id": 1
+        },
+        {
+            "mot": "kevin",
+            "text": " On ne parle pas de kevin. ",
+            "time": 5,
+            "id": 5
+        },
+        {
+            "mot": "dan",
+            "text": " addict \u00e0 tetris depuis 1978 ",
+            "time": 2,
+            "id": 7
+        },
+        {
+            "mot": "b&w",
+            "text": " J'arrive! ",
+            "time": 1,
+            "id": 11
+        },
+        {
+            "mot": "eau",
+            "text": " Dans 20-30 ans il y en aura plus ",
+            "time": 2,
+            "id": 12
+        },
+        {
+            "mot": "ping",
+            "text": " pong! ",
+            "time": 5,
+            "id": 16
+        },
+        {
+            "mot": "J'ai faim",
+            "text": " mange ",
+            "time": 5,
+            "id": 19
+        },
+        {
+            "mot": "long",
+            "text": " let meee do it for you ",
+            "time": 5,
+            "id": 20
+        },
+        {
+            "mot": "ptk",
+            "text": " Salut c'est Ki\u00eat ",
+            "time": 1,
+            "id": 21
+        },
+        {
+            "mot": "kiet",
+            "text": " Salut c'est Ki\u00eat ",
+            "time": 1,
+            "id": 23
+        },
+        {
+            "mot": "oolong",
+            "text": " https://tenor.com/view/fire-drink-burn-alcohol-gif-15842781 ",
+            "time": 1,
+            "id": 29
+        },
+        {
+            "mot": "Hello there",
+            "text": " General Kenobi ",
+            "time": 30,
+            "id": 30
+        },
+        {
+            "mot": "bubble tea",
+            "text": " \ud83e\uddcb ",
+            "time": 1,
+            "id": 33
+        },
+        {
+            "mot": "resto u",
+            "text": " beurk ",
+            "time": 1,
+            "id": 35
+        },
+        {
+            "mot": "dormir",
+            "text": " dors ",
+            "time": 1,
+            "id": 36
+        },
+        {
+            "mot": "!manger",
+            "text": "O\u00f9 manger \u00e0 Louvain-la-Neuve ? \n**__Fast-food :__**\n```\u2022 \ud83c\udf54 Burger King  \u20ac\u20ac\n\u2022 \ud83c\udf54 Black and white \u20ac\u20ac\n\u2022 \ud83c\udf54 Quick \u20ac\u20ac\n\u2022 \ud83c\udf57 Faux KFC \u20ac\u20ac\n\u2022 \ud83c\udf2e O tacos \u20ac\u20ac```\n**__Healthy : __**\n```\u2022 \ud83e\udd57 Poke house \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf63 Taki Maki \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf2f Mex and go \u20ac\u20ac\n\u2022 \ud83c\udf63 Sushi world \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf72 Resto u \u20ac\n\u2022 \ud83c\udf58 Itadaki Max \u20ac\u20ac\n\u2022 \ud83e\udd57 Wok\u00e9 \u20ac\u20ac\u20ac```\n**__Pates : __**\n```\u2022 \ud83c\udf5d Nulles pates ailleurs \u20ac\u20ac\n\u2022 \ud83c\udf5d Fantasia \u20ac\u20ac\n\u2022 \ud83c\udf5d Pates du resto u \u20ac```\n**__Sandwich : __ ** \n```\u2022 \ud83e\udd6a Kafette (Barbe) \u20ac\n\u2022 \ud83e\udd6a Crousti \u20ac\n\u2022 \ud83e\udd6a SOS Sandwich \u20ac\n\u2022 \ud83e\udd6a La sandwicherie \u20ac\u20ac\n\u2022 \ud83e\udd6a Cyclofette (Cyclotron) \u20ac```\n**__Sucr\u00e9 :__** \n```\u2022 \ud83e\uddc7 Gofidor \u20ac\n\u2022 \ud83c\udf69 Dunkin Donut \u20ac\n\u2022 \ud83e\uddc3 Guapa \u20ac\u20ac\n\u2022 \ud83c\udf75 Bubble tea \u20ac\u20ac\n```",
+            "time": null,
+            "id": 51
+        }
+    ],
+    "tetris": {
+        "723244609597341748": "csromega",
+        "329571940476125185": "uwubereats",
+        "443867585075871767": "s_17",
+        "457594644495073280": "silversci777",
+        "183259368286978048": "dan1259",
+        "627431499960156161": "leonielc",
+        "269210243093889028": "poirefruit",
+        "366975965601071104": "clonmell"
+    },
+    "birthday": {
+        "346945067975704577": {
+            "year": 2000,
+            "month": 2,
+            "day": 21
+        },
+        "443867585075871767": {
+            "year": 2005,
+            "month": 1,
+            "day": 2
+        },
+        "627431499960156161": {
+            "year": 2003,
+            "month": 12,
+            "day": 29
+        },
+        "271305579698323456": {
+            "year": 2003,
+            "month": 2,
+            "day": 17
+        },
+        "303485893317230593": {
+            "year": 2002,
+            "month": 1,
+            "day": 8
+        },
+        "560155603574718475": {
+            "year": 2003,
+            "month": 2,
+            "day": 26
+        },
+        "330670074320912384": {
+            "year": 2004,
+            "month": 1,
+            "day": 20
+        },
+        "183259368286978048": {
+            "year": 2003,
+            "month": 2,
+            "day": 4
+        },
+        "723244609597341748": {
+            "year": 2004,
+            "month": 8,
+            "day": 23
+        },
+        "329571940476125185": {
+            "year": 2004,
+            "month": 8,
+            "day": 3
+        }
+    }
+}
