@@ -9,7 +9,6 @@
 <p align="center">
 	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/RobinRab/SINF-Bot?color=lightblue" />
 	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/RobinRab/SINF-Bot?color=critical" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/RobinRab/SINF-Bot?color=blue" />
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/RobinRab/SINF-Bot?color=green" />
 </p>
 
