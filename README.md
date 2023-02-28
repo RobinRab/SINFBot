@@ -1,5 +1,5 @@
 <h1 align="center">
-	📖 Anon
+	:shipit: Anon
 </h1>
 
 <p align="center">
