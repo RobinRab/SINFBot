@@ -40,23 +40,20 @@ Pour ce projet git vous aurez besoin d'installer git sur votre machine, ça vous
 ## 3. dotenv
 Le module dotenv permet de lire un fichier `.env` dans votre dépôt, celui-ci sera nécessaire plus tard
 
-# 🛠️ Setup le bot
-
+# 🛠️ Setup des tests
 ## 1. créer votre bot de test
 > ### 1. Connectez vous à discord et rendez-vous sur [Discord Developper Portal](https://discord.com/developers/applications)
 > ### 2. Cliquez sur "New Application"
 > ### 3. Donnez lui un nom et appuyez sur "create"
 > ### 4. Allez dans l'onglet 'Bot' et cliquez sur "Add bot" 
-> ### 5. Activez les 3 checks intents 
-> ### 6. Copiez le token de votre bot via le bouton "copy token"
+> ### 5. Désactivez ""Public bot"
+> ### 6. Activez les 3 checks intents 
 > ### 7. rejoingnez le serveur de [testing](https://discord.gg/5braTFUa8h)
 > ### 8. Invitez votre bot dessus via [ce lien](https://discord.com/oauth2/authorize?response_type=code&client_id=CLIENT_ID&scope=bot+applications.commands&permissions=8&guild_id=1078948017773756496), remplacez CLIENT_ID dans l'url par l'ID que vous trouverez dans "General Information" du portal
 Vous voici désormais prêt avec votre bot pour tous les tests, ceci est nécessaire par sécurité pour le serveur principal ainsi que pour éviter les spams que certains tests peuvent provoquer. <br> Sur votre compte discord, je vous conseille d'aller dans settings/Advanced et d'activer le mode développeur, cela vous permettra de copier l'ID de vos messages, serveurs, etc.
 
-## 2. cloner le projet
-```
-git clone https://github.com/RobinRab/SINF-Bot
-```
+## 2. forker le projet
+Pour forker le projet, cliquez sur le bouton "fork" en haut à droite de la page, vous aurez alors une copie du projet sur votre compte github. <br> Vous pouvez maintenant cloner le projet sur votre machine via git et le modifier comme ci-dessous
 
 ## 3. créer le fichier `.env`
 Dans le dossier principal, créer un fichier `.env` contenant toutes vos variables personnelles, celles-ci ne seront pas partagées avec les autres développeurs. <br> Le fichier `.env` doit contenir les variables suivantes:
@@ -85,11 +82,13 @@ python3.11 main.py
 Le bot devrait maintenant être en ligne, vous pouvez le tester comme vous le souhaitez. Pour l'arrêter, appuyez sur `CTRL + C` dans le terminal
 
 # 📡 Partager vos modifications
-
-COMMENT?? Ne faites pas comme moi, commentez corresctement votre code. ça je sais pas encore comment faire, mais je pense que chacun aura le droit de créer sa branche te la modifier en ajouter un dossier à son nom avec ses fonctions, ensuite il pourra proposer de merge, on check le code et il est ajouté au main si tout est bon
-
-ATTENTION: ne pas oublier que je sais pas quoi faire avec le fichier `json` entre chaque branche
-
+Lorsque votre nouvelle commande a bien été testée et que vous souhaitez la partager avec les autres développeurs, suivez ces étapes dans votre terminal:
+```
+git add .
+git commit -m "explication de vos changements"
+git push
+```
+Ensuite, vous devez créer une pull request. <br> Pour cela, rendez-vous sur votre fork du projet, cliquez sur le bouton "pull request" et suivez les instructions. <br> Une fois la pull request créée, un développeur va la vérifier et la merger dans le projet principal <br> <br> 
 
 # 📝 Comment ça marche?
 ## `Main.py`
