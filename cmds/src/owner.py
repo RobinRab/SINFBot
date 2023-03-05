@@ -116,6 +116,24 @@ class Owner(commands.Cog):
 		await inter.followup.send(txt)
 
 
+	@app_commands.command(description="Debugs the state of the bot")
+	@commands.is_owner()
+	async def debug(self, inter:discord.Interaction):
+		txt = "```\n"
+		for ext in settings.extensions:
+			if ext in self.bot.extensions:
+				txt += f"\n ✅ {ext} loaded"
+			else :
+				txt += f"\n ❌ {ext} not loaded"
+
+		txt += "```"
+
+		E = discord.Embed(title="Debug", description=txt)
+		E.add_field(name="Synced", value=self.bot.tree.synced)
+		E.add_field(name="Ping", value=f"{self.bot.latency*1000:.2f}ms")
+
+		await inter.response.send_message(embed=E)
+
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Owner(bot))
