@@ -19,7 +19,7 @@ class General(commands.Cog):
 	@commands.cooldown(1, 5, commands.BucketType.user)
 	async def file(self, ctx:commands.Context, link=None):
 		if link is None : 
-			await ctx.send("Vous devez préciser un lien à convertir",delete_after=5)
+			await ctx.send("You must specify a link to convert",delete_after=5)
 			return
 		await ctx.trigger_typing()
 	
@@ -35,7 +35,7 @@ class General(commands.Cog):
 					break
 		
 		if Format is None:
-			await ctx.send(f"**{ctx.author},**Le lien envoyé n'est pas valable",delete_after=5)
+			await ctx.send(f"**{ctx.author},** link invalid",delete_after=5)
 			return
 		
 		try :
@@ -43,9 +43,9 @@ class General(commands.Cog):
 			async with aiohttp.ClientSession() as cs:
 				async with cs.get(link) as resp:
 					File = discord.File(io.BytesIO(await resp.content.read()),filename=f"file{Format}") #,filename="image.png") pour préciser le format
-					await ctx.send(f"**{ctx.author},** Voici votre fichier",file=File)
+					await ctx.send(f"**{ctx.author},** here's your file!",file=File)
 		except :
-			await ctx.send(f"**{ctx.author},** Le lien envoyé n'est pas un lien valide",delete_after=15)
+			await ctx.send(f"**{ctx.author},** link invalid",delete_after=15)
 
 
 	@commands.command()
@@ -54,41 +54,41 @@ class General(commands.Cog):
 		if len(ctx.message.attachments) >= 1 :
 			await ctx.trigger_typing()
 			link = await GetLogLink(self.bot, ctx.message.attachments[0].url)
-			await ctx.send(f"**{ctx.author}**, Voici votre lien permanent : {link}")
+			await ctx.send(f"**{ctx.author}**, here's your permanent link : {link}")
 		else : 
-			await ctx.send("Vous devez attacher une image ou un fichier à votre message",delete_after=5)
+			await ctx.send("You must specify a file as attachment",delete_after=5)
 
 
 	@commands.command()
 	@commands.cooldown(1, 5, commands.BucketType.user)
 	async def emoji(self, ctx:commands.Context, content=None):
 		if content is None : 
-			await ctx.send("Vous devez préciser un emoji",delete_after=5)
+			await ctx.send("You most specify an emoji",delete_after=5)
 			return
 		
 		async with ctx.typing():
 			emoji = await get_emoji(ctx,content)
 
 			if emoji is None:
-				await ctx.send(f"**{ctx.author}**, L'émoji n'existe pas",delete_after=5)
+				await ctx.send(f"**{ctx.author}**, Emoji not found",delete_after=5)
 				return
 		
 			a = str(emoji.created_at)
 			b = a.split()
 			b[1] = b[1].split(".")[0]
 			c = b[0].split("-")
-			creator = emoji.user if emoji.user is not None else "Inconnu"
+			creator = emoji.user if emoji.user is not None else "Unknown"
 			date =  str(c[2]+"/"+c[1]+"/"+ c[0] +" à " + b[1])
 			link = await GetLogLink(self.bot, emoji.url)
 			icon = await GetLogLink(self.bot, ctx.author.display_avatar)
 			embed = discord.Embed(
-				title = "Voici votre émoji",
-				description = f"**Nom : **`{emoji.name}`\n**Aperçu : **{emoji}\n**ID : **{emoji.id}\n**Identifiant : **`{emoji}`\n**Serveur : **`{emoji.guild}`{creator}\n**Date d'ajout : **{date}",
+				title = "Here's your emoji",
+				description = f"**Name : **`{emoji.name}`\n**Preview : **{emoji}\n**ID : **{emoji.id}\n**ID : **`{emoji}`\n**Server : **`{emoji.guild}`{creator}\n**Date added : **{date}",
 				colour = discord.Colour.random()
 				)
 			embed.url=link
 			embed.set_image(url=link)
-			embed.set_footer(text=f"Requête par : {ctx.author}",icon_url=icon)
+			embed.set_footer(text=f"Requested by : {ctx.author}",icon_url=icon)
 			await ctx.send(embed=embed)
 
 
@@ -97,7 +97,7 @@ class General(commands.Cog):
 	@commands.cooldown(1, 60, commands.BucketType.user)
 	async def confession(self, ctx: commands.Context, *, txt=None):
 		if txt is None:
-			await ctx.channel.send("Je n'ai aucune confession à partager")
+			await ctx.channel.send("You must specify a confession")
 			return
 
 		E = discord.Embed(
@@ -111,7 +111,7 @@ class General(commands.Cog):
 
 		await chan.send(embed=E)
 		await ctx.channel.send(embed=discord.Embed(
-			title = "Confession envoyée",
+			title = "Confession sent",
 			color=discord.Colour.green()
 			)
 		)

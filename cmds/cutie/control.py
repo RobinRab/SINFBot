@@ -4,6 +4,7 @@ from discord.ext import commands
 
 import aiohttp
 import requests
+from typing import Optional
 
 from utils import is_cutie, activities, statuses
 
@@ -13,6 +14,7 @@ class Control(commands.Cog):
 		self.bot : commands.Bot = bot
 
 	@app_commands.command(description="Changes the bot's name")
+	@app_commands.describe(name="The new name")
 	@app_commands.check(is_cutie)
 	@app_commands.checks.cooldown(1, 3600, key=lambda i: (i.guild_id, i.guild.id))
 	async def rename(self, inter:discord.Interaction, *, name:str):
@@ -29,7 +31,7 @@ class Control(commands.Cog):
 	@commands.command(description="Changes the bot's avatar")
 	@commands.check(is_cutie)
 	@commands.cooldown(1, 3600, commands.BucketType.guild)
-	async def avatar(self, inter: discord.Interaction, link:str=None):
+	async def avatar(self, inter: discord.Interaction, link:Optional[str]):
 		if link is None and len(inter.message.attachments) == 0:
 			await inter.response.send_message("You must send a link or attach an image", delete_after=5)
 			return
@@ -53,6 +55,7 @@ class Control(commands.Cog):
 
 
 	@app_commands.command(description="Changes the bot's status")
+	@app_commands.describe(state="Chose the new status of the bot")
 	@app_commands.check(is_cutie)
 	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.guild.id))
 	async def status(self, inter:discord.Interaction, state:statuses):
@@ -61,9 +64,13 @@ class Control(commands.Cog):
 
 
 	@app_commands.command(description="Changes the bot's activity")
+	@app_commands.describe(
+		typ="Choose the activity type",
+		text = "Enter any text"
+	)
 	@app_commands.check(is_cutie)
 	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.guild.id))
-	async def activity(self, inter:discord.Interaction, typ:activities, text:str=None):
+	async def activity(self, inter:discord.Interaction, typ:activities, text:Optional[str]):
 		if text is None and typ != "stop":
 			await inter.response.send_message("You must specify a text", delete_after=5)
 			return

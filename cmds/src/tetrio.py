@@ -49,7 +49,7 @@ class Tetrio(commands.Cog):
 				raise ValueError
 
 		except:
-			await inter.response.send_message("Malheureusement une erreur est survenue sur le serveur, veuillez réessayer plus tard")
+			await inter.response.send_message("An error occured while fetching data", ephemeral=True)
 			return
 
 		#if they have a country
@@ -220,7 +220,7 @@ class Tetrio(commands.Cog):
 			getr = requests.get(f"https://ch.tetr.io/api/users/{user}/records").json()
 
 			if not all([get['success'] , getr['success']]) :
-				await inter.response.send_message("Malheureusement une erreur est survenue sur le serveur, veuillez réessayer plus tard")
+				await inter.response.send_message("An error occured while fetching the data")
 				return
 
 			datatr[user] = round(get['data']['user']['league']['rating'])

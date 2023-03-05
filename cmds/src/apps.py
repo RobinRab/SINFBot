@@ -37,13 +37,13 @@ class GeneralCM(commands.Cog):
 			y = int(days/365)
 			m = int((days-(y*365))/30)
 			d = int(days-(y*365)-(m*30))
-			Ellapsed = f"({f'{y}a,' if y != 0 else ''}{f'{m}m,' if m != 0 else ''}{f'{d}j' if d != 0 else ''})"
+			Ellapsed = f"({f'{y}y,' if y != 0 else ''}{f'{m}m,' if m != 0 else ''}{f'{d}d' if d != 0 else ''})"
 			if Ellapsed == "()":
-				return "Aujourd'hui"
+				return "Today"
 			return Ellapsed
 
 		if user.name != user.display_name : 
-			E.add_field(name="**Surnom**",value=f"`{user.display_name}`") #nickname
+			E.add_field(name="**Nickname**",value=f"`{user.display_name}`")
 
 		#bot aren't allowed to see badges, but maybe in the future
 		badges = {
@@ -83,13 +83,13 @@ class GeneralCM(commands.Cog):
 			if m != 0 :
 				# if m in L I can find the emoji directly 
 				if m in L :
-					premium = f"Boost depuis : <t:{int(user.premium_since.timestamp())}:F>, <:month:{emotes[L.index(m)]}> `({m} mois)`" #name doesn't really matter
+					premium = f"Boost since : <t:{int(user.premium_since.timestamp())}:F>, <:month:{emotes[L.index(m)]}> `({m} months)`" #name doesn't really matter
 				# if not, I need to do i-1 to get the next closest lower emoji
 				else :
 					L.append(m)
 					L.sort()
 					i = L.index(m)
-					premium = f"Boost depuis : <t:{int(user.premium_since.timestamp())}:F>, <:month:{emotes[i-1]}> `({m} mois)`" #name doesn't really matter
+					premium = f"Boost since : <t:{int(user.premium_since.timestamp())}:F>, <:month:{emotes[i-1]}> `({m} months)`" #name doesn't really matter
 
 			if user.banner != None:
 				E.image = await GetLogLink(self.bot, user.banner)
@@ -98,11 +98,11 @@ class GeneralCM(commands.Cog):
 			E.add_field(name="Badges" if len(txt.split())>1 else "Badge",value=txt,inline=False)
 
 		if premium != "" :
-			E.add_field(name="Serveur boost",value=premium)
+			E.add_field(name="Server boost",value=premium)
 
 		#get date
-		E.add_field(name="Date de création",value=f"<t:{int(user.created_at.timestamp())}:F>, `{getEllapsed(user.created_at)}`",inline=False)
-		E.add_field(name="Date d'arrivée",value=f"<t:{int(user.joined_at.timestamp())}:F>, `{getEllapsed(user.joined_at)}`",inline=True)
+		E.add_field(name="Created at",value=f"<t:{int(user.created_at.timestamp())}:F>, `{getEllapsed(user.created_at)}`",inline=False)
+		E.add_field(name="Arrived at",value=f"<t:{int(user.joined_at.timestamp())}:F>, `{getEllapsed(user.joined_at)}`",inline=True)
 		#roles
 		txt = ""
 
@@ -115,7 +115,7 @@ class GeneralCM(commands.Cog):
 		await inter.response.send_message(embed=E)
 
 	async def avatar(self, inter:discord.Interaction, user:discord.Member):
-		P = "**Voici votre avatar :**\n"
+		P = "**Here's your avatar :**\n"
 		D = ""
 
 		for i in ["png","jpg","jpeg","webp"] :
@@ -124,7 +124,7 @@ class GeneralCM(commands.Cog):
 			D = f"{D}[{i}]({Format}), "
 
 		if inter.user != user :
-			P = f"**Voici l'avatar de : {user} **\n"
+			P = f"**Here is {user}`s avatar **\n"
 
 		if user.display_avatar.is_animated():
 			D = "[gif]({})--".format(user.display_avatar.with_format("gif"))
@@ -133,7 +133,7 @@ class GeneralCM(commands.Cog):
 		embed = discord.Embed(colour=discord.Colour.from_rgb(0,0,0) ,title=P,description=f"**{D[:-2]}**")
 		embed.url=link
 		embed.set_image(url=link)
-		embed.set_footer(text=f"Requête par : {inter.user}")
+		embed.set_footer(text=f"Requested by : {inter.user}")
 		
 		await inter.response.send_message(embed=embed)
 
@@ -142,7 +142,7 @@ class GeneralCM(commands.Cog):
 		year = dt.datetime.now().year
 
 		if str(user.id) not in data.keys():
-			await inter.response.send_message(f"**{user}** n'a pas ajouté son anniversaire")
+			await inter.response.send_message(f"**{user}** has not added their birthday")
 			return
 
 		date = dt.datetime(year, data[str(user.id)]["month"], data[str(user.id)]["day"])
@@ -151,7 +151,7 @@ class GeneralCM(commands.Cog):
 
 		left = date - dt.datetime.now()
 
-		await inter.response.send_message(f"**{user}** a son anniversaire le {date.strftime('%d/%m/%Y')} dans **{left.days+1}j**")
+		await inter.response.send_message(f"**{user}** has his birthday the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**")
 
 
 async def setup(bot:commands.Bot):

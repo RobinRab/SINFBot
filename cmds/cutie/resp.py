@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from typing import Optional
 from utils import is_cutie, get_data, upd_data
 
 class Resp(app_commands.Group):
@@ -14,8 +15,8 @@ class Resp(app_commands.Group):
 		resp="The response to send",
 		time= "The time before the response is deleted (in seconds, max 30)"
 	)
-	async def add(self, inter:discord.Interaction,*, key:str, resp:str, time:int=None):
-		data = get_data()
+	async def add(self, inter:discord.Interaction, key:str, resp:str, time:Optional[int]):
+		data : dict = get_data()
 
 		if time is not None :
 			if time >= 300 :
@@ -29,9 +30,9 @@ class Resp(app_commands.Group):
 		upd_data(data)
 
 		if time == None :
-			await inter.response.send_message(f"Nouvelle réponse ajoutée avec succès :\n**Mot clef : **{key}\n**Réponse : **{resp}\n**Aucune suppression**")
+			await inter.response.send_message(f"New response successfully added :\n**Key : **{key}\n**Resp : **{resp}\n**No Deletion**")
 		else :
-			await inter.response.send_message(f"Nouvelle réponse ajoutée avec succès :\n**Mot clef : **{key}\n**Réponse : **{resp}\n**Temps avant suppression : ** `{time}` secondes")
+			await inter.response.send_message(f"New response successfully added :\n**Key : **{key}\n**Resp : **{resp}\n**Deletion after : ** `{time}`s")
 
 
 	@app_commands.guild_only()
@@ -40,16 +41,16 @@ class Resp(app_commands.Group):
 	@app_commands.command(description="Removes a response from the bot")
 	@app_commands.describe(id="The id of the response to remove")
 	async def delete(self, inter:discord.Interaction, id:int):
-		data = get_data()
+		responses : list = get_data("phrases")
 
-		for i, val in enumerate(data['phrases']):
+		for i, val in enumerate(responses):
 			if val["id"] == id :
-				del data['phrases'][i]
-				await inter.response.send_message(f"La réponse {id} a bien été supprimée")
+				del responses[i]
+				await inter.response.send_message(f"The response n°{id} was successfully deleted")
 				break
 		else : 
-			await inter.response.send_message("L'id envoyé ne correspond à aucune réponse, veuillez réessayer")
-		upd_data(data)
+			await inter.response.send_message("The specified ID matches no response")
+		upd_data(responses)
 
 
 	@app_commands.guild_only()
@@ -58,10 +59,10 @@ class Resp(app_commands.Group):
 	@app_commands.command(description="Lists all the responses of the bot")
 	@app_commands.describe(page="The page to display, default is 1")
 	async def list(self, inter:discord.Interaction, page:int=None):
-		data = get_data()
+		responses : list = get_data("phrases")
 
-		pages = int(len(data["phrases"])/25)
-		if len(data["phrases"])%25 != 0 :
+		pages = int(len(responses)/25)
+		if len(responses)%25 != 0 :
 			pages += 1
 
 		if page is None :
@@ -77,13 +78,13 @@ class Resp(app_commands.Group):
 		E = discord.Embed(title='Liste des phrases et réponses',colour=discord.Colour.random())
 		E.set_footer(text=f"Page {page+1} sur {pages}")
 
-		for i in data["phrases"][page*25:(page*25)+25]:
+		for i in responses[page*25:(page*25)+25]:
 			if i["time"] == None :
-				E.add_field(name=f'**{i["id"]}**',value=f'**Mot : **{i["mot"]}\n**Aucune suppression**\n**texte :** {i["text"]}')
+				E.add_field(name=f'**{i["id"]}**',value=f'**Key : **{i["mot"]}\n**No deletion**\n**Response :** {i["text"]}')
 			else :
-				E.add_field(name=f'**{i["id"]}**',value=f'**Mot : **{i["mot"]}\n**Supprimé après :** {i["time"]}\n**texte :** {i["text"]}')
+				E.add_field(name=f'**{i["id"]}**',value=f'**Key : **{i["mot"]}\n**Deletion after :** {i["time"]}s\n**Response :** {i["text"]}')
 		await inter.response.send_message(embed=E)
 
 
 async def setup(bot:commands.Bot):
-	bot.tree.add_command(Resp(name="resp",description="automatic responses gestion"))
+	bot.tree.add_command(Resp(name="resp",description="Automatic responses gestion"))

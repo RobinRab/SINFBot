@@ -13,7 +13,7 @@ class Help(commands.Cog):
 	async def help(self, ctx:commands.Context) -> None:
 		if ctx.invoked_subcommand is None:
 			E = discord.Embed(title="Help")
-			E.description = "Pour afficher une page d'aide, vous devez préciser le nom d'une commande"
+			E.description = "To display the help page of a command, type `!help <command>`"
 
 			if is_cutie(ctx):
 				E.add_field(name="**Cuties**", value=
@@ -59,10 +59,10 @@ class Help(commands.Cog):
 	@commands.check(is_cutie)
 	async def rename(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/rename")
-		E.description = "**Change le nom du bot**"
+		E.description = "**Changes the name of the bot**"
 		E.add_field(name="**Example**", value="```/rename <name>```")
 		E.add_field(name="**Cooldown**", value="```1h / guild```")
-		E.add_field(name="**Requis**", value="```CUTIE```")
+		E.add_field(name="**Requirement**", value="```CUTIE```")
 
 		await ctx.reply(embed=E)
 
@@ -71,10 +71,10 @@ class Help(commands.Cog):
 	@commands.check(is_cutie)
 	async def avatar(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="!avatar")
-		E.description = "**Change l'avatar du bot**\nlink = lien vers une image\nattachment = fichier image"
+		E.description = "**Changes the avatar of the bot**\nlink = link to an image\nattachment = image file"
 		E.add_field(name="**Example**", value="```!avatar <link> \n!avatar <attachment>```")
 		E.add_field(name="**Cooldown**", value="```1h / guild```")
-		E.add_field(name="**Requis**", value="```CUTIE```")
+		E.add_field(name="**Requirement**", value="```CUTIE```")
 
 		await ctx.reply(embed=E)
 
@@ -83,10 +83,10 @@ class Help(commands.Cog):
 	@commands.check(is_cutie)
 	async def status(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/status")
-		E.description = "**Change le status du bot**\nstatus = online/idle/dnd/invisible"
+		E.description = "**Changes the status of the bot**\nstatus = online/idle/dnd/invisible"
 		E.add_field(name="**Example**", value="```/status <status>```")
 		E.add_field(name="**Cooldown**", value="```60s / guild```")
-		E.add_field(name="**Requis**", value="```CUTIE```")
+		E.add_field(name="**Requirement**", value="```CUTIE```")
 
 		await ctx.reply(embed=E)
 
@@ -95,10 +95,10 @@ class Help(commands.Cog):
 	@commands.check(is_cutie)
 	async def activity(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/activity")
-		E.description = "**Change l'activitée du bot**\nact = playing/listening/watching/stop"
+		E.description = "**Changes the activity of the bot**\nact = playing/listening/watching/stop"
 		E.add_field(name="**Example**", value="```/activity <act> <txt>```")
 		E.add_field(name="**Cooldown**", value="```60s / guild```")
-		E.add_field(name="**Requis**", value="```CUTIE```")
+		E.add_field(name="**Requirement**", value="```CUTIE```")
 
 		await ctx.reply(embed=E)
 
@@ -107,22 +107,22 @@ class Help(commands.Cog):
 	@commands.check(is_cutie)
 	async def resp(self, ctx:commands.Context) -> None:
 		E_add = discord.Embed(title="/resp add")
-		E_add.description = "**Ajoute une réponse automatique**\nkey = mot clé\nresp = réponse\n(time) = temps avant suppression (optionnel)"
+		E_add.description = "**Adds an automatic response**\nkey = trigger keyword\nresp = response\n(time) = time before deletion (optionnal)"
 		E_add.add_field(name="**Example**", value="```/resp <key> <resp> (time)```")
 		E_add.add_field(name="**Cooldown**", value="```5s / user```")
-		E_add.add_field(name="**Requis**", value="```CUTIE```")
+		E_add.add_field(name="**Requirement**", value="```CUTIE```")
 
 		E_del = discord.Embed(title="/resp del")
-		E_del.description = "**Supprime une réponse automatique**\nid = id de la réponse"
+		E_del.description = "**Deletes an automatic response**\nid = id of the response"
 		E_del.add_field(name="**Example**", value="```/resp del <id>```")
 		E_del.add_field(name="**Cooldown**", value="```5s / user```")
-		E_del.add_field(name="**Requis**", value="```CUTIE```")
+		E_del.add_field(name="**Requirement**", value="```CUTIE```")
 
 		E_list = discord.Embed(title="/resp list")
-		E_list.description = "**Affiche la liste des réponses automatiques**\n(page) = page de la liste (optionnel)"
+		E_list.description = "**Displays the list of automatic responses**\n(page) = page of the list (optionnal)"
 		E_list.add_field(name="**Example**", value="```/resp list (page)```")
 		E_list.add_field(name="**Cooldown**", value="```5s / user```")
-		E_list.add_field(name="**Requis**", value="```CUTIE```")
+		E_list.add_field(name="**Requirement**", value="```CUTIE```")
 
 		class B_resp(discord.ui.View):
 			def __init__(self, timeout=15):
@@ -156,10 +156,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["/register"])
 	async def register(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/register")
-		E.description = "**Enregistre un compte Tetrio**\nusername = nom d'utilisateur Tetrio"
+		E.description = "**Registers a Tetrio account to your discord**\nusername = Tetrio username"
 		E.add_field(name="**Example**", value="```/register <username>```")
 		E.add_field(name="**Cooldown**", value="```once / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -167,10 +167,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["/profile"])
 	async def profile(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/profile")
-		E.description = "**Affiche le profil d'un utilisateur Tetrio**\n(username) = nom d'utilisateur Tetrio (optionnel) -> si non spécifié, affiche le profil personnel"
+		E.description = "**Displays the Tetrio profile of a user**\n(username) = Tetrio username (optionnal) -> If none, displays your profile"
 		E.add_field(name="**Example**", value="```/profile (username)```")
 		E.add_field(name="**Cooldown**", value="```5s / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -178,10 +178,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["/leaderboard"])
 	async def leaderboard(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/leaderboard")
-		E.description = "**Affiche le classement Tetrio**"
+		E.description = "**Displays the Tetrio leaderboard**"
 		E.add_field(name="**Example**", value="```/leaderboard```")
 		E.add_field(name="**Cooldown**", value="```60s / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -190,10 +190,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["/set", "set"])
 	async def set_birthday(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/set")
-		E.description = "**Enregistre votre date de naissance**\nyear = année\nmonth = mois\nday = jour"
+		E.description = "**Registers your birthday**\nyear = year of birth\nmonth = month of birth\nday = day of birth"
 		E.add_field(name="**Example**", value="```/set <year> <month> <day>```")
 		E.add_field(name="**Cooldown**", value="```once / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -201,10 +201,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["/birthdays", "bdays", "/bdays"])
 	async def birthdays(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/birthdays")
-		E.description = "**Affiche la liste des anniversaires**\n(user) = utilisateur (optionnel) -> si spécifié, affiche l'anniversaire de la personne"
+		E.description = "**Displays the birthdays list**\n(user) = user (optionnal) -> if specified, displays the birthday of the user"
 		E.add_field(name="**Example**", value="```/birthdays (user)```")
 		E.add_field(name="**Cooldown**", value="```10s / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -213,15 +213,15 @@ class Help(commands.Cog):
 	@help.command(aliases=["!file"])
 	async def file(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/file")
-		E.description = "**transforme votre lien en fichier**\nlink = lien du fichier\n"
-		E.description += "**Attention :** le lien doit être un lien direct vers le fichier.\n"
-		E.description += "**Attention :** seuls les formats discord sont supportés:\n"
+		E.description = "**Converts your link to a file**\nlink = link of file\n"
+		E.description += "**WARNING :** The link must be direct.\n"
+		E.description += "**WARNONG :** Only discord formats are supported:\n"
 		E.description += "IMAGE : png, jpg, jpeg, webp, gif\n"
 		E.description += "AUDIO : mp3, ogg, wav, flac\n"
 		E.description += "VIDEO : mp4, webm, mov"
 		E.add_field(name="**Example**", value="```!file <link>```")
 		E.add_field(name="**Cooldown**", value="```5s / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -229,10 +229,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["!link"])
 	async def link(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/link")
-		E.description = "**transforme votre fichier en lien**\nattachment = fichier"
+		E.description = "**Converts your link to a file**\nattachment = file"
 		E.add_field(name="**Example**", value="```!link <attachment>```")
 		E.add_field(name="**Cooldown**", value="```5s / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -240,10 +240,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["!emoji"])
 	async def emoji(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/emoji")
-		E.description = "**Affiche les infos d'un emoji**\nemoji = emoji (nom accepté)"
+		E.description = "**Displays all information about an emoji**\nemoji = emoji (name or anything)"
 		E.add_field(name="**Example**", value="```!emoji <emoji>```")
 		E.add_field(name="**Cooldown**", value="```5s / user```")
-		E.add_field(name="**Requis**", value="```None```")
+		E.add_field(name="**Requirement**", value="```None```")
 
 		await ctx.reply(embed=E)
 
@@ -251,10 +251,10 @@ class Help(commands.Cog):
 	@help.command(aliases=["!confession"])
 	async def confession(self, ctx:commands.Context) -> None:
 		E = discord.Embed(title="/confession")
-		E.description = "**Envoie une confession**\nmessage = message de la confession"
+		E.description = "**Send an anonymous confession**\nmessage = message to confess"
 		E.add_field(name="**Example**", value="```!confession <message>```")
 		E.add_field(name="**Cooldown**", value="```60s / user```")
-		E.add_field(name="**Requis**", value="```DM```")
+		E.add_field(name="**Requirement**", value="```DM```")
 
 		await ctx.reply(embed=E)
 

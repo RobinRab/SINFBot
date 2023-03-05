@@ -11,39 +11,39 @@ class Birthday(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
-	@app_commands.command(description="Ajoute ton anniversaire")
-	@app_commands.describe(day="Ton jour de naissance", month="Ton mois de naissance", year="Ton année de naissance")
+	@app_commands.command(description="Adds your birthday!")
+	@app_commands.describe(day="Day of birth", month="Month of birth", year="Year of birth")
 	async def set_birthday(self, inter:discord.Interaction, day:int, month:months, year:int):
-		months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+		months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 		name = str(inter.user.id)
 
 		data : dict = get_data("birthday")
 
 		if name in data.keys():
-			await inter.response.send_message(f"Vous avez déjà ajouté votre anniversaire", ephemeral=True)
+			await inter.response.send_message(f"You already set your birthday", ephemeral=True)
 			return
 		
 		MIN = dt.datetime.now().year - 100
 		MAX = dt.datetime.now().year - 13
 
 		if not (MIN < year < MAX):
-			await inter.response.send_message("Cette date n'existe pas", ephemeral=True)
+			await inter.response.send_message("This date does not exist", ephemeral=True)
 			return
 		
 		try:
 			month = months.index(month) + 1
 			birthday = dt.datetime(year, month, day)
 		except ValueError:
-			await inter.response.send_message("Cette date n'existe pas")
+			await inter.response.send_message("This date does not exist")
 			return
 
 		data[name] = {"year": year, "month": month, "day": day}
 		upd_data(data, "birthday")
 		self.birthdays.restart()
 
-		await inter.response.send_message(f"L'anniversaire de {inter.user.mention} a été ajouté le {birthday.strftime('%d/%m/%Y')}")
+		await inter.response.send_message(f"{inter.user.mention}'s birthday has been set on the {birthday.strftime('%d/%m/%Y')}")
 
-	@app_commands.command(description="Affiche les anniversaires")
+	@app_commands.command(description="Displays everyone's birthday")
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
 	async def birthdays(self, inter:discord.Interaction, user:discord.Member=None):
 
@@ -53,7 +53,7 @@ class Birthday(commands.Cog):
 		if user is None:
 			birthdays = sort_bdays(data)
 
-			embed = discord.Embed(title="Anniversaires", color=discord.Color.blurple())
+			embed = discord.Embed(title="Birthdays list", color=discord.Color.blurple())
 			embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1074650207796609115/file.png")
 
 			txt = ""
@@ -65,14 +65,14 @@ class Birthday(commands.Cog):
 			
 				left = date - dt.datetime.now()
 
-				txt += f"{user.mention} - {date.strftime('%d/%m/%Y')} dans **{left.days+1}j**\n"
+				txt += f"{user.mention} - {date.strftime('%d/%m/%Y')} dans **{left.days+1}d**\n"
 
 			embed.description = txt
 			await inter.response.send_message(embed=embed)
 
 		else:
 			if str(user.id) not in data.keys():
-				await inter.response.send_message(f"**{user}** n'a pas ajouté son anniversaire")
+				await inter.response.send_message(f"**{user}** has not set their birthday yet")
 				return
 
 			date = dt.datetime(year, data[str(user.id)]["month"], data[str(user.id)]["day"])
@@ -81,7 +81,7 @@ class Birthday(commands.Cog):
 
 			left = date - dt.datetime.now()
 
-			await inter.response.send_message(f"**{user}** a son anniversaire le {date.strftime('%d/%m/%Y')} dans **{left.days+1}j**")
+			await inter.response.send_message(f"**{user}** has their birthday on the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**")
 
 	@tasks.loop()
 	async def _birthdays(bot:commands.Bot):
@@ -106,7 +106,7 @@ class Birthday(commands.Cog):
 				year = dt.datetime.now().year
 				age = year - data[str(user.id)]["year"]
 
-				await channel.send(f"Joyeux anniversaire {user.mention}, tu fêtes aujourd'hui tes {age} ans! :tada:")
+				await channel.send(f"Happy birthday {user.mention}, You are {age} years old today! :tada:")
 
 				await asyncio.sleep(43200) #sleep 12h by safety (2h at least to skip timezone issues)
 
