@@ -212,7 +212,7 @@ class SelectView(discord.ui.View):
 				child.disabled = True
 				child.placeholder = "Timed out"
 
-		await self.message.edit(view=self)
+		await self.message.edit(content="Expired", view=self)
 
 
 	async def interaction_check(self, inter: discord.Interaction, /) -> bool:
@@ -231,8 +231,9 @@ class SelectView(discord.ui.View):
 			await view.message.edit(view=view)
 
 		else:
-			view.add_item(ChoiceSelect(choices))
-			await inter.response.send_message("Select a choice", view=view)
+			view.add_item(ChoiceSelect(choices)) #{int(dt.datetime.now().timestamp() + timeout)}
+			time = f"<t:{int(dt.datetime.now().timestamp() + timeout)}:R>"
+			await inter.response.send_message(f"Select a choice, timeout ({time})", view=view)
 			view.message = await inter.original_response()
 
 		await view.wait()
