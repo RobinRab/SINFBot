@@ -15,13 +15,13 @@ bot = commands.Bot(
 	intents=intents,
 	strip_after_prefix=True
 )
-bot.tree.synced : bool = False
+bot.tree.synced = False
 
 
 
 @bot.event
 async def on_ready():
-	log("INFO", f"Logged in as {bot.user} (ID: {bot.user.id})")
+	log("INFO", f"Logged in as {bot.user}")
 	for ext in settings.extensions:
 		await bot.load_extension(ext)
 		log("INFO", f"{ext} loaded ")

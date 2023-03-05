@@ -31,12 +31,12 @@ class Control(commands.Cog):
 	@commands.command(description="Changes the bot's avatar")
 	@commands.check(is_cutie)
 	@commands.cooldown(1, 3600, commands.BucketType.guild)
-	async def avatar(self, inter: discord.Interaction, link:Optional[str]):
-		if link is None and len(inter.message.attachments) == 0:
-			await inter.response.send_message("You must send a link or attach an image", delete_after=5)
+	async def avatar(self, ctx: commands.Context, link:Optional[str]):
+		if link is None and len(ctx.message.attachments) == 0:
+			await ctx.reply("You must send a link or attach an image", delete_after=5)
 			return
 		elif link is None:
-			link = inter.message.attachments[0].url
+			link = ctx.message.attachments[0].url
 
 		try :
 			requests.get(link)
@@ -45,13 +45,13 @@ class Control(commands.Cog):
 					File = await resp.content.read()
 					await self.bot.user.edit(avatar=File)
 		except discord.DiscordException: #pense pas que c'est la bonne exception
-			await inter.response.send_message(f"**{inter.user},** 404",delete_after=5)
+			await ctx.reply(f"**{ctx.user},** 404",delete_after=5)
 		except ValueError:
-			await inter.response.send_message(f"**{inter.user},** Invalid format",delete_after=5)
+			await ctx.reply(f"**{ctx.user},** Invalid format",delete_after=5)
 		except :
-			await inter.response.send_message(f"**{inter.user},** Invalid link",delete_after=5)
+			await ctx.reply(f"**{ctx.user},** Invalid link",delete_after=5)
 		finally:
-			await inter.response.send_message("Avatar successfully changed")
+			await ctx.reply("Avatar successfully changed")
 
 
 	@app_commands.command(description="Changes the bot's status")

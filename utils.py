@@ -200,7 +200,7 @@ class ChoiceSelect(discord.ui.Select):
 class SelectView(discord.ui.View):
 	message: discord.Message | discord.InteractionMessage | discord.WebhookMessage
 
-	def __init__(self, author_id: int, *, timeout: float = 180.0) -> None:
+	def __init__(self, author_id: int, *, timeout:float) -> None:
 		super().__init__(timeout=timeout)
 		self.author_id: int = author_id
 
@@ -219,7 +219,7 @@ class SelectView(discord.ui.View):
 		return inter.user.id == self.author_id
 
 	@classmethod
-	async def get_app_choice(cls, inter: discord.Interaction, choices: list[tuple[Any,Any]], *, timeout: float = 15.0, previous: Optional[SelectView] = None) -> tuple[SelectView, Optional[str]]:
+	async def get_app_choice(cls, inter: discord.Interaction, choices: list[tuple[Any,Any]], *, timeout: float = 15.0, previous: Optional[SelectView]) -> tuple[SelectView, Optional[str]]:
 		#create instance of SelectView
 		view = cls(inter.user.id, timeout=timeout)
 		if previous:
@@ -231,7 +231,7 @@ class SelectView(discord.ui.View):
 			await view.message.edit(view=view)
 
 		else:
-			view.add_item(ChoiceSelect(choices)) #{int(dt.datetime.now().timestamp() + timeout)}
+			view.add_item(ChoiceSelect(choices))
 			time = f"<t:{int(dt.datetime.now().timestamp() + timeout)}:R>"
 			await inter.response.send_message(f"Select a choice, timeout ({time})", view=view)
 			view.message = await inter.original_response()
