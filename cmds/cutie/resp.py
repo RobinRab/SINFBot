@@ -50,7 +50,7 @@ class Resp(app_commands.Group):
 				break
 		else : 
 			await inter.response.send_message("The specified ID matches no response")
-		upd_data(responses)
+		upd_data(responses, "phrases")
 
 
 	@app_commands.guild_only()
@@ -58,7 +58,7 @@ class Resp(app_commands.Group):
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.command(description="Lists all the responses of the bot")
 	@app_commands.describe(page="The page to display, default is 1")
-	async def list(self, inter:discord.Interaction, page:int=None):
+	async def list(self, inter:discord.Interaction, page:Optional[int]):
 		responses : list = get_data("phrases")
 
 		pages = int(len(responses)/25)
