@@ -1,6 +1,3 @@
-#yayyy
-
-
 import settings
 
 import discord
@@ -12,7 +9,7 @@ from cmds.src.birthday import Birthday as Bd
 intents = discord.Intents.all()
 
 bot = commands.Bot(
-	command_prefix=[settings.BOT_PREFIX, f"<@!{settings.BOT_ID}> "],
+	command_prefix=commands.when_mentioned_or(settings.BOT_PREFIX),
 	case_insensitive=True,
 	help_command=None,
 	intents=intents,

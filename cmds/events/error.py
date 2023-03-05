@@ -69,14 +69,27 @@ class Error(commands.Cog):
 
 
 	async def on_app_command_error(self,inter: discord.Interaction,error: app_commands.AppCommandError):
-		if isinstance(error, app_commands.errors.CommandOnCooldown):
+		if isinstance(error, app_commands.errors.CommandNotFound) :
+			await inter.response.send_message("Cette commande n'existe pas",ephemeral=True)
+	
+		elif isinstance(error, app_commands.errors.CommandOnCooldown):
 			await inter.response.send_message(f"Vous ne pouvez pas encore utiliser cette commande, attendez : **{round(error.retry_after,1)}** secondes",ephemeral=True)
+
+		elif isinstance(error, app_commands.errors.MissingPermissions):
+			L = error.missing_perms
+			if len(L) == 1 : 
+				await inter.response.send_message(f"Vous ne pouvez pas executer cette commande, vous avez besoin de la permission : **{L[0]} **!",ephemeral=True)
+			elif len(L) > 1 :
+				await inter.response.send_message(f"Vous ne pouvez pas executer cette commande, vous avez besoin des permissions : **{', '.join(L)}** ! ",ephemeral=True)
 
 		elif isinstance(error, app_commands.errors.CheckFailure):
 			await inter.response.send_message("Vous n'êtes pas autorisé à utiliser cette commande",ephemeral=True)
 
 		else :
-			await inter.response.send_message(error)
+			try:
+				await inter.response.send_message(error)
+			except:
+				await inter.followup.send(error)
 
 			error_chan = await self.bot.fetch_channel(ERROR_CHANNEL_ID)
 

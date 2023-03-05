@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import discord
 from discord.ext import commands
 from discord.ext.commands import MemberConverter, EmojiConverter
@@ -8,8 +10,10 @@ import json
 import aiohttp
 import unicodedata
 import datetime as dt
-from typing import Literal
 from settings import DATA_DIR, CUTIE_ID
+from typing import Any, Optional, Literal
+
+#!!WARNING!! Any edits in this file can break commands
 
 async def GetLogLink(bot:commands.Bot, link:str) -> str:
 	"""Returns a permanant link of the file"""
@@ -90,7 +94,7 @@ def nospecial(text:str) -> str:
 	text = re.sub("[^a-zA-Z0-9_]+", "",simplify(text))
 	return text
 
-def get_data(*opts:str) -> ...:
+def get_data(*opts:Optional[str]) -> Any:
 	"""Retrieve data from a JSON file."""
 
 	with open(f"{DATA_DIR}/datasinf.json", 'r') as f:
@@ -101,7 +105,7 @@ def get_data(*opts:str) -> ...:
 
 	return data
 
-def upd_data(new_data:..., *keys:str) -> None:
+def upd_data(new_data:Any, *keys:Optional[str]) -> None:
 	"""Update data in a JSON file."""
 
 	with open(f"{DATA_DIR}/datasinf.json", 'r') as f:
@@ -160,16 +164,77 @@ def sort_bdays(data : dict) -> dict:
 
 	return sorted(birthdays.items(), key=lambda x: birthdays[x[0]])
 
-months = Literal["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+months = Literal["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 activities = Literal["playing", "watching", "listening", "stop"]
 statuses = Literal["online", "idle", "dnd", "offline"]
 
 def log(type:str, txt:str) -> None:
 	"""Logs a message in the console and in the bot.log file."""
-	if type == "ERROR":
-		print(f"\033[90;1m[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] \033[1;34m[{type.upper(): <8}] \u001b[0m {txt}")
-	else:
-		one, *two = txt.split()
-		print(f"\033[90;1m[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] \033[1;34m[{type.upper(): <8}] \u001b[0;35m{one} \u001b[1;33m{' '.join(two)}\u001b[0m")
 	with open(f"{DATA_DIR}/bot.log", 'a') as f:
-		print(f"[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] [{type: <8}] {txt}", file=f)
+		if type == "ERROR":
+			print(f"[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] [{type.upper(): <8}] {txt}", file=f)
+			print(f"\033[90;1m[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] \033[1;34m[{type.upper(): <8}] \u001b[0m {txt}")
+		else:
+			one, *two = txt.split()
+			print(f"\033[90;1m[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] \033[1;34m[{type.upper(): <8}] \u001b[0;35m{one} \u001b[1;33m{' '.join(two)}\u001b[0m")
+			print(f"[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] [{type: <8}] {txt}", file=f)
+
+#only use through SelectView.get_app_choice
+class ChoiceSelect(discord.ui.Select):
+	view: SelectView
+
+	def __init__(self, options: list[Any]) -> None:
+		options = [discord.SelectOption(label=label, value=value) for label, value in options]
+		super().__init__(options=options, placeholder="Choose an option", min_values=1, max_values=1)
+
+	async def callback(self, inter:discord.Interaction):
+		self.view.chosen = self.values[0]
+		for option in self.options:
+			if option.value == self.values[0]:
+				option.default = True
+		
+		self.disabled = True
+		await inter.response.edit_message(view=self.view)
+		self.view.stop()
+
+class SelectView(discord.ui.View):
+	message: discord.Message | discord.InteractionMessage | discord.WebhookMessage
+
+	def __init__(self, author_id: int, *, timeout: float = 180.0) -> None:
+		super().__init__(timeout=timeout)
+		self.author_id: int = author_id
+
+		self.chosen: str | None = None
+
+	async def on_timeout(self):
+		for child in self.children:
+			if isinstance(child, discord.ui.Select):
+				child.disabled = True
+				child.placeholder = "Timed out"
+
+		await self.message.edit(view=self)
+
+
+	async def interaction_check(self, inter: discord.Interaction, /) -> bool:
+		return inter.user.id == self.author_id
+
+	@classmethod
+	async def get_app_choice(cls, inter: discord.Interaction, choices: list[tuple[Any,Any]], *, timeout: float = 15.0, previous: Optional[SelectView] = None) -> tuple[SelectView, Optional[str]]:
+		#create instance of SelectView
+		view = cls(inter.user.id, timeout=timeout)
+		if previous:
+			view.message = previous.message
+			for child in previous.children:
+				view.add_item(child)
+
+			view.add_item(ChoiceSelect(choices))
+			await view.message.edit(view=view)
+
+		else:
+			view.add_item(ChoiceSelect(choices))
+			await inter.response.send_message("Select a choice", view=view)
+			view.message = await inter.original_response()
+
+		await view.wait()
+		return view, view.chosen
+
