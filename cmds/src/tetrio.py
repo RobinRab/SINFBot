@@ -4,7 +4,7 @@ from discord.ext import commands
 
 import requests
 import datetime as dt
-from typing import List
+from typing import List, Optional
 
 from utils import get_data, upd_data, nospecial, GetLogLink
 
@@ -17,24 +17,20 @@ class Tetrio(commands.Cog):
 			callback=self.tetrio_profile)
 		)
 
-	async def tprofile(self, inter:discord.Interaction, user:str=None):
-		if user is None:
-			user = str(inter.user.id)
+	async def tprofile(self, inter:discord.Interaction, user_id:Optional[str]):
+		data : dict = get_data("tetris")
+	
+		if user_id is None:
+			user_id = str(inter.user.id)
+			if user_id not in data.keys():
+				return await inter.response.send_message("You are not connected to a Tetrio account", ephemeral=True)
 
-		for user_id in get_data("tetris").keys():
-			if user == user_id:
-				break
-		else:
-			await inter.response.send_message("This user does not have a Tetrio profile", ephemeral=True)
-			return
+		if user_id not in data.keys():
+			return await inter.response.send_message("This user does not have a Tetrio profile", ephemeral=True)
 
 		await inter.response.defer()
 
-		try:
-			name = get_data("tetris")[user_id]
-		except KeyError:
-			await inter.followup.send("You are not connected to a Tetrio account", ephemeral=True)
-			return
+		name = data[user_id]
 		
 		r1= requests.get(f"https://ch.tetr.io/api/users/{name}")
 		r2 = requests.get(f"https://ch.tetr.io/api/users/{name}/records")
@@ -49,8 +45,7 @@ class Tetrio(commands.Cog):
 				raise ValueError
 
 		except:
-			await inter.response.send_message("An error occured while fetching data", ephemeral=True)
-			return
+			return await inter.response.send_message("An error occured while fetching data", ephemeral=True)
 
 		#if they have a country
 		flag = ""
@@ -176,7 +171,13 @@ class Tetrio(commands.Cog):
 
 	@profile.autocomplete("user")
 	async def user_autocomplete(self, inter: discord.Interaction, current:str) -> List[app_commands.Choice[str]]:
-		return [app_commands.Choice(name=self.bot.get_user(int(user_id)).name, value=str(user_id)) for user_id in get_data("tetris").keys()]
+		lst = []
+		for user_id in get_data("tetris").keys():
+			user = self.bot.get_user(int(user_id))
+			if user is not None:
+				lst.append(app_commands.Choice(name=user.name, value=str(user_id)))
+
+		return lst
 	
 	#tetrio profile context menu
 	async def tetrio_profile(self, inter: discord.Interaction, user:discord.User):
