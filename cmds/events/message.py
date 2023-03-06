@@ -36,8 +36,8 @@ class Message(commands.Cog):
 					break
 
 		#anon says
-		if message.channel.id == ANON_SAYS_ID:
-			general = message.guild.get_channel(GENERAL_ID)
+		if message.channel.id == int(ANON_SAYS_ID):
+			general = message.guild.get_channel(int(GENERAL_ID))
 
 			Files= []
 			try :
