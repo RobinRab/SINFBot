@@ -39,7 +39,7 @@ class Birthday(commands.Cog):
 
 		data[name] = {"year": year, "month": month, "day": day}
 		upd_data(data, "birthday")
-		self.birthdays.restart()
+		self._birthdays.restart()
 
 		await inter.response.send_message(f"{inter.user.mention}'s birthday has been set on the {birthday.strftime('%d/%m/%Y')}")
 
