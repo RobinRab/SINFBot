@@ -24,9 +24,10 @@ directories = []
 extensions = []
 for _, folders, _ in os.walk(CMDS_DIR):
     for folder in folders:
+        if folder.startswith('_'):
+            continue
 
-        if not( folder.startswith('_')):
-            directories.append(folder)
+        directories.append(folder)
 
         dir = CMDS_DIR / folder
         for file in dir.iterdir():
