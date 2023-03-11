@@ -40,6 +40,9 @@ Pour ce projet git vous aurez besoin d'installer git sur votre machine, ça vous
 ## 3. dotenv
 Le module dotenv permet de lire un fichier `.env` dans votre dépôt, celui-ci sera nécessaire plus tard
 
+## 4. requests
+Le module requests est indispensable pour faire des requêtes à internet. Le bot en aura besoin pour se connecter à l'API de tetrio, ou encore lorsqu'il a besoin de manipuler des fichiers discord
+
 # 🛠️ Setup des tests
 ## 1. créer votre bot de test
 > ### 1. Connectez vous à discord et rendez-vous sur [Discord Developper Portal](https://discord.com/developers/applications)
@@ -124,8 +127,10 @@ Le fichier `utils.py` contient toutes les fonctions utiles au projet, vous pouve
 Le fichier `.gitignore` permet d'ignorer certains fichiers lors de l'upload sur github, il est important de ne jamais supprimer des lignes
 
 ## `cmds/` 
-Le dossier `cmds/` contient tous les fichiers qui contiennent les commandes du bot, il est important de respecter leur structure. <br>
-Chaque dossier dans `cmds/` correspond à une catégorie de commandes, par exemple `cmds/cutie/` contient toutes les commandes qui concernent les cuties. <br>
+
+#### Le dossier `cmds/` contient tous les fichiers qui contiennent les commandes du bot, il est important de respecter leur structure. 
+<br>
+
 ---
 
 ## Vous trouverez plus d'informations sur le code en lisant la [documentation](https://discordpy.readthedocs.io/en/stable/)
