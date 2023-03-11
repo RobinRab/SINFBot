@@ -10,7 +10,7 @@ import json
 import aiohttp
 import unicodedata
 import datetime as dt
-from cmds.src.settings import DATA_DIR, CUTIE_ID
+from src.settings import DATA_DIR, CUTIE_ID
 from typing import Any, Optional, Literal
 
 #!!WARNING!! Any edits in this file can break commands

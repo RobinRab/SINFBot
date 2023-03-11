@@ -4,7 +4,7 @@ from discord.ext import commands, tasks
 
 import asyncio
 import datetime as dt
-from cmds.src.settings import GENERAL_ID
+from src.settings import GENERAL_ID
 from src.utils import get_data, upd_data, sort_bdays, months
 
 class Birthday(commands.Cog):

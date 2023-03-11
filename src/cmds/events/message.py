@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 from src.utils import get_data, simplify
-from cmds.src.settings import ANON_SAYS_ID, GENERAL_ID
+from src.settings import ANON_SAYS_ID, GENERAL_ID
 
 import io
 import re

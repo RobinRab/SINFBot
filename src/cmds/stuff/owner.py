@@ -3,7 +3,7 @@ from discord import app_commands
 from discord.ext import commands
 
 import os
-import cmds.src.settings as settings
+import src.settings as settings
 from src.utils import log, SelectView
 
 class Owner(commands.Cog):

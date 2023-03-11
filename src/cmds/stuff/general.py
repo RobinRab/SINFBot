@@ -7,7 +7,7 @@ import aiohttp
 import requests
 import datetime as dt
 
-from cmds.src.settings import CONFESSION_ID
+from src.settings import CONFESSION_ID
 from src.utils import GetLogLink, get_emoji
 
 

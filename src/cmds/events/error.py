@@ -6,7 +6,7 @@ import traceback
 import datetime as dt
 
 from src.utils import log
-from cmds.src.settings import ERROR_CHANNEL_ID
+from src.settings import ERROR_CHANNEL_ID
 
 class Error(commands.Cog):
 	def __init__(self, bot):
