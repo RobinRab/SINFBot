@@ -123,11 +123,9 @@ Le fichier `utils.py` contient toutes les fonctions utiles au projet, vous pouve
 ## `.gitignore`
 Le fichier `.gitignore` permet d'ignorer certains fichiers lors de l'upload sur github, il est important de ne jamais supprimer des lignes
 
-## `cmds/`
+## `cmds/` 
 Le dossier `cmds/` contient tous les fichiers qui contiennent les commandes du bot, il est important de respecter leur structure. <br>
 Chaque dossier dans `cmds/` correspond à une catégorie de commandes, par exemple `cmds/cutie/` contient toutes les commandes qui concernent les cuties. <br>
-Pour vos commandes, je vous encourage à créer un dossier à votre nom dans lequels vous pourrez ajouter vos fichiers 
-
 ---
 
 ## Vous trouverez plus d'informations sur le code en lisant la [documentation](https://discordpy.readthedocs.io/en/stable/)
