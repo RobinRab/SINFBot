@@ -7,8 +7,8 @@ import aiohttp
 import requests
 import datetime as dt
 
-from src.settings import CONFESSION_ID
-from src.utils import GetLogLink, get_emoji
+from settings import CONFESSION_ID
+from utils import GetLogLink, get_emoji
 
 
 class General(commands.Cog):

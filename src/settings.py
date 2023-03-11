@@ -17,8 +17,8 @@ CONFESSION_ID = os.getenv("CONFESSION_ID")
 CUTIE_ID = os.getenv("CUTIE_ID")
 
 BASE_DIR = pathlib.Path(__file__).parent
-CMDS_DIR = BASE_DIR / "src" / "cmds"
-DATA_DIR = BASE_DIR / "src" / "data"
+CMDS_DIR = BASE_DIR / "cmds"
+DATA_DIR = BASE_DIR / "data"
 
 directories = []
 extensions = []
@@ -31,7 +31,7 @@ for _, folders, _ in os.walk(CMDS_DIR):
         dir = CMDS_DIR / folder
         for file in dir.iterdir():
             if file.name.endswith(".py"):
-                extensions.append(f"src.cmds.{folder}.{file.name[:-3]}")
+                extensions.append(f"cmds.{folder}.{file.name[:-3]}")
 
 
 logger = logging.getLogger('discord')
@@ -39,7 +39,7 @@ logger.setLevel(logging.DEBUG)
 logging.getLogger('discord.http').setLevel(logging.INFO)
 
 handler = logging.handlers.RotatingFileHandler(
-    filename='data/bot.log',
+    filename='src/data/bot.log',
     encoding='utf-8',
 )
 dt_fmt = '%Y-%m-%d %H:%M:%S'

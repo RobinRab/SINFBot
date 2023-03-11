@@ -3,7 +3,7 @@ from discord import app_commands
 from discord.ext import commands
 
 from typing import Optional
-from src.utils import is_cutie, get_data, upd_data
+from utils import is_cutie, get_data, upd_data
 
 class Resp(app_commands.Group):
 	@app_commands.guild_only()

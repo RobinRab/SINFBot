@@ -6,7 +6,7 @@ import aiohttp
 import requests
 from typing import Optional
 
-from src.utils import is_cutie, activities, statuses
+from utils import is_cutie, activities, statuses
 
 
 class Control(commands.Cog):

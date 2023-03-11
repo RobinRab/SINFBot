@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import EmojiConverter, TextChannelConverter
 
-from src.utils import simplify, GetLogLink
+from utils import simplify, GetLogLink
 
 import io
 import re

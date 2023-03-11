@@ -3,7 +3,7 @@ from discord import app_commands
 from discord.ext import commands
 
 import datetime as dt
-from src.utils import GetLogLink, log, get_data
+from utils import GetLogLink, log, get_data
 
 #!! all functions added in this class will be added as context menu
 #!! all functions added in this class will be added as context menu

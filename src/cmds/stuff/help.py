@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from src.utils import is_cutie, GetLogLink
+from utils import is_cutie, GetLogLink
 
 class Help(commands.Cog):
 	def __init__(self, bot:commands.Bot):

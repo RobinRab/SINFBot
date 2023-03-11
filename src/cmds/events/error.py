@@ -5,8 +5,8 @@ from discord.ext import commands
 import traceback
 import datetime as dt
 
-from src.utils import log
-from src.settings import ERROR_CHANNEL_ID
+from utils import log
+from settings import ERROR_CHANNEL_ID
 
 class Error(commands.Cog):
 	def __init__(self, bot):

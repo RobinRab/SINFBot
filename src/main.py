@@ -1,10 +1,10 @@
-import src.settings as settings
+import settings as settings
 
 import discord
 from discord.ext import commands
 
-from src.utils import log
-from src.cmds.stuff.birthday import Birthday as Bd
+from utils import log
+from cmds.stuff.birthday import Birthday as Bd
 
 intents = discord.Intents.all()
 

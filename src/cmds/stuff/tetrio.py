@@ -6,7 +6,7 @@ import requests
 import datetime as dt
 from typing import List, Optional
 
-from src.utils import get_data, upd_data, nospecial, GetLogLink
+from utils import get_data, upd_data, nospecial, GetLogLink
 
 class Tetrio(commands.Cog):
 	def __init__(self, bot:commands.Bot):

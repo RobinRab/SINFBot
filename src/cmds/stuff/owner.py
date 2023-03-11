@@ -3,8 +3,8 @@ from discord import app_commands
 from discord.ext import commands
 
 import os
-import src.settings as settings
-from src.utils import log, SelectView
+import settings as settings
+from utils import log, SelectView
 
 class Owner(commands.Cog):
 	def __init__(self, bot:commands.Bot) -> None:
