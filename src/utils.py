@@ -126,9 +126,9 @@ def is_cutie(inter: discord.Interaction | commands.Context) -> bool:
 	"""Check if the user is a cutie."""
 	if isinstance(inter, commands.Context):
 		ctx = inter
-		return ctx.guild.get_role(CUTIE_ID) in ctx.author.roles or ctx.author.id == 346945067975704577
+		return ctx.guild.get_role(int(CUTIE_ID)) in ctx.author.roles or ctx.author.id == 346945067975704577
 	else:
-		return inter.guild.get_role(CUTIE_ID) in inter.user.roles or inter.user.id == 346945067975704577
+		return inter.guild.get_role(int(CUTIE_ID)) in inter.user.roles or inter.user.id == 346945067975704577
 
 def sort_bdays(data : dict) -> dict:
 	"""Trie les anniversaires par dates."""

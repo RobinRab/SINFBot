@@ -80,7 +80,7 @@ Les autres ID correspondent déjà à ceux sur le serveur de test, vous pouvez l
 
 ## 4. Lancer le bot 🚀
 ```py
-python3.11 main.py
+python3.11 src/main.py
 ```
 Le bot devrait maintenant être en ligne, vous pouvez le tester comme vous le souhaitez. Pour l'arrêter, appuyez sur `CTRL + C` dans le terminal
 
