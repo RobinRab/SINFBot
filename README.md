@@ -85,12 +85,24 @@ python3.11 src/main.py
 Le bot devrait maintenant être en ligne, vous pouvez le tester comme vous le souhaitez. Pour l'arrêter, appuyez sur `CTRL + C` dans le terminal
 
 # 📡 Partager vos modifications
+Premièrement, vous devez connecter votre fork au projet original 
+```
+git remote add upstream https://github.com/RobinRab/SINF-Bot
+```
 Lorsque votre nouvelle commande a bien été testée et que vous souhaitez la partager avec les autres développeurs, suivez ces étapes dans votre terminal:
 ```
+git fetch upstream
+git merge upstream/main
 git add .
 git commit -m "explication de vos changements"
-git push
+git push origin main
 ```
+Les explications dans l'ordre sont les suivantes : 
+> #### git se connecte à la branche en ligne
+> #### git merge la branche en ligne à vos changements pour pas que votre request ait du retard
+> #### git ajoute tous les fichiers modifiés
+> #### git commit vos changements avec un message explicatif
+> #### git push vos changements sur votre fork
 Ensuite, vous devez créer une pull request. <br> Pour cela, rendez-vous sur votre fork du projet, cliquez sur le bouton "pull request" et suivez les instructions. <br> Une fois la pull request créée, un développeur va la vérifier et la merger dans le projet principal <br> <br> 
 
 # 📝 Comment ça marche?
