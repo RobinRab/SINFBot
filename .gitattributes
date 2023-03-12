@@ -1,5 +1,3 @@
-# Ignore files in the 'data' directory
-src/data/* -merge -diff
-
-# Do not delete the .env file during a merge
+# Do not edit the files during a merge
+src/data/* -merge=keepMine
 .env merge=keepMine
