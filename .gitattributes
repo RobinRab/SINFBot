@@ -1,0 +1,5 @@
+# Ignore files in the 'data' directory
+src/data/* -merge -diff
+
+# Do not delete the .env file during a merge
+.env merge=keepMine
