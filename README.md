@@ -15,7 +15,7 @@
 <h3 align="center">
 	<a href="#-dépendances">Dépendances</a>
 	<span> · </span>
-	<a href="#%EF%B8%8F-setup-le-bot">Setup</a>
+	<a href="#%EF%B8%8F-setup-des-tests">Setup</a>
 	<span> · </span>
 	<a href="#-partager-vos-modifications">Ensemble</a>
 	<span> · </span>
@@ -36,12 +36,28 @@ Le bot discord qui tourne en permanence demande de nombreuses ressources, il tou
 
 ## 2. git
 Pour ce projet git vous aurez besoin d'installer git sur votre machine, ça vous permettra de clone le projet ainsi que d'y apporter des modifications
+```
+python3.11 -m pip install git
+```
 
 ## 3. dotenv
 Le module dotenv permet de lire un fichier `.env` dans votre dépôt, celui-ci sera nécessaire plus tard
+```
+python3.11 -m pip install python-dotenv
+```
 
 ## 4. requests
 Le module requests est indispensable pour faire des requêtes à internet. Le bot en aura besoin pour se connecter à l'API de tetrio, ou encore lorsqu'il a besoin de manipuler des fichiers discord
+```
+python3.11 -m pip install requests
+```
+
+## 5. discord
+Le module discord est indispensable pour la création d'un bot... discord.
+```
+python3.11 -m pip install -U discord
+```
+
 
 # 🛠️ Setup des tests
 ## 1. créer votre bot de test
@@ -52,7 +68,7 @@ Le module requests est indispensable pour faire des requêtes à internet. Le bo
 > ### 5. Désactivez "Public bot"
 > ### 6. Activez les 3 checks intents 
 > ### 7. rejoingnez le serveur de [testing](https://discord.gg/5braTFUa8h)
-> ### 8. Dans le portal, allez dans Oauth2/URL GENERATOR, sélectionnez 'bot' puis 'administator' et copiez le lien
+> ### 8. Dans le portal, allez dans Oauth2/URL GENERATOR, sélectionnez 'bot' puis 'administator' et copiez le lien dans le navigateur
 Vous voici désormais prêt avec votre bot pour tous les tests, ceci est nécessaire par sécurité pour le serveur principal ainsi que pour éviter les spams que certains tests peuvent provoquer. <br> Sur votre compte discord, je vous conseille d'aller dans settings/Advanced et d'activer le mode développeur, cela vous permettra de copier l'ID de vos messages, serveurs, etc.
 
 ## 2. forker le projet
@@ -61,7 +77,7 @@ Pour forker le projet, cliquez sur le bouton "fork" en haut à droite de la page
 ## 3. créer le fichier `.env`
 Dans le dossier principal, créer un fichier `.env` contenant toutes vos variables personnelles, celles-ci ne seront pas partagées avec les autres développeurs. <br> Le fichier `.env` doit contenir les variables suivantes:
 ```py
-BOT_PREFIX = "!"
+BOT_PREFIX = "!!"
 DISCORD_API_TOKEN = "your secret token here"
 
 BOT_ID = int
@@ -73,8 +89,8 @@ GENERAL_ID = 1079214079161417882
 CONFESSION_ID = 1079217281449590836
 CUTIE_ID = 1079337720041705472
 ```
-**BOT_PREFIX** est le préfixe que vous voulez donner à votre bot, par exemple `!` ou `?` <br>
-**DISCORD_API_TOKEN** est le token que vous avez copié plus tôt <br> 
+**BOT_PREFIX** est le préfixe que vous voulez donner à votre bot, par exemple `!!` ou `?` <br>
+**DISCORD_API_TOKEN** est le token de votre bot que vous trouverez dans dans le portal/bot/ <br> 
 **BOT_ID** est l'ID de votre bot, vous pouvez le trouver dans "General Information" du portal <br>
 Les autres ID correspondent déjà à ceux sur le serveur de test, vous pouvez les laisser tels quels
 
