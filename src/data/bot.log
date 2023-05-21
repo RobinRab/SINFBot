@@ -1,0 +1,1145 @@
+[2023-03-20 09:15:01] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2023-03-20 09:15:01] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2023-03-20 09:15:01] [INFO    ] discord.client: logging in using static token
+[2023-03-20 09:15:02] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: cbd72f2c33a1335091f6be3b0e667dd5).
+[2023-03-20 09:15:04] [INFO    ] Logged in as Kabuto#4854
+[2023-03-20 09:15:04] [INFO    ] cmds.events.message loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.events.error loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.stuff.birthday loaded 
+[2023-03-20 09:15:04] [INFO    ] adding Avatar to context menu
+[2023-03-20 09:15:04] [INFO    ] adding Birthday to context menu
+[2023-03-20 09:15:04] [INFO    ] cmds.stuff.apps loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.stuff.embed loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.stuff.help loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.stuff.tetrio loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.stuff.owner loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.stuff.general loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.cutie.resp loaded 
+[2023-03-20 09:15:04] [INFO    ] cmds.cutie.control loaded 
+[2023-03-20 11:20:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 12:03:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 13:16:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 15:52:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 16:30:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 16:52:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 17:32:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 17:53:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 18:34:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 20:48:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 22:26:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 23:20:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-20 23:58:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 01:53:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 03:02:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 05:07:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 07:18:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 10:38:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 11:21:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 12:17:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 13:31:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 14:31:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 14:32:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 17:10:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 18:07:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 18:16:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 20:39:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-21 22:01:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 00:16:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 01:33:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 02:57:55] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 04:51:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 06:49:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 10:16:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 11:39:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 15:05:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 16:20:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 19:08:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 21:09:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 22:03:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-22 22:33:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 00:53:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 02:30:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 05:08:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 07:16:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 09:22:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 09:43:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 13:27:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 17:17:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 17:43:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 18:06:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 20:08:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 20:49:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 21:03:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-23 22:30:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 00:28:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 03:45:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 06:53:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 08:04:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 11:29:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 12:10:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 13:03:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 15:19:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 16:44:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 17:50:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 19:34:49] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 19:46:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 21:51:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 21:58:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 21:58:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 21:58:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-24 21:58:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 01:55:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 03:07:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 03:38:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 06:07:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 07:55:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 11:53:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 14:34:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 16:33:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 19:00:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 20:10:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-25 22:52:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 01:27:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 02:09:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 02:34:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 04:19:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 06:52:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 07:37:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 09:15:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 10:38:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 12:28:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 14:53:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 16:37:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 17:08:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 19:16:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 22:06:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-26 22:55:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 01:14:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 03:20:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 05:00:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 05:35:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 09:15:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 10:30:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 11:47:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 11:48:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 12:15:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 12:32:03] [ERROR   ] Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing' 
+ https://discord.com/channels/1032356193731100702/1054317885658497064/1089889568439930881 
+ Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 229, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/rabinowicz_robin_gmail_com/Projects/SINF-Bot/src/cmds/stuff/general.py", line 55, in link
+    await ctx.trigger_typing()
+          ^^^^^^^^^^^^^^^^^^
+
+AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1350, in invoke
+    await ctx.command.invoke(ctx)
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 1023, in invoke
+    await injected(*ctx.args, **ctx.kwargs)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 238, in wrapped
+    raise CommandInvokeError(exc) from exc
+
+discord.ext.commands.errors.CommandInvokeError: Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+[2023-03-27 12:39:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 15:53:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 17:56:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 19:39:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 20:56:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-27 22:37:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 02:24:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 05:18:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 07:48:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 09:49:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 11:13:04] [ERROR   ] Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing' 
+ https://discord.com/channels/1032356193731100702/1054317885658497064/1090232081218543696 
+ Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 229, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/rabinowicz_robin_gmail_com/Projects/SINF-Bot/src/cmds/stuff/general.py", line 55, in link
+    await ctx.trigger_typing()
+          ^^^^^^^^^^^^^^^^^^
+
+AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1350, in invoke
+    await ctx.command.invoke(ctx)
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 1023, in invoke
+    await injected(*ctx.args, **ctx.kwargs)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 238, in wrapped
+    raise CommandInvokeError(exc) from exc
+
+discord.ext.commands.errors.CommandInvokeError: Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+[2023-03-28 11:16:37] [ERROR   ] Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing' 
+ https://discord.com/channels/1032356193731100702/1054317885658497064/1090232977096708196 
+ Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 229, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/rabinowicz_robin_gmail_com/Projects/SINF-Bot/src/cmds/stuff/general.py", line 55, in link
+    await ctx.trigger_typing()
+          ^^^^^^^^^^^^^^^^^^
+
+AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1350, in invoke
+    await ctx.command.invoke(ctx)
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 1023, in invoke
+    await injected(*ctx.args, **ctx.kwargs)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 238, in wrapped
+    raise CommandInvokeError(exc) from exc
+
+discord.ext.commands.errors.CommandInvokeError: Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+[2023-03-28 12:53:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 13:34:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 14:56:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 18:44:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 22:18:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-28 23:12:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 01:06:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 01:39:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 03:01:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 06:33:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 06:56:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 09:28:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 09:50:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 11:26:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 14:19:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 17:30:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 17:55:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 18:59:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 21:31:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-29 23:07:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 01:37:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 03:01:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 06:20:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 07:43:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 09:18:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 12:30:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 14:39:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 16:48:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 18:04:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 19:35:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-30 23:29:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 01:19:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 03:04:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 04:19:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 07:45:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 09:05:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 09:42:49] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 10:50:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 10:53:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 10:53:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 12:08:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 12:14:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 14:37:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 17:32:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 20:14:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-03-31 21:52:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 01:12:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 02:54:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 03:28:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 07:05:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 09:02:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 09:33:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 12:28:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 14:07:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 17:31:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 20:11:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-01 21:49:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 01:20:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 02:53:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 04:19:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 04:43:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 08:15:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 11:58:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 15:48:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 17:04:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 20:52:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 22:32:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-02 23:53:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 00:13:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 00:38:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 03:16:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 03:37:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 04:37:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 05:50:55] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 07:24:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 10:55:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 11:55:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 12:29:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 13:47:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 16:55:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 18:30:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 22:03:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-03 23:49:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 02:45:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 04:01:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 06:32:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 08:41:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 10:25:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 12:23:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 12:54:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 16:44:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 20:43:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 21:17:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-04 23:49:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 00:47:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 02:08:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 04:54:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 06:58:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 07:52:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 08:44:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 11:05:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 14:07:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 14:49:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 15:19:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 15:46:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 17:50:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 18:05:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 19:44:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-05 23:04:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 01:39:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 04:48:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 05:15:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 08:53:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 09:39:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 11:02:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 11:29:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 13:25:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 15:53:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 17:15:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 19:35:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-06 23:33:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 03:18:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 05:01:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 08:22:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 10:00:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 12:57:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 15:14:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 16:52:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 18:05:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 18:47:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 21:34:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-07 23:11:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 02:19:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 03:32:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 04:12:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 06:22:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 06:52:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 09:12:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 11:03:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 12:25:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 12:58:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 14:05:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 14:36:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 18:09:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 19:40:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 20:56:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-08 22:18:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 01:09:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 04:57:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 07:20:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 07:39:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 08:02:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 10:23:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 11:54:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 13:09:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 15:25:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 17:36:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 19:06:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 21:23:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-09 23:49:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 01:24:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 04:30:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 06:56:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 09:53:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 12:35:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 13:03:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 13:29:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 16:48:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 18:53:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 20:45:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 21:24:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 21:25:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session cbd72f2c33a1335091f6be3b0e667dd5.
+[2023-04-10 21:28:20] [ERROR   ] discord.client: Attempting a reconnect in 0.81s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:28:27] [ERROR   ] discord.client: Attempting a reconnect in 0.49s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:28:32] [ERROR   ] discord.client: Attempting a reconnect in 0.70s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:28:40] [ERROR   ] discord.client: Attempting a reconnect in 15.08s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:29:00] [ERROR   ] discord.client: Attempting a reconnect in 22.41s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:29:42] [ERROR   ] discord.client: Attempting a reconnect in 2.00s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:30:23] [ERROR   ] discord.client: Attempting a reconnect in 72.42s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:32:05] [ERROR   ] discord.client: Attempting a reconnect in 34.57s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:35:26] [ERROR   ] discord.client: Attempting a reconnect in 468.53s
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 656, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/gateway.py", line 372, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/discord/http.py", line 536, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiohttp/client.py", line 795, in _ws_connect
+    raise WSServerHandshakeError(
+aiohttp.client_exceptions.WSServerHandshakeError: 520, message='Invalid response status', url=URL('wss://gateway-us-east1-b.discord.gg/?v=10&encoding=json&compress=zlib-stream')
+[2023-04-10 21:43:15] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2023-04-10 21:43:21] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 5d3d922544aed1d635011a63c9d2f705).
+[2023-04-10 21:43:23] [INFO    ] Logged in as Forgelina#4854
+[2023-04-10 21:43:23] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/rabinowicz_robin_gmail_com/Projects/SINF-Bot/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.events.message' is already loaded.
+[2023-04-11 00:26:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 04:06:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 07:30:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 10:47:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 11:38:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 12:07:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 12:42:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 14:39:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 14:57:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 15:58:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 18:07:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 19:02:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 20:45:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-11 20:58:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 00:41:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 02:16:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 03:44:49] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 04:04:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 05:08:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 06:04:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 08:21:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 11:36:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 15:35:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 16:04:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 16:07:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 16:10:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 19:14:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 19:58:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-12 21:28:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 01:06:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 03:16:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 03:48:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 05:29:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 07:42:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 10:25:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 11:11:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 11:43:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 13:10:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 13:23:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 14:34:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 18:05:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 18:28:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 18:31:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 19:43:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 21:53:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-13 23:57:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 00:44:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 03:01:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 05:54:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 08:32:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 11:23:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 12:01:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 12:11:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 13:00:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 13:14:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 13:43:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 16:23:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 20:08:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-14 23:22:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 00:13:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 03:00:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 05:40:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 08:49:55] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 12:46:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 13:03:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 13:30:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-15 14:48:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 5d3d922544aed1d635011a63c9d2f705.
+[2023-04-19 08:47:47] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2023-04-19 08:47:47] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2023-04-19 08:47:47] [INFO    ] discord.client: logging in using static token
+[2023-04-19 08:47:48] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b15370aefec9ca16b7ca87ee4f2102a3).
+[2023-04-19 08:47:50] [INFO    ] Logged in as Slimy, Destroyer of dream#4854
+[2023-04-19 08:47:50] [INFO    ] cmds.events.message loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.events.error loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.stuff.birthday loaded 
+[2023-04-19 08:47:50] [INFO    ] adding Avatar to context menu
+[2023-04-19 08:47:50] [INFO    ] adding Birthday to context menu
+[2023-04-19 08:47:50] [INFO    ] cmds.stuff.apps loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.stuff.embed loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.stuff.help loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.stuff.tetrio loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.stuff.owner loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.stuff.general loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.cutie.resp loaded 
+[2023-04-19 08:47:50] [INFO    ] cmds.cutie.control loaded 
+[2023-04-19 08:48:01] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2023-04-19 08:48:01] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2023-04-19 08:48:01] [INFO    ] discord.client: logging in using static token
+[2023-04-19 08:48:02] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 16eee03c0f9c4b3a9b79ff734c6731f1).
+[2023-04-19 08:48:04] [INFO    ] Logged in as Slimy, Destroyer of dream#4854
+[2023-04-19 08:48:04] [INFO    ] cmds.events.message loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.events.error loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.stuff.birthday loaded 
+[2023-04-19 08:48:04] [INFO    ] adding Avatar to context menu
+[2023-04-19 08:48:04] [INFO    ] adding Birthday to context menu
+[2023-04-19 08:48:04] [INFO    ] cmds.stuff.apps loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.stuff.embed loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.stuff.help loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.stuff.tetrio loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.stuff.owner loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.stuff.general loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.cutie.resp loaded 
+[2023-04-19 08:48:04] [INFO    ] cmds.cutie.control loaded 
+[2023-04-19 09:07:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 11:38:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 12:30:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 13:40:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 14:35:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 15:06:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 15:16:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 15:57:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 16:43:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 17:55:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-19 21:04:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 00:58:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 04:16:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 06:59:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 07:55:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 11:39:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 12:11:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 13:04:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 14:11:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 16:52:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 20:07:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 22:03:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 22:24:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-20 23:55:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 00:25:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 01:05:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 01:38:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 02:00:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 02:47:55] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 04:00:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 07:20:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 08:23:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 08:58:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 11:32:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 13:25:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 15:33:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 15:43:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 18:33:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 19:29:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 19:51:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 23:27:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-21 23:34:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 00:11:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 00:15:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 01:50:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 03:25:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 05:47:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 07:13:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 08:46:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 09:38:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 13:38:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 17:13:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 20:04:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-22 23:09:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 02:32:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 02:51:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 06:05:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 06:24:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 09:20:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 12:05:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 14:12:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 15:33:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 18:59:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 20:58:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 22:25:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-23 23:43:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 00:38:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 02:17:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 05:38:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 08:32:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 10:17:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 13:28:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 14:26:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 16:03:55] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 18:20:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 19:03:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-24 22:33:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 00:20:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 00:56:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 04:44:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 07:58:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 10:30:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 12:00:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 15:35:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 19:19:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 20:46:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 22:24:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-25 23:13:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 00:18:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 03:48:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 06:19:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 09:10:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 11:11:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 13:37:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 14:56:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 17:05:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 18:05:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-26 21:09:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 00:29:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 02:54:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 03:36:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 06:43:49] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 07:58:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 08:59:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 11:29:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 11:56:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 15:47:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 16:17:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 18:15:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 21:23:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-27 23:26:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 02:54:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 03:01:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 03:43:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 04:05:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 04:24:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 05:41:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 09:27:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 09:51:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 10:45:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 11:01:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 14:38:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 15:13:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 16:05:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 16:20:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 16:53:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 18:06:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 21:11:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-28 21:42:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 00:20:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 01:07:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 02:44:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 04:53:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 05:22:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 09:19:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 11:40:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 14:45:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 16:35:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 17:06:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 17:29:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 20:34:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 22:23:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-29 23:27:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 01:01:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 03:04:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 05:48:49] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 06:13:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 06:30:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 06:51:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 06:59:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 09:46:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 12:10:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 14:07:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 16:11:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 19:53:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 23:13:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-04-30 23:48:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 01:55:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 05:33:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 06:16:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 06:32:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 06:58:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 09:09:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 10:45:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 14:05:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 17:03:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 17:17:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 18:07:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 19:02:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 19:04:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-01 21:39:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 00:41:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 02:19:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 04:55:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 05:14:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 08:39:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 11:25:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 14:07:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 17:54:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 18:39:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-02 21:56:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 01:36:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 02:58:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 04:13:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 07:30:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 07:44:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 08:14:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 08:43:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 09:23:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 10:04:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 11:30:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 15:24:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 18:35:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 19:19:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 20:30:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-03 23:36:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 01:11:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 03:08:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 06:08:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 09:23:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 11:28:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 13:49:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 16:34:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 18:00:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 21:41:55] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-04 21:44:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 00:58:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 03:13:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 04:19:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 04:36:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 06:57:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 08:40:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 09:23:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 10:55:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 11:37:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 13:03:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 14:03:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 15:46:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 16:34:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 17:43:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 19:30:49] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 20:30:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 21:19:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 22:57:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-05 23:24:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 01:14:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 03:24:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 04:45:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 07:14:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 07:42:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 09:57:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 12:38:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 15:04:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 17:01:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 20:00:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 20:50:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 21:37:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-06 23:16:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 02:30:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 04:09:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 06:04:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 08:10:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 09:17:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 13:14:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 16:23:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 17:51:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-07 20:37:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 00:25:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 03:28:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 05:32:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 08:56:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 09:59:53] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 11:59:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 12:41:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 13:10:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 14:20:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 14:46:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 16:05:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 17:30:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 18:09:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 19:14:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 22:30:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-08 23:21:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 00:03:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 00:38:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 01:36:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 05:34:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 08:20:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 08:57:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 12:49:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 13:21:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 16:33:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 17:00:29] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 19:16:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 20:01:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 21:24:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-09 23:06:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 02:12:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 02:51:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 03:58:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 04:43:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 05:03:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 08:37:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 09:14:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 09:51:59] [ERROR   ] Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing' 
+ https://discord.com/channels/1032356193731100702/1035273730487754872/1105794354523684874 
+ Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 229, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/rabinowicz_robin_gmail_com/Projects/SINF-Bot/src/cmds/stuff/general.py", line 55, in link
+    await ctx.trigger_typing()
+          ^^^^^^^^^^^^^^^^^^
+
+AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1350, in invoke
+    await ctx.command.invoke(ctx)
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 1023, in invoke
+    await injected(*ctx.args, **ctx.kwargs)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/usr/local/lib/python3.11/site-packages/discord/ext/commands/core.py", line 238, in wrapped
+    raise CommandInvokeError(exc) from exc
+
+discord.ext.commands.errors.CommandInvokeError: Command raised an exception: AttributeError: 'Context' object has no attribute 'trigger_typing'
+
+[2023-05-10 11:41:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 13:26:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 13:41:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 13:41:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 13:45:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 14:12:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 15:57:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 18:50:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 20:32:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-10 22:37:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 00:55:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 02:49:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 04:22:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 07:13:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 08:42:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 11:21:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 11:22:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 12:30:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 14:42:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 14:57:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 15:05:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 15:06:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 17:18:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 18:04:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 19:22:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-11 21:50:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 00:48:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 02:00:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 03:46:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 05:30:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 05:41:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 06:26:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 08:01:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 11:47:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 15:02:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 17:26:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 20:28:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-12 23:11:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 02:26:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 04:24:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 06:57:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 10:57:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 11:25:59] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 15:17:06] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 17:14:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 18:06:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 19:27:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 21:30:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-13 23:56:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 03:04:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 07:00:52] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 08:58:18] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 11:40:42] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 15:14:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 18:48:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 19:30:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 20:41:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 21:01:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-14 23:58:26] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 00:36:22] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 04:00:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 05:00:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 05:57:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 08:23:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 10:27:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 10:48:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 14:03:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 14:08:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 14:27:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 15:31:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 15:55:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 18:17:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 19:30:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 19:31:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 20:35:31] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 21:54:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-15 22:31:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 02:15:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 03:41:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 04:02:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 07:12:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 07:49:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 08:27:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 11:12:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 12:58:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 13:15:44] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 14:42:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 17:14:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 19:16:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 20:20:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 20:31:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-16 22:05:28] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 00:53:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 03:14:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 04:19:51] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 05:26:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 08:52:02] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 10:31:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 11:47:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 15:29:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 18:07:10] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 18:32:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 21:50:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-17 23:45:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 00:12:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 03:35:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 03:36:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 04:09:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 04:14:56] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 05:54:00] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 06:25:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 08:17:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 09:11:05] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 09:37:45] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 12:57:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 14:44:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 16:41:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 18:24:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 18:42:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 19:23:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 19:42:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-18 22:53:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 01:31:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 03:53:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 04:36:19] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 05:24:35] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 07:10:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 09:03:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 10:54:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 11:27:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 12:38:49] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 13:21:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 15:34:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 16:38:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 17:23:15] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 17:31:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 19:30:48] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 21:26:54] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-19 23:20:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 02:45:08] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 03:11:07] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 03:46:50] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 04:58:27] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 08:57:17] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 09:39:34] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 13:34:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 16:03:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 18:45:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-20 20:36:30] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 00:14:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 02:19:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 05:36:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 06:23:36] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 08:09:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 09:27:46] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 10:35:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 13:32:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
+[2023-05-21 17:02:20] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 16eee03c0f9c4b3a9b79ff734c6731f1.
