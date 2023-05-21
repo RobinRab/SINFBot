@@ -2,7 +2,3 @@ __pycache__
 .DS_Store
 Thumbs.db
 .env
-
-src/data
-bot.log
-datasinf.json
