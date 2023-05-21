@@ -1,5 +1,6 @@
 {
-    "phrasesID": 53,
+    "phrasesID": 107,
+    "test": true,
     "phrases": [
         {
             "mot": "avatar",
@@ -44,18 +45,6 @@
             "id": 19
         },
         {
-            "mot": "long",
-            "text": " let meee do it for you ",
-            "time": 5,
-            "id": 20
-        },
-        {
-            "mot": "ptk",
-            "text": " Salut c'est Ki\u00eat ",
-            "time": 1,
-            "id": 21
-        },
-        {
             "mot": "kiet",
             "text": " Salut c'est Ki\u00eat ",
             "time": 1,
@@ -92,10 +81,136 @@
             "id": 36
         },
         {
-            "mot": "!manger",
-            "text": "O\u00f9 manger \u00e0 Louvain-la-Neuve ? \n**__Fast-food :__**\n```\u2022 \ud83c\udf54 Burger King  \u20ac\u20ac\n\u2022 \ud83c\udf54 Black and white \u20ac\u20ac\n\u2022 \ud83c\udf54 Quick \u20ac\u20ac\n\u2022 \ud83c\udf57 Faux KFC \u20ac\u20ac\n\u2022 \ud83c\udf2e O tacos \u20ac\u20ac```\n**__Healthy : __**\n```\u2022 \ud83e\udd57 Poke house \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf63 Taki Maki \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf2f Mex and go \u20ac\u20ac\n\u2022 \ud83c\udf63 Sushi world \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf72 Resto u \u20ac\n\u2022 \ud83c\udf58 Itadaki Max \u20ac\u20ac\n\u2022 \ud83e\udd57 Wok\u00e9 \u20ac\u20ac\u20ac```\n**__Pates : __**\n```\u2022 \ud83c\udf5d Nulles pates ailleurs \u20ac\u20ac\n\u2022 \ud83c\udf5d Fantasia \u20ac\u20ac\n\u2022 \ud83c\udf5d Pates du resto u \u20ac```\n**__Sandwich : __ ** \n```\u2022 \ud83e\udd6a Kafette (Barbe) \u20ac\n\u2022 \ud83e\udd6a Crousti \u20ac\n\u2022 \ud83e\udd6a SOS Sandwich \u20ac\n\u2022 \ud83e\udd6a La sandwicherie \u20ac\u20ac\n\u2022 \ud83e\udd6a Cyclofette (Cyclotron) \u20ac```\n**__Sucr\u00e9 :__** \n```\u2022 \ud83e\uddc7 Gofidor \u20ac\n\u2022 \ud83c\udf69 Dunkin Donut \u20ac\n\u2022 \ud83e\uddc3 Guapa \u20ac\u20ac\n\u2022 \ud83c\udf75 Bubble tea \u20ac\u20ac\n```",
+            "mot": "matteo",
+            "text": "https://cdn.discordapp.com/attachments/709313685226782751/1085171228748292197/matteo.png",
+            "time": 1,
+            "id": 54
+        },
+        {
+            "mot": "wazzup",
+            "text": "https://tenor.com/view/whats-up-wazzup-scary-movie-scream-gif-16474707",
             "time": null,
-            "id": 51
+            "id": 63
+        },
+        {
+            "mot": "sus",
+            "text": "https://tenor.com/view/among-us-sus-yhk-among-twerk-among-us-twerk-gif-23335803",
+            "time": 2,
+            "id": 67
+        },
+        {
+            "mot": "kiet",
+            "text": "https://tenor.com/view/amouranth-horse-mask-dramateam-gif-22030881",
+            "time": 2,
+            "id": 68
+        },
+        {
+            "mot": "PTK",
+            "text": "https://tenor.com/view/amouranth-horse-mask-dramateam-gif-22030881",
+            "time": 2,
+            "id": 69
+        },
+        {
+            "mot": "gsm",
+            "text": "13 tels : 14.7cm",
+            "time": null,
+            "id": 71
+        },
+        {
+            "mot": "!manger",
+            "text": "**__Fast-food :__**\n```\u2022 \ud83c\udf54 Burger King  \u20ac\u20ac\n\u2022 \ud83c\udf54 Black and white \u20ac\u20ac\n\u2022 \ud83c\udf54 Quick \u20ac\u20ac\n\u2022 \ud83c\udf57 Faux KFC \u20ac\u20ac\n\u2022 \ud83c\udf2e O tacos \u20ac\u20ac```\n**__Healthy : __**\n```\u2022 \ud83e\udd57 Poke house \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf63 Taki Maki \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf2f Mex and go \u20ac\u20ac\n\u2022 \ud83c\udf63 Sushi world \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf72 Resto u \u20ac\n\u2022 \ud83c\udf58 Itadaki Max \u20ac\u20ac\n\u2022 \ud83e\udd57 Wok\u00e9 \u20ac\u20ac\u20ac```\n**__Pates : __**\n```\u2022 \ud83c\udf5d Nulles pates ailleurs \u20ac\u20ac\n\u2022 \ud83c\udf5d Fantasia \u20ac\u20ac\n\u2022 \ud83c\udf5d Pates du resto u \u20ac\n\u2022 \ud83c\udf5d Chez toi \u20ac\n```\n**__Sandwich : __ ** \n```\u2022 \ud83e\udd6a Kafette (Barbe) \u20ac\n\u2022 \ud83e\udd6a Crousti \u20ac\n\u2022 \ud83e\udd6a SOS Sandwich \u20ac\n\u2022 \ud83e\udd6a La sandwicherie \u20ac\u20ac\n\u2022 \ud83e\udd6a Cyclofette (Cyclotron) \u20ac\n\u2022 \ud83e\udd6a Chez moi \u20ac```\n**__Sucr\u00e9 :__** \n```\u2022 \ud83e\uddc7 Gofidor \u20ac\n\u2022 \ud83c\udf69 Dunkin Donut \u20ac\n\u2022 \ud83c\udf79 Guapa \u20ac\u20ac\n\u2022 \ud83c\udf75 Bubble tea \u20ac\u20ac\n```",
+            "time": null,
+            "id": 76
+        },
+        {
+            "mot": "Simon",
+            "text": "https://cdn.discordapp.com/attachments/709313685226782751/1089889812305162300/imh.jpg",
+            "time": 1,
+            "id": 78
+        },
+        {
+            "mot": "Emma",
+            "text": "https://cdn.discordapp.com/attachments/709313685226782751/1090233426797400084/emma.jpeg",
+            "time": 1,
+            "id": 79
+        },
+        {
+            "mot": "harc\u00e8le",
+            "text": "Petit rappel : c\u2019est pas bien d\u2019\u00eatre m\u00e9chant",
+            "time": 5,
+            "id": 85
+        },
+        {
+            "mot": "Bizarre",
+            "text": "https://tenor.com/view/suspect-jdg-joueur-du-grenier-louche-gif-25493922",
+            "time": 5,
+            "id": 89
+        },
+        {
+            "mot": "merci",
+            "text": "https://tenor.com/view/welcome-bitch-youre-welcome-the-rock-dwayne-johnson-gif-17767003",
+            "time": 1,
+            "id": 90
+        },
+        {
+            "mot": "Robin",
+            "text": "https://tenor.com/view/hi-hello-herro-wru-scooby-doo-gif-15747987",
+            "time": 5,
+            "id": 92
+        },
+        {
+            "mot": "@183259368286978048",
+            "text": "https://tenor.com/view/kevyn-monkey-kevyntth-gif-24951593",
+            "time": 5,
+            "id": 93
+        },
+        {
+            "mot": "@443867585075871767",
+            "text": "<:Simonprincesse:1091351770367799416>",
+            "time": null,
+            "id": 94
+        },
+        {
+            "mot": "@329571940476125185",
+            "text": "https://tenor.com/view/sleep-will-ferrell-elf-how-did-you-sleep-last-night-got-a-full40minutes-gif-10508562",
+            "time": 5,
+            "id": 96
+        },
+        {
+            "mot": "@346945067975704577",
+            "text": "https://tenor.com/view/dog-gif-26024604",
+            "time": 10,
+            "id": 97
+        },
+        {
+            "mot": "<@271305579698323456>",
+            "text": "<:john:1095327420145483786>",
+            "time": 3,
+            "id": 99
+        },
+        {
+            "mot": "john",
+            "text": "<:john:1095327420145483786>",
+            "time": 4,
+            "id": 100
+        },
+        {
+            "mot": "tg",
+            "text": "tg toi m\u00eame",
+            "time": 3,
+            "id": 101
+        },
+        {
+            "mot": "Audrey",
+            "text": "<:audreydegout:1105462628484141116>",
+            "time": 1,
+            "id": 104
+        },
+        {
+            "mot": "<@560155603574718475>",
+            "text": "https://tenor.com/view/triggered-eevee-glaceon-pokemon-angry-gif-16123164",
+            "time": 2,
+            "id": 105
         }
     ],
     "tetris": {
@@ -110,9 +225,9 @@
     },
     "birthday": {
         "346945067975704577": {
-            "year": 2000,
-            "month": 2,
-            "day": 21
+            "year": 2004,
+            "month": 7,
+            "day": 16
         },
         "443867585075871767": {
             "year": 2005,
@@ -158,6 +273,16 @@
             "year": 2004,
             "month": 8,
             "day": 3
+        },
+        "752574610666684426": {
+            "year": 2004,
+            "month": 8,
+            "day": 28
+        },
+        "454318083876847616": {
+            "year": 2003,
+            "month": 10,
+            "day": 12
         }
     }
 }
