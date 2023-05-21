@@ -3,5 +3,5 @@ __pycache__
 Thumbs.db
 .env
 
-src/data/*
-data/*
+bot.log
+datasinf.json
