@@ -3,5 +3,6 @@ __pycache__
 Thumbs.db
 .env
 
+src/data
 bot.log
 datasinf.json
