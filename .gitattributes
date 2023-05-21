@@ -1,3 +1,0 @@
-# Do not edit the files during a merge
-src/data/* -merge=keepMine
-.env merge=keepMine

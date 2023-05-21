@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import EmojiConverter, TextChannelConverter
 
-from utils import simplify, GetLogLink
+from utils import is_allowed, simplify, GetLogLink
 
 import io
 import re
@@ -20,6 +20,7 @@ class Embed(commands.Cog):
 	@commands.group(aliases=["e"])
 	@commands.max_concurrency(1, commands.BucketType.user)
 	@commands.guild_only()
+	@commands.check(is_allowed)
 	async def embed(self, ctx:commands.Context):
 		if ctx.invoked_subcommand is None:
 			await ctx.send("You must select an option (view/help/new)", delete_after=5)

@@ -1,8 +1,8 @@
-import settings as settings
+import settings
 
 import discord
 from discord.ext import commands
-
+print(discord.__version__)
 from utils import log
 from cmds.stuff.birthday import Birthday as Bd
 
@@ -34,7 +34,5 @@ async def on_ready():
 @bot.command()
 async def ping(ctx:commands.Context):
 	await ctx.send(f"🏓 **PONG!** je t'ai renvoyé la balle en `{round(bot.latency*1000)}`_ms_ !")
-
-
 
 bot.run(settings.DISCORD_API_TOKEN)

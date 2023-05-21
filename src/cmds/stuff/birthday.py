@@ -5,7 +5,7 @@ from discord.ext import commands, tasks
 import asyncio
 import datetime as dt
 from settings import GENERAL_ID
-from utils import get_data, upd_data, sort_bdays, months
+from utils import is_allowed, get_data, upd_data, sort_bdays, months
 
 class Birthday(commands.Cog):
 	def __init__(self,bot):
@@ -13,6 +13,7 @@ class Birthday(commands.Cog):
 
 	@app_commands.command(description="Adds your birthday!")
 	@app_commands.describe(day="Day of birth", month="Month of birth", year="Year of birth")
+	@app_commands.check(is_allowed)
 	async def set_birthday(self, inter:discord.Interaction, day:int, month:months, year:int):
 		months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 		name = str(inter.user.id)
@@ -45,6 +46,7 @@ class Birthday(commands.Cog):
 
 	@app_commands.command(description="Displays everyone's birthday")
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.check(is_allowed)
 	async def birthdays(self, inter:discord.Interaction, user:discord.Member=None):
 
 		data : dict = get_data("birthday")

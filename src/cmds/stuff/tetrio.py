@@ -6,7 +6,7 @@ import requests
 import datetime as dt
 from typing import List, Optional
 
-from utils import get_data, upd_data, nospecial, GetLogLink
+from utils import is_allowed, get_data, upd_data, nospecial, GetLogLink
 
 class Tetrio(commands.Cog):
 	def __init__(self, bot:commands.Bot):
@@ -138,6 +138,7 @@ class Tetrio(commands.Cog):
 	@app_commands.command(description="Connect your discord account to your Tetrio profile")
 	@app_commands.describe(name="The name of your Tetrio profile")
 	@app_commands.guild_only()
+	@app_commands.check(is_allowed)
 	async def register(self, inter : discord.Interaction, name: str):
 		data : dict = get_data("tetris")
 
@@ -166,6 +167,7 @@ class Tetrio(commands.Cog):
 	@app_commands.guild_only()
 	@app_commands.describe(user="The user's profile you want to see")
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.check(is_allowed)
 	async def profile(self, inter: discord.Interaction, user:str=None):
 		await self.tprofile(inter, user)
 

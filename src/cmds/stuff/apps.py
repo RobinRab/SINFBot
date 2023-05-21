@@ -48,7 +48,7 @@ class GeneralCM(commands.Cog):
 		embed.set_image(url=link)
 		embed.set_footer(text=f"Requested by : {inter.user}")
 		
-		await inter.response.send_message(embed=embed)
+		await inter.response.send_message(embed=embed, ephemeral=True)
 
 	async def birthday(self, inter:discord.Interaction, user:discord.Member):
 		data : dict = get_data("birthday")
@@ -64,7 +64,7 @@ class GeneralCM(commands.Cog):
 
 		left = date - dt.datetime.now()
 
-		await inter.response.send_message(f"**{user}** has his birthday the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**")
+		await inter.response.send_message(f"**{user}** has his birthday the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**", ephemeral=True)
 
 
 async def setup(bot:commands.Bot):

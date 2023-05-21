@@ -1,14 +1,13 @@
 import discord
 from discord.ext import commands
 
-import re
 import io
 import aiohttp
 import requests
 import datetime as dt
 
 from settings import CONFESSION_ID
-from utils import GetLogLink, get_emoji
+from utils import is_allowed, GetLogLink, get_emoji
 
 
 class General(commands.Cog):
@@ -17,50 +16,53 @@ class General(commands.Cog):
 
 	@commands.command()
 	@commands.cooldown(1, 5, commands.BucketType.user)
+	@commands.check(is_allowed)
 	async def file(self, ctx:commands.Context, link=None):
 		if link is None : 
 			await ctx.send("You must specify a link to convert",delete_after=5)
 			return
-		await ctx.trigger_typing()
-	
-		Format = None
-		Fim = [".gif",".png",".jpg",".jpeg",".webp"]
-		Fau = [".mp3",".ogg",".wav",".flac"]
-		Fvi = [".mp4",".webm",".mov"]
-		LL = [Fim,Fau,Fvi]
-		for n in LL :
-			for i in n :
-				if i in link :
-					Format = i
-					break
-		
-		if Format is None:
-			await ctx.send(f"**{ctx.author},** link invalid",delete_after=5)
-			return
-		
-		try :
-			requests.get(link)
-			async with aiohttp.ClientSession() as cs:
-				async with cs.get(link) as resp:
-					File = discord.File(io.BytesIO(await resp.content.read()),filename=f"file{Format}") #,filename="image.png") pour préciser le format
-					await ctx.send(f"**{ctx.author},** here's your file!",file=File)
-		except :
-			await ctx.send(f"**{ctx.author},** link invalid",delete_after=15)
+
+		async with ctx.typing():
+			Format = None
+			Fim = [".gif",".png",".jpg",".jpeg",".webp"]
+			Fau = [".mp3",".ogg",".wav",".flac"]
+			Fvi = [".mp4",".webm",".mov"]
+			LL = [Fim,Fau,Fvi]
+			for n in LL :
+				for i in n :
+					if i in link :
+						Format = i
+						break
+			
+			if Format is None:
+				await ctx.send(f"**{ctx.author},** link invalid",delete_after=5)
+				return
+			
+			try :
+				requests.get(link)
+				async with aiohttp.ClientSession() as cs:
+					async with cs.get(link) as resp:
+						File = discord.File(io.BytesIO(await resp.content.read()),filename=f"file{Format}") #,filename="image.png") pour préciser le format
+						await ctx.send(f"**{ctx.author},** here's your file!",file=File)
+			except :
+				await ctx.send(f"**{ctx.author},** link invalid",delete_after=15)
 
 
 	@commands.command()
 	@commands.cooldown(1, 5, commands.BucketType.user)
+	@commands.check(is_allowed)
 	async def link(self, ctx:commands.Context):
 		if len(ctx.message.attachments) >= 1 :
-			await ctx.trigger_typing()
-			link = await GetLogLink(self.bot, ctx.message.attachments[0].url)
-			await ctx.send(f"**{ctx.author}**, here's your permanent link : {link}")
+			async with ctx.typing():
+				link = await GetLogLink(self.bot, ctx.message.attachments[0].url)
+				await ctx.send(f"**{ctx.author}**, here's your permanent link : {link}")
 		else : 
 			await ctx.send("You must specify a file as attachment",delete_after=5)
 
 
 	@commands.command()
 	@commands.cooldown(1, 5, commands.BucketType.user)
+	@commands.check(is_allowed)
 	async def emoji(self, ctx:commands.Context, content=None):
 		if content is None : 
 			await ctx.send("You most specify an emoji",delete_after=5)

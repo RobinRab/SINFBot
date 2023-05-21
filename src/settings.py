@@ -15,6 +15,7 @@ ANON_SAYS_ID = os.getenv("ANON_SAYS_ID")
 GENERAL_ID = os.getenv("GENERAL_ID")
 CONFESSION_ID = os.getenv("CONFESSION_ID")
 CUTIE_ID = os.getenv("CUTIE_ID")
+MEMBER_ID = os.getenv("MEMBER_ID")
 
 BASE_DIR = pathlib.Path(__file__).parent
 CMDS_DIR = BASE_DIR / "cmds"

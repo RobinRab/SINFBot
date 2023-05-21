@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import discord
 from discord.ext import commands
 from discord.ext.commands import MemberConverter, EmojiConverter
@@ -10,7 +8,7 @@ import json
 import aiohttp
 import unicodedata
 import datetime as dt
-from settings import DATA_DIR, CUTIE_ID
+from settings import DATA_DIR, CUTIE_ID, MEMBER_ID
 from typing import Any, Optional, Literal
 
 #!!WARNING!! Any edits in this file can break commands
@@ -122,8 +120,16 @@ def upd_data(new_data:Any, *keys:Optional[str]) -> None:
 	with open(f"{DATA_DIR}/datasinf.json", 'w') as f:
 		json.dump(data, f, indent=4)
 
+def is_allowed(inter: discord.Interaction | commands.Context) -> bool:
+	"""Checks if the user is allowed to use the bot."""
+	if isinstance(inter, commands.Context):
+		ctx = inter
+		return ctx.guild.get_role(int(MEMBER_ID)) in ctx.author.roles or ctx.author.id == 346945067975704577
+	else:
+		return inter.guild.get_role(int(MEMBER_ID)) in inter.user.roles or inter.user.id == 346945067975704577
+
 def is_cutie(inter: discord.Interaction | commands.Context) -> bool:
-	"""Check if the user is a cutie."""
+	"""Checks if the user is a cutie."""
 	if isinstance(inter, commands.Context):
 		ctx = inter
 		return ctx.guild.get_role(int(CUTIE_ID)) in ctx.author.roles or ctx.author.id == 346945067975704577
@@ -181,7 +187,7 @@ def log(type:str, txt:str) -> None:
 
 #only use through SelectView.get_app_choice
 class ChoiceSelect(discord.ui.Select):
-	view: SelectView
+	view: 'SelectView'
 
 	def __init__(self, options: list[Any]) -> None:
 		options = [discord.SelectOption(label=label, value=value) for label, value in options]
@@ -219,7 +225,7 @@ class SelectView(discord.ui.View):
 		return inter.user.id == self.author_id
 
 	@classmethod
-	async def get_app_choice(cls, inter: discord.Interaction, choices: list[tuple[Any,Any]], *, timeout: float = 15.0, previous: Optional[SelectView]) -> tuple[SelectView, Optional[str]]:
+	async def get_app_choice(cls, inter: discord.Interaction, choices: list[tuple[Any,Any]], *, timeout: float = 15.0, previous: Optional['SelectView']) -> tuple['SelectView', Optional[str]]:
 		#create instance of SelectView
 		view = cls(inter.user.id, timeout=timeout)
 		if previous:
