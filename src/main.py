@@ -1,8 +1,9 @@
-import settings
 
 import discord
 from discord.ext import commands
 print(discord.__version__)
+
+import settings
 from utils import log
 from cmds.stuff.birthday import Birthday as Bd
 
