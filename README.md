@@ -103,7 +103,7 @@ Le bot devrait maintenant être en ligne, vous pouvez le tester comme vous le so
 # 📡 Partager vos modifications
 Premièrement, vous devez connecter votre fork au projet original 
 ```
-git remote add upstream https://github.com/RobinRab/SINF-Bot
+git remote add upstream https://github.com/RobinRab/SINFBot
 ```
 Lorsque votre nouvelle commande a bien été testée et que vous souhaitez la partager avec les autres développeurs, suivez ces étapes dans votre terminal:
 ```
