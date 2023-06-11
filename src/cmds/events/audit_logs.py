@@ -12,6 +12,8 @@ class AuditLog(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_audit_log_entry_create(self, entry:discord.AuditLogEntry):
+		#!! command disabled for now
+		return 
 		# check is a role update
 		if entry.action.name != "member_role_update":
 			return
