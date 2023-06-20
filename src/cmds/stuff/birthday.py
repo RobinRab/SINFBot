@@ -4,8 +4,9 @@ from discord.ext import commands, tasks
 
 import asyncio
 import datetime as dt
+from typing import Optional
 from settings import GENERAL_ID
-from utils import is_allowed, get_data, upd_data, sort_bdays, months
+from utils import UnexpectedValue, is_summer_time, is_allowed, get_data, upd_data, sort_bdays, months
 
 class Birthday(commands.Cog):
 	def __init__(self,bot):
@@ -32,47 +33,31 @@ class Birthday(commands.Cog):
 			return
 		
 		try:
-			month = months.index(month) + 1
-			birthday = dt.datetime(year, month, day)
+			month_index = months.index(month) + 1
+			birthday = dt.datetime(year, month_index, day)
 		except ValueError:
 			await inter.response.send_message("This date does not exist")
 			return
 
 		data[name] = {"year": year, "month": month, "day": day}
 		upd_data(data, "birthday")
-		self._birthdays.restart()
+		self.birthdays_loop.restart()
 
 		await inter.response.send_message(f"{inter.user.mention}'s birthday has been set on the {birthday.strftime('%d/%m/%Y')}")
 
 	@app_commands.command(description="Displays everyone's birthday")
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_allowed)
-	async def birthdays(self, inter:discord.Interaction, user:discord.Member=None):
+	@app_commands.guild_only()
+	async def birthdays(self, inter:discord.Interaction, user:Optional[discord.Member]):
+		if not isinstance(inter.guild, discord.Guild):
+			raise UnexpectedValue("inter.guild is not a discord.Guild")
+
 
 		data : dict = get_data("birthday")
 		year = dt.datetime.now().year
 
-		if user is None:
-			birthdays = sort_bdays(data)
-
-			embed = discord.Embed(title="Birthdays list", color=discord.Color.blurple())
-			embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1074650207796609115/file.png")
-
-			txt = ""
-			for user, date in birthdays:
-				user = inter.guild.get_member(int(user))
-
-				if user is None:
-					continue
-			
-				left = date - dt.datetime.now()
-
-				txt += f"{user.mention} - {date.strftime('%d/%m/%Y')} dans **{left.days+1}d**\n"
-
-			embed.description = txt
-			await inter.response.send_message(embed=embed)
-
-		else:
+		if isinstance(user, discord.Member):
 			if str(user.id) not in data.keys():
 				await inter.response.send_message(f"**{user}** has not set their birthday yet")
 				return
@@ -84,23 +69,48 @@ class Birthday(commands.Cog):
 			left = date - dt.datetime.now()
 
 			await inter.response.send_message(f"**{user}** has their birthday on the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**")
+		else:
+			birthdays = sort_bdays(data)
+
+			embed = discord.Embed(title="Birthdays list", color=discord.Color.blurple())
+			embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1074650207796609115/file.png")
+
+			txt = ""
+			for Bduser, date in birthdays:
+
+				user = inter.guild.get_member(int(Bduser))
+
+				if user is None:
+					continue
+			
+				left = date - dt.datetime.now()
+
+				txt += f"{user.mention} - {date.strftime('%d/%m/%Y')} dans **{left.days+1}d**\n"
+
+			embed.description = txt
+			await inter.response.send_message(embed=embed)
 
 	@tasks.loop()
-	async def _birthdays(bot:commands.Bot):
-		channel = bot.get_channel(GENERAL_ID)
+	async def birthdays_loop(self):
+		channel = self.bot.get_channel(GENERAL_ID)
+		if not isinstance(channel, discord.TextChannel):
+			raise UnexpectedValue("channel is not a discord.TextChannel")
+	
 		while 1:
 			data : dict = get_data("birthday")
 
 			birthdays = sort_bdays(data)
 
 			for user, date in birthdays:
-				user = bot.get_user(int(user))
+				user = self.bot.get_user(int(user))
 
 				if user is None:
 					continue
 
 				left = (date - dt.datetime.now()).total_seconds()
-				left -= 3600 # 1h, -2h for summer time (7200)
+				left -= 3600 # -1h, winter time
+				if is_summer_time():
+					left -= 3600 # -2h for summer time (7200)
 				left += 1 # somehow it is 1 second early
 
 				await asyncio.sleep(left)

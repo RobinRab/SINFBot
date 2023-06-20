@@ -128,6 +128,7 @@ class Help(commands.Cog):
 		class B_resp(discord.ui.View):
 			def __init__(self, timeout=15):
 				super().__init__(timeout=timeout)
+				self.message : discord.Message
 
 			async def interaction_check(self, inter: discord.Interaction):
 				return inter.user.id == ctx.author.id
@@ -146,11 +147,13 @@ class Help(commands.Cog):
 
 			async def on_timeout(self):
 				for item in self.children:
-					item.disabled = True
+					if isinstance(item, discord.ui.Button):
+						item.disabled = True
 
 				await self.message.edit(view=self)
 
-		B_resp.message = await ctx.reply(view=B_resp())
+		b_resp = B_resp()
+		b_resp.message = await ctx.reply(view=b_resp)
 
 
 	# Tetrio section
@@ -263,7 +266,7 @@ class Help(commands.Cog):
 	@help.command(aliases=["!embed"])
 	async def embed(self, ctx:commands.Context) -> None:
 		E = discord.Embed(colour=discord.Colour.random())
-		E.set_author(name=ctx.author,icon_url=await GetLogLink(self.bot, ctx.author.avatar))
+		E.set_author(name=ctx.author,icon_url=await GetLogLink(self.bot, str(ctx.author.avatar)))
 		E.title = "Page d'aide de la commande `embed`"
 		E.description = """Vous trouverez ci-dessous une liste de toutes les options que vous pouvez appliquer à votre embed pour le personnaliser autant que possible en le commancant via `m!embed new`
 			Vous aurez **un delay de 10m** à chaque fois avant que l'embed s'anulle.

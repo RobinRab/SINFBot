@@ -35,7 +35,7 @@ class AuditLog(commands.Cog):
 		await entry.target.add_roles(*roles, reason="Re-added roles after timeout")
 
 		# send message
-		chan = self.bot.get_channel(int(GENERAL_ID))
+		chan = self.bot.get_channel(GENERAL_ID)
 		E = discord.Embed(title="Tentative de retrait de rôle", color=discord.Color.red())
 		E.set_author(name=entry.user, icon_url=await GetLogLink(self.bot,entry.user.display_avatar))
 		E.description = ', '.join(role.mention for role in roles)

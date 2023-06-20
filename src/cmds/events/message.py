@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from utils import get_data, simplify
+from utils import UnexpectedValue, get_data, simplify
 from settings import ANON_SAYS_ID, GENERAL_ID
 
 import io
@@ -36,8 +36,12 @@ class Message(commands.Cog):
 					break
 
 		#anon says
-		if message.channel.id == int(ANON_SAYS_ID):
-			general = message.guild.get_channel(int(GENERAL_ID))
+		if message.channel.id == ANON_SAYS_ID:
+			if not isinstance(message.guild, discord.Guild):
+				raise UnexpectedValue("message.guild is a guild")
+			general = message.guild.get_channel(GENERAL_ID)
+			if not isinstance(general, discord.TextChannel):
+				raise UnexpectedValue("general is a text channel")
 
 			Files= []
 			try :

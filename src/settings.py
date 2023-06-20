@@ -6,16 +6,16 @@ import logging.handlers
 from dotenv import load_dotenv
 
 load_dotenv()
-BOT_PREFIX = os.getenv("BOT_PREFIX")
-DISCORD_API_TOKEN = os.getenv("DISCORD_API_TOKEN")
-BOT_ID = os.getenv("BOT_ID") 
-GUILD_ID = os.getenv("GUILD_ID")
-ERROR_CHANNEL_ID = os.getenv("ERROR_CHANNEL_ID")
-ANON_SAYS_ID = os.getenv("ANON_SAYS_ID")
-GENERAL_ID = os.getenv("GENERAL_ID")
-CONFESSION_ID = os.getenv("CONFESSION_ID")
-CUTIE_ID = os.getenv("CUTIE_ID")
-MEMBER_ID = os.getenv("MEMBER_ID")
+BOT_PREFIX = os.getenv("BOT_PREFIX") or "!"
+DISCORD_API_TOKEN = os.getenv("DISCORD_API_TOKEN") or ""
+BOT_ID = int(os.getenv("BOT_ID") or 0)
+GUILD_ID = int(os.getenv("GUILD_ID") or 0)
+ERROR_CHANNEL_ID = int(os.getenv("ERROR_CHANNEL_ID") or 0)
+ANON_SAYS_ID = int(os.getenv("ANON_SAYS_ID") or 0)
+GENERAL_ID = int(os.getenv("GENERAL_ID") or 0)
+CONFESSION_ID = int(os.getenv("CONFESSION_ID") or 0)
+CUTIE_ID = int(os.getenv("CUTIE_ID") or 0)
+MEMBER_ID = int(os.getenv("MEMBER_ID") or 0)
 
 BASE_DIR = pathlib.Path(__file__).parent
 CMDS_DIR = BASE_DIR / "cmds"

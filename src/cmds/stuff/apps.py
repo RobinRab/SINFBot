@@ -7,10 +7,8 @@ from utils import GetLogLink, log, get_data
 
 #!! all functions added in this class will be added as context menu
 #!! all functions added in this class will be added as context menu
-
-
 class GeneralCM(commands.Cog):
-	#! there is one more app in tetrio.py
+	#! there's one more CM in tetrio.py
 	def __init__(self, bot: commands.Bot) -> None:
 		self.bot = bot
 
@@ -31,8 +29,7 @@ class GeneralCM(commands.Cog):
 		P = "**Here's your avatar :**\n"
 		D = ""
 
-		for i in ["png","jpg","jpeg","webp"] :
-			#Format = user.display_avatar(format=i)
+		for i in ("png","jpg","jpeg","webp") :
 			Format = str(user.display_avatar.with_format(i))
 			D = f"{D}[{i}]({Format}), "
 
@@ -42,7 +39,7 @@ class GeneralCM(commands.Cog):
 		if user.display_avatar.is_animated():
 			D = "[gif]({})--".format(user.display_avatar.with_format("gif"))
 
-		link = await GetLogLink(self.bot, user.display_avatar)
+		link = await GetLogLink(self.bot, str(user.display_avatar))
 		embed = discord.Embed(colour=discord.Colour.from_rgb(0,0,0) ,title=P,description=f"**{D[:-2]}**")
 		embed.url=link
 		embed.set_image(url=link)

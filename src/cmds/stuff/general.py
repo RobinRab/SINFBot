@@ -7,7 +7,7 @@ import requests
 import datetime as dt
 
 from settings import CONFESSION_ID
-from utils import is_allowed, GetLogLink, get_emoji
+from utils import UnexpectedValue, is_allowed, GetLogLink, get_emoji
 
 
 class General(commands.Cog):
@@ -82,7 +82,7 @@ class General(commands.Cog):
 			creator = emoji.user if emoji.user is not None else "Unknown"
 			date =  str(c[2]+"/"+c[1]+"/"+ c[0] +" à " + b[1])
 			link = await GetLogLink(self.bot, emoji.url)
-			icon = await GetLogLink(self.bot, ctx.author.display_avatar)
+			icon = await GetLogLink(self.bot, str(ctx.author.display_avatar))
 			embed = discord.Embed(
 				title = "Here's your emoji",
 				description = f"**Name : **`{emoji.name}`\n**Preview : **{emoji}\n**ID : **{emoji.id}\n**ID : **`{emoji}`\n**Server : **`{emoji.guild}`{creator}\n**Date added : **{date}",
@@ -110,6 +110,8 @@ class General(commands.Cog):
 		)
 		E.set_footer(text="Anon",icon_url="https://cdn.discordapp.com/attachments/709313685226782751/1049237441053208676/anon.png")
 		chan = await self.bot.fetch_channel(CONFESSION_ID)
+		if not isinstance(chan, discord.TextChannel):
+			raise UnexpectedValue("Channel not found")
 
 		await chan.send(embed=E)
 		await ctx.channel.send(embed=discord.Embed(

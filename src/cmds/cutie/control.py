@@ -6,7 +6,7 @@ import aiohttp
 import requests
 from typing import Optional
 
-from utils import is_cutie, activities, statuses
+from utils import UnexpectedValue, app_cd_guild, is_cutie, activities, statuses
 
 
 class Control(commands.Cog):
@@ -14,51 +14,62 @@ class Control(commands.Cog):
 		self.bot : commands.Bot = bot
 
 	@app_commands.command(description="Changes the bot's name")
-	@app_commands.describe(name="The new name")
+	@app_commands.describe(name="Write new name")
 	@app_commands.check(is_cutie)
-	@app_commands.checks.cooldown(1, 3600, key=lambda i: (i.guild_id, i.guild.id))
+	@app_commands.guild_only()
+	@app_commands.checks.cooldown(1, 3600, key=app_cd_guild)
 	async def rename(self, inter:discord.Interaction, *, name:str):
+
 		if not 2 <= len(name) <= 32:
 			await inter.response.send_message("The name'length must be between 2 and 32 characters", delete_after=5)
 			return
 		try:
+			if not isinstance(self.bot.user, discord.ClientUser):
+				raise Exception("self.bot.user is not a ClientUser")
+
 			await self.bot.user.edit(username=name)
 			await inter.response.send_message(f"Name successfully changed to **{name}**")
 		except: 
 			await inter.response.send_message("Invalid name", delete_after=5)
 
 
-	@commands.command(description="Changes the bot's avatar")
-	@commands.check(is_cutie)
-	@commands.cooldown(1, 3600, commands.BucketType.guild)
-	async def avatar(self, ctx: commands.Context, link:Optional[str]):
-		if link is None and len(ctx.message.attachments) == 0:
-			await ctx.reply("You must send a link or attach an image", delete_after=5)
-			return
-		elif link is None:
-			link = ctx.message.attachments[0].url
+	@app_commands.command(description="Changes the bot's avatar")
+	@app_commands.check(is_cutie)
+	@app_commands.guild_only()
+	@app_commands.checks.cooldown(1, 3600, key=app_cd_guild)
+	async def avatar(self, inter: discord.Interaction, link:Optional[str], file:Optional[discord.Attachment]):
+		if isinstance(file, discord.Attachment):
+			link = file.url
+		else:
+			link = link or ""
 
 		try :
 			requests.get(link)
 			async with aiohttp.ClientSession() as cs:
 				async with cs.get(link) as resp:
 					File = await resp.content.read()
+
+					if not isinstance(self.bot.user, discord.ClientUser):
+						raise UnexpectedValue("self.bot.user is not a ClientUser")
 					await self.bot.user.edit(avatar=File)
-		except discord.DiscordException: #pense pas que c'est la bonne exception
-			await ctx.reply(f"**{ctx.user},** 404",delete_after=5)
-		except ValueError:
-			await ctx.reply(f"**{ctx.user},** Invalid format",delete_after=5)
 		except :
-			await ctx.reply(f"**{ctx.user},** Invalid link",delete_after=5)
-		finally:
-			await ctx.reply("Avatar successfully changed")
+			await inter.response.send_message(f"**{inter.user},** Invalid link",delete_after=5)
+			return
+		
+		await inter.response.send_message("Avatar successfully changed")
 
 
 	@app_commands.command(description="Changes the bot's status")
 	@app_commands.describe(state="Chose the new status of the bot")
 	@app_commands.check(is_cutie)
-	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.guild.id))
+	@app_commands.guild_only()
+	@app_commands.checks.cooldown(1, 60, key=app_cd_guild)
 	async def status(self, inter:discord.Interaction, state:statuses):
+		if not isinstance(inter.guild, discord.Guild):
+			raise UnexpectedValue("inter.guild.me is not a Member")
+		if not isinstance(inter.guild.me.activity, discord.Activity):
+			raise UnexpectedValue("inter.guild.me.activity is not an Activity")
+	
 		await self.bot.change_presence(status=discord.Status(f'{state}'),activity=inter.guild.me.activity)
 		await inter.response.send_message(f"Status successfully changed to **{state}**")
 
@@ -69,25 +80,25 @@ class Control(commands.Cog):
 		text = "Enter any text"
 	)
 	@app_commands.check(is_cutie)
-	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.guild.id))
+	@app_commands.guild_only()
+	@app_commands.checks.cooldown(1, 60, key=app_cd_guild)
 	async def activity(self, inter:discord.Interaction, typ:activities, text:Optional[str]):
-		if text is None and typ != "stop":
-			await inter.response.send_message("You must specify a text", delete_after=5)
-			return
-	
+		if not isinstance(inter.guild, discord.Guild):
+			raise UnexpectedValue("inter.guild.me is not a Member")
+
 		match typ:
 			case "playing":
-				await self.bot.change_presence(status=inter.guild.me.status,activity=discord.Game(name=text))
+				await self.bot.change_presence(status=inter.guild.me.status,activity=discord.Game(name=text or " "))
 			case "watching":
-				await self.bot.change_presence(status=inter.guild.me.status,activity=discord.Activity(type=discord.ActivityType.watching, name=text))
+				await self.bot.change_presence(status=inter.guild.me.status,activity=discord.Activity(type=discord.ActivityType.watching, name=text or ""))
 			case "listening":
-				await self.bot.change_presence(status=inter.guild.me.status,activity=discord.Activity(type=discord.ActivityType.listening, name=text))
+				await self.bot.change_presence(status=inter.guild.me.status,activity=discord.Activity(type=discord.ActivityType.listening, name=text or ""))
 			case "stop":
 				await self.bot.change_presence(status=inter.guild.me.status,activity=discord.Game(name=""))
 				await inter.response.send_message(f"Activity successfully removed")
 				return
 
-		await inter.response.send_message(f"Activity successfully changed to **{typ} {text}**")
+		await inter.response.send_message(f"Activity successfully changed to **{typ} {text or ''}**")
 
 
 async def setup(bot:commands.Bot):

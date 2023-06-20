@@ -6,7 +6,7 @@ import requests
 import datetime as dt
 from typing import List, Optional
 
-from utils import is_allowed, get_data, upd_data, nospecial, GetLogLink
+from utils import UnexpectedValue, is_allowed, get_data, upd_data, nospecial, GetLogLink
 
 class Tetrio(commands.Cog):
 	def __init__(self, bot:commands.Bot):
@@ -168,7 +168,7 @@ class Tetrio(commands.Cog):
 	@app_commands.describe(user="The user's profile you want to see")
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_allowed)
-	async def profile(self, inter: discord.Interaction, user:str=None):
+	async def profile(self, inter: discord.Interaction, user:Optional[str]):
 		await self.tprofile(inter, user)
 
 	@profile.autocomplete("user")
@@ -258,33 +258,22 @@ class Tetrio(commands.Cog):
 			color=discord.Color.red()
 		)
 
+		tr_E_desc = l40_E_desc = blitz_E_desc = ""
+
 		for index, (tr, l40, blitz) in enumerate(zip(datatr, data40, datablitz)):
-			
+			medal = "🥇" if index == 0 else "🥈" if index == 1 else "🥉" if index == 2 else index+1
+			tr_E_desc += f"\n**{medal}. {tr.upper()}** : {datatr[tr]:,} TR {userranks[tr]}"
+			l40_E_desc += f"\n**{medal}. {l40.upper()}**: [{data40[l40][0]}]({data40[l40][1]})s"
+			blitz_E_desc += f"\n**{medal}. {blitz.upper()}** : [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
+		
+		tr_E.description = tr_E_desc
+		l40_E.description = l40_E_desc
+		blitz_E.description = blitz_E_desc
 
-			if index == 0:
-				tr_E.description += f"**🥇 {tr.upper()}** : {datatr[tr]:,} TR {userranks[tr]}"
-				l40_E.description += f"**🥇 {l40.upper()}** : [{data40[l40][0]}]({data40[l40][1]})s"
-				blitz_E.description += f"**🥇 {blitz.upper()}** : [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
-
-			elif index == 1:
-				tr_E.description += f"\n**🥈 {tr.upper()}** : {datatr[tr]:,} TR {userranks[tr]}"
-				l40_E.description += f"\n**🥈 {l40.upper()}** : [{data40[l40][0]}]({data40[l40][1]})s"
-				blitz_E.description += f"\n**🥈 {blitz.upper()}** : [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
-
-			elif index == 2:
-				tr_E.description += f"\n**🥉 {tr.upper()}** : {datatr[tr]:,} TR {userranks[tr]}"
-				l40_E.description += f"\n**🥉 {l40.upper()}** : [{data40[l40][0]}]({data40[l40][1]})s"
-				blitz_E.description += f"\n**🥉 {blitz.upper()}** : [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
-
-			else:
-				tr_E.description += f"\n** {index+1}. {tr.upper()}** : {datatr[tr]:,} TR {userranks[tr]}"
-				l40_E.description += f"\n** {index+1}. {l40.upper()}**: [{data40[l40][0]}]({data40[l40][1]})s"
-				blitz_E.description += f"\n** {index+1}. {blitz.upper()}** : [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
-
-		class leader(discord.ui.View):
-			def __init__(self, timeout=60):
+		class LeaderBoard(discord.ui.View):
+			def __init__(self, timeout=5):
 				super().__init__(timeout=timeout)
-				#self.value = None
+				self.message : Optional[discord.Message]
 
 			@discord.ui.button(label="Rank",style=discord.ButtonStyle.primary)
 			async def t1(self, inter: discord.Interaction, button: discord.ui.Button):
@@ -300,11 +289,14 @@ class Tetrio(commands.Cog):
 
 			async def on_timeout(self):
 				for item in self.children:
-					item.disabled = True
+					if isinstance(item, discord.ui.Button):
+						item.disabled = True
 
-				await self.message.edit(view=self)
+				if isinstance(self.message, discord.Message):
+					await self.message.edit(view=self)
 
-		leader.message = await inter.followup.send(embed=tr_E, view=leader())
+		leaderboard = LeaderBoard()
+		leaderboard.message = await inter.followup.send(embed=tr_E, view=leaderboard)
 
 
 async def setup(bot:commands.Bot):

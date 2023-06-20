@@ -3,7 +3,7 @@ from discord import app_commands
 from discord.ext import commands
 
 import os
-import settings as settings
+import settings
 from utils import log, SelectView
 
 class Owner(commands.Cog):
@@ -13,7 +13,7 @@ class Owner(commands.Cog):
 	@commands.command()
 	@commands.is_owner()
 	async def sync(self, ctx:commands.Context):
-		if self.bot.tree.synced:
+		if self.bot.description == "Synced":
 			await ctx.send("Bot already synced")
 			return
 		try : 
@@ -21,7 +21,7 @@ class Owner(commands.Cog):
 			self.bot.tree.copy_global_to(guild=discord.Object(id=settings.GUILD_ID))
 			
 			await self.bot.tree.sync(guild=discord.Object(id=settings.GUILD_ID))
-			self.bot.tree.synced = True
+			self.bot.description = "Synced"
 
 			await ctx.send("Bot synced")
 			log("INFO", "Bot synced")
@@ -46,7 +46,7 @@ class Owner(commands.Cog):
 	async def enable(self, inter:discord.Interaction):
 		folders =  [(file,file) for file in os.listdir("cmds/") if file[0] not in [".", "_"]]
 
-		view, folder = await SelectView.get_app_choice(inter, folders)
+		view, folder = await SelectView.get_app_choice(inter, folders, previous=None)
 
 		if folder is None:
 			return await inter.followup.send("You must select a folder", ephemeral=True)
@@ -88,7 +88,7 @@ class Owner(commands.Cog):
 	async def disable(self, inter:discord.Interaction):
 		folders =  [(file,file) for file in os.listdir("cmds/") if file[0] not in [".", "_"]]
 
-		view, folder = await SelectView.get_app_choice(inter, folders)
+		view, folder = await SelectView.get_app_choice(inter, folders, previous=None)
 
 		if folder is None:
 			return await inter.followup.send("Your must select a folder", ephemeral=True)
@@ -129,7 +129,7 @@ class Owner(commands.Cog):
 		txt += "```"
 
 		E = discord.Embed(title="Debug", description=txt)
-		E.add_field(name="Synced", value=self.bot.tree.synced)
+		E.add_field(name="Synced", value=self.bot.description == "Synced")
 		E.add_field(name="Ping", value=f"{self.bot.latency*1000:.2f}ms")
 
 		await inter.response.send_message(embed=E)

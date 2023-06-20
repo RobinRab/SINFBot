@@ -13,9 +13,21 @@ from typing import Any, Optional, Literal
 
 #!!WARNING!! Any edits in this file can break commands
 
+class UnexpectedValue(Exception):
+	"""Raised when an unexpected value is given"""
+	pass
+
+def app_cd_guild(i:discord.Interaction) -> tuple:
+	"""Used as the key for app_commands cooldown on the guild"""
+	assert i.guild # assets i.guild is not None
+	return (i.guild_id, i.guild.id)
+
 async def GetLogLink(bot:commands.Bot, link:str) -> str:
 	"""Returns a permanant link of the file"""
 	LogPic = bot.get_channel(709313685226782751)
+	if not isinstance(LogPic, discord.TextChannel):
+		raise UnexpectedValue("LogPic is not a TextChannel")
+
 	link = str(link)
 	Fim = [".png",".jpg",".jpeg",".webp"]
 	Fau = [".mp3",".ogg",".wav",".flac"]
@@ -43,13 +55,15 @@ async def GetLogLink(bot:commands.Bot, link:str) -> str:
 					return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 
-async def get_member(ctx:commands.Context | discord.Interaction, text:str) -> discord.Member:
+async def get_member(ctx: commands.Context, text: str) -> Optional[discord.Member]:
 	"""Converts to a :class:`~discord.Member`."""
 	try : #search by conv
 		conv = MemberConverter()
 		mem = await conv.convert(ctx, text)
 		return mem
 	except commands.errors.BadArgument : # search by name
+		if not isinstance(ctx.guild, discord.Guild):
+			raise UnexpectedValue("ctx.guild is not a Guild")
 		members = [i for i in ctx.guild.members if not i.bot]
 		for i in members : 
 			if i.name == text :
@@ -63,13 +77,16 @@ async def get_member(ctx:commands.Context | discord.Interaction, text:str) -> di
 					return i
 	return None
 
-async def get_emoji(ctx:commands.Context, text:str) -> discord.Emoji :
+async def get_emoji(ctx:commands.Context, text:str) -> Optional[discord.Emoji] :
 	"""Converts to a :class:`~discord.Emoji`."""
 	try : #search by conv
 		conv = EmojiConverter()
 		emoji = await conv.convert(ctx, text)
 		return emoji
 	except commands.errors.BadArgument : # search by name
+		if not isinstance(ctx.guild, discord.Guild):
+			raise UnexpectedValue("ctx.guild is not a Guild")
+
 		emojis = [i for i in ctx.guild.emojis]
 		for e in emojis : 
 			if e.name == text :
@@ -120,23 +137,52 @@ def upd_data(new_data:Any, *keys:Optional[str]) -> None:
 	with open(f"{DATA_DIR}/datasinf.json", 'w') as f:
 		json.dump(data, f, indent=4)
 
-def is_allowed(inter: discord.Interaction | commands.Context) -> bool:
+def is_allowed(inter:commands.Context | discord.Interaction) -> bool:
 	"""Checks if the user is allowed to use the bot."""
 	if isinstance(inter, commands.Context):
 		ctx = inter
-		return ctx.guild.get_role(int(MEMBER_ID)) in ctx.author.roles or ctx.author.id == 346945067975704577
-	else:
-		return inter.guild.get_role(int(MEMBER_ID)) in inter.user.roles or inter.user.id == 346945067975704577
+		if not isinstance(ctx.guild, discord.Guild):
+			raise UnexpectedValue("ctx.guild is not a Guild")
+		if not isinstance(ctx.author, discord.Member):
+			raise UnexpectedValue("ctx.author is not a Member")
 
-def is_cutie(inter: discord.Interaction | commands.Context) -> bool:
+		return ctx.guild.get_role(MEMBER_ID) in ctx.author.roles or ctx.author.id == 346945067975704577
+	else:
+		if not isinstance(inter.guild, discord.Guild):
+			raise UnexpectedValue("inter.guild is not a Guild")
+		if not isinstance(inter.user, discord.Member):
+			raise UnexpectedValue("inter.user is not a Member")
+	
+		return inter.guild.get_role(MEMBER_ID) in inter.user.roles or inter.user.id == 346945067975704577
+
+def is_cutie(inter:commands.Context | discord.Interaction) -> bool:
 	"""Checks if the user is a cutie."""
 	if isinstance(inter, commands.Context):
 		ctx = inter
-		return ctx.guild.get_role(int(CUTIE_ID)) in ctx.author.roles or ctx.author.id == 346945067975704577
-	else:
-		return inter.guild.get_role(int(CUTIE_ID)) in inter.user.roles or inter.user.id == 346945067975704577
 
-def sort_bdays(data : dict) -> dict:
+		if not isinstance(ctx.guild, discord.Guild):
+			raise UnexpectedValue("ctx.guild is not a Guild")
+		if not isinstance(ctx.author, discord.Member):
+			raise UnexpectedValue("ctx.author is not a Member")
+
+		return ctx.guild.get_role(CUTIE_ID) in ctx.author.roles or ctx.author.id == 346945067975704577
+	else:
+		if not isinstance(inter.guild, discord.Guild):
+			raise UnexpectedValue("inter.guild is not a Guild")
+		if not isinstance(inter.user, discord.Member):
+			raise UnexpectedValue("inter.user is not a Member")
+	
+		return inter.guild.get_role(CUTIE_ID) in inter.user.roles or inter.user.id == 346945067975704577
+
+def is_summer_time() -> bool:
+	"""Checks if it's summer time."""
+	now = dt.datetime.now()
+	debut_heure_dete = dt.datetime(now.year, 3, 31) - dt.timedelta(days=dt.datetime(now.year, 3, 31).weekday() + 1)
+	fin_heure_dete = dt.datetime(now.year, 10, 31) - dt.timedelta(days=dt.datetime(now.year, 10, 31).weekday() + 1)
+
+	return debut_heure_dete <= now <= fin_heure_dete
+
+def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
 	"""Trie les anniversaires par dates."""
 	year = dt.datetime.now().year
 	birthdays = {}

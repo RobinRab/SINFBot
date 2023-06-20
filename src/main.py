@@ -5,7 +5,7 @@ print(discord.__version__)
 
 import settings
 from utils import log
-from cmds.stuff.birthday import Birthday as Bd
+from cmds.stuff.birthday import Birthday 
 
 intents = discord.Intents.all()
 
@@ -16,7 +16,7 @@ bot = commands.Bot(
 	intents=intents,
 	strip_after_prefix=True
 )
-bot.tree.synced = False
+bot.description = "" # not synced
 
 
 
@@ -27,9 +27,11 @@ async def on_ready():
 		await bot.load_extension(ext)
 		log("INFO", f"{ext} loaded ")
 
-	Bd._birthdays.start(bot)
+	Bd = Birthday(bot)
+	Bd.birthdays_loop.start()
 
 	print("SINF illégal family bot online\n")
+
 
 
 @bot.command()
