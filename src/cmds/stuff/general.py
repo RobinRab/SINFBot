@@ -1,4 +1,5 @@
 import discord
+from discord import app_commands
 from discord.ext import commands
 
 import io
@@ -7,104 +8,91 @@ import requests
 import datetime as dt
 
 from settings import CONFESSION_ID
-from utils import UnexpectedValue, is_allowed, GetLogLink, get_emoji
+from utils import UnexpectedValue, is_member, GetLogLink, get_emoji
 
 
 class General(commands.Cog):
 	def __init__(self, bot:commands.Bot) -> None:
 		self.bot = bot
 
-	@commands.command()
-	@commands.cooldown(1, 5, commands.BucketType.user)
-	@commands.check(is_allowed)
-	async def file(self, ctx:commands.Context, link=None):
-		if link is None : 
-			await ctx.send("You must specify a link to convert",delete_after=5)
+	@app_commands.command(description="Converts a link into a file")
+	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.check(is_member)
+	@app_commands.guild_only()
+	async def link_to_file(self, inter:discord.Interaction, link:str):
+		await inter.response.defer()
+
+		formats = [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]
+		if not any(x in link for x in formats):
+			await inter.followup.send(f"**{inter.user},** link invalid",ephemeral=True)
 			return
 
-		async with ctx.typing():
-			Format = None
-			Fim = [".gif",".png",".jpg",".jpeg",".webp"]
-			Fau = [".mp3",".ogg",".wav",".flac"]
-			Fvi = [".mp4",".webm",".mov"]
-			LL = [Fim,Fau,Fvi]
-			for n in LL :
-				for i in n :
-					if i in link :
-						Format = i
-						break
-			
-			if Format is None:
-				await ctx.send(f"**{ctx.author},** link invalid",delete_after=5)
-				return
-			
-			try :
-				requests.get(link)
-				async with aiohttp.ClientSession() as cs:
-					async with cs.get(link) as resp:
-						File = discord.File(io.BytesIO(await resp.content.read()),filename=f"file{Format}") #,filename="image.png") pour préciser le format
-						await ctx.send(f"**{ctx.author},** here's your file!",file=File)
-			except :
-				await ctx.send(f"**{ctx.author},** link invalid",delete_after=15)
+		Format = link.split(".")[-1]
+
+		try :
+			requests.get(link)
+			async with aiohttp.ClientSession() as cs:
+				async with cs.get(link) as resp:
+					File = discord.File(io.BytesIO(await resp.content.read()),filename=f"file.{Format}") #,filename="image.png") pour préciser le format
+					await inter.followup.send(f"**{inter.user},** here's your file!",file=File)
+		except :
+			await inter.followup.send(f"**{inter.user},** link invalid",ephemeral=True)
 
 
-	@commands.command()
-	@commands.cooldown(1, 5, commands.BucketType.user)
-	@commands.check(is_allowed)
-	async def link(self, ctx:commands.Context):
-		if len(ctx.message.attachments) >= 1 :
-			async with ctx.typing():
-				link = await GetLogLink(self.bot, ctx.message.attachments[0].url)
-				await ctx.send(f"**{ctx.author}**, here's your permanent link : {link}")
-		else : 
-			await ctx.send("You must specify a file as attachment",delete_after=5)
-
-
-	@commands.command()
-	@commands.cooldown(1, 5, commands.BucketType.user)
-	@commands.check(is_allowed)
-	async def emoji(self, ctx:commands.Context, content=None):
-		if content is None : 
-			await ctx.send("You most specify an emoji",delete_after=5)
+	@app_commands.command(description="Converts a file into a link")
+	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.check(is_member)
+	@app_commands.guild_only()
+	async def file_to_link(self, inter:discord.Interaction, file:discord.Attachment):
+		await inter.response.defer()
+		formats = [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]
+		if not any(x in file.filename for x in formats):
+			await inter.followup.send(f"**{inter.user},** file invalid",ephemeral=True)
 			return
 		
-		async with ctx.typing():
-			emoji = await get_emoji(ctx,content)
+		link = await GetLogLink(self.bot, file.url)
+		await inter.followup.send(f"**{inter.user}**, here's your permanent link : {link}")
 
-			if emoji is None:
-				await ctx.send(f"**{ctx.author}**, Emoji not found",delete_after=5)
-				return
-		
-			a = str(emoji.created_at)
-			b = a.split()
-			b[1] = b[1].split(".")[0]
-			c = b[0].split("-")
-			creator = emoji.user if emoji.user is not None else "Unknown"
-			date =  str(c[2]+"/"+c[1]+"/"+ c[0] +" à " + b[1])
-			link = await GetLogLink(self.bot, emoji.url)
-			icon = await GetLogLink(self.bot, str(ctx.author.display_avatar))
-			embed = discord.Embed(
-				title = "Here's your emoji",
-				description = f"**Name : **`{emoji.name}`\n**Preview : **{emoji}\n**ID : **{emoji.id}\n**ID : **`{emoji}`\n**Server : **`{emoji.guild}`{creator}\n**Date added : **{date}",
-				colour = discord.Colour.random()
-				)
-			embed.url=link
-			embed.set_image(url=link)
-			embed.set_footer(text=f"Requested by : {ctx.author}",icon_url=icon)
-			await ctx.send(embed=embed)
+	@app_commands.command(description="Gets informations about an emoji")
+	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.check(is_member)
+	@app_commands.guild_only()
+	async def emoji(self, inter:discord.Interaction[commands.Bot], content:str):
+		await inter.response.defer()
 
+		emoji = await get_emoji(inter,content)
 
-	@commands.command(aliases=["confess"])
-	@commands.dm_only()
-	@commands.cooldown(1, 60, commands.BucketType.user)
-	async def confession(self, ctx: commands.Context, *, txt=None):
-		if txt is None:
-			await ctx.channel.send("You must specify a confession")
+		if emoji is None:
+			await inter.followup.send(f"**{inter.user}**, Emoji not found",ephemeral=True)
 			return
+	
+		a = str(emoji.created_at)
+		b = a.split()
+		b[1] = b[1].split(".")[0]
+		c = b[0].split("-")
+		creator = emoji.user if emoji.user is not None else "Unknown"
+		date =  str(c[2]+"/"+c[1]+"/"+ c[0] +" à " + b[1])
+		link = await GetLogLink(self.bot, emoji.url)
+		icon = await GetLogLink(self.bot, str(inter.user.display_avatar))
+		embed = discord.Embed(
+			title = "Here's your emoji",
+			description = f"**Name : **`{emoji.name}`\n**Preview : **{emoji}\n**ID : **{emoji.id}\n**ID : **`{emoji}`\n**Server : **`{emoji.guild}`{creator}\n**Date added : **{date}",
+			colour = discord.Colour.random()
+			)
+		embed.url=link
+		embed.set_image(url=link)
+		embed.set_footer(text=f"Requested by : {inter.user}",icon_url=icon)
+		await inter.followup.send(embed=embed)
 
+
+	@app_commands.command(description="Sends a confession anonymously")
+	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.check(is_member)
+	@app_commands.guild_only()
+	async def confession(self, inter: discord.Interaction, confess:str):
 		E = discord.Embed(
 			title="New confession",
-			description=txt,
+			description=confess,
 			color=discord.Colour.from_rgb(88, 101, 242),
 			timestamp=dt.datetime.now()
 		)
@@ -114,11 +102,7 @@ class General(commands.Cog):
 			raise UnexpectedValue("Channel not found")
 
 		await chan.send(embed=E)
-		await ctx.channel.send(embed=discord.Embed(
-			title = "Confession sent",
-			color=discord.Colour.green()
-			)
-		)
+		await inter.response.send_message("Confession sent !", ephemeral=True)
 
 
 async def setup(bot:commands.Bot) -> None:

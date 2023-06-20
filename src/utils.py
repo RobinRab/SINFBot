@@ -8,8 +8,9 @@ import json
 import aiohttp
 import unicodedata
 import datetime as dt
-from settings import DATA_DIR, CUTIE_ID, MEMBER_ID
 from typing import Any, Optional, Literal
+from settings import DATA_DIR, CUTIE_ID, MEMBER_ID
+
 
 #!!WARNING!! Any edits in this file can break commands
 
@@ -22,7 +23,7 @@ def app_cd_guild(i:discord.Interaction) -> tuple:
 	assert i.guild # assets i.guild is not None
 	return (i.guild_id, i.guild.id)
 
-async def GetLogLink(bot:commands.Bot, link:str) -> str:
+async def GetLogLink2(bot:commands.Bot, link:str) -> str:
 	"""Returns a permanant link of the file"""
 	LogPic = bot.get_channel(709313685226782751)
 	if not isinstance(LogPic, discord.TextChannel):
@@ -55,8 +56,30 @@ async def GetLogLink(bot:commands.Bot, link:str) -> str:
 					return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 
-async def get_member(ctx: commands.Context, text: str) -> Optional[discord.Member]:
+async def GetLogLink(bot: commands.Bot, link:str) -> str:
+	LogPic = bot.get_channel(709313685226782751)
+	if not isinstance(LogPic, discord.TextChannel):
+		raise UnexpectedValue("LogPic is not a TextChannel")
+	
+	for format in [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]:
+		if format in link:
+			try:
+				async with aiohttp.ClientSession() as cs:
+					async with cs.get(link) as resp:
+						file = discord.File(io.BytesIO(await resp.content.read()), filename=f"file{format}")
+						msg = await LogPic.send(file=file)
+						return msg.attachments[0].url
+			except:
+				break
+	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
+
+
+async def get_member(ctx: commands.Context | discord.Interaction[commands.Bot], text: str) -> Optional[discord.Member]:
 	"""Converts to a :class:`~discord.Member`."""
+	if isinstance(ctx, discord.Interaction):
+		# the commands requires a discord.Interaction[commands.Bot] type
+		ctx = await commands.Context.from_interaction(ctx)
+
 	try : #search by conv
 		conv = MemberConverter()
 		mem = await conv.convert(ctx, text)
@@ -77,8 +100,11 @@ async def get_member(ctx: commands.Context, text: str) -> Optional[discord.Membe
 					return i
 	return None
 
-async def get_emoji(ctx:commands.Context, text:str) -> Optional[discord.Emoji] :
+async def get_emoji(ctx:commands.Context | discord.Interaction[commands.Bot], text:str) -> Optional[discord.Emoji] :
 	"""Converts to a :class:`~discord.Emoji`."""
+	if isinstance(ctx, discord.Interaction):
+		ctx = await commands.Context.from_interaction(ctx)
+
 	try : #search by conv
 		conv = EmojiConverter()
 		emoji = await conv.convert(ctx, text)
@@ -98,10 +124,9 @@ async def get_emoji(ctx:commands.Context, text:str) -> Optional[discord.Emoji] :
 def simplify(text:str) -> str:
 	"""Removes special characters from a string."""
 	try:
-		text = unicode(text, 'utf-8') #type: ignore
+		text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode("utf-8")
 	except NameError:
 		pass
-	text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode("utf-8")
 	return str(text)
 
 def nospecial(text:str) -> str:
@@ -143,7 +168,7 @@ def upd_data(new_data: Any, path: Optional[str]=None) -> None:
 	with open(f"{DATA_DIR}/datasinf.json", 'w') as f:
 		json.dump(data, f, indent=4)
 
-def is_allowed(inter:commands.Context | discord.Interaction) -> bool:
+def is_member(inter:commands.Context | discord.Interaction) -> bool:
 	"""Checks if the user is allowed to use the bot."""
 	if isinstance(inter, commands.Context):
 		ctx = inter

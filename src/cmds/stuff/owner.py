@@ -10,11 +10,11 @@ class Owner(commands.Cog):
 	def __init__(self, bot:commands.Bot) -> None:
 		self.bot : commands.Bot = bot
 
-	@commands.command()
+	@app_commands.command(description="Synchronise le bot")
 	@commands.is_owner()
-	async def sync(self, ctx:commands.Context):
+	async def sync(self, inter:discord.Interaction):
 		if self.bot.description == "Synced":
-			await ctx.send("Bot already synced")
+			await inter.response.send_message("Bot already synced")
 			return
 		try : 
 			self.bot.tree.clear_commands(guild=discord.Object(id=settings.GUILD_ID))
@@ -23,28 +23,28 @@ class Owner(commands.Cog):
 			await self.bot.tree.sync(guild=discord.Object(id=settings.GUILD_ID))
 			self.bot.description = "Synced"
 
-			await ctx.send("Bot synced")
+			await inter.response.send_message("Bot synced")
 			log("INFO", "Bot synced")
 		except:
-			await ctx.send("Sync failed")
+			await inter.response.send_message("Sync failed")
 			log("ERROR", "Sync failed")
 
-	@commands.command()
+	@app_commands.command(description="Reload all extensions")
 	@commands.is_owner()
-	async def reload(self, ctx:commands.Context):
+	async def reload(self, inter:discord.Interaction):
 		for ext in settings.extensions:
 			try: 
 				await self.bot.load_extension(ext)
 			except:
 				await self.bot.reload_extension(ext)
 			log("INFO", f"{ext} reloaded")
-		await ctx.send("Bot reloaded")
+		await inter.response.send_message("Bot reloaded")
 
 
 	@app_commands.command(description="Enables a file or folder")
 	@commands.is_owner()
 	async def enable(self, inter:discord.Interaction):
-		folders =  [(file,file) for file in os.listdir("cmds/") if file[0] not in [".", "_"]]
+		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in [".", "_"]]
 
 		view, folder = await SelectView.get_app_choice(inter, folders, previous=None)
 
@@ -52,14 +52,14 @@ class Owner(commands.Cog):
 			return await inter.followup.send("You must select a folder", ephemeral=True)
 		
 
-		files = [(file, file) for file in os.listdir("cmds/"+folder) if file.endswith(".py")]
+		files = [(file, file) for file in os.listdir("src/cmds/"+folder) if file.endswith(".py")]
 		files.insert(0, ("All", "All"))
 		txt = ""
 
 		_ , file = await SelectView.get_app_choice(inter, files, previous=view)
 
 		if file is None or file == "All":
-			for file in os.listdir("cmds/"+folder):
+			for file in os.listdir("src/cmds/"+folder):
 				if file.endswith(".py"):
 					try:
 						await self.bot.load_extension("cmds."+folder+"."+file[:-3])
@@ -86,7 +86,7 @@ class Owner(commands.Cog):
 	@app_commands.command(description="Disables a file or folder")
 	@commands.is_owner()
 	async def disable(self, inter:discord.Interaction):
-		folders =  [(file,file) for file in os.listdir("cmds/") if file[0] not in [".", "_"]]
+		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in [".", "_"]]
 
 		view, folder = await SelectView.get_app_choice(inter, folders, previous=None)
 
@@ -94,14 +94,14 @@ class Owner(commands.Cog):
 			return await inter.followup.send("Your must select a folder", ephemeral=True)
 		
 
-		files = [(file, file) for file in os.listdir("cmds/"+folder) if file.endswith(".py")]
+		files = [(file, file) for file in os.listdir("src/cmds/"+folder) if file.endswith(".py")]
 		files.insert(0, ('All', 'All'))
 		txt = ""
 
 		_ , file = await SelectView.get_app_choice(inter, files, previous=view)
 
 		if file is None or file == "All":
-			for file in os.listdir("cmds/"+folder):
+			for file in os.listdir("src/cmds/"+folder):
 				if file.endswith(".py"):
 					await self.bot.unload_extension("cmds."+folder+"."+file[:-3])
 					txt += f"\ncmds/{folder}/{file[:-3]} unloaded"

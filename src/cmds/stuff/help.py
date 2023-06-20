@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from utils import is_allowed, is_cutie, GetLogLink
+from utils import is_member, is_cutie, GetLogLink
 
 class Help(commands.Cog):
 	def __init__(self, bot:commands.Bot):
@@ -10,7 +10,8 @@ class Help(commands.Cog):
 
 	@commands.group()
 	@commands.cooldown(1, 5, commands.BucketType.user)
-	@commands.check(is_allowed)
+	@commands.check(is_member)
+	@commands.guild_only()
 	async def help(self, ctx:commands.Context) -> None:
 		if ctx.invoked_subcommand is None:
 			E = discord.Embed(title="Help")
