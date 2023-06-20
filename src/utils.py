@@ -109,30 +109,36 @@ def nospecial(text:str) -> str:
 	text = re.sub("[^a-zA-Z0-9_]+", "",simplify(text))
 	return text
 
-def get_data(*opts:Optional[str]) -> Any:
-	"""Retrieve data from a JSON file."""
-
+def get_data(path: Optional[str]=None) -> Any:
+	"""Retrieve data from a JSON file using a path."""
 	with open(f"{DATA_DIR}/datasinf.json", 'r') as f:
 		data = json.load(f)
 
-	for opt in opts:
-		data = data[opt]
-
+	if isinstance(path, str):
+		for opt in path.split('/'):
+			try: 
+				data = data[opt]
+			except KeyError:
+				data = data[int(opt)]
 	return data
 
-def upd_data(new_data:Any, *keys:Optional[str]) -> None:
-	"""Update data in a JSON file."""
-
+def upd_data(new_data: Any, path: Optional[str]=None) -> None:
+	"""Update data in a JSON file using a path."""
 	with open(f"{DATA_DIR}/datasinf.json", 'r') as f:
 		data = json.load(f)
 
-	if not keys:
-		data = new_data
-	else:
+	if isinstance(path, str):
+		keys = path.split('/')
 		current_level = data
 		for key in keys[:-1]:
-			current_level = current_level[key]
-		current_level[keys[-1]] = new_data
+			try: 
+				current_level = current_level[key]
+			except:
+				current_level = current_level[int(key)]
+		try: 
+			current_level[keys[-1]] = new_data
+		except:
+			current_level[int(keys[-1])] = new_data
 
 	with open(f"{DATA_DIR}/datasinf.json", 'w') as f:
 		json.dump(data, f, indent=4)

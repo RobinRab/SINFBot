@@ -4,7 +4,7 @@ from discord.ext import commands
 print(discord.__version__)
 
 import settings
-from utils import log
+from utils import log, get_data, upd_data
 from cmds.stuff.birthday import Birthday 
 
 intents = discord.Intents.all()
@@ -31,8 +31,6 @@ async def on_ready():
 	Bd.birthdays_loop.start()
 
 	print("SINF illégal family bot online\n")
-
-
 
 @bot.command()
 async def ping(ctx:commands.Context):
