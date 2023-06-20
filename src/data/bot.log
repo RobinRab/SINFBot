@@ -1,0 +1,19 @@
+[2023-06-20 15:48:47] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2023-06-20 15:48:47] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2023-06-20 15:48:47] [INFO    ] discord.client: logging in using static token
+[2023-06-20 15:48:48] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e9a7242748cb2e969a851900ca07ab68).
+[2023-06-20 15:48:50] [INFO    ] Logged in as yasname#7557
+[2023-06-20 15:48:50] [INFO    ] cmds.stuff.embed loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.stuff.owner loaded 
+[2023-06-20 15:48:50] [INFO    ] adding Avatar to context menu
+[2023-06-20 15:48:50] [INFO    ] adding Birthday to context menu
+[2023-06-20 15:48:50] [INFO    ] cmds.stuff.apps loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.stuff.birthday loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.stuff.help loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.stuff.tetrio loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.stuff.general loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.cutie.resp loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.cutie.control loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.events.error loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.events.message loaded 
+[2023-06-20 15:48:50] [INFO    ] cmds.events.audit_logs loaded 

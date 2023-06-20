@@ -4,14 +4,14 @@ from discord.ext import commands
 
 import os
 import settings
-from utils import log, SelectView
+from utils import log, SelectView, is_owner
 
 class Owner(commands.Cog):
 	def __init__(self, bot:commands.Bot) -> None:
 		self.bot : commands.Bot = bot
 
 	@app_commands.command(description="Synchronise le bot")
-	@commands.is_owner()
+	@app_commands.check(is_owner)
 	async def sync(self, inter:discord.Interaction):
 		if self.bot.description == "Synced":
 			await inter.response.send_message("Bot already synced")
@@ -30,7 +30,7 @@ class Owner(commands.Cog):
 			log("ERROR", "Sync failed")
 
 	@app_commands.command(description="Reload all extensions")
-	@commands.is_owner()
+	@app_commands.check(is_owner)
 	async def reload(self, inter:discord.Interaction):
 		for ext in settings.extensions:
 			try: 
@@ -42,7 +42,7 @@ class Owner(commands.Cog):
 
 
 	@app_commands.command(description="Enables a file or folder")
-	@commands.is_owner()
+	@app_commands.check(is_owner)
 	async def enable(self, inter:discord.Interaction):
 		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in [".", "_"]]
 
@@ -84,7 +84,7 @@ class Owner(commands.Cog):
 
 
 	@app_commands.command(description="Disables a file or folder")
-	@commands.is_owner()
+	@app_commands.check(is_owner)
 	async def disable(self, inter:discord.Interaction):
 		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in [".", "_"]]
 
@@ -117,7 +117,7 @@ class Owner(commands.Cog):
 
 
 	@app_commands.command(description="Debugs the state of the bot")
-	@commands.is_owner()
+	@app_commands.check(is_owner)
 	async def debug(self, inter:discord.Interaction):
 		txt = "```\n"
 		for ext in settings.extensions:

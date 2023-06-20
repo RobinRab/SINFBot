@@ -9,7 +9,7 @@ import aiohttp
 import unicodedata
 import datetime as dt
 from typing import Any, Optional, Literal
-from settings import DATA_DIR, CUTIE_ID, MEMBER_ID
+from settings import DATA_DIR, MEMBER_ID, CUTIE_ID, OWNER_ID
 
 
 #!!WARNING!! Any edits in this file can break commands
@@ -177,14 +177,14 @@ def is_member(inter:commands.Context | discord.Interaction) -> bool:
 		if not isinstance(ctx.author, discord.Member):
 			raise UnexpectedValue("ctx.author is not a Member")
 
-		return ctx.guild.get_role(MEMBER_ID) in ctx.author.roles or ctx.author.id == 346945067975704577
+		return ctx.guild.get_role(MEMBER_ID) in ctx.author.roles
 	else:
 		if not isinstance(inter.guild, discord.Guild):
 			raise UnexpectedValue("inter.guild is not a Guild")
 		if not isinstance(inter.user, discord.Member):
 			raise UnexpectedValue("inter.user is not a Member")
 	
-		return inter.guild.get_role(MEMBER_ID) in inter.user.roles or inter.user.id == 346945067975704577
+		return inter.guild.get_role(MEMBER_ID) in inter.user.roles
 
 def is_cutie(inter:commands.Context | discord.Interaction) -> bool:
 	"""Checks if the user is a cutie."""
@@ -196,14 +196,33 @@ def is_cutie(inter:commands.Context | discord.Interaction) -> bool:
 		if not isinstance(ctx.author, discord.Member):
 			raise UnexpectedValue("ctx.author is not a Member")
 
-		return ctx.guild.get_role(CUTIE_ID) in ctx.author.roles or ctx.author.id == 346945067975704577
+		return ctx.guild.get_role(CUTIE_ID) in ctx.author.roles or ctx.author.id == OWNER_ID
 	else:
 		if not isinstance(inter.guild, discord.Guild):
 			raise UnexpectedValue("inter.guild is not a Guild")
 		if not isinstance(inter.user, discord.Member):
 			raise UnexpectedValue("inter.user is not a Member")
 	
-		return inter.guild.get_role(CUTIE_ID) in inter.user.roles or inter.user.id == 346945067975704577
+		return inter.guild.get_role(CUTIE_ID) in inter.user.roles or inter.user.id == OWNER_ID
+
+def is_owner(inter: commands.Context | discord.Interaction ) -> bool:
+	"""Checks if the user is the owner of the bot"""
+	if isinstance(inter, commands.Context):
+		ctx = inter
+
+		if not isinstance(ctx.guild, discord.Guild):
+			raise UnexpectedValue("ctx.guild is not a Guild")
+		if not isinstance(ctx.author, discord.Member):
+			raise UnexpectedValue("ctx.author is not a Member")
+
+		return ctx.author.id == OWNER_ID
+	else:
+		if not isinstance(inter.guild, discord.Guild):
+			raise UnexpectedValue("inter.guild is not a Guild")
+		if not isinstance(inter.user, discord.Member):
+			raise UnexpectedValue("inter.user is not a Member")
+	
+		return inter.user.id == OWNER_ID
 
 def is_summer_time() -> bool:
 	"""Checks if it's summer time."""
