@@ -3,7 +3,7 @@ from discord.ext import commands
 
 import datetime as dt
 
-from utils import GetLogLink
+from utils import GetLogLink, UnexpectedValue
 from settings import GENERAL_ID
 
 class AuditLog(commands.Cog):
@@ -31,17 +31,26 @@ class AuditLog(commands.Cog):
 
 		# timeout and re-add roles:
 		until = dt.datetime.now().astimezone() + dt.timedelta(minutes=5)
-		await entry.target.timeout(until, reason="auto-removed roles")
-		await entry.target.add_roles(*roles, reason="Re-added roles after timeout")
+
+		if not isinstance(entry.user, discord.Member):
+			raise UnexpectedValue("entry.user not a discord.Member")
+
+		try: 
+			await entry.user.timeout(until, reason="auto-removed roles")
+			await entry.user.add_roles(*roles, reason="Re-added roles after timeout")
+		except: 
+			return
 
 		# send message
-		chan = self.bot.get_channel(GENERAL_ID)
 		E = discord.Embed(title="Tentative de retrait de rôle", color=discord.Color.red())
-		E.set_author(name=entry.user, icon_url=await GetLogLink(self.bot,entry.user.display_avatar))
+		E.set_author(name=entry.user, icon_url=await GetLogLink(self.bot,str(entry.user.display_avatar)))
 		E.description = ', '.join(role.mention for role in roles)
 
-		await chan.send(embed=E)
+		chan = self.bot.get_channel(GENERAL_ID)
+		if not isinstance(chan, discord.TextChannel):
+			raise UnexpectedValue("chan not found")
 
+		await chan.send(embed=E)
 
 
 

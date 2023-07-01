@@ -5,12 +5,12 @@ from discord.ext.commands import MemberConverter, EmojiConverter
 import io
 import re
 import json
+import random
 import aiohttp
 import unicodedata
 import datetime as dt
-from typing import Any, Optional, Literal
+from typing import Any, Optional
 from settings import DATA_DIR, MEMBER_ID, CUTIE_ID, OWNER_ID
-
 
 #!!WARNING!! Any edits in this file can break commands
 
@@ -18,43 +18,10 @@ class UnexpectedValue(Exception):
 	"""Raised when an unexpected value is given"""
 	pass
 
-def app_cd_guild(i:discord.Interaction) -> tuple:
+def app_guild_cooldown(i:discord.Interaction) -> tuple:
 	"""Used as the key for app_commands cooldown on the guild"""
 	assert i.guild # assets i.guild is not None
 	return (i.guild_id, i.guild.id)
-
-async def GetLogLink2(bot:commands.Bot, link:str) -> str:
-	"""Returns a permanant link of the file"""
-	LogPic = bot.get_channel(709313685226782751)
-	if not isinstance(LogPic, discord.TextChannel):
-		raise UnexpectedValue("LogPic is not a TextChannel")
-
-	link = str(link)
-	Fim = [".png",".jpg",".jpeg",".webp"]
-	Fau = [".mp3",".ogg",".wav",".flac"]
-	Fvi = [".mp4",".webm",".mov"]
-	LL = [Fim,Fau,Fvi,".gif"]
-	for n in LL :
-		for i in n :
-			if i in link :
-				Format = i
-				if i in Fim :
-					Format = ".png"
-				elif i in Fau : 
-					Format = ".mp3"
-				elif i in Fvi :
-					Format = ".mp4"
-				else : 
-					Format = ".gif"
-				try : 
-					async with aiohttp.ClientSession() as cs:
-						async with cs.get(link) as resp:
-							File = discord.File(io.BytesIO(await resp.content.read()),filename=f"file{Format}")
-							M = await LogPic.send(file=File)
-							return M.attachments[0].url
-				except :
-					return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
-	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 
 async def GetLogLink(bot: commands.Bot, link:str) -> str:
 	LogPic = bot.get_channel(709313685226782751)
@@ -72,7 +39,6 @@ async def GetLogLink(bot: commands.Bot, link:str) -> str:
 			except:
 				break
 	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
-
 
 async def get_member(ctx: commands.Context | discord.Interaction[commands.Bot], text: str) -> Optional[discord.Member]:
 	"""Converts to a :class:`~discord.Member`."""
@@ -266,10 +232,6 @@ def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
 
 	return sorted(birthdays.items(), key=lambda x: birthdays[x[0]])
 
-months = Literal["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-activities = Literal["playing", "watching", "listening", "stop"]
-statuses = Literal["online", "idle", "dnd", "offline"]
-
 def log(type:str, txt:str) -> None:
 	"""Logs a message in the console and in the bot.log file."""
 	with open(f"{DATA_DIR}/bot.log", 'a') as f:
@@ -280,6 +242,9 @@ def log(type:str, txt:str) -> None:
 			one, *two = txt.split()
 			print(f"\033[90;1m[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] \033[1;34m[{type.upper(): <8}] \u001b[0;35m{one} \u001b[1;33m{' '.join(two)}\u001b[0m")
 			print(f"[{dt.datetime.now().strftime('20%y-%m-%d %H:%M:%S')}] [{type: <8}] {txt}", file=f)
+
+def random_avatar() -> str:
+	return f"https://cdn.discordapp.com/embed/avatars/{random.randint(0,5)}.png"
 
 #only use through SelectView.get_app_choice
 class ChoiceSelect(discord.ui.Select):

@@ -4,9 +4,12 @@ from discord.ext import commands
 
 import aiohttp
 import requests
-from typing import Optional
+from typing import Optional, Literal
 
-from utils import UnexpectedValue, app_cd_guild, is_cutie, activities, statuses
+from utils import UnexpectedValue, app_guild_cooldown, is_cutie
+
+activities = Literal["playing", "watching", "listening", "stop"]
+statuses = Literal["online", "idle", "dnd", "offline"]
 
 
 class Control(commands.Cog):
@@ -17,7 +20,7 @@ class Control(commands.Cog):
 	@app_commands.describe(name="Write new name")
 	@app_commands.check(is_cutie)
 	@app_commands.guild_only()
-	@app_commands.checks.cooldown(1, 3600, key=app_cd_guild)
+	@app_commands.checks.cooldown(1, 3600, key=app_guild_cooldown)
 	async def rename(self, inter:discord.Interaction, *, name:str):
 
 		if not 2 <= len(name) <= 32:
@@ -36,7 +39,7 @@ class Control(commands.Cog):
 	@app_commands.command(description="Changes the bot's avatar")
 	@app_commands.check(is_cutie)
 	@app_commands.guild_only()
-	@app_commands.checks.cooldown(1, 3600, key=app_cd_guild)
+	@app_commands.checks.cooldown(1, 3600, key=app_guild_cooldown)
 	async def avatar(self, inter: discord.Interaction, link:Optional[str], file:Optional[discord.Attachment]):
 		if isinstance(file, discord.Attachment):
 			link = file.url
@@ -63,7 +66,7 @@ class Control(commands.Cog):
 	@app_commands.describe(state="Chose the new status of the bot")
 	@app_commands.check(is_cutie)
 	@app_commands.guild_only()
-	@app_commands.checks.cooldown(1, 60, key=app_cd_guild)
+	@app_commands.checks.cooldown(1, 60, key=app_guild_cooldown)
 	async def status(self, inter:discord.Interaction, state:statuses):
 		if not isinstance(inter.guild, discord.Guild):
 			raise UnexpectedValue("inter.guild.me is not a Member")
@@ -81,7 +84,7 @@ class Control(commands.Cog):
 	)
 	@app_commands.check(is_cutie)
 	@app_commands.guild_only()
-	@app_commands.checks.cooldown(1, 60, key=app_cd_guild)
+	@app_commands.checks.cooldown(1, 60, key=app_guild_cooldown)
 	async def activity(self, inter:discord.Interaction, typ:activities, text:Optional[str]):
 		if not isinstance(inter.guild, discord.Guild):
 			raise UnexpectedValue("inter.guild.me is not a Member")

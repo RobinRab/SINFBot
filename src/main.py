@@ -1,6 +1,5 @@
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 print(discord.__version__)
 
@@ -31,6 +30,29 @@ async def on_ready():
 	Bd.birthdays_loop.start()
 
 	print("SINF illégal family bot online\n")
+
+# #only allow app_commands in bot channel
+# async def interaction_check(inter:discord.Interaction, /) -> bool:
+# 	if isinstance(inter.guild, discord.Guild) and isinstance(inter.user, discord.Member):
+# 		cutie = inter.guild.get_role(settings.CUTIE_ID)
+# 		assert isinstance(inter.channel, discord.TextChannel)
+# 		if inter.channel.id != settings.BOT_CHANNEL_ID: 
+# 			if not cutie in inter.user.roles and inter.user.id != settings.OWNER_ID:
+# 				return False
+# 	return True
+
+# bot.tree.interaction_check = interaction_check
+
+#only allow commands in bot channel
+@bot.check
+def check_commands(ctx:commands.Context) -> bool:
+	if isinstance(ctx.guild, discord.Guild) and isinstance(ctx.author, discord.Member):
+		cutie = ctx.guild.get_role(settings.CUTIE_ID)
+		assert isinstance(ctx.channel, discord.TextChannel)
+		if ctx.channel.id != settings.BOT_CHANNEL_ID: 
+			if not cutie in ctx.author.roles and ctx.author.id != settings.OWNER_ID:
+				return False
+	return True
 
 @bot.tree.command(description="Pings the bots!")
 async def ping(inter:discord.Interaction):

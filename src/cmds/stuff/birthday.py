@@ -4,9 +4,12 @@ from discord.ext import commands, tasks
 
 import asyncio
 import datetime as dt
-from typing import Optional
+from typing import Optional, Literal
 from settings import GENERAL_ID
-from utils import UnexpectedValue, is_summer_time, is_member, get_data, upd_data, sort_bdays, months
+from utils import UnexpectedValue, is_summer_time, is_member, get_data, upd_data, sort_bdays
+
+months = Literal["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 
 class Birthday(commands.Cog):
 	def __init__(self,bot):
