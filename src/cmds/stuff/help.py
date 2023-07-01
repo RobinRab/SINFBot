@@ -152,6 +152,11 @@ class Help(commands.Cog):
 				elif query == "/debug":
 					E.description = "Displays the debug page"
 				# cutie commands
+				elif query == "/say":
+					E.description = "**Sends a message as the bot**\nmessage = message to send\nfile = file to send"
+					E.add_field(name="**Example**", value="```/say <message> (file)```")
+					E.add_field(name="**Cooldown**", value="```1s / user```")
+					E.add_field(name="**Requirement**", value="```CUTIE```")
 				elif query == "/rename":
 					E.description = "**Changes the name of the bot**"
 					E.add_field(name="**Example**", value="```/rename <name>```")

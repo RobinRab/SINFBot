@@ -104,5 +104,23 @@ class Control(commands.Cog):
 		await inter.response.send_message(f"Activity successfully changed to **{typ} {text or ''}**")
 
 
+	@app_commands.command(description="Talk using the bot")
+	@app_commands.describe(text="Enter any text", file="Enter any file")
+	@app_commands.check(is_cutie)
+	@app_commands.guild_only()
+	@app_commands.checks.cooldown(1, 1, key=app_guild_cooldown)
+	async def say(self, inter:discord.Interaction, text:str, file:Optional[discord.Attachment]):
+		if not isinstance(inter.channel, discord.TextChannel):
+			return await inter.response.send_message("This command can only be used in a textchannel", ephemeral=True)
+	
+		if isinstance(file, discord.Attachment):
+			f = await file.to_file()
+			return await inter.channel.send(text, file=f)
+
+		await inter.channel.send(text)
+
+		await inter.response.send_message("✅** **", ephemeral=True)
+
+
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Control(bot))
