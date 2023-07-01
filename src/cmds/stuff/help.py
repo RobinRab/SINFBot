@@ -25,6 +25,7 @@ class Help(commands.Cog):
 
 	@app_commands.command(description="Anon bot's help page")
 	@app_commands.describe(query="The command or category you want to get help on")
+	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
 	async def help(self, inter:discord.Interaction, query:Optional[str]):
 		async def get_app_commands(names:list[str]) -> list[app_commands.AppCommand]:
