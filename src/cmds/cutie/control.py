@@ -115,9 +115,9 @@ class Control(commands.Cog):
 	
 		if isinstance(file, discord.Attachment):
 			f = await file.to_file()
-			return await inter.channel.send(text, file=f)
-
-		await inter.channel.send(text)
+			await inter.channel.send(text, file=f)
+		else:
+			await inter.channel.send(text)
 
 		await inter.response.send_message("✅** **", ephemeral=True)
 
