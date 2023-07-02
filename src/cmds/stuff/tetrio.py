@@ -228,11 +228,19 @@ class Tetrio(commands.Cog):
 
 			datatr[user] = round(get['data']['user']['league']['rating'])
 
-			url = f"https://tetr.io/#r:{getr['data']['records']['40l']['record']['replayid']}"
-			data40[user] = (round(getr['data']['records']['40l']['record']['endcontext']['finalTime']/1000, 3), url)
+			# if the user has no record in 40l, it will throw an error
+			try:
+				url = f"https://tetr.io/#r:{getr['data']['records']['40l']['record']['replayid']}"
+				data40[user] = (round(getr['data']['records']['40l']['record']['endcontext']['finalTime']/1000, 3), url)
+			except:
+				pass
 
-			url = f"https://tetr.io/#r:{getr['data']['records']['blitz']['record']['replayid']}"
-			datablitz[user] = (getr['data']['records']['blitz']['record']['endcontext']['score'], url)
+			# if the user has no record in blitz, it will throw an error
+			try: 
+				url = f"https://tetr.io/#r:{getr['data']['records']['blitz']['record']['replayid']}"
+				datablitz[user] = (getr['data']['records']['blitz']['record']['endcontext']['score'], url)
+			except:
+				pass
 
 			userranks[user] = ranks[get['data']['user']['league']['rank']]
 
@@ -271,7 +279,7 @@ class Tetrio(commands.Cog):
 		blitz_E.description = blitz_E_desc
 
 		class LeaderBoard(discord.ui.View):
-			def __init__(self, timeout=5):
+			def __init__(self, timeout=15):
 				super().__init__(timeout=timeout)
 				self.message : Optional[discord.Message]
 
