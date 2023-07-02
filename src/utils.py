@@ -10,7 +10,7 @@ import aiohttp
 import unicodedata
 import datetime as dt
 from typing import Any, Optional
-from settings import DATA_DIR, MEMBER_ID, CUTIE_ID, OWNER_ID
+from settings import DATA_DIR, MEMBER_ID, CUTIE_ID, OWNER_ID, LOG_PIC_CHANNEL_ID
 
 #!!WARNING!! Any edits in this file can break commands
 
@@ -24,9 +24,9 @@ def app_guild_cooldown(i:discord.Interaction) -> tuple:
 	return (i.guild_id, i.guild.id)
 
 async def GetLogLink(bot: commands.Bot, link:str) -> str:
-	LogPic = bot.get_channel(709313685226782751)
+	LogPic = bot.get_channel(LOG_PIC_CHANNEL_ID)
 	if not isinstance(LogPic, discord.TextChannel):
-		raise UnexpectedValue("LogPic is not a TextChannel")
+		raise UnexpectedValue("LogPic was not found")
 	
 	for format in [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]:
 		if format in link:

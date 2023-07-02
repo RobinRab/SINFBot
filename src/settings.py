@@ -6,17 +6,25 @@ import logging.handlers
 from dotenv import load_dotenv
 
 load_dotenv()
+# bot setup variables
 BOT_PREFIX = os.getenv("BOT_PREFIX") or "!"
 DISCORD_API_TOKEN = os.getenv("DISCORD_API_TOKEN") or ""
-BOT_ID = int(os.getenv("BOT_ID") or 0)
 
+# id of the guild the bot is in
 GUILD_ID = int(os.getenv("GUILD_ID") or 0)
+# id of the channel the bot will send errors to
 ERROR_CHANNEL_ID = int(os.getenv("ERROR_CHANNEL_ID") or 0)
-ANON_SAYS_ID = int(os.getenv("ANON_SAYS_ID") or 0)
+# id of the log channel for GetLogLink
+LOG_PIC_CHANNEL_ID = int(os.getenv("LOG_PIC_CHANNEL_ID") or 0)
+
+# used to display birthdays
 GENERAL_ID = int(os.getenv("GENERAL_ID") or 0)
+# used to send confessions
 CONFESSION_ID = int(os.getenv("CONFESSION_ID") or 0)
+# only channel to allow bot commands
 BOT_CHANNEL_ID = int(os.getenv("BOT_CHANNEL_ID") or 0)
 
+# the 3 status roles a member can have
 MEMBER_ID = int(os.getenv("MEMBER_ID") or 0)
 CUTIE_ID = int(os.getenv("CUTIE_ID") or 0)
 OWNER_ID = int(os.getenv("OWNER_ID") or 0)
