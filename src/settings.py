@@ -5,9 +5,10 @@ import logging
 import logging.handlers
 from dotenv import load_dotenv
 
+class EnvVariableNotFoundError(Exception):pass
 load_dotenv()
 # bot setup variables
-BOT_PREFIX = os.getenv("BOT_PREFIX") or "!"
+BOT_PREFIX = os.getenv("BOT_PREFIX") or ""
 DISCORD_API_TOKEN = os.getenv("DISCORD_API_TOKEN") or ""
 
 # id of the guild the bot is in
@@ -28,6 +29,13 @@ BOT_CHANNEL_ID = int(os.getenv("BOT_CHANNEL_ID") or 0)
 MEMBER_ID = int(os.getenv("MEMBER_ID") or 0)
 CUTIE_ID = int(os.getenv("CUTIE_ID") or 0)
 OWNER_ID = int(os.getenv("OWNER_ID") or 0)
+
+if not all([
+            BOT_PREFIX, DISCORD_API_TOKEN, 
+            GUILD_ID, ERROR_CHANNEL_ID, LOG_PIC_CHANNEL_ID,
+            GENERAL_ID, CONFESSION_ID, BOT_CHANNEL_ID, 
+            MEMBER_ID, CUTIE_ID, OWNER_ID]):
+    raise EnvVariableNotFoundError("One or more environment variables are missing. Please check the .env file and try again.")
 
 BASE_DIR = pathlib.Path(__file__).parent
 CMDS_DIR = BASE_DIR / "cmds"
