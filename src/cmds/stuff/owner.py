@@ -59,6 +59,7 @@ class Owner(commands.Cog):
 		txt = ""
 
 		_ , file = await SelectView.get_app_choice(inter, files, previous=view)
+		await view.message.edit(content="Selection complete")
 
 		if file is None or file == "All":
 			for file in os.listdir("src/cmds/"+folder):
@@ -71,7 +72,6 @@ class Owner(commands.Cog):
 						await self.bot.reload_extension("cmds."+folder+"."+file[:-3])
 						txt += f"\ncmds/{folder}/{file[:-3]} reloaded"
 						log("INFO", f"\ncmds/{folder}/{file[:-3]} reloaded")
-
 		else:
 			try:
 				await self.bot.load_extension("cmds."+folder+"."+file[:-3])

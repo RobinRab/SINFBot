@@ -295,7 +295,8 @@ class SelectView(discord.ui.View):
 				view.add_item(child)
 
 			view.add_item(ChoiceSelect(choices))
-			await view.message.edit(view=view)
+			time = f"<t:{int(dt.datetime.now().timestamp() + timeout)}:R>"
+			await view.message.edit(view=view, content=f"Select a choice, timeout ({time})")
 
 		else:
 			view.add_item(ChoiceSelect(choices))
