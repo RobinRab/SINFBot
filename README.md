@@ -130,5 +130,5 @@ Ensuite, vous devez créer une pull request. <br> Pour cela, rendez-vous sur vot
 
 ---
 
-## Vous trouverez plus d'informations sur le code (quel code ?)en lisant la [documentation](https://discordpy.readthedocs.io/en/stable/)
+## Vous trouverez toutes les informations sur la librairie utilisée par le bot en lisant la [documentation](https://discordpy.readthedocs.io/en/stable/)
 --- 
