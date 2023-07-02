@@ -1,4 +1,0 @@
-# Keep local changes when pulling
-src/data/bot.log -merge=keepMine
-src/data/datasinf.json -merge=keepMine
-.env merge=keepMine
