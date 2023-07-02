@@ -46,13 +46,13 @@ class Owner(commands.Cog):
 	@app_commands.command(description="Enables a file or folder")
 	@app_commands.check(is_owner)
 	async def enable(self, inter:discord.Interaction):
-		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in [".", "_"]]
+		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in ['.', '_'] and not '.' in file]
 
 		view, folder = await SelectView.get_app_choice(inter, folders, previous=None)
 
 		if folder is None:
 			return await inter.followup.send("You must select a folder", ephemeral=True)
-		
+
 
 		files = [(file, file) for file in os.listdir("src/cmds/"+folder) if file.endswith(".py")]
 		files.insert(0, ("All", "All"))
@@ -88,7 +88,7 @@ class Owner(commands.Cog):
 	@app_commands.command(description="Disables a file or folder")
 	@app_commands.check(is_owner)
 	async def disable(self, inter:discord.Interaction):
-		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in [".", "_"]]
+		folders =  [(file,file) for file in os.listdir("src/cmds/") if file[0] not in ['.', '_'] and not '.' in file]
 
 		view, folder = await SelectView.get_app_choice(inter, folders, previous=None)
 
