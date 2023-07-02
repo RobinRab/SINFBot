@@ -262,10 +262,10 @@ class Tetrio(commands.Cog):
 
 		for index, (tr, l40, blitz) in enumerate(zip(datatr, data40, datablitz)):
 			medal = "🥇" if index == 0 else "🥈" if index == 1 else "🥉" if index == 2 else index+1
-			tr_E_desc += f"\n**{medal}. {tr.upper()}** : {datatr[tr]:,} TR {userranks[tr]}"
-			l40_E_desc += f"\n**{medal}. {l40.upper()}**: [{data40[l40][0]}]({data40[l40][1]})s"
-			blitz_E_desc += f"\n**{medal}. {blitz.upper()}** : [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
-		
+			tr_E_desc += f"\n**{medal}) {tr.upper()}**: {datatr[tr]:,} TR {userranks[tr]}"
+			l40_E_desc += f"\n**{medal}) {l40.upper()}**: [{data40[l40][0]}]({data40[l40][1]})s"
+			blitz_E_desc += f"\n**{medal}) {blitz.upper()}**: [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
+
 		tr_E.description = tr_E_desc
 		l40_E.description = l40_E_desc
 		blitz_E.description = blitz_E_desc
