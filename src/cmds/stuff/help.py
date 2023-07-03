@@ -2,22 +2,22 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from utils import is_member, is_cutie, is_owner, GetLogLink
 from typing import Optional, Callable
 
 from settings import GUILD_ID
+from utils import is_member, is_cutie, is_owner, GetLogLink
 
 class MissingCommand(Exception):pass
 
 bot_commands = {
-	"owner"      : [is_owner, "/sync", "/reload", "/enable", "/disable", "/debug"],
-	"cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity"],
-	"tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
-	"infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
-	"birthdays"  : [is_member, "/set_birthday", "/birthdays"],
-	"member_fun" : [is_member, "/confession", "/apoll"],
-	"fun"        : [None, "/poll"],
-	"games"      : [None],
+	"Owner"      : [is_owner, "/sync", "/reload", "/enable", "/disable", "/debug"],
+	"Cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity"],
+	"Tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
+	"Infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
+	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
+	"Member Fun" : [is_member, "/confession", "/apoll"],
+	"Fun"        : [None, "/poll"],
+	"Games"      : [None],
 }
 
 class Help(commands.Cog):
@@ -54,63 +54,11 @@ class Help(commands.Cog):
 			E.title = "/help"
 			E.description = "To display the help page of a command or category, type `/help query:<query>`"
 
-			if is_owner(inter):
-				E.add_field(name="**Owner**", value=
-					"""```/sync   \
-						/reload   \
-						/enable   \
-						/disable  \
-						/debug    \
-					```"""
-				)
-
-			if is_cutie(inter) or is_owner(inter):
-				E.add_field(name="**Cuties**", value=
-					"""```/rename \
-						/avatar   \
-						/status   \
-						/activity \
-						/resp     \
-					```"""
-				)
-
-			if is_member(inter) or is_cutie(inter) or is_owner(inter):
-				E.add_field(name="**Tetrio**", value=
-					"""```/register  \
-						/profile     \
-						/leaderboard \
-					```"""
-				)
-
-				E.add_field(name="**Infos**", value=
-					"""```/help     \
-						/file       \
-						/link       \
-						/emoji      \
-					```"""
-				)
-
-				E.add_field(name="**Birthdays**", value=
-					"""```/set birthday  \
-						/birthdays       \
-					```"""
-				)
-
-				E.add_field(name="**Member Fun**", value=
-				"""```/confession \
-					/apoll      \
-				```"""
-				)
-
-			E.add_field(name="**Fun**", value=
-				"""```/poll \
-				```"""
-			)
-
-			E.add_field(name="**Games**", value="""///""")
-
-		if isinstance(query, str):
-			query = query.lower()
+			for key in bot_commands.keys():
+				perms = bot_commands[key][0]
+				if (isinstance(perms, Callable) and perms(inter)) or (perms is None):
+					txt = "\n".join(bot_commands[key][1:]) 
+					E.add_field(name=f"**{key}**", value=f"```{txt}```")
 
 		all_commands = []
 		for value in bot_commands.values():
@@ -121,14 +69,14 @@ class Help(commands.Cog):
 		if query is None:
 			general_page()
 		# if the query is one of the categories
-		elif query in list(map(str.lower, bot_commands.keys())):
+		elif query in bot_commands.keys():
 			perms : Optional[Callable] = bot_commands[query][0]
 			remove_first_char = lambda s: s[1:]
 			commands_names = list(map(remove_first_char, bot_commands[query][1:]))
 			commands = await get_app_commands(commands_names)
 
 			if (isinstance(perms, Callable) and perms(inter)) or (perms is None):
-				E.title = f"**{query.capitalize()} commands**"
+				E.title = f"**{query} commands**"
 
 				for command in commands:
 					E.description += f"{command.mention} - {command.description}\n"
@@ -316,34 +264,31 @@ class Help(commands.Cog):
 	async def user_autocomplete(self, inter: discord.Interaction, current:str) -> list[app_commands.Choice[str]]:
 		choices = []
 
-		# add all the commands the user can use (remove the perms check)
-		if is_owner(inter):
-			choices.extend(["Owner", *bot_commands["owner"][1:]])
-
-		if is_cutie(inter) :
-			choices.extend(["Cuties", *bot_commands["cuties"][1:]])
-		
-		if is_member(inter) :
-			choices.extend(["Tetrio", *bot_commands["tetrio"][1:]])
-			choices.extend(["Infos", *bot_commands["infos"][1:]])
-			choices.extend(["Birthdays", *bot_commands["birthdays"][1:]])
-			choices.extend(["Member_Fun", *bot_commands["member_fun"][1:]])
-
-		choices.extend(["Fun", *bot_commands["fun"][1:]])
-		choices.extend(["Games", *bot_commands["games"][1:]])
+		# add all the commands the user can use 
+		for key in bot_commands.keys():
+			perms = bot_commands[key][0]
+			if (isinstance(perms, Callable) and perms(inter)) or (perms is None):
+				choices.extend([key, *bot_commands[key][1:]])
 
 		# lower everything
 		choices = list(map(str.lower, choices))
 		current = current.lower()
 
 		# only keep the lookalikes
-		if current is not None:
-			choices = [choice for choice in choices if current in choice]
+		new_choices = []
+		for choice in choices:
+			if current == "" or (current != "" and current in choice):
+				if choice.startswith('/'):
+					new_choices.append(choice)
+				else : 
+					new_choices.append(choice.title())
 
 		# only keep the first 25 and convert them to choices
 		final_choices = []
-		for choice in choices[:25]:
-			final_choices.append(app_commands.Choice(name=choice.capitalize(), value=choice))
+		for choice in new_choices[:25]:
+			final_choices.append(app_commands.Choice(name=choice, value=choice))
+			print(choice, "adde")
+
 
 		return final_choices
 
