@@ -18,7 +18,7 @@ class Fun(commands.Cog):
 		await inter.response.defer()
 
 		E = discord.Embed(title=question, color=discord.Color.blurple())
-		E.set_author(name=inter.user, icon_url=await GetLogLink(self.bot,str(inter.user.display_avatar)))
+		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot,str(inter.user.display_avatar)))
 		E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1125361175929049158/770002495614877738.png")
 		
 		# send the message and get it back
@@ -38,7 +38,7 @@ class Fun(commands.Cog):
 		await inter.response.defer()
 
 		E = discord.Embed(title=question, color=discord.Color.blurple())
-		E.set_author(name=inter.user, icon_url=await GetLogLink(self.bot,str(inter.user.display_avatar)))
+		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot,str(inter.user.display_avatar)))
 		E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1125361175929049158/770002495614877738.png")
 
 		class B_votes(discord.ui.View):

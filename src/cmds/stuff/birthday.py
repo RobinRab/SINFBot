@@ -63,7 +63,7 @@ class Birthday(commands.Cog):
 
 		if isinstance(user, discord.Member):
 			if str(user.id) not in data.keys():
-				await inter.response.send_message(f"**{user}** has not set their birthday yet")
+				await inter.response.send_message(f"**{user.name}** has not set their birthday yet")
 				return
 
 			date = dt.datetime(year, data[str(user.id)]["month"], data[str(user.id)]["day"])
@@ -72,7 +72,7 @@ class Birthday(commands.Cog):
 
 			left = date - dt.datetime.now()
 
-			await inter.response.send_message(f"**{user}** has their birthday on the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**")
+			await inter.response.send_message(f"**{user.name}** has their birthday on the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**")
 		else:
 			birthdays = sort_bdays(data)
 

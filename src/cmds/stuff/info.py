@@ -24,7 +24,7 @@ class General(commands.Cog):
 
 		formats = [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]
 		if not any(x in link for x in formats):
-			await inter.followup.send(f"**{inter.user},** link invalid",ephemeral=True)
+			await inter.followup.send(f"**{inter.user.name},** link invalid",ephemeral=True)
 			return
 
 		Format = link.split(".")[-1]
@@ -34,9 +34,9 @@ class General(commands.Cog):
 			async with aiohttp.ClientSession() as cs:
 				async with cs.get(link) as resp:
 					File = discord.File(io.BytesIO(await resp.content.read()),filename=f"file.{Format}") #,filename="image.png") pour préciser le format
-					await inter.followup.send(f"**{inter.user},** here's your file!",file=File)
+					await inter.followup.send(f"**{inter.user.name},** here's your file!",file=File)
 		except :
-			await inter.followup.send(f"**{inter.user},** link invalid",ephemeral=True)
+			await inter.followup.send(f"**{inter.user.name},** link invalid",ephemeral=True)
 
 
 	@app_commands.command(description="Converts a file into a link")
@@ -51,7 +51,7 @@ class General(commands.Cog):
 			return
 		
 		link = await GetLogLink(self.bot, file.url)
-		await inter.followup.send(f"**{inter.user}**, here's your permanent link : {link}")
+		await inter.followup.send(f"**{inter.user.name}**, here's your permanent link : {link}")
 
 	@app_commands.command(description="Gets informations about an emoji")
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
@@ -63,7 +63,7 @@ class General(commands.Cog):
 		emoji = await get_emoji(inter,content)
 
 		if emoji is None:
-			await inter.followup.send(f"**{inter.user}**, Emoji not found",ephemeral=True)
+			await inter.followup.send(f"**{inter.user.name}**, Emoji not found",ephemeral=True)
 			return
 	
 		a = str(emoji.created_at)
@@ -81,7 +81,7 @@ class General(commands.Cog):
 			)
 		embed.url=link
 		embed.set_image(url=link)
-		embed.set_footer(text=f"Requested by : {inter.user}",icon_url=icon)
+		embed.set_footer(text=f"Requested by : {inter.user.name}",icon_url=icon)
 		await inter.followup.send(embed=embed)
 
 

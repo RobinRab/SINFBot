@@ -43,7 +43,7 @@ class GeneralCM(commands.Cog):
 		embed = discord.Embed(colour=discord.Colour.from_rgb(0,0,0) ,title=P,description=f"**{D[:-2]}**")
 		embed.url=link
 		embed.set_image(url=link)
-		embed.set_footer(text=f"Requested by : {inter.user}")
+		embed.set_footer(text=f"Requested by : {inter.user.name}")
 		
 		await inter.response.send_message(embed=embed, ephemeral=True)
 
@@ -52,7 +52,7 @@ class GeneralCM(commands.Cog):
 		year = dt.datetime.now().year
 
 		if str(user.id) not in data.keys():
-			await inter.response.send_message(f"**{user}** has not added their birthday")
+			await inter.response.send_message(f"**{user.name}** has not added their birthday")
 			return
 
 		date = dt.datetime(year, data[str(user.id)]["month"], data[str(user.id)]["day"])
@@ -61,7 +61,7 @@ class GeneralCM(commands.Cog):
 
 		left = date - dt.datetime.now()
 
-		await inter.response.send_message(f"**{user}** has his birthday the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**", ephemeral=True)
+		await inter.response.send_message(f"**{user.name}** has his birthday the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**", ephemeral=True)
 
 
 async def setup(bot:commands.Bot):
