@@ -13,9 +13,9 @@ bot_commands = {
 	"owner"     : [is_owner, "/sync", "/reload", "/enable", "/disable", "/debug"],
 	"cuties"    : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity"],
 	"tetrio"    : [is_member, "/register", "/profile", "/leaderboard"],
-	"infos"     : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
+	"infos"     : [is_member, "/help", "/confession", "/file_to_link", "/link_to_file", "/emoji"],
 	"birthdays" : [is_member, "/set_birthday", "/birthdays"],
-	"fun"       : [is_member, "/confession"],
+	"fun"       : [None, "/poll"],
 	"games"     : [None],
 }
 
@@ -82,10 +82,11 @@ class Help(commands.Cog):
 				)
 
 				E.add_field(name="**Infos**", value=
-					"""```/help \
-						/file   \
-						/link   \
-						/emoji  \
+					"""```/help     \
+						/confession \
+						/file       \
+						/link       \
+						/emoji      \
 					```"""
 				)
 
@@ -96,7 +97,7 @@ class Help(commands.Cog):
 				)
 
 				E.add_field(name="**Fun**", value=
-					"""```/confession \
+					"""```/poll \
 					```"""
 				)
 
