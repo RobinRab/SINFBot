@@ -10,13 +10,14 @@ from settings import GUILD_ID
 class MissingCommand(Exception):pass
 
 bot_commands = {
-	"owner"     : [is_owner, "/sync", "/reload", "/enable", "/disable", "/debug"],
-	"cuties"    : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity"],
-	"tetrio"    : [is_member, "/register", "/profile", "/leaderboard"],
-	"infos"     : [is_member, "/help", "/confession", "/file_to_link", "/link_to_file", "/emoji"],
-	"birthdays" : [is_member, "/set_birthday", "/birthdays"],
-	"fun"       : [None, "/poll"],
-	"games"     : [None],
+	"owner"      : [is_owner, "/sync", "/reload", "/enable", "/disable", "/debug"],
+	"cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity"],
+	"tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
+	"infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
+	"birthdays"  : [is_member, "/set_birthday", "/birthdays"],
+	"member_fun" : [is_member, "/confession", "/apoll"],
+	"fun"        : [None, "/poll"],
+	"games"      : [None],
 }
 
 class Help(commands.Cog):
@@ -83,7 +84,6 @@ class Help(commands.Cog):
 
 				E.add_field(name="**Infos**", value=
 					"""```/help     \
-						/confession \
 						/file       \
 						/link       \
 						/emoji      \
@@ -96,10 +96,16 @@ class Help(commands.Cog):
 					```"""
 				)
 
-				E.add_field(name="**Fun**", value=
-					"""```/poll \
-					```"""
+				E.add_field(name="**Member Fun**", value=
+				"""```/confession \
+					/apoll      \
+				```"""
 				)
+
+			E.add_field(name="**Fun**", value=
+				"""```/poll \
+				```"""
+			)
 
 			E.add_field(name="**Games**", value="""///""")
 
@@ -276,12 +282,23 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/birthdays (user)```")
 					E.add_field(name="**Cooldown**", value="```10s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
-				# fun commands
+				# member fun commands
 				elif query == "/confession":
 					E.description = "**Send an anonymous confession**\nmessage = message to confess"
 					E.add_field(name="**Example**", value="```/confession <message>```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
+				elif query == "/apoll":
+					E.description = "**Sends an anonymous poll**\nquestion = question to ask\ntime = time before the poll ends"
+					E.add_field(name="**Example**", value="```/poll <question> <time>```")
+					E.add_field(name="**Cooldown**", value="```60s / user```")
+					E.add_field(name="**Requirement**", value="```MEMBER```")
+				# fun commands
+				elif query == "/poll":
+					E.description = "**Sends a polll**\nquestion = question to ask"
+					E.add_field(name="**Example**", value="```/poll <question>```")
+					E.add_field(name="**Cooldown**", value="```60s / user```")
+					E.add_field(name="**Requirement**", value="```None```")
 				# game commands
 
 				else:
@@ -310,8 +327,9 @@ class Help(commands.Cog):
 			choices.extend(["Tetrio", *bot_commands["tetrio"][1:]])
 			choices.extend(["Infos", *bot_commands["infos"][1:]])
 			choices.extend(["Birthdays", *bot_commands["birthdays"][1:]])
-			choices.extend(["Fun", *bot_commands["fun"][1:]])
+			choices.extend(["Member_Fun", *bot_commands["member_fun"][1:]])
 
+		choices.extend(["Fun", *bot_commands["fun"][1:]])
 		choices.extend(["Games", *bot_commands["games"][1:]])
 
 		# lower everything
