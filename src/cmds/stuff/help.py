@@ -287,7 +287,6 @@ class Help(commands.Cog):
 		final_choices = []
 		for choice in new_choices[:25]:
 			final_choices.append(app_commands.Choice(name=choice, value=choice))
-			print(choice, "adde")
 
 
 		return final_choices
