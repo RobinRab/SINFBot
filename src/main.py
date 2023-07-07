@@ -58,6 +58,28 @@ def check_commands(ctx:commands.Context) -> bool:
 
 @bot.hybrid_command(name="ping", with_app_command=True, description="Pings the bots!")
 async def ping(ctx:commands.Context):
+	await ctx.defer()
 	await ctx.reply(f"🏓 **PONG!** je t'ai renvoyé la balle en `{round(bot.latency*1000)}`_ms_ !")
+
+@bot.hybrid_command(name="sync", with_app_command=True, description="Synchronizes app commands with the guild")
+@app_commands.check(is_owner)
+async def sync(ctx:commands.Context):
+	await ctx.defer()
+
+	if bot.description == "Synced":
+		await ctx.reply("Bot already synced")
+		return
+	try :
+		bot.tree.clear_commands(guild=discord.Object(id=settings.GUILD_ID))
+		bot.tree.copy_global_to(guild=discord.Object(id=settings.GUILD_ID))
+
+		await bot.tree.sync(guild=discord.Object(id=settings.GUILD_ID))
+		bot.description = "Synced"
+
+		await ctx.reply("Bot synced")
+		log("INFO", "Bot synced")
+	except Exception as e:
+		await ctx.reply("Sync failed")
+		raise Exception("Sync failed")
 
 bot.run(settings.DISCORD_API_TOKEN)
