@@ -121,7 +121,7 @@ Ensuite, vous devez créer une pull request. <br> Pour cela, rendez-vous sur vot
 ### 3. Le code est moche ou trop peu optimisé 
 ### 4. Il y a des erreurs (erreurs de typecheck comprises)
 
-#### Pour vous assurer d'avoir un typecheck basique, nous recommandons d'utiliser Visual Studio Code, et d'ajouter dans la fichier settings.json (trouvable facilement dans les paramètres d'extensions) la ligne suivante:
+#### Pour vous assurer d'avoir un typecheck basique, nous recommandons d'utiliser Visual Studio Code, et d'ajouter dans la fichier settings.json (en cherchant "Open User Settings (JSON)" via ctrl+maj+P) la ligne suivante:
 ```
 "python.analysis.typeCheckingMode": "basic"
 ```
