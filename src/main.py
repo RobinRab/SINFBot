@@ -54,8 +54,9 @@ def check_commands(ctx:commands.Context) -> bool:
 				return False
 	return True
 
-@bot.tree.command(description="Pings the bots!")
-async def ping(inter:discord.Interaction):
-	await inter.response.send_message(f"🏓 **PONG!** je t'ai renvoyé la balle en `{round(bot.latency*1000)}`_ms_ !")
+
+@bot.hybrid_command(name="ping", with_app_command=True, description="Pings the bots!")
+async def ping(ctx:commands.Context):
+	await ctx.reply(f"🏓 **PONG!** je t'ai renvoyé la balle en `{round(bot.latency*1000)}`_ms_ !")
 
 bot.run(settings.DISCORD_API_TOKEN)
