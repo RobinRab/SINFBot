@@ -43,7 +43,7 @@ Le module dotenv permet de lire un fichier `.env` dans votre dépôt, celui-ci s
 Le module requests est indispensable pour faire des requêtes internet <br>
 Le module discord est indispensable pour la création d'un bot... discord
 
-lorsque vous aurez cloné le projet, vous pourrez installer les dépendances avec la commande suivante
+lorsque vous aurez cloné le projet, dans le dossier, vous pourrez installer les dépendances avec la commande suivante
 ```
 pip install -r requirements.txt
 ```
