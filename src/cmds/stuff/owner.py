@@ -6,30 +6,9 @@ import os
 import settings
 from utils import log, SelectView, is_owner
 
-class SyncedFailed(Exception):pass
-
 class Owner(commands.Cog):
 	def __init__(self, bot:commands.Bot) -> None:
 		self.bot : commands.Bot = bot
-
-	@app_commands.command(description="Synchronizes app commands with the guild")
-	@app_commands.check(is_owner)
-	async def sync(self, inter:discord.Interaction):
-		if self.bot.description == "Synced":
-			await inter.response.send_message("Bot already synced")
-			return
-		try : 
-			self.bot.tree.clear_commands(guild=discord.Object(id=settings.GUILD_ID))
-			self.bot.tree.copy_global_to(guild=discord.Object(id=settings.GUILD_ID))
-
-			await self.bot.tree.sync(guild=discord.Object(id=settings.GUILD_ID))
-			self.bot.description = "Synced"
-
-			await inter.response.send_message("Bot synced")
-			log("INFO", "Bot synced")
-		except Exception as e:
-			await inter.response.send_message("Sync failed")
-			raise SyncedFailed(e)
 
 	@app_commands.command(description="Reloads all extensions")
 	@app_commands.check(is_owner)

@@ -1,10 +1,11 @@
 
 import discord
+from discord import app_commands
 from discord.ext import commands
 print(discord.__version__)
 
 import settings
-from utils import log
+from utils import log, is_owner
 from cmds.stuff.birthday import Birthday 
 
 intents = discord.Intents.all()

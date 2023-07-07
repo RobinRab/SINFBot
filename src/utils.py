@@ -40,6 +40,7 @@ async def GetLogLink(bot: commands.Bot, link:str) -> str:
 				break
 	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 
+
 async def get_member(ctx: commands.Context | discord.Interaction[commands.Bot], text: str) -> Optional[discord.Member]:
 	"""Converts to a :class:`~discord.Member`."""
 	if isinstance(ctx, discord.Interaction):
@@ -87,6 +88,7 @@ async def get_emoji(ctx:commands.Context | discord.Interaction[commands.Bot], te
 				return e
 	return None
 
+
 def simplify(text:str) -> str:
 	"""Removes special characters from a string."""
 	try:
@@ -99,6 +101,7 @@ def nospecial(text:str) -> str:
 	"""Remove every character that is non-letter."""
 	text = re.sub("[^a-zA-Z0-9_]+", "",simplify(text))
 	return text
+
 
 def get_data(path: Optional[str]=None) -> Any:
 	"""Retrieve data from a JSON file using a path."""
@@ -134,6 +137,7 @@ def upd_data(new_data: Any, path: Optional[str]=None) -> None:
 	with open(f"{DATA_DIR}/datasinf.json", 'w') as f:
 		json.dump(data, f, indent=4)
 
+# permissions check
 def is_member(inter:commands.Context | discord.Interaction) -> bool:
 	"""Checks if the user is allowed to use the bot."""
 	if isinstance(inter, commands.Context):
@@ -197,6 +201,7 @@ def is_summer_time() -> bool:
 	fin_heure_dete = dt.datetime(now.year, 10, 31) - dt.timedelta(days=dt.datetime(now.year, 10, 31).weekday() + 1)
 
 	return debut_heure_dete <= now <= fin_heure_dete
+
 
 def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
 	"""Trie les anniversaires par dates."""
@@ -307,3 +312,9 @@ class SelectView(discord.ui.View):
 		await view.wait()
 		return view, view.chosen
 
+# games
+new_user = {
+	"level" : 0,
+	"timely" : 0,
+	"roses" : 0,
+}
