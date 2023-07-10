@@ -6,7 +6,6 @@ print(discord.__version__)
 
 import settings
 from utils import log, is_owner
-from cmds.stuff.birthday import Birthday 
 
 intents = discord.Intents.all()
 
@@ -26,9 +25,6 @@ async def on_ready():
 	for ext in settings.extensions:
 		await bot.load_extension(ext)
 		log("INFO", f"{ext} loaded ")
-
-	Bd = Birthday(bot)
-	Bd.birthdays_loop.start()
 
 	print("SINF illégal family bot online\n")
 

@@ -15,6 +15,8 @@ class Birthday(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
+		birthdays_loop.start(bot=self.bot)
+
 	@app_commands.command(description="Adds your birthday!")
 	@app_commands.describe(day="Day of birth", month="Month of birth", year="Year of birth")
 	@app_commands.check(is_member)
@@ -45,7 +47,8 @@ class Birthday(commands.Cog):
 
 		data[name] = {"year": year, "month": month, "day": day}
 		upd_data(data, "birthday")
-		self.birthdays_loop.restart()
+
+		birthdays_loop.restart(self.bot)
 
 		await inter.response.send_message(f"{inter.user.mention}'s birthday has been set on the {birthday.strftime('%d/%m/%Y')}")
 
@@ -94,37 +97,37 @@ class Birthday(commands.Cog):
 			embed.description = txt
 			await inter.response.send_message(embed=embed)
 
-	@tasks.loop()
-	async def birthdays_loop(self):
-		channel = self.bot.get_channel(GENERAL_ID)
-		if not isinstance(channel, discord.TextChannel):
-			raise UnexpectedValue("channel is not a discord.TextChannel")
-	
-		while 1:
-			data : dict = get_data("birthday")
+@tasks.loop()
+async def birthdays_loop(*, bot:commands.Bot):
+	channel = bot.get_channel(GENERAL_ID)
+	if not isinstance(channel, discord.TextChannel):
+		raise UnexpectedValue("channel is not a discord.TextChannel")
 
-			birthdays = sort_bdays(data)
+	while 1:
+		data : dict = get_data("birthday")
 
-			for user, date in birthdays:
-				user = self.bot.get_user(int(user))
+		birthdays = sort_bdays(data)
 
-				if user is None:
-					continue
+		for user, date in birthdays:
+			user = bot.get_user(int(user))
 
-				left = (date - dt.datetime.now()).total_seconds()
-				left -= 3600 # -1h, winter time
-				if is_summer_time():
-					left -= 3600 # -2h for summer time (7200)
-				left += 1 # somehow it is 1 second early
+			if user is None:
+				continue
 
-				await asyncio.sleep(left)
+			left = (date - dt.datetime.now()).total_seconds()
+			left -= 3600 # -1h, winter time
+			if is_summer_time():
+				left -= 3600 # -2h for summer time (7200)
+			left += 1 # somehow it is 1 second early
 
-				year = dt.datetime.now().year
-				age = year - data[str(user.id)]["year"]
+			await asyncio.sleep(left)
 
-				await channel.send(f"Happy birthday {user.mention}, You are {age} years old today! :tada:")
+			year = dt.datetime.now().year
+			age = year - data[str(user.id)]["year"]
 
-				await asyncio.sleep(43200) #sleep 12h by safety (2h at least to skip timezone issues)
+			await channel.send(f"Happy birthday {user.mention}, You are {age} years old today! :tada:")
+
+			await asyncio.sleep(43200) #sleep 12h to skip timezones issudes
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Birthday(bot))
