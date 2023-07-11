@@ -14,6 +14,7 @@ class Fun(commands.Cog):
 	@app_commands.command(description="Creates a poll")
 	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
+	@app_commands.describe(question="The question to ask")
 	async def poll(self, inter:discord.Interaction, question:str):
 		await inter.response.defer()
 
@@ -34,6 +35,7 @@ class Fun(commands.Cog):
 	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_member)
 	@app_commands.guild_only()
+	@app_commands.describe(question="The question to ask", time="The time the poll will last")
 	async def apoll(self, inter:discord.Interaction, question:str, time:Literal["1m", "15m", "1h", "12h", "24h"]):
 		await inter.response.defer()
 

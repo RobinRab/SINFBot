@@ -56,6 +56,7 @@ class Birthday(commands.Cog):
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_member)
 	@app_commands.guild_only()
+	@app_commands.describe(user="The user to display, default is everyone")
 	async def birthdays(self, inter:discord.Interaction, user:Optional[discord.Member]):
 		if not isinstance(inter.guild, discord.Guild):
 			raise UnexpectedValue("inter.guild is not a discord.Guild")

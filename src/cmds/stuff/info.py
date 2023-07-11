@@ -19,6 +19,7 @@ class General(commands.Cog):
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_member)
 	@app_commands.guild_only()
+	@app_commands.describe(link="The link to convert")
 	async def link_to_file(self, inter:discord.Interaction, link:str):
 		await inter.response.defer()
 
@@ -43,6 +44,7 @@ class General(commands.Cog):
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_member)
 	@app_commands.guild_only()
+	@app_commands.describe(file="The file to convert")
 	async def file_to_link(self, inter:discord.Interaction, file:discord.Attachment):
 		await inter.response.defer()
 		formats = [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]
@@ -57,6 +59,7 @@ class General(commands.Cog):
 	@app_commands.checks.cooldown(1, 10, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_member)
 	@app_commands.guild_only()
+	@app_commands.describe(content="The emoji to get informations from")
 	async def emoji(self, inter:discord.Interaction[commands.Bot], content:str):
 		await inter.response.defer()
 
@@ -89,6 +92,7 @@ class General(commands.Cog):
 	@app_commands.checks.cooldown(1, 60, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.check(is_member)
 	@app_commands.guild_only()
+	@app_commands.describe(confess="The confession to send")
 	async def confession(self, inter: discord.Interaction, confess:str):
 		E = discord.Embed(
 			title="New confession",
