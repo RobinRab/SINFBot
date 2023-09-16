@@ -11,13 +11,14 @@ class MissingCommand(Exception):pass
 
 bot_commands = {
 	"Owner"      : [is_owner, "/sync", "/reload", "/enable", "/disable", "/debug"],
-	"Cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity"],
+	"Cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
 	"Tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
 	"Infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
 	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun" : [is_member, "/confession", "/apoll"],
 	"Fun"        : [None, "/poll"],
-	"Games"      : [None],
+	"Economy"    : [None, "/balance", "/collect", "/levelup", "/bank"],
+	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
 }
 
 class Help(commands.Cog):
@@ -107,6 +108,7 @@ class Help(commands.Cog):
 					E.description = "Disables a command"
 				elif query == "/debug":
 					E.description = "Displays the debug page"
+
 				# cutie commands
 				elif query == "/say":
 					E.description = "**Sends a message as the bot**\nmessage = message to send\nfile = file to send"
@@ -183,6 +185,13 @@ class Help(commands.Cog):
 					b_resp = B_resp()
 					b_resp.message = await inter.followup.send(embed=E_add, view=b_resp)
 					return
+				elif query == "/bpoll":
+					E.description = "**Creates a bet poll**\nquestion = question to ask\ntimeout = time before the poll ends"
+					E.description += "Poll owner can end and choose the winner, if no winner in 24h, poll is refunded"
+					E.add_field(name="**Example**", value="```/bpoll <question> <timeout>```")
+					E.add_field(name="**Cooldown**", value="```60s / guild```")
+					E.add_field(name="**Requirement**", value="```CUTIE```")
+
 				# tetrio commands
 				elif query == "/register":
 					E.description = "**Registers a Tetrio account to your discord**\nusername = Tetrio username"
@@ -199,6 +208,7 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/leaderboard```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
+
 				# infos commands
 				elif query == "/file_to_link":
 					E.description = "**Converts your link to a file**\n"
@@ -220,6 +230,7 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/emoji <emoji>```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
+
 				# birthday commands
 				elif query == "/set_birthday":
 					E.description = "**Registers your birthday**\nyear = year of birth\nmonth = month of birth\nday = day of birth"
@@ -231,6 +242,7 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/birthdays (user)```")
 					E.add_field(name="**Cooldown**", value="```10s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
+
 				# member fun commands
 				elif query == "/confession":
 					E.description = "**Send an anonymous confession**\nmessage = message to confess"
@@ -242,13 +254,93 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/poll <question> <time>```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
+
 				# fun commands
 				elif query == "/poll":
 					E.description = "**Sends a polll**\nquestion = question to ask"
 					E.add_field(name="**Example**", value="```/poll <question>```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
+
+				# economy commands
+				elif query == "/collect":
+					E.description = "**Collects your ressources each 12h**"
+					if is_cutie(inter):
+						E.description += "\n**CUTIE BONUS :** 10h cooldown instead of 12h"
+					E.add_field(name="**Example**", value="```/collect```")
+					E.add_field(name="**Cooldown**", value="```12h / user```")
+					E.add_field(name="**Requirement**", value="```None```")
+				elif query == "/balance":
+					E.description = "**Displays a user's ressources (yours if user is None)*"
+					E.add_field(name="**Example**", value="```/balance (user)```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+					E.add_field(name="**Requirement**", value="```None```")
+				elif query == "/levelup":
+					E.description = "**Levels up your account**"
+					E.add_field(name="**Example**", value="```/levelup```")
+					E.add_field(name="**Cooldown**", value="```3s / user```")
+					E.add_field(name="**Requirement**", value="```None```")
+				elif query == "/bank":
+					E_check = discord.Embed(title="/bank check")
+					E_check.description = "**Displays your bank account**"
+					E_check.add_field(name="**Example**", value="```/bank check```")
+					E_check.add_field(name="**Cooldown**", value="```5s / user```")
+
+					E_dep = discord.Embed(title="/bank deposit")
+					E_dep.description = "**Deposits your ressources to your bank account**\namount = amount to deposit"
+					E_dep.add_field(name="**Example**", value="```/bank deposit <amount>```")
+					E_dep.add_field(name="**Cooldown**", value="```5s / user```")
+
+					E_with = discord.Embed(title="/bank withdraw")
+					E_with.description = "**Withdraws your ressources from your bank account**\namount = amount to withdraw"
+					E_with.add_field(name="**Example**", value="```/bank withdraw <amount>```")
+					E_with.add_field(name="**Cooldown**", value="```5s / user```")
+
+					class B_bank(discord.ui.View):
+						def __init__(self, timeout=15):
+							super().__init__(timeout=timeout)
+							self.message : Optional[discord.Message]
+
+						async def interaction_check(self, inter2: discord.Interaction):
+							return inter2.user.id == inter.user.id
+
+						@discord.ui.button(label="/bank check",style=discord.ButtonStyle.success)
+						async def add(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_check)
+
+						@discord.ui.button(label="/bank deposit",style=discord.ButtonStyle.primary)
+						async def list(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_dep)
+
+						@discord.ui.button(label="/bank withdraw",style=discord.ButtonStyle.danger)
+						async def delete(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_with)
+
+						async def on_timeout(self):
+							for item in self.children:
+								if isinstance(item, discord.ui.Button):
+									item.disabled = True
+
+							if isinstance(self.message, discord.Message):
+								await self.message.edit(view=self)
+
+					b_bank = B_bank()
+					b_bank.message = await inter.followup.send(embed=E_check, view=b_bank)
+					return
+
 				# game commands
+				elif query == "/roll":
+					E.description = "**Rolls a number between 1 and 100*\n100 => x 10\n>=90 => x4\n>=75 => x2\n0"
+					E.add_field(name="**Example**", value="```/roll```")
+					E.add_field(name="**Cooldown**", value="```1s / user```")
+				elif query == "/flip":
+					E.description = "**Flips a coin**\nguess right to win x1.6"
+					E.add_field(name="**Example**", value="```/flip <guess>```")
+					E.add_field(name="**Cooldown**", value="```1s / user```")
+				elif query == "/ladder":
+					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
+					E.add_field(name="**Example**", value="```/ladder```")
+					E.add_field(name="**Cooldown**", value="```1s / user```")
 
 				else:
 					raise MissingCommand(f"Help page for command {query} not found")
@@ -288,7 +380,6 @@ class Help(commands.Cog):
 		final_choices = []
 		for choice in new_choices[:25]:
 			final_choices.append(app_commands.Choice(name=choice, value=choice))
-
 
 		return final_choices
 

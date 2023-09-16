@@ -314,7 +314,45 @@ class SelectView(discord.ui.View):
 
 # games
 new_user = {
-	"level" : 0,
-	"timely" : 0,
-	"roses" : 0,
+	"level"   : 0,
+	"timely"  : 0,
+	"roses"   : 0,
+	"candies" : 0,
+	"ideas"   : 0,
+	"bank"    : {
+		"roses"   : 0,
+		"candies" : 0,
+		"ideas"   : 0
+	},
+	"achievements" : []
 }
+
+def get_amount(cash: int, txt: str) -> Optional[int]:
+	txt = txt.lower().replace(" ", "")
+	# Check if txt is a valid number
+	try: 
+		return int(float(txt))
+	except ValueError:
+		pass
+
+	if txt == "all":
+		return cash
+
+	# Check if txt is a valid percentage
+	elif re.match(r'^([1-9]|[1-9]\d|100)%$', txt):
+		percentage = int(txt[:-1]) / 100
+		return int(cash * percentage)
+
+	return None
+
+def get_value(user_data:dict) -> int:
+	"""Calculates the value of the timely reward. \n
+	Level 0 starts with 150. Each level grants 40% of that each time \n
+	Each achievement adds 1% bonus, 2% if all achievements are unlocked"""
+	level:int = user_data["level"]
+	achievements:list = user_data["achievements"]
+	return int((150 * (1 + (level/4)))*(1 + (len(achievements)/100)))
+
+def translate(txt: str) -> str:
+	"""Translates choice emojis to their names"""
+	return {"🌹": "roses","🍬": "candies","💡": "ideas"}[txt]
