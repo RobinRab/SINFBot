@@ -10,7 +10,7 @@ from utils import is_member, is_cutie, is_owner, GetLogLink
 class MissingCommand(Exception):pass
 
 bot_commands = {
-	"Owner"      : [is_owner, "/sync", "/reload", "/enable", "/disable", "/debug"],
+	"Owner"      : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
 	"Cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
 	"Tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
 	"Infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
@@ -18,7 +18,7 @@ bot_commands = {
 	"Member Fun" : [is_member, "/confession", "/apoll"],
 	"Fun"        : [None, "/poll"],
 	"Economy"    : [None, "/balance", "/collect", "/levelup", "/bank"],
-	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
+	"Gambling"   : [None, "!/roll", "!/flip", "!/ladder"]
 }
 
 class Help(commands.Cog):
@@ -98,7 +98,7 @@ class Help(commands.Cog):
 				E.title = (await get_app_commands([query[1:]]))[0].mention
 
 				# owner commands
-				if query == "/sync":
+				if query == "!/sync":
 					E.description = "Syncs the bot's commands with the guild"
 				elif query == "/reload":
 					E.description = "Reloads the bot's extensions"
@@ -329,15 +329,15 @@ class Help(commands.Cog):
 					return
 
 				# game commands
-				elif query == "/roll":
+				elif query == "!/roll":
 					E.description = "**Rolls a number between 1 and 100*\n100 => x 10\n>=90 => x4\n>=75 => x2\n0"
 					E.add_field(name="**Example**", value="```/roll```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
-				elif query == "/flip":
+				elif query == "!/flip":
 					E.description = "**Flips a coin**\nguess right to win x1.6"
 					E.add_field(name="**Example**", value="```/flip <guess>```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
-				elif query == "/ladder":
+				elif query == "!/ladder":
 					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")

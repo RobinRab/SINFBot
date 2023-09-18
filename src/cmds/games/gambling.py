@@ -12,15 +12,23 @@ class Gambling(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
-	async def is_allowed_to_bet(self, inter:discord.Interaction, bet:str) -> tuple[int, discord.Embed, dict]:
+	async def is_allowed_to_bet(self, ctx:discord.Interaction | commands.Context, bet:Optional[str]) -> tuple[int, discord.Embed, dict]:
+		if bet is None:
+			bet = "0"
+
+		if isinstance(ctx, discord.Interaction):
+			user= ctx.user
+		else:
+			user = ctx.author
+
 		E = discord.Embed()
 		E.color = discord.Color.green()
-		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
+		E.set_author(name=user.name, icon_url=await GetLogLink(self.bot, user.display_avatar.url))
 
 		try :
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : dict = get_data(f"games/users/{user.id}")
 		except :
-			E.description = f"{inter.user.mention}, You don't have any 🌹"
+			E.description = f"{user.mention}, You don't have any 🌹"
 			E.color = discord.Color.red()
 			return 0, E, {}
 		
@@ -28,65 +36,67 @@ class Gambling(commands.Cog):
 		amount = get_amount(user_data["roses"], bet)
 
 		if amount is None or amount < 0:
-			E.description = f"{inter.user.mention}, You need to bet a valid amount of 🌹"
+			E.description = f"{user.mention}, You need to bet a valid amount of 🌹"
 			E.color = discord.Color.red()
 			return 0, E, user_data
 
 		if amount < 2:
-			E.description = f"{inter.user.mention}, You need to bet at least 2🌹"
+			E.description = f"{user.mention}, You need to bet at least 2🌹"
 			E.color = discord.Color.red()
 
 		elif user_data["roses"] < amount:
-			E.description = f"{inter.user.mention}, You don't have enough 🌹"
+			E.description = f"{user.mention}, You don't have enough 🌹"
 			E.color = discord.Color.red()
 
 		return amount, E, user_data
 
-	@app_commands.command(description="Rolls a dice")
-	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
-	@app_commands.guild_only()
-	@app_commands.describe(bet="The amount to bet")
-	async def roll(self, inter:discord.Interaction, bet:str):
-		await inter.response.defer()
+	@commands.hybrid_command(name="roll", with_app_command=True, description="Rolls a dice")
+	@commands.cooldown(1, 1, commands.BucketType.user)
+	@commands.guild_only()
+	async def roll(self, ctx:commands.Context, bet:Optional[str]=None):
+		await ctx.defer()
 
-		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
+		amount, E, user_data = await self.is_allowed_to_bet(ctx, bet)
 		# if the already has a description, an issue was found
 		if E.description is not None:
-			return await inter.followup.send(embed=E)
+			return await ctx.reply(embed=E)
 
 		r = random.randint(1,100)
 		if r == 100:
 			cash = amount*10
-			E.description = f"{inter.user.mention}, You rolled a 100 and won **{cash}🌹!** 👑"
+			E.description = f"{ctx.author.mention}, You rolled a 100 and won **{cash}🌹!** 👑"
 			E.color = discord.Color.gold()
 		elif r >= 90:
 			cash = amount*4
-			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎯"
+			E.description = f"{ctx.author.mention}, You rolled a {r} and won **{cash}🌹!** 🎯"
 		elif r >= 75:
 			cash = amount*2
-			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎉"
+			E.description = f"{ctx.author.mention}, You rolled a {r} and won **{cash}🌹!** 🎉"
 		else: 
 			cash = 0
 			E.color = discord.Color.red()
-			E.description = f"{inter.user.mention}, You rolled a {r} and won nothing..."
+			E.description = f"{ctx.author.mention}, You rolled a {r} and won nothing..."
 
 		user_data["roses"] += - amount + cash
-		upd_data(user_data, f"games/users/{inter.user.id}")
+		upd_data(user_data, f"games/users/{ctx.author.id}")
 
-		await inter.followup.send(embed=E)
+		await ctx.reply(embed=E)
 
-	@app_commands.command(description="Flips a coin")
-	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
-	@app_commands.guild_only()
-	@app_commands.describe(bet="The amount to bet", guess="Your guess")
-	async def flip(self, inter:discord.Interaction, bet:str, guess:Literal["heads", "tails"]):
-		await inter.response.defer()
+	@commands.hybrid_command(name="flip", with_app_command=True, description="Flips a coin")
+	@commands.cooldown(1, 1, commands.BucketType.user)
+	@commands.guild_only()
+	async def flip(self, ctx:commands.Context, bet:Optional[str], guess:Optional[Literal["heads", "tails"]]):
+		await ctx.defer()
 
-		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
+		amount, E, user_data = await self.is_allowed_to_bet(ctx, bet)
 
 		# if the already has a description, an issue was found
 		if E.description is not None:
-			return await inter.followup.send(embed=E)
+			return await ctx.reply(embed=E)
+		
+		if guess is None:
+			E.description = f"{ctx.author.mention}, You need to guess heads or tails"
+			return await ctx.reply(embed=E)
 
 		choice = random.choice(["heads", "tails"])
 		if choice == "tails":
@@ -106,21 +116,20 @@ class Gambling(commands.Cog):
 			E.description = f"You guessed it wrong..."
 
 		user_data["roses"] += - amount + cash
-		upd_data(user_data, f"games/users/{inter.user.id}")
+		upd_data(user_data, f"games/users/{ctx.author.id}")
 
-		await inter.followup.send(embed=E)
+		await ctx.reply(embed=E)
 
-	@app_commands.command(description="Lucky Ladder, each step has equal chances of occuring")
-	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
-	@app_commands.guild_only()
-	@app_commands.describe(bet="The amount to bet")
-	async def ladder(self, inter:discord.Interaction, bet:str):
-		await inter.response.defer()
+	@commands.hybrid_command(name="ladder", with_app_command=True, description="Climb the ladder")
+	@commands.cooldown(1, 1, commands.BucketType.user)
+	@commands.guild_only()
+	async def ladder(self, ctx:commands.Context, bet:Optional[str]):
+		await ctx.defer()
 
-		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
+		amount, E, user_data = await self.is_allowed_to_bet(ctx, bet)
 		# if the already has a description, an issue was found
 		if E.description is not None:
-			return await inter.followup.send(embed=E)
+			return await ctx.reply(embed=E)
 		
 		r = random.randint(1,8)
 		if r <= 5:
@@ -158,9 +167,9 @@ class Gambling(commands.Cog):
 		E.add_field(name="Won", value=f"**{cash}🌹 **")
 
 		user_data["roses"] += - amount + cash
-		upd_data(user_data, f"games/users/{inter.user.id}")
+		upd_data(user_data, f"games/users/{ctx.author.id}")
 
-		await inter.followup.send(embed=E)
+		await ctx.reply(embed=E)
 
 	@app_commands.command(description="betpoll, bet on a poll")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
