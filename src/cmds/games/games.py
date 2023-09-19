@@ -147,7 +147,7 @@ async def traveler(*, bot: commands.Bot):
 		try: 
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
-			user_data = new_user
+			user_data = new_user()
 		
 		value = get_value(user_data)
 
@@ -167,7 +167,7 @@ async def traveler(*, bot: commands.Bot):
 		try: 
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
-			user_data = new_user
+			user_data = new_user()
 
 		user_data["roses"] += 50
 		upd_data(user_data, f"games/users/{inter.user.id}")

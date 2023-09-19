@@ -54,7 +54,7 @@ class Economy(commands.Cog):
 		try: 
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
-			user_data = new_user
+			user_data = new_user()
 
 		next_timely:int = user_data["timely"]
 

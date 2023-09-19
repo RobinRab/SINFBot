@@ -313,19 +313,20 @@ class SelectView(discord.ui.View):
 		return view, view.chosen
 
 # games
-new_user = {
-	"level"   : 0,
-	"timely"  : 1,
-	"roses"   : 0,
-	"candies" : 0,
-	"ideas"   : 0,
-	"bank"    : {
+def new_user():
+	return {
+		"level"   : 0,
+		"timely"  : int(dt.datetime.now().timestamp()),
 		"roses"   : 0,
 		"candies" : 0,
-		"ideas"   : 0
-	},
-	"achievements" : []
-}
+		"ideas"   : 0,
+		"bank"    : {
+			"roses"   : 0,
+			"candies" : 0,
+			"ideas"   : 0
+		},
+		"achievements" : []
+	}
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
 	txt = txt.lower().replace(" ", "")
