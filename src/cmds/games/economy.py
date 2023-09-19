@@ -96,11 +96,11 @@ class Economy(commands.Cog):
 			E.description = f"{inter.user.mention}, You can't level up you have never played"
 			return await inter.followup.send(embed=E)
 
-		level = user_data["level"]
+		level = user_data["level"] +1
 		if level < 10:
-			price = int(level/1.25) * 1000
+			price = int((level/1.25) * 1000)
 		else:
-			price = (int((level**2)/25) + 4) * 1000
+			price = int((((level**2)/25) + 4) * 1000)
 
 		if user_data["roses"] < price:
 			E.description = f"{inter.user.mention}, You need {price}🌹 to level up"
