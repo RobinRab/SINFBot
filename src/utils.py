@@ -315,7 +315,7 @@ class SelectView(discord.ui.View):
 # games
 new_user = {
 	"level"   : 0,
-	"timely"  : 0,
+	"timely"  : 1,
 	"roses"   : 0,
 	"candies" : 0,
 	"ideas"   : 0,
