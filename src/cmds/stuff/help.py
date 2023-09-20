@@ -16,9 +16,9 @@ bot_commands = {
 	"Infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
 	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun" : [is_member, "/confession", "/apoll"],
-	"Fun"        : [None, "/poll"],
+	"Fun"        : [None, "/poll", "!/ping"],
 	"Economy"    : [None, "/balance", "/collect", "/levelup", "/bank"],
-	"Gambling"   : [None, "!/roll", "!/flip", "!/ladder"]
+	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
 }
 
 class Help(commands.Cog):
