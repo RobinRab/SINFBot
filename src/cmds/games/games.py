@@ -157,7 +157,7 @@ async def traveler(*, bot: commands.Bot):
 		upd_data(user_data, f"games/users/{inter.user.id}")
 		E.description = f"You earned **{value}🌹** and **10💡**"
 	
-		await inter.followup.send(embed=E)
+		await inter.followup.send(inter.user.mention, embed=E)
 
 	async def incorrect(inter:discord.Interaction):
 		E = discord.Embed(title="Incorrect!", color=discord.Color.red())
@@ -175,7 +175,7 @@ async def traveler(*, bot: commands.Bot):
 		E.description = f"The correct answer was **{correct_answer}**\n"
 		E.description += f"The traveler left **50🌹** by accident on the ground"
 
-		await inter.followup.send(embed=E)
+		await inter.followup.send(inter.user.mention, embed=E)
 
 	# subclass of discord.ui.Button, all buttons will have the same callback (no need for functions)
 	class CallbackButton(discord.ui.Button):
