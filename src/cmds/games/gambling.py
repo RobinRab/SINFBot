@@ -191,13 +191,9 @@ class Gambling(commands.Cog):
 				self.bet_type = bet_type
 				super().__init__(title="How much 🌹 do you want to bet?")
 
-			bet = discord.ui.TextInput(label="Bet amount?", default='0', min_length=1, max_length=5)
+			bet = discord.ui.TextInput(label="Bet amount?", default='2', min_length=1, max_length=5)
 
 			async def on_submit(self, inter: discord.Interaction):
-				# check if the user can bet 
-				if inter.user.id in greens or inter.user.id in reds:
-					return await inter.response.send_message(f'You already bet', ephemeral=True)
-
 				# get the amount 
 				bet_amount = self.bet.value
 
@@ -207,6 +203,9 @@ class Gambling(commands.Cog):
 						raise ValueError
 				except: 
 					return await inter.response.send_message(f'Invalid amount', ephemeral=True)
+
+				if bet_amount < 2:
+					return await inter.response.send_message(f'You need to bet at least 2🌹', ephemeral=True)
 
 				# check if the user has enough roses
 				try: 
@@ -242,19 +241,31 @@ class Gambling(commands.Cog):
 
 		# create the view that asks users to bet
 		class FirstView(discord.ui.View):
-			def __init__(self, timeout:int):
+			def __init__(self, timeout:float):
 				super().__init__(timeout=timeout)
 				self.message : Optional[discord.Message]
 
 			@discord.ui.button(label="bet yes",style=discord.ButtonStyle.success)
 			async def bet_yes(self, inter2: discord.Interaction, _: discord.ui.Button):
+				if inter2.user.id in greens or inter2.user.id in reds:
+					return await inter2.response.send_message(f'You already bet', ephemeral=True)
+
 				if isinstance(self.message, discord.Message):
 					await inter2.response.send_modal(GetBet(self.message, "green"))
 
+				# update timeout so it stays on time
+				self.timeout = time_ends - int(dt.datetime.now().timestamp())
+
 			@discord.ui.button(label="bet no",style=discord.ButtonStyle.danger)
 			async def bet_no(self, inter2: discord.Interaction, _: discord.ui.Button):
+				if inter2.user.id in greens or inter2.user.id in reds:
+					return await inter2.response.send_message(f'You already bet', ephemeral=True)
+
 				if isinstance(self.message, discord.Message):
 					await inter2.response.send_modal(GetBet(self.message, "red"))
+
+				# update timeout so it stays on time
+				self.timeout = time_ends - int(dt.datetime.now().timestamp())
 
 			@discord.ui.button(label="end poll",style=discord.ButtonStyle.blurple)
 			async def end_poll(self, inter2: discord.Interaction, _: discord.ui.Button):
@@ -266,17 +277,19 @@ class Gambling(commands.Cog):
 
 		# translate timeout choice to seconds
 		equivalents = {
-			"1m": 10, #60
+			"1m": 60,
 			"15m": 900,
 			"1h": 3600,
 			"12h": 43_200,
 			"24h": 86_400
 		}
-		timeout = equivalents[time]
+		# +2 for the time it takes to send the message
+		time_ends = int(dt.datetime.now().timestamp()) + equivalents[time] + 2
+		left = time_ends - int(dt.datetime.now().timestamp())
 
-		firstView = FirstView(timeout)
+		firstView = FirstView(left)
 		firstView.message = await inter.followup.send(
-			f"<t:{int(dt.datetime.now().timestamp() + timeout)}:R>", 
+			f"<t:{time_ends}:R>", 
 			embed=E,
 			view=firstView
 		)
