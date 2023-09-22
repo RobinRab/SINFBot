@@ -62,6 +62,7 @@ class Help(commands.Cog):
 					txt = "\n".join(bot_commands[key][1:]) 
 					E.add_field(name=f"**{key}**", value=f"```{txt}```")
 
+		remplace = lambda string: string.replace("/", "").replace("!", "")
 		all_commands = []
 		for value in bot_commands.values():
 			for val in value:
@@ -73,8 +74,7 @@ class Help(commands.Cog):
 		# if the query is one of the categories
 		elif query in bot_commands.keys():
 			perms : Optional[Callable] = bot_commands[query][0]
-			remove_first_char = lambda s: s[1:]
-			commands_names = list(map(remove_first_char, bot_commands[query][1:]))
+			commands_names = list(map(remplace, bot_commands[query][1:]))
 			commands = await get_app_commands(commands_names)
 
 			if (isinstance(perms, Callable) and perms(inter)) or (perms is None):
@@ -97,45 +97,47 @@ class Help(commands.Cog):
 			if (isinstance(perms, Callable) and perms(inter)) or (perms is None):
 				E.title = (await get_app_commands([query[1:]]))[0].mention
 
+				query = remplace(query)
+
 				# owner commands
-				if query == "!/sync":
+				if query == "sync":
 					E.description = "Syncs the bot's commands with the guild"
-				elif query == "/reload":
+				elif query == "reload":
 					E.description = "Reloads the bot's extensions"
-				elif query == "/enable":
+				elif query == "enable":
 					E.description = "Enables a command"
-				elif query == "/disable":
+				elif query == "disable":
 					E.description = "Disables a command"
-				elif query == "/debug":
+				elif query == "debug":
 					E.description = "Displays the debug page"
 
 				# cutie commands
-				elif query == "/say":
+				elif query == "say":
 					E.description = "**Sends a message as the bot**\nmessage = message to send\nfile = file to send"
 					E.add_field(name="**Example**", value="```/say <message> (file)```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
 					E.add_field(name="**Requirement**", value="```CUTIE```")
-				elif query == "/rename":
+				elif query == "rename":
 					E.description = "**Changes the name of the bot**"
 					E.add_field(name="**Example**", value="```/rename <name>```")
 					E.add_field(name="**Cooldown**", value="```1h / guild```")
 					E.add_field(name="**Requirement**", value="```CUTIE```")
-				elif query == "/avatar":
+				elif query == "avatar":
 					E.description = "**Changes the avatar of the bot**\nlink = link to an image\nattachment = image file"
 					E.add_field(name="**Example**", value="```/avatar link:<link> \n/avatar file:<attachment>```")
 					E.add_field(name="**Cooldown**", value="```1h / guild```")
 					E.add_field(name="**Requirement**", value="```CUTIE```")
-				elif query == "/status":
+				elif query == "status":
 					E.description = "**Changes the status of the bot**\nstatus = online/idle/dnd/invisible"
 					E.add_field(name="**Example**", value="```/status <status>```")
 					E.add_field(name="**Cooldown**", value="```60s / guild```")
 					E.add_field(name="**Requirement**", value="```CUTIE```")
-				elif query == "/activity":
+				elif query == "activity":
 					E.description = "**Changes the activity of the bot**"
 					E.add_field(name="**Example**", value="```/activity <typ> <txt>```")
 					E.add_field(name="**Cooldown**", value="```60s / guild```")
 					E.add_field(name="**Requirement**", value="```CUTIE```")
-				elif query == "/resp":
+				elif query == "resp":
 					E_add = discord.Embed(title="/resp add")
 					E_add.description = "**Adds an automatic response**\nkey = trigger keyword\nresp = response\n(time) = time before deletion (optionnal)"
 					E_add.add_field(name="**Example**", value="```/resp <key> <resp> (time)```")
@@ -185,7 +187,7 @@ class Help(commands.Cog):
 					b_resp = B_resp()
 					b_resp.message = await inter.followup.send(embed=E_add, view=b_resp)
 					return
-				elif query == "/bpoll":
+				elif query == "bpoll":
 					E.description = "**Creates a bet poll**\nquestion = question to ask\ntimeout = time before the poll ends"
 					E.description += "Poll owner can end and choose the winner, if no winner in 24h, poll is refunded"
 					E.add_field(name="**Example**", value="```/bpoll <question> <timeout>```")
@@ -193,29 +195,29 @@ class Help(commands.Cog):
 					E.add_field(name="**Requirement**", value="```CUTIE```")
 
 				# tetrio commands
-				elif query == "/register":
+				elif query == "register":
 					E.description = "**Registers a Tetrio account to your discord**\nusername = Tetrio username"
 					E.add_field(name="**Example**", value="```/register <username>```")
 					E.add_field(name="**Cooldown**", value="```once / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
-				elif query == "/profile":
+				elif query == "profile":
 					E.description = "**Displays the Tetrio profile of a user**\n(username) = Tetrio username (optionnal) -> If none, displays your profile"
 					E.add_field(name="**Example**", value="```/profile (username)```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
-				elif query == "/leaderboard":
+				elif query == "leaderboard":
 					E.description = "**Displays the Tetrio leaderboard**"
 					E.add_field(name="**Example**", value="```/leaderboard```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
 
 				# infos commands
-				elif query == "/file_to_link":
+				elif query == "file_to_link":
 					E.description = "**Converts your link to a file**\n"
 					E.add_field(name="**Example**", value="```/link_to_file <file>```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
-				elif query == "/link_to_file":
+				elif query == "link_to_file":
 					E.description = "**Converts your link to a file**\n"
 					E.description += "**WARNING :** The link must be direct.\n"
 					E.description += "**WARNONG :** Only discord formats are supported:\n"
@@ -225,62 +227,62 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/file_to_link <link>```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
-				elif query == "/emoji":
+				elif query == "emoji":
 					E.description = "**Displays all information about an emoji**\nemoji name or anything"
 					E.add_field(name="**Example**", value="```/emoji <emoji>```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
 
 				# birthday commands
-				elif query == "/set_birthday":
+				elif query == "set_birthday":
 					E.description = "**Registers your birthday**\nyear = year of birth\nmonth = month of birth\nday = day of birth"
 					E.add_field(name="**Example**", value="```/set <year> <month> <day>```")
 					E.add_field(name="**Cooldown**", value="```once / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
-				elif query == "/birthdays":
+				elif query == "birthdays":
 					E.description = "**Displays the birthdays list**\n(user) = user (optionnal) -> if specified, displays the birthday of the user"
 					E.add_field(name="**Example**", value="```/birthdays (user)```")
 					E.add_field(name="**Cooldown**", value="```10s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
 
 				# member fun commands
-				elif query == "/confession":
+				elif query == "confession":
 					E.description = "**Send an anonymous confession**\nmessage = message to confess"
 					E.add_field(name="**Example**", value="```/confession <message>```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
-				elif query == "/apoll":
+				elif query == "apoll":
 					E.description = "**Sends an anonymous poll**\nquestion = question to ask\ntime = time before the poll ends"
 					E.add_field(name="**Example**", value="```/poll <question> <time>```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
 
 				# fun commands
-				elif query == "/poll":
+				elif query == "poll":
 					E.description = "**Sends a polll**\nquestion = question to ask"
 					E.add_field(name="**Example**", value="```/poll <question>```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
 
 				# economy commands
-				elif query == "/collect":
+				elif query == "collect":
 					E.description = "**Collects your ressources each 12h**"
 					if is_cutie(inter):
 						E.description += "\n**CUTIE BONUS :** 10h cooldown instead of 12h"
 					E.add_field(name="**Example**", value="```/collect```")
 					E.add_field(name="**Cooldown**", value="```12h / user```")
 					E.add_field(name="**Requirement**", value="```None```")
-				elif query == "/balance":
+				elif query == "balance":
 					E.description = "**Displays a user's ressources (yours if user is None)*"
 					E.add_field(name="**Example**", value="```/balance (user)```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
-				elif query == "/levelup":
+				elif query == "levelup":
 					E.description = "**Levels up your account**"
 					E.add_field(name="**Example**", value="```/levelup```")
 					E.add_field(name="**Cooldown**", value="```3s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
-				elif query == "/bank":
+				elif query == "bank":
 					E_check = discord.Embed(title="/bank check")
 					E_check.description = "**Displays your bank account**"
 					E_check.add_field(name="**Example**", value="```/bank check```")
@@ -329,21 +331,21 @@ class Help(commands.Cog):
 					return
 
 				# game commands
-				elif query == "!/roll":
-					E.description = "**Rolls a number between 1 and 100*\n100 => x 10\n>=90 => x4\n>=75 => x2\n0"
+				elif query == "roll":
+					E.description = "**Rolls a number between 1 and 100**\n100 => x 10\n90 => x4\n75 => x2\n0"
 					E.add_field(name="**Example**", value="```/roll```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
-				elif query == "!/flip":
+				elif query == "flip":
 					E.description = "**Flips a coin**\nguess right to win x1.6"
 					E.add_field(name="**Example**", value="```/flip <guess>```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
-				elif query == "!/ladder":
+				elif query == "ladder":
 					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
 
 				else:
-					raise MissingCommand(f"Help page for command {query} not found")
+					await inter.followup.send(f"{inter.user.name} Help page for command {query} not found")
 			# if the user doesn't have the perms
 			else:
 				general_page()
