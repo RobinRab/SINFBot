@@ -133,6 +133,8 @@ def upd_data(new_data: Any, path: Optional[str]=None) -> None:
 			current_level[keys[-1]] = new_data
 		except:
 			current_level[int(keys[-1])] = new_data
+	else:
+		data = new_data
 
 	with open(f"{DATA_DIR}/datasinf.json", 'w') as f:
 		json.dump(data, f, indent=4)
