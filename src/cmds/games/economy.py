@@ -61,7 +61,7 @@ class Economy(commands.Cog):
 		value = get_value(user_data)
 
 		if next_timely > dt.datetime.now().timestamp():
-			E.description = f"{inter.user.mention}, Come back to claim your {value}🌹 in <t:{next_timely}:R>"
+			E.description = f"{inter.user.mention}, Come back to claim your {value}🌹 <t:{next_timely}:R>"
 			E.color = discord.Color.red()
 			return await inter.followup.send(embed=E)
 
