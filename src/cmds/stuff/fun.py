@@ -29,6 +29,7 @@ class Fun(commands.Cog):
 		if isinstance(msg, discord.InteractionMessage):
 			await msg.add_reaction("✅")
 			await msg.add_reaction("❌")
+			await msg.add_reaction("⬜")
 
 
 	@app_commands.command(description="Creates an anonymous poll")
