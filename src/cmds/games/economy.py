@@ -96,7 +96,7 @@ class Economy(commands.Cog):
 			E.description = f"{inter.user.mention}, You can't level up you have never played"
 			return await inter.followup.send(embed=E)
 
-		level = user_data["level"] +1
+		level = user_data["level"] + 1
 		if level < 10:
 			price = int((level/1.25) * 1000)
 		else:
@@ -111,7 +111,7 @@ class Economy(commands.Cog):
 		user_data["level"] += 1
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
-		E.description = f"{inter.user.mention}, You are now level **{level+1}**!"
+		E.description = f"{inter.user.mention}, You are now level **{level}**!"
 
 		await inter.followup.send(embed=E)
 
