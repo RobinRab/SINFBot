@@ -62,7 +62,7 @@ class Gambling(commands.Cog):
 		elif r >= 90:
 			cash = amount*4
 			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎯"
-		elif r >= 75:
+		elif r >= 70:
 			cash = amount*2
 			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎉"
 		else: 
@@ -98,7 +98,7 @@ class Gambling(commands.Cog):
 		E.set_image(url=image)
 
 		if guess == choice:
-			cash = int(amount*1.6)
+			cash = int(amount*1.8)
 			E.description = f"You guessed it right and won **{cash}🌹!** 🎉"
 		else:
 			cash = 0
@@ -130,10 +130,10 @@ class Gambling(commands.Cog):
 
 		equivalents = {
 			1: 0.1,
-			2: 0.2,
-			3: 0.3,
-			4: 0.4,
-			5: 0.5,
+			2: 0.3,
+			3: 0.4,
+			4: 0.5,
+			5: 1.0,
 			6: 1.2,
 			7: 1.5,
 			8: 2.2
