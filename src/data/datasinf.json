@@ -292,11 +292,11 @@
     "games": {
         "users": {
             "560155603574718475": {
-                "level": 1,
-                "timely": 1695229782,
-                "roses": 487,
+                "level": 2,
+                "timely": 1695490503,
+                "roses": 275,
                 "candies": 0,
-                "ideas": 0,
+                "ideas": 20,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -306,8 +306,8 @@
             },
             "366975965601071104": {
                 "level": 1,
-                "timely": 1695180611,
-                "roses": 300,
+                "timely": 1695338797,
+                "roses": 487,
                 "candies": 0,
                 "ideas": 10,
                 "bank": {
@@ -319,8 +319,8 @@
             },
             "443867585075871767": {
                 "level": 1,
-                "timely": 1695247180,
-                "roses": 50,
+                "timely": 1695511476,
+                "roses": 187,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
@@ -331,11 +331,11 @@
                 "achievements": []
             },
             "346945067975704577": {
-                "level": 1,
-                "timely": 1695229437,
-                "roses": 504,
+                "level": 2,
+                "timely": 1695485220,
+                "roses": 292,
                 "candies": 0,
-                "ideas": 10,
+                "ideas": 20,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -345,10 +345,10 @@
             },
             "627431499960156161": {
                 "level": 1,
-                "timely": 1695225059,
-                "roses": 0,
+                "timely": 1695485241,
+                "roses": 1433,
                 "candies": 0,
-                "ideas": 0,
+                "ideas": 20,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -358,8 +358,8 @@
             },
             "183259368286978048": {
                 "level": 1,
-                "timely": 1695259573,
-                "roses": 377,
+                "timely": 1695501594,
+                "roses": 0,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
@@ -383,9 +383,9 @@
                 "achievements": []
             },
             "271305579698323456": {
-                "level": 0,
-                "timely": 1695239103,
-                "roses": 300,
+                "level": 1,
+                "timely": 1695503494,
+                "roses": 0,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
@@ -397,10 +397,10 @@
             },
             "269210243093889028": {
                 "level": 0,
-                "timely": 1695220409,
+                "timely": 1695494879,
                 "roses": 0,
                 "candies": 0,
-                "ideas": 0,
+                "ideas": 10,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -410,8 +410,8 @@
             },
             "454318083876847616": {
                 "level": 0,
-                "timely": 1695191199,
-                "roses": 150,
+                "timely": 1695515262,
+                "roses": 0,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
@@ -423,7 +423,7 @@
             },
             "553163806600331284": {
                 "level": 0,
-                "timely": 1695201118,
+                "timely": 1695512871,
                 "roses": 0,
                 "candies": 0,
                 "ideas": 0,
@@ -436,8 +436,34 @@
             },
             "936185870724239402": {
                 "level": 0,
-                "timely": 1695260269,
-                "roses": 150,
+                "timely": 1695333801,
+                "roses": 290,
+                "candies": 0,
+                "ideas": 0,
+                "bank": {
+                    "roses": 0,
+                    "candies": 0,
+                    "ideas": 0
+                },
+                "achievements": []
+            },
+            "415538227705806850": {
+                "level": 0,
+                "timely": 1695448462,
+                "roses": 450,
+                "candies": 0,
+                "ideas": 0,
+                "bank": {
+                    "roses": 0,
+                    "candies": 0,
+                    "ideas": 0
+                },
+                "achievements": []
+            },
+            "350595760703930368": {
+                "level": 0,
+                "timely": 1695428421,
+                "roses": 0,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
