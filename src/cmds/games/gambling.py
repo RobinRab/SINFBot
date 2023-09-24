@@ -123,8 +123,10 @@ class Gambling(commands.Cog):
 			return await inter.followup.send(embed=E)
 
 		r = random.randint(1,8)
-		if r <= 5:
+		if r <= 4:
 			E.color = discord.Color.red()
+		if r == 5: 
+			E.color = discord.Color.blurple()
 		if r == 8:
 			E.color = discord.Color.gold()
 
@@ -142,10 +144,10 @@ class Gambling(commands.Cog):
 			"╠══╣||x2.2||",
 			"╠══╣||x1.5||",
 			"╠══╣||x1.2||",
-			"╠══╣||x0.5||",
+			"╠══╣||x1.0||",
+			"╠══╣||x0.5||", 
 			"╠══╣||x0.4||", 
-			"╠══╣||x0.3||", 
-			"╠══╣||x0.2||",
+			"╠══╣||x0.3||",
 			"╠══╣||x0.1||", 
 		]
 
