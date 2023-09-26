@@ -5,7 +5,7 @@ from discord.ext import commands
 import datetime as dt
 from typing import Optional, Literal
 
-from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value
+from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time
 
 class Economy(commands.Cog):
 	def __init__(self,bot):
@@ -35,7 +35,7 @@ class Economy(commands.Cog):
 			return await inter.followup.send(embed=E)
 
 		level = int(user_data["level"])
-		E.title = f"balance [{level} ⭐]"
+		E.title = f"balance [{level} ⭐] + {user_data['tech']} :gear: "
 		E.description  = f"- **{user_data['roses']}🌹**\n"
 		E.description += f"- **{user_data['candies']}🍬**\n"
 		E.description += f"- **{user_data['ideas']}💡**\n"
@@ -65,10 +65,7 @@ class Economy(commands.Cog):
 			E.color = discord.Color.red()
 			return await inter.followup.send(embed=E)
 
-		if is_cutie(inter):
-			time_to_wait = int(dt.datetime.now().timestamp() + dt.timedelta(hours=10).total_seconds())
-		else :
-			time_to_wait = int(dt.datetime.now().timestamp() + dt.timedelta(hours=12).total_seconds())
+		time_to_wait = get_collect_time(is_cutie(inter), user_data["tech"])
 
 		# add the data
 		user_data["timely"] = time_to_wait
@@ -76,7 +73,7 @@ class Economy(commands.Cog):
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
-		E.description = f"{inter.user.mention}, You claimed your {value}🌹 roses! Come back in <t:{time_to_wait}:R> to claim it again!"
+		E.description = f"{inter.user.mention}, You claimed your {value}🌹 roses! Come back <t:{time_to_wait}:R> to claim it again!"
 		E.color = discord.Color.green()
 		await inter.followup.send(embed=E)
 
@@ -93,7 +90,7 @@ class Economy(commands.Cog):
 		try: 
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
-			E.description = f"{inter.user.mention}, You can't level up you have never played"
+			E.description = f"{inter.user.mention}, You can't level up, you have never played"
 			return await inter.followup.send(embed=E)
 
 		level = user_data["level"] + 1
@@ -114,6 +111,44 @@ class Economy(commands.Cog):
 		E.description = f"{inter.user.mention}, You are now level **{level}**!"
 
 		await inter.followup.send(embed=E)
+
+	@app_commands.command(description="Allows you to upgrade your tech level")
+	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	async def tech(self, inter:discord.Interaction):
+		await inter.response.defer()
+
+		E = discord.Embed()
+		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
+		E.color = discord.Color.green()
+
+		try: 
+			user_data : dict = get_data(f"games/users/{inter.user.id}")
+		except :
+			E.description = f"{inter.user.mention}, You can't upgrade your tech, you have never played"
+			return await inter.followup.send(embed=E)
+
+		tech = user_data["tech"] + 1
+		price = tech*10
+
+		if tech > 10:
+			E.description = f"{inter.user.mention}, You are already max tech"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E)
+
+		if user_data["ideas"] < price:
+			E.description = f"{inter.user.mention}, You need {price}💡 to upgrade your tech"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E)
+		
+		user_data["ideas"] -= price
+		user_data["tech"] += 1
+		upd_data(user_data, f"games/users/{inter.user.id}")
+
+		E.description = f"{inter.user.mention}, You are now tech **{tech}**:gear:!"
+
+		await inter.followup.send(embed=E)
+
 
 class Bank(app_commands.Group):
 	def __init__(self, bot:commands.Bot, *args, **kwargs):

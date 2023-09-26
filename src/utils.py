@@ -322,6 +322,7 @@ def new_user():
 		"roses"   : 0,
 		"candies" : 0,
 		"ideas"   : 0,
+		"tech"    : 0,
 		"bank"    : {
 			"roses"   : 0,
 			"candies" : 0,
@@ -355,6 +356,16 @@ def get_value(user_data:dict) -> int:
 	level:int = user_data["level"]
 	achievements:list = user_data["achievements"]
 	return int((150 * (1 + (level/4)))*(1 + (len(achievements)/100)))
+
+def get_collect_time(is_cutie:bool, tech:int) -> int:
+	base = dt.timedelta(hours=12).total_seconds()
+	if is_cutie:
+		base = dt.timedelta(hours=10).total_seconds()
+
+	# 1% less for each tech level
+	time = base - (base*tech)/100
+
+	return int(dt.datetime.now().timestamp() + time)
 
 def translate(txt: str) -> str:
 	"""Translates choice emojis to their names"""
