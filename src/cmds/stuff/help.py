@@ -399,5 +399,49 @@ class Help(commands.Cog):
 
 		return final_choices
 
+	@app_commands.command(description="Displays the tips page")
+	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	async def tips(self, inter:discord.Interaction):
+		E = discord.Embed()
+		E.colour = discord.Colour.blurple()
+
+		E.description = """### Economy
+		Based on 3 ressources: 
+		🌹 roses, 💡 ideas and 🍬 candies
+
+		You can collect roses with **/collect** every 12h
+		- Your **/collect** value is used as a base for all earnings
+		- You can increase earnings by leveling up with **/levelup**
+		- You can also increase earnings by earning achievements, granting 1% bonus each
+		The time between each **/collect** can be reduced by 1% by upgrading your **/tech**
+		- Your tech can be upgraded using 💡 ideas
+		### Traveller
+		You can earn 💡 ideas by answering the traveller's questions
+		- A good answer will give you 10💡 ideas and the value of a **/collect**
+		- The traveller randomly spawns withing 2 to 10 hours
+		- The traveller will leave after 1h if no one answered his question
+		### Gambling
+		You can gamble your 🌹 roses with **/roll**, **/flip** and **/ladder**
+		Each earning is specific to the game
+		Though all gambling games have an average of return of 90% of the bet
+		### Bank
+		You can deposit your ressources to your bank account with **/bank deposit**
+		This is used to protect your ressources from gambling
+		### Trade
+		You can trade your ressources with other users with **/trade**
+		You can sell your ressources for another ressource
+		### Maths
+		your base value (used for **/collect** and the traveller) is calculated like this: ```py
+		int((150 * (1 + (level/4)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
+		if level < 10:
+		    price = int((level/1.25) * 1000)
+		else:
+		    price = int((((level**2)/25) + 4) * 1000)```
+		""".replace("\t", "")
+
+		await inter.response.send_message(embed=E)
+
+
 async def setup(bot:commands.Bot) -> None:
 	await bot.add_cog(Help(bot))
