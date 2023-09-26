@@ -347,7 +347,7 @@ class Gambling(commands.Cog):
 		timeout = 86400
 		secondView = SecondView(message=firstView.message, timeout=timeout)
 
-		await secondView.message.edit(content=f"Waiting for {inter.user.mention}'s answer.\nrefund in <t:{int(dt.datetime.now().timestamp() + timeout)}:R>",
+		await secondView.message.edit(content=f"Waiting for {inter.user.mention}'s answer.\nrefund <t:{int(dt.datetime.now().timestamp() + timeout)}:R>",
 				view=secondView)
 
 		await secondView.wait()
