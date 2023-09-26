@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+import random
 import datetime as dt
 from typing import Optional, Literal
 
@@ -67,13 +68,18 @@ class Economy(commands.Cog):
 
 		time_to_wait = get_collect_time(is_cutie(inter), user_data["tech"])
 
+		# value/100 % to win a candy
+		candy = random.random()*100 <= value/100
+		if candy:
+			user_data["candies"] += 1
+
 		# add the data
 		user_data["timely"] = time_to_wait
 		user_data["roses"] += value
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
-		E.description = f"{inter.user.mention}, You claimed your {value}🌹 roses! Come back <t:{time_to_wait}:R> to claim it again!"
+		E.description = f"{inter.user.mention}, You claimed your {value}🌹 roses {'and 1🍬' if candy else ''}! Come back <t:{time_to_wait}:R> to claim it again!"
 		E.color = discord.Color.green()
 		await inter.followup.send(embed=E)
 
