@@ -93,6 +93,11 @@ class Games(commands.Cog):
 
 @tasks.loop()
 async def traveler(*, bot: commands.Bot):
+	# spawn every 2 to 10 hours
+	random_time = random.randint(7200, 36000)
+
+	await asyncio.sleep(random_time)
+
 	# get the bot channel and make sure it is not none
 	bot_channel = await bot.fetch_channel(BOT_CHANNEL_ID)
 	assert isinstance(bot_channel, discord.TextChannel)
@@ -227,11 +232,6 @@ async def traveler(*, bot: commands.Bot):
 	b_choices.message = await bot_channel.send(embed=E, view=b_choices)
 
 	await b_choices.wait()
-
-	# come back in 2 to 10 hours
-	random_time = random.randint(7200, 36000)
-
-	await asyncio.sleep(random_time)
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Games(bot))
