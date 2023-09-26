@@ -17,7 +17,7 @@ bot_commands = {
 	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun" : [is_member, "/confession", "/apoll"],
 	"Fun"        : [None, "/poll", "!/ping"],
-	"Economy"    : [None, "/balance", "/collect", "/levelup", "/bank"],
+	"Economy"    : [None, "/balance", "/collect", "/levelup", "/tech", "/bank", "/trade"],
 	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
 }
 
@@ -48,6 +48,7 @@ class Help(commands.Cog):
 		E = discord.Embed()
 		E.colour = discord.Colour.blurple()
 		E.description = ""
+		E.set_footer(text="Do /tips to get a page explaining how the economy works")
 
 		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
 
@@ -280,8 +281,14 @@ class Help(commands.Cog):
 				elif query == "levelup":
 					E.description = "**Levels up your account**"
 					E.add_field(name="**Example**", value="```/levelup```")
-					E.add_field(name="**Cooldown**", value="```3s / user```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
+				elif query == "tech":
+					E.description = "**Upgrade your tech**\n_Each tech upgrade reduces 1% the wait for the collect_"
+					E.add_field(name="**Example**", value="```/tech```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+					E.add_field(name="**Requirement**", value="```None```")
+
 				elif query == "bank":
 					E_check = discord.Embed(title="/bank check")
 					E_check.description = "**Displays your bank account**"
@@ -330,7 +337,14 @@ class Help(commands.Cog):
 					b_bank.message = await inter.followup.send(embed=E_check, view=b_bank)
 					return
 
-				# game commands
+				# trades
+				elif query == "trade":
+					E.description = "**Sends a trade request**\namount = amount to sell\nsell_item = item to sell\nprice = price of the item\nbuy_item = item to buy\nuser = user to trade with (optionnal)"
+					E.add_field(name="**Example**", value="```/trade <amount> <sell_item> <price> <buy_item> (user)```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+					E.add_field(name="**Requirement**", value="```None```")
+
+				# gambling commands
 				elif query == "roll":
 					E.description = "**Rolls a number between 1 and 100**\n100 => x 10\n90 => x4\n75 => x2\n0"
 					E.add_field(name="**Example**", value="```/roll```")
