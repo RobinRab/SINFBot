@@ -48,7 +48,7 @@ class Help(commands.Cog):
 		E = discord.Embed()
 		E.colour = discord.Colour.blurple()
 		E.description = ""
-		E.set_footer(text="Do /tips to get a page explaining how the economy works")
+		E.set_footer(text="Do /how to get a page explaining how the economy works")
 
 		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
 
@@ -402,7 +402,7 @@ class Help(commands.Cog):
 	@app_commands.command(description="Displays the tips page")
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
-	async def tips(self, inter:discord.Interaction):
+	async def how(self, inter:discord.Interaction):
 		E = discord.Embed()
 		E.colour = discord.Colour.blurple()
 
