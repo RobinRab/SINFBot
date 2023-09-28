@@ -4,9 +4,9 @@ from discord.ext import commands
 
 import random
 import datetime as dt
-from typing import Literal, Optional
+from typing import Literal
 
-from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie
+from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie, UnexpectedValue
 
 class Gambling(commands.Cog):
 	def __init__(self,bot):
@@ -168,7 +168,7 @@ class Gambling(commands.Cog):
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
 	@app_commands.check(is_cutie)
-	@app_commands.describe(question="Ask everyone a question", time="The time the poll will last")
+	@app_commands.describe(question="Set a bet!s", time="The time the poll will last")
 	async def bpoll(self, inter:discord.Interaction, question:str, time:Literal["1m", "15m", "1h", "12h", "24h"]):
 		await inter.response.defer()
 
@@ -195,7 +195,7 @@ class Gambling(commands.Cog):
 
 			bet = discord.ui.TextInput(label="Bet amount?", default='2', min_length=1, max_length=5)
 
-			async def on_submit(self, inter: discord.Interaction):
+			async def on_submit(self, inter2: discord.Interaction):
 				# get the amount 
 				bet_amount = self.bet.value
 
@@ -204,25 +204,26 @@ class Gambling(commands.Cog):
 					if bet_amount < 0:
 						raise ValueError
 				except: 
-					return await inter.response.send_message(f'Invalid amount', ephemeral=True)
+					return await inter2.response.send_message(f'Invalid amount', ephemeral=True)
 
 				if bet_amount < 2:
-					return await inter.response.send_message(f'You need to bet at least 2🌹', ephemeral=True)
+					return await inter2.response.send_message(f'You need to bet at least 2🌹', ephemeral=True)
 
 				# check if the user has enough roses
 				try: 
-					user_data : dict = get_data(f"games/users/{inter.user.id}")
+					user_data : dict = get_data(f"games/users/{inter2.user.id}")
 					if user_data["roses"] < bet_amount:
 						raise ValueError
 				except:
-					return await inter.response.send_message(f'You don\'t have enough 🌹', ephemeral=True)
+					return await inter2.response.send_message(f'You don\'t have enough 🌹', ephemeral=True)
+
 				user_data["roses"] -= bet_amount
-				upd_data(user_data, f"games/users/{inter.user.id}")
+				upd_data(user_data, f"games/users/{inter2.user.id}")
 
 				# update data
 				txt = ""
 				if self.bet_type == "red":
-					reds[inter.user.id] = bet_amount
+					reds[inter2.user.id] = bet_amount
 
 					for user_id, amount in reds.items():
 						txt += f"<@!{user_id}> : {amount:,}🌹\n"
@@ -230,7 +231,7 @@ class Gambling(commands.Cog):
 					E.set_field_at(4, name="total no", value=f"{sum(reds.values()):,}🌹")
 
 				else:
-					greens[inter.user.id] = bet_amount
+					greens[inter2.user.id] = bet_amount
 
 					for user_id, amount in greens.items():
 						txt += f"<@!{user_id}> : {amount:,}🌹\n"
@@ -239,21 +240,26 @@ class Gambling(commands.Cog):
 
 				await self.message.edit(embed=E)
 
-				await inter.response.send_message(f'bet set!', ephemeral=True)
+				await inter2.response.send_message(f'bet set!', ephemeral=True)
 
 		# create the view that asks users to bet
 		class FirstView(discord.ui.View):
 			def __init__(self, timeout:float):
 				super().__init__(timeout=timeout)
-				self.message : Optional[discord.Message]
+				self.message_id : int
 
 			@discord.ui.button(label="bet yes",style=discord.ButtonStyle.success)
 			async def bet_yes(self, inter2: discord.Interaction, _: discord.ui.Button):
 				if inter2.user.id in greens or inter2.user.id in reds:
 					return await inter2.response.send_message(f'You already bet', ephemeral=True)
+				
+				# fetch the message back (>15 mins)
+				if not isinstance(inter2.channel, discord.TextChannel):
+					raise UnexpectedValue("inter2.channel is not a discord.TextChannel")
+				
+				message = await inter2.channel.fetch_message(self.message_id)
 
-				if isinstance(self.message, discord.Message):
-					await inter2.response.send_modal(GetBet(self.message, "green"))
+				await inter2.response.send_modal(GetBet(message, "green"))
 
 				# update timeout so it stays on time
 				self.timeout = time_ends - int(dt.datetime.now().timestamp())
@@ -263,8 +269,13 @@ class Gambling(commands.Cog):
 				if inter2.user.id in greens or inter2.user.id in reds:
 					return await inter2.response.send_message(f'You already bet', ephemeral=True)
 
-				if isinstance(self.message, discord.Message):
-					await inter2.response.send_modal(GetBet(self.message, "red"))
+				# fetch the message back (>15 mins)
+				if not isinstance(inter2.channel, discord.TextChannel):
+					raise UnexpectedValue("inter2.channel is not a discord.TextChannel")
+				
+				message = await inter2.channel.fetch_message(self.message_id)
+
+				await inter2.response.send_modal(GetBet(message, "red"))
 
 				# update timeout so it stays on time
 				self.timeout = time_ends - int(dt.datetime.now().timestamp())
@@ -290,32 +301,40 @@ class Gambling(commands.Cog):
 		left = time_ends - int(dt.datetime.now().timestamp())
 
 		firstView = FirstView(left)
-		firstView.message = await inter.followup.send(
-			f"<t:{time_ends}:R>", 
-			embed=E,
-			view=firstView
-		)
+
+		message = await inter.followup.send(f"<t:{time_ends}:R>", embed=E,view=firstView)
+
+		if not isinstance(message, discord.Message):
+			raise UnexpectedValue("message is not a discord.Message")
+		
+		firstView.message_id = message.id
 
 		await firstView.wait()
 
 		# second view awaiting for the owner to choose the end result
 		class SecondView(discord.ui.View):
-			def __init__(self, message:discord.Message, timeout:int):
+			def __init__(self, message_id:int, timeout:int):
 				super().__init__(timeout=timeout)
 				self.add_item(discord.ui.Button(label="bet yes",style=discord.ButtonStyle.success, disabled=True))
 				self.add_item(discord.ui.Button(label="bet no",style=discord.ButtonStyle.danger, disabled=True))
 				self.add_item(discord.ui.Button(label="end poll",style=discord.ButtonStyle.blurple, disabled=True))
-				self.message = message
+				self.message : discord.Message
+				self.message_id = message_id
 
 				self.result : Literal["yes", "no"]
 
-			async def close(self):
+			async def close(self, channel, txt):
 				for item in self.children:
 					if isinstance(item, discord.ui.Button):
 						item.disabled = True
 
-				if isinstance(self.message, discord.Message):
-					await self.message.edit(content="The poll is over", view=self)
+				# fetch the message back (>15 mins)
+				if not isinstance(channel, discord.TextChannel):
+					raise UnexpectedValue("channel is not a discord.TextChannel")
+				
+				message = await channel.fetch_message(self.message_id)
+				await message.edit(content=txt, view=self)
+
 				self.stop()
 
 			async def interaction_check(self, inter2: discord.Interaction) -> bool:
@@ -325,13 +344,13 @@ class Gambling(commands.Cog):
 			async def yes(self, inter2: discord.Interaction, _: discord.ui.Button):
 				self.result = "yes"
 				await inter2.response.send_message(f"The final answer has been set to 'yes'", ephemeral=True)
-				await self.close()
+				await self.close(inter2.channel, "'Yes' team wins!'")
 
 			@discord.ui.button(label="no!",style=discord.ButtonStyle.danger, row=1)
 			async def no(self, inter2: discord.Interaction, _: discord.ui.Button):
 				self.result = "no"
 				await inter2.response.send_message(f"The final answer has been set to 'no'", ephemeral=True)
-				await self.close()
+				await self.close(inter2.channel, "'No' team wins!")
 
 			async def on_timeout(self):
 				for user_id, amount in {**greens, **reds}.items():
@@ -340,12 +359,17 @@ class Gambling(commands.Cog):
 					upd_data(user_data, f"games/users/{user_id}")
 
 				await self.message.reply("all users have been refunded")
-				await self.close()
+				await self.close(self.message.channel, "Poll timed out\nUsers have been refunded")
 
-		assert isinstance(firstView.message, discord.Message)
 		# after 24h users are refunded
 		timeout = 86400
-		secondView = SecondView(message=firstView.message, timeout=timeout)
+		secondView = SecondView(message_id=firstView.message_id, timeout=timeout)
+
+		# fetch the message back (>15 mins)
+		if not isinstance(inter.channel, discord.TextChannel):
+			raise UnexpectedValue("channel is not a discord.TextChannel")
+		
+		secondView.message = await inter.channel.fetch_message(secondView.message_id)
 
 		await secondView.message.edit(content=f"Waiting for {inter.user.mention}'s answer.\nrefund <t:{int(dt.datetime.now().timestamp() + timeout)}:R>",
 				view=secondView)
