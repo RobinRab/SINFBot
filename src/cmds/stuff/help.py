@@ -426,6 +426,7 @@ class Help(commands.Cog):
 		- A good answer will give you 10💡 ideas and the value of a **/collect**
 		- The traveller randomly spawns withing 2 to 10 hours
 		- The traveller will leave after 1h if no one answered his question
+		- you can **/summon** the traveller with 🍬 candies
 		### Gambling
 		You can gamble your 🌹 roses with **/roll**, **/flip** and **/ladder**
 		Each earning is specific to the game
