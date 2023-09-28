@@ -71,6 +71,10 @@ class Error(commands.Cog):
 
 
 	async def on_app_command_error(self,inter: discord.Interaction,error: app_commands.AppCommandError):
+		# Allows to check for original exceptions raised and sent to CommandInvokeError.
+		# If nothing is found. Keeps the exception passed to on_command_error.
+		error = getattr(error, 'original', error)
+	
 		if isinstance(error, app_commands.errors.CommandNotFound) :
 			await inter.response.send_message("Cette commande n'existe pas",ephemeral=True)
 	
