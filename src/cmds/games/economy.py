@@ -79,7 +79,7 @@ class Economy(commands.Cog):
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
-		E.description = f"{inter.user.mention}, You claimed your {value}🌹 roses {'and 1🍬' if candy else ''}! Come back <t:{time_to_wait}:R> to claim it again!"
+		E.description = f"{inter.user.mention}, You claimed your {value}🌹 roses {'and 1🍬 candy' if candy else ''}! Come back <t:{time_to_wait}:R> to claim it again!"
 		E.color = discord.Color.green()
 		await inter.followup.send(embed=E)
 
