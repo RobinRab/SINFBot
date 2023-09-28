@@ -6,10 +6,26 @@ import asyncio
 import datetime as dt
 from typing import Optional, Literal
 from settings import GENERAL_ID
-from utils import UnexpectedValue, is_summer_time, is_member, get_data, upd_data, sort_bdays
+from utils import UnexpectedValue, is_member, get_data, upd_data, get_belgian_time
 
 months = Literal["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
+def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
+	"""Trie les anniversaires par dates."""
+	year = get_belgian_time().year
+	birthdays = {}
+
+	for user in data.keys():
+		month = int(data[user]["month"])
+		day = int(data[user]["day"])
+
+		date = dt.datetime(year, month, day)
+		if date < get_belgian_time():
+			date = dt.datetime(year+1, month, day)
+
+		birthdays[user] = date
+
+	return sorted(birthdays.items(), key=lambda x: birthdays[x[0]])
 
 class Birthday(commands.Cog):
 	def __init__(self,bot):
@@ -61,22 +77,24 @@ class Birthday(commands.Cog):
 		if not isinstance(inter.guild, discord.Guild):
 			raise UnexpectedValue("inter.guild is not a discord.Guild")
 
-
 		data : dict = get_data("birthday")
-		year = dt.datetime.now().year
+		year = get_belgian_time().year
 
 		if isinstance(user, discord.Member):
 			if str(user.id) not in data.keys():
 				await inter.response.send_message(f"**{user.name}** has not set their birthday yet")
 				return
 
-			date = dt.datetime(year, data[str(user.id)]["month"], data[str(user.id)]["day"])
+			month = int(data[str(user.id)]["month"])
+			day = int(data[str(user.id)]["day"])
+
+			date = dt.datetime(year, month, day)
 			if date < dt.datetime.now():
-				date = dt.datetime(year+1, data[str(user.id)]["month"], data[str(user.id)]["day"])
+				date = dt.datetime(year+1, month, day)
 
-			left = date - dt.datetime.now()
+			timestamp = int(date.timestamp())
 
-			await inter.response.send_message(f"**{user.name}** has their birthday on the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**")
+			await inter.response.send_message(f"**{user.name}** has their birthday on the {day}/{month}/{year} <t:{timestamp}:R>")
 		else:
 			birthdays = sort_bdays(data)
 
@@ -91,9 +109,9 @@ class Birthday(commands.Cog):
 				if user is None:
 					continue
 			
-				left = date - dt.datetime.now()
+				timestamp = int(date.timestamp())
 
-				txt += f"{user.mention} - {date.strftime('%d/%m/%Y')} dans **{left.days+1}d**\n"
+				txt += f"{user.mention} - {date.strftime('%d/%m/%Y')} <t:{timestamp}:R> \n"
 
 			embed.description = txt
 			await inter.response.send_message(embed=embed)
@@ -115,20 +133,17 @@ async def birthdays_loop(*, bot:commands.Bot):
 			if user is None:
 				continue
 
-			left = (date - dt.datetime.now()).total_seconds()
-			left -= 3600 # -1h, winter time
-			if is_summer_time():
-				left -= 3600 # -2h for summer time (7200)
-			left += 1 # somehow it is 1 second early
+			timestamp = int(date.timestamp())
+			left = timestamp - int(get_belgian_time().timestamp())
 
-			await asyncio.sleep(left)
+			await asyncio.sleep(left+1)
 
-			year = dt.datetime.now().year
+			year = get_belgian_time().year
 			age = year - data[str(user.id)]["year"]
 
 			await channel.send(f"Happy birthday {user.mention}, You are {age} years old today! :tada:")
 
-			await asyncio.sleep(43200) #sleep 12h to skip timezones issudes
+			await asyncio.sleep(43200) #sleep 12h to skip timezones issues
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Birthday(bot))
