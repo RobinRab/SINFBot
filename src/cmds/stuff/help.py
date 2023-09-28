@@ -17,7 +17,7 @@ bot_commands = {
 	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun" : [is_member, "/confession", "/apoll"],
 	"Fun"        : [None, "/poll", "!/ping"],
-	"Economy"    : [None, "/balance", "/collect", "/levelup", "/tech", "/bank", "/trade"],
+	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade", "/summon"],
 	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
 }
 
@@ -286,6 +286,11 @@ class Help(commands.Cog):
 				elif query == "tech":
 					E.description = "**Upgrade your tech**\n_Each tech upgrade reduces 1% the wait for the collect_"
 					E.add_field(name="**Example**", value="```/tech```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+					E.add_field(name="**Requirement**", value="```None```")
+				elif query == "summon":
+					E.description = "**Each candy increases your chances of summoning a traveler by 10%\ncandies = amount of candies to use**\n"
+					E.add_field(name="**Example**", value="```/summon <candies>```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
 

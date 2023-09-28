@@ -6,6 +6,8 @@ import random
 import datetime as dt
 from typing import Optional, Literal
 
+from cmds.games.games import traveler
+
 from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time
 
 class Economy(commands.Cog):
@@ -154,6 +156,28 @@ class Economy(commands.Cog):
 		E.description = f"{inter.user.mention}, You are now tech **{tech}**:gear:!"
 
 		await inter.followup.send(embed=E)
+
+	@app_commands.command(description="Try to summon a traveler")
+	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.describe(number="The number of candies to use, 10% chance each")
+	@app_commands.rename(number="candies")
+	@app_commands.guild_only()
+	async def summon(self, inter:discord.Interaction, number:int):
+		data = get_data(f"games/users/{inter.user.id}")
+
+		if data["candies"] < number:
+			return await inter.response.send_message(f"You don't have {number} cand{'y' if number == 1 else 'ies'}")
+		
+		data["candies"] -= number
+		upd_data(data, f"games/users/{inter.user.id}")
+
+		if random.random() < number/10:
+			await inter.response.send_message(f"{inter.user.mention} successfully summoned a traveler with {number}🍬 cand{'y' if number == 1 else 'ies'}!")
+			# for some reason the restart method doesn't work
+			traveler.stop()
+			traveler.start(bot=self.bot)
+		else:
+			await inter.response.send_message(f"{inter.user.mention} failed to summon a traveler with {number}🍬 cand{'y' if number == 1 else 'ies'}")
 
 
 class Bank(app_commands.Group):

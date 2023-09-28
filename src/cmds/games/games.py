@@ -1,5 +1,4 @@
 import discord 
-from discord import app_commands
 from discord.ext import commands, tasks
 
 import html
@@ -17,87 +16,9 @@ class Games(commands.Cog):
 
 		traveler.start(bot=self.bot)
 
-	#! jsp quoi faire de ça
-	# @app_commands.command(description="memorize the squares")
-	# @app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
-	# @app_commands.guild_only()
-	# async def memory(self, inter:discord.Interaction):
-	# 	matrix = [[0]*5 for _ in range(5)]
-
-	# 	num_ones = 5
-	# 	for i in range(num_ones):
-	# 		while True:
-	# 			x = random.randint(0, 4)
-	# 			y = random.randint(0, 4)
-	# 			if matrix[y][x] == 0:
-	# 				matrix[y][x] = 1
-	# 				break
-
-	# 	class Memory(discord.ui.View):
-	# 		def __init__(self, matrix:list[list], timeout:int):
-	# 			super().__init__(timeout=timeout)
-
-	# 			self.matrix = matrix
-	# 			self.message : Optional[discord.Message]
-
-	# 			for iy, y in enumerate(matrix):
-	# 				for ix, x in enumerate(y):
-	# 					color = random.choice([discord.ButtonStyle.red, discord.ButtonStyle.blurple])
-	# 					if x == 1:
-	# 						self.add_item(discord.ui.Button(label=f"({ix},{iy})", style=discord.ButtonStyle.green))
-	# 					else:
-	# 						self.add_item(discord.ui.Button(label=f"({ix},{iy})"))
-
-	# 	memoryview = Memory(matrix, 10)
-	# 	memoryview.message = await inter.response.send_message("Memorize the squares", view=memoryview)
-
-	# 	await memoryview.wait()
-
-	# 	class CallbackButton(discord.ui.Button):
-	# 		def __init__(self, parent_view:'HiddenView', *args, **kwargs):
-	# 			super().__init__(*args, **kwargs)
-
-	# 			self.parent_view = parent_view
-
-	# 		async def callback(self, inter2: discord.Interaction):
-	# 			assert isinstance(self.label, str)
-	# 			assert isinstance(self.parent_view.message, discord.Message)
-
-	# 			if matrix[int(self.label[3])][int(self.label[1])] == 1:
-	# 				self.style = discord.ButtonStyle.green
-	# 				self.parent_view.children[int(self.label[3])*5 + int(self.label[1])] = self
-
-	# 				await self.parent_view.message.edit(view=self.parent_view)
-	# 				await inter2.response.send_message("correct", ephemeral=True)
-	# 			else:
-	# 				self.style = discord.ButtonStyle.red
-	# 				self.parent_view.children[int(self.label[3])*5 + int(self.label[1])] = self
-
-	# 				await self.parent_view.message.edit(view=self.parent_view, content="You lost")
-	# 				await inter2.response.send_message("incorrect", ephemeral=True)
-	# 				self.parent_view.stop()
-
-	# 	class HiddenView(discord.ui.View):
-	# 		def __init__(self, message, timeout:int):
-	# 			super().__init__(timeout=timeout)
-	# 			self.message : discord.Message = message
-
-	# 	hiddenview = HiddenView(memoryview.message, 30)
-
-	# 	for iy in range(5):
-	# 		for ix in range(5):
-	# 			hiddenview.add_item(CallbackButton(hiddenview, label=f"({ix},{iy})", style=discord.ButtonStyle.grey))
-
-	# 	await hiddenview.message.edit(content="click the green squares", view=hiddenview)
-
 
 @tasks.loop()
 async def traveler(*, bot: commands.Bot):
-	# spawn every 2 to 10 hours
-	random_time = random.randint(7200, 36000)
-
-	await asyncio.sleep(random_time)
-
 	# get the bot channel and make sure it is not none
 	bot_channel = await bot.fetch_channel(BOT_CHANNEL_ID)
 	assert isinstance(bot_channel, discord.TextChannel)
@@ -232,6 +153,11 @@ async def traveler(*, bot: commands.Bot):
 	b_choices.message = await bot_channel.send(embed=E, view=b_choices)
 
 	await b_choices.wait()
+
+	# come back in 2 to 10 hours
+	random_time = random.randint(7200, 36000)
+
+	await asyncio.sleep(random_time)
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Games(bot))
