@@ -198,9 +198,10 @@ def is_owner(inter: commands.Context | discord.Interaction ) -> bool:
 
 
 def is_summer_time() -> bool:
-	# Determine if DST is currently in effect in Belgium
-	belgium = dt.timezone(dt.timedelta(hours=1), "CET")
-	return belgium.dst(dt.datetime.now(belgium)) != dt.timedelta(0)
+	now = dt.datetime.utcnow()
+	start_dst = dt.datetime(now.year, 3, 31) - dt.timedelta(days=(dt.datetime(now.year, 3, 31).weekday() + 1) % 7)
+	end_dst = dt.datetime(now.year, 10, 31) - dt.timedelta(days=(dt.datetime(now.year, 10, 31).weekday() + 1) % 7)
+	return start_dst <= now < end_dst
 
 def get_belgian_time() -> dt.datetime:
 	# Get the current UTC time
@@ -300,7 +301,6 @@ def new_user():
 		"roses"   : 0,
 		"candies" : 0,
 		"ideas"   : 0,
-		"tech"    : 0,
 		"bank"    : {
 			"roses"   : 0,
 			"candies" : 0,
