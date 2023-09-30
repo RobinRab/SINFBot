@@ -6,7 +6,7 @@ import asyncio
 import datetime as dt
 from typing import Optional, Literal
 from settings import GENERAL_ID
-from utils import UnexpectedValue, is_member, get_data, upd_data, get_belgian_time
+from utils import UnexpectedValue, is_member, get_data, upd_data, get_belgian_time, is_summer_time
 
 months = Literal["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -19,9 +19,11 @@ def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
 		month = int(data[user]["month"])
 		day = int(data[user]["day"])
 
-		date = dt.datetime(year, month, day)
-		if date < get_belgian_time():
-			date = dt.datetime(year+1, month, day)
+		diff = dt.timedelta(hours=2 if is_summer_time() else 1)
+
+		date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc) - diff
+		if date < dt.datetime.now(tz=dt.timezone.utc) - diff:
+			date = dt.datetime(year+1, month, day, tzinfo=dt.timezone.utc) - diff
 
 		birthdays[user] = date
 
@@ -88,9 +90,11 @@ class Birthday(commands.Cog):
 			month = int(data[str(user.id)]["month"])
 			day = int(data[str(user.id)]["day"])
 
-			date = dt.datetime(year, month, day)
-			if date < dt.datetime.now():
-				date = dt.datetime(year+1, month, day)
+			diff = dt.timedelta(hours=2 if is_summer_time() else 1)
+
+			date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc) - diff
+			if date < dt.datetime.now(tz=dt.timezone.utc) - diff:
+				date = dt.datetime(year+1, month, day, tzinfo=dt.timezone.utc) - diff
 
 			timestamp = int(date.timestamp())
 
@@ -133,8 +137,7 @@ async def birthdays_loop(*, bot:commands.Bot):
 			if user is None:
 				continue
 
-			timestamp = int(date.timestamp())
-			left = timestamp - int(get_belgian_time().timestamp())
+			left = int(date.timestamp() - get_belgian_time().timestamp())
 
 			await asyncio.sleep(left+1)
 

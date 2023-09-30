@@ -3,7 +3,7 @@ from discord import app_commands
 from discord.ext import commands
 
 import datetime as dt
-from utils import GetLogLink, log, get_data
+from utils import GetLogLink, log, get_data, get_belgian_time, is_summer_time
 
 #!! all functions added in this class will be added as context menu
 #!! all functions added in this class will be added as context menu
@@ -48,20 +48,23 @@ class GeneralCM(commands.Cog):
 		await inter.response.send_message(embed=embed, ephemeral=True)
 
 	async def birthday(self, inter:discord.Interaction, user:discord.Member):
-		data : dict = get_data("birthday")
-		year = dt.datetime.now().year
+		try:
+			data : dict = get_data(f"birthday/{user.id}")
+		except KeyError:
+			return await inter.response.send_message(f"**{user.name}** has not set their birthday yet", ephemeral=True)
 
-		if str(user.id) not in data.keys():
-			await inter.response.send_message(f"**{user.name}** has not added their birthday")
-			return
+		year = get_belgian_time().year
+		month = int(data["month"])
+		day = int(data["day"])
 
-		date = dt.datetime(year, data[str(user.id)]["month"], data[str(user.id)]["day"])
-		if date < dt.datetime.now():
-			date = dt.datetime(year+1, data[str(user.id)]["month"], data[str(user.id)]["day"])
+		diff = dt.timedelta(hours=2 if is_summer_time() else 1)
 
-		left = date - dt.datetime.now()
+		date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc) - diff
+		if date < dt.datetime.now(tz=dt.timezone.utc) - diff:
+			year += 1
+			date = dt.datetime(year+1, month, day, tzinfo=dt.timezone.utc) - diff
 
-		await inter.response.send_message(f"**{user.name}** has his birthday the {date.strftime('%d/%m/%Y')} in **{left.days+1}d**", ephemeral=True)
+		await inter.response.send_message(f"**{user.name}** has his birthday the {day}/{month}/{year} <t:{int(date.timestamp())}:R>", ephemeral=True)
 
 
 async def setup(bot:commands.Bot):
