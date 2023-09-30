@@ -150,7 +150,7 @@ async def traveler(*, bot: commands.Bot):
 			E.description += f"{i+1}. {answers[i]}\n"
 			b_choices.add_item(CallbackButton(parent_view=b_choices, label=str(i+1), style=discord.ButtonStyle.blurple))
 
-	b_choices.message = await bot_channel.send(embed=E, view=b_choices)
+	b_choices.message = await bot_channel.send(embed=E, view=b_choices, silent=True)
 
 	await b_choices.wait()
 
