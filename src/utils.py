@@ -197,11 +197,11 @@ def is_owner(inter: commands.Context | discord.Interaction ) -> bool:
 		return inter.user.id == OWNER_ID
 
 
-def is_summer_time() -> bool:
-	now = dt.datetime.utcnow()
-	start_dst = dt.datetime(now.year, 3, 31) - dt.timedelta(days=(dt.datetime(now.year, 3, 31).weekday() + 1) % 7)
-	end_dst = dt.datetime(now.year, 10, 31) - dt.timedelta(days=(dt.datetime(now.year, 10, 31).weekday() + 1) % 7)
-	return start_dst <= now < end_dst
+def is_summer_time(date:dt.datetime) -> bool:
+	date = dt.datetime.fromtimestamp(date.timestamp())
+	start_dst = dt.datetime(date.year, 3, 31) - dt.timedelta(days=(dt.datetime(date.year, 3, 31).weekday() + 1) % 7)
+	end_dst = dt.datetime(date.year, 10, 31) - dt.timedelta(days=(dt.datetime(date.year, 10, 31).weekday() + 1) % 7)
+	return start_dst <= date < end_dst
 
 def get_belgian_time() -> dt.datetime:
 	# Get the current UTC time
@@ -209,7 +209,7 @@ def get_belgian_time() -> dt.datetime:
 
 	# Calculate the offset for Belgian time utc+1
 	belgium_offset = dt.timedelta(hours=1)
-	if is_summer_time(): # utc+2
+	if is_summer_time(utc_time): # utc+2
 		belgium_offset += dt.timedelta(hours=1)
 
 	# Apply the offset to the UTC time to get the Belgian time

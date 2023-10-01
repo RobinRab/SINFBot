@@ -19,7 +19,9 @@ def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
 		month = int(data[user]["month"])
 		day = int(data[user]["day"])
 
-		diff = dt.timedelta(hours=2 if is_summer_time() else 1)
+		date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc)
+
+		diff = dt.timedelta(hours=2 if is_summer_time(date) else 1)
 
 		date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc) - diff
 		if date < dt.datetime.now(tz=dt.timezone.utc) - diff:
@@ -90,7 +92,9 @@ class Birthday(commands.Cog):
 			month = int(data[str(user.id)]["month"])
 			day = int(data[str(user.id)]["day"])
 
-			diff = dt.timedelta(hours=2 if is_summer_time() else 1)
+			date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc)
+
+			diff = dt.timedelta(hours=2 if is_summer_time(date) else 1)
 
 			date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc) - diff
 			if date < dt.datetime.now(tz=dt.timezone.utc) - diff:
@@ -112,10 +116,11 @@ class Birthday(commands.Cog):
 
 				if user is None:
 					continue
-			
-				timestamp = int(date.timestamp())
 
-				txt += f"{user.mention} - {date.strftime('%d/%m/%Y')} <t:{timestamp}:R> \n"
+				timestamp = int(date.timestamp())
+				day, month = data[Bduser]["day"], data[Bduser]["month"]
+
+				txt += f"{user.mention} - {day}/{month}/{date.year} <t:{timestamp}:R> \n"
 
 			embed.description = txt
 			await inter.response.send_message(embed=embed)
@@ -137,7 +142,7 @@ async def birthdays_loop(*, bot:commands.Bot):
 			if user is None:
 				continue
 
-			left = int(date.timestamp() - get_belgian_time().timestamp())
+			left = int(date.timestamp() - dt.datetime.now(dt.timezone.utc).timestamp())
 
 			await asyncio.sleep(left+1)
 
