@@ -304,8 +304,8 @@
         "users": {
             "560155603574718475": {
                 "level": 3,
-                "timely": 1696188473,
-                "roses": 1000,
+                "timely": 1696615754,
+                "roses": 1700,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
@@ -317,9 +317,9 @@
                 "tech": 1
             },
             "366975965601071104": {
-                "level": 1,
-                "timely": 1696072709,
-                "roses": 1609,
+                "level": 2,
+                "timely": 1696543410,
+                "roses": 1058,
                 "candies": 0,
                 "ideas": 10,
                 "bank": {
@@ -331,9 +331,9 @@
                 "tech": 0
             },
             "443867585075871767": {
-                "level": 1,
-                "timely": 1696194576,
-                "roses": 1387,
+                "level": 2,
+                "timely": 1696619461,
+                "roses": 676,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
@@ -345,11 +345,11 @@
                 "tech": 0
             },
             "346945067975704577": {
-                "level": 4,
-                "timely": 1696211528,
-                "roses": 2832,
-                "candies": 0,
-                "ideas": 20,
+                "level": 5,
+                "timely": 1696609374,
+                "roses": 3105,
+                "candies": 1,
+                "ideas": 40,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -360,10 +360,10 @@
             },
             "627431499960156161": {
                 "level": 3,
-                "timely": 1696215683,
+                "timely": 1696619065,
                 "roses": 0,
-                "candies": 0,
-                "ideas": 0,
+                "candies": 1,
+                "ideas": 30,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -374,17 +374,17 @@
             },
             "183259368286978048": {
                 "level": 3,
-                "timely": 1696226142,
-                "roses": 0,
+                "timely": 1696620523,
+                "roses": 148,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
-                    "roses": 0,
+                    "roses": 995,
                     "candies": 0,
                     "ideas": 0
                 },
                 "achievements": [],
-                "tech": 0
+                "tech": 1
             },
             "752574610666684426": {
                 "level": 1,
@@ -402,24 +402,24 @@
             },
             "271305579698323456": {
                 "level": 5,
-                "timely": 1696198185,
+                "timely": 1696626095,
                 "roses": 0,
                 "candies": 0,
-                "ideas": 0,
+                "ideas": 10,
                 "bank": {
-                    "roses": 0,
+                    "roses": 3253,
                     "candies": 0,
                     "ideas": 0
                 },
                 "achievements": [],
-                "tech": 1
+                "tech": 2
             },
             "269210243093889028": {
                 "level": 3,
-                "timely": 1696196781,
+                "timely": 1696615922,
                 "roses": 0,
                 "candies": 0,
-                "ideas": 0,
+                "ideas": 10,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -444,7 +444,7 @@
             },
             "553163806600331284": {
                 "level": 1,
-                "timely": 1696196770,
+                "timely": 1696627273,
                 "roses": 0,
                 "candies": 0,
                 "ideas": 0,
@@ -472,12 +472,12 @@
             },
             "415538227705806850": {
                 "level": 1,
-                "timely": 1696195195,
+                "timely": 1696637447,
                 "roses": 0,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
-                    "roses": 0,
+                    "roses": 483,
                     "candies": 0,
                     "ideas": 0
                 },
