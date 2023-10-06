@@ -163,10 +163,13 @@ class Economy(commands.Cog):
 	@app_commands.rename(number="candies")
 	@app_commands.guild_only()
 	async def summon(self, inter:discord.Interaction, number:int):
+		if number <= 0:
+			return await inter.response.send_message(f"{inter.user.mention} You need to spend a valid amount of 🍬 candy", ephemeral=True)
+
 		data = get_data(f"games/users/{inter.user.id}")
 
 		if data["candies"] < number:
-			return await inter.response.send_message(f"You don't have {number} cand{'y' if number == 1 else 'ies'}")
+			return await inter.response.send_message(f"You don't have {number} cand{'y' if number == 1 else 'ies'}", ephemeral=True)
 		
 		data["candies"] -= number
 		upd_data(data, f"games/users/{inter.user.id}")
