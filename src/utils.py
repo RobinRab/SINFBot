@@ -301,6 +301,7 @@ def new_user():
 		"roses"   : 0,
 		"candies" : 0,
 		"ideas"   : 0,
+		"tech"    : 0,
 		"bank"    : {
 			"roses"   : 0,
 			"candies" : 0,
