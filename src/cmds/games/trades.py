@@ -45,11 +45,14 @@ class Trades(commands.Cog):
 		E.add_field(name="For", value=f"{price}{buy_item}", inline=False)
 
 		class Button(discord.ui.View):
-			def __init__(self, timeout=60):
-				super().__init__(timeout=timeout)
+			def __init__(self, timeout_date:dt.datetime):
+				self.timeout_date = timeout_date
+				super().__init__(timeout=60)
 				self.message : Optional[discord.Message]
 
 			async def interaction_check(self, inter2: discord.Interaction):
+				self.upd_timeout()
+
 				if inter.user == inter2.user:
 					await inter2.response.send_message("You can't interact with your own message", ephemeral=True)
 					return False
@@ -57,6 +60,10 @@ class Trades(commands.Cog):
 					await inter2.response.send_message("You can't interact with this message", ephemeral=True)
 					return False
 				return True
+			
+			def upd_timeout(self):
+				timeout = (self.timeout_date - dt.datetime.now()).total_seconds()
+				self.timeout = timeout
 
 			async def close(self, reason):
 				for item in self.children:
@@ -116,14 +123,16 @@ class Trades(commands.Cog):
 			E.set_footer(text=f"Trade offer for {user.name}", icon_url=await GetLogLink(self.bot, user.display_avatar.url))
 			txt = f"{user.mention}, **{inter.user.name}** is selling {amount} {sell_item} for {price} {buy_item}"
 
-		txt += f"\nend <t:{int(dt.datetime.now().timestamp()) + 60}:R>"
+		txt += f"\nends <t:{int(dt.datetime.now().timestamp()) + 60}:R>"
 
 		# remove the item from the seller
 		seller = get_data(f"games/users/{inter.user.id}")
 		seller[translate(sell_item)] -= amount
 		upd_data(seller, f"games/users/{inter.user.id}")
 
-		button = Button()
+		timeout_date = dt.datetime.now() + dt.timedelta(seconds=60)
+		button = Button(timeout_date)
+
 		button.message = await inter.followup.send(txt, embed=E, view=button)
 
 async def setup(bot:commands.Bot):
