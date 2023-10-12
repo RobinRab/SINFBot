@@ -334,7 +334,7 @@ def get_value(user_data:dict) -> int:
 	Each achievement adds 1% bonus, 2% if all achievements are unlocked"""
 	level:int = user_data["level"]
 	achievements:list = user_data["achievements"]
-	return int((150 * (1 + (level/4)))*(1 + (len(achievements)/100)))
+	return int((120 * (1 + (level/4.5)))*(1 + (len(achievements)/100)))
 
 def get_collect_time(is_cutie:bool, tech:int) -> int:
 	base = dt.timedelta(hours=12).total_seconds()
