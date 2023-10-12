@@ -157,30 +157,25 @@ class Economy(commands.Cog):
 
 		await inter.followup.send(embed=E)
 
-	@app_commands.command(description="Try to summon a traveler")
+	@app_commands.command(description="Try to summon a traveler for a candy")
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
-	@app_commands.describe(number="The number of candies to use, 10% chance each")
-	@app_commands.rename(number="candies")
 	@app_commands.guild_only()
-	async def summon(self, inter:discord.Interaction, number:int):
-		if number <= 0:
-			return await inter.response.send_message(f"{inter.user.mention} You need to spend a valid amount of 🍬 candy", ephemeral=True)
-
+	async def summon(self, inter:discord.Interaction):
 		data = get_data(f"games/users/{inter.user.id}")
 
-		if data["candies"] < number:
-			return await inter.response.send_message(f"You don't have {number} cand{'y' if number == 1 else 'ies'}", ephemeral=True)
+		if data["candies"] < 1:
+			return await inter.response.send_message(f"You don't have any candies 🍬", ephemeral=True)
 		
-		data["candies"] -= number
+		data["candies"] -= 1
 		upd_data(data, f"games/users/{inter.user.id}")
 
-		if random.random() < number/10:
-			await inter.response.send_message(f"{inter.user.mention} successfully summoned a traveler with {number}🍬 cand{'y' if number == 1 else 'ies'}!")
+		if random.random() < 0.5:
+			await inter.response.send_message(f"{inter.user.mention} successfully summoned a traveler!")
 			# for some reason the restart method doesn't work
 			traveler.stop()
 			traveler.start(bot=self.bot)
 		else:
-			await inter.response.send_message(f"{inter.user.mention} failed to summon a traveler with {number}🍬 cand{'y' if number == 1 else 'ies'}")
+			await inter.response.send_message(f"{inter.user.mention} failed to summon a traveler...")
 
 
 class Bank(app_commands.Group):
@@ -258,6 +253,12 @@ class Bank(app_commands.Group):
 		user_data[translate(currency)] += amount
 		user_data["bank"][translate(currency)] -= amount
 		upd_data(user_data, f"games/users/{inter.user.id}")
+
+		# check if they can withdraw that amount
+		if user_data["bank"][translate(currency)] < amount:
+			E.description = f"{inter.user.mention}, You don't have enough {currency} in your bank account"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E)
 
 		E.description = f"{inter.user.mention}, You withdrew {amount}{currency} from your bank account"
 		await inter.followup.send(embed=E)
