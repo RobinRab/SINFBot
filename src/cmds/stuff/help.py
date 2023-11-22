@@ -17,7 +17,7 @@ bot_commands = {
 	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun" : [is_member, "/confession", "/apoll"],
 	"Fun"        : [None, "/poll", "!/ping"],
-	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade", "/summon"],
+	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
 	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
 }
 
@@ -288,11 +288,6 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/tech```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
-				elif query == "summon":
-					E.description = "**Each candy increases your chances of summoning a traveler by 10%\ncandies = amount of candies to use**\n"
-					E.add_field(name="**Example**", value="```/summon <candies>```")
-					E.add_field(name="**Cooldown**", value="```5s / user```")
-					E.add_field(name="**Requirement**", value="```None```")
 
 				elif query == "bank":
 					E_check = discord.Embed(title="/bank check")
@@ -426,7 +421,6 @@ class Help(commands.Cog):
 		- A good answer will give you 10💡 ideas and the value of a **/collect**
 		- The traveller randomly spawns withing 2 to 10 hours
 		- The traveller will leave after 1h if no one answered his question
-		- you can **/summon** the traveller with 🍬 candies
 		### Gambling
 		You can gamble your 🌹 roses with **/roll**, **/flip** and **/ladder**
 		Each earning is specific to the game

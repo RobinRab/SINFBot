@@ -157,27 +157,6 @@ class Economy(commands.Cog):
 
 		await inter.followup.send(embed=E)
 
-	@app_commands.command(description="Try to summon a traveler for a candy")
-	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
-	@app_commands.guild_only()
-	async def summon(self, inter:discord.Interaction):
-		data = get_data(f"games/users/{inter.user.id}")
-
-		if data["candies"] < 1:
-			return await inter.response.send_message(f"You don't have any candies 🍬", ephemeral=True)
-		
-		data["candies"] -= 1
-		upd_data(data, f"games/users/{inter.user.id}")
-
-		if random.random() < 0.5:
-			await inter.response.send_message(f"{inter.user.mention} successfully summoned a traveler!")
-			# for some reason the restart method doesn't work
-			traveler.stop()
-			traveler.start(bot=self.bot)
-		else:
-			await inter.response.send_message(f"{inter.user.mention} failed to summon a traveler...")
-
-
 class Bank(app_commands.Group):
 	def __init__(self, bot:commands.Bot, *args, **kwargs):
 		self.bot : commands.Bot = bot
