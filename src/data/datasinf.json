@@ -332,22 +332,22 @@
         "users": {
             "560155603574718475": {
                 "level": 10,
-                "timely": 1700156927,
-                "roses": 4332,
-                "candies": 0,
-                "ideas": 10,
+                "timely": 1700675479,
+                "roses": 700,
+                "candies": 2,
+                "ideas": 0,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
                     "ideas": 0
                 },
                 "achievements": [],
-                "tech": 3
+                "tech": 4
             },
             "366975965601071104": {
-                "level": 6,
-                "timely": 1700160682,
-                "roses": 5258,
+                "level": 7,
+                "timely": 1700616387,
+                "roses": 2361,
                 "candies": 1,
                 "ideas": 0,
                 "bank": {
@@ -360,7 +360,7 @@
             },
             "443867585075871767": {
                 "level": 6,
-                "timely": 1700160463,
+                "timely": 1700683426,
                 "roses": 0,
                 "candies": 0,
                 "ideas": 10,
@@ -373,9 +373,9 @@
                 "tech": 4
             },
             "346945067975704577": {
-                "level": 8,
-                "timely": 1700164411,
-                "roses": 3663,
+                "level": 10,
+                "timely": 1700648118,
+                "roses": 436,
                 "candies": 1,
                 "ideas": 50,
                 "bank": {
@@ -388,24 +388,24 @@
             },
             "627431499960156161": {
                 "level": 8,
-                "timely": 1700153391,
-                "roses": 666,
+                "timely": 1700676167,
+                "roses": 2994,
                 "candies": 2,
-                "ideas": 60,
+                "ideas": 10,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
                     "ideas": 0
                 },
                 "achievements": [],
-                "tech": 6
+                "tech": 7
             },
             "183259368286978048": {
                 "level": 8,
-                "timely": 1700128732,
-                "roses": 333,
+                "timely": 1700610871,
+                "roses": 0,
                 "candies": 1,
-                "ideas": 10,
+                "ideas": 20,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -416,8 +416,8 @@
             },
             "752574610666684426": {
                 "level": 1,
-                "timely": 1700173302,
-                "roses": 300,
+                "timely": 1700600329,
+                "roses": 1034,
                 "candies": 0,
                 "ideas": 0,
                 "bank": {
@@ -429,25 +429,25 @@
                 "tech": 1
             },
             "271305579698323456": {
-                "level": 9,
-                "timely": 1700094063,
-                "roses": 0,
+                "level": 10,
+                "timely": 1700653857,
+                "roses": 391,
                 "candies": 1,
-                "ideas": 50,
+                "ideas": 0,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
                     "ideas": 0
                 },
                 "achievements": [],
-                "tech": 7
+                "tech": 8
             },
             "269210243093889028": {
                 "level": 3,
-                "timely": 1699956615,
+                "timely": 1700648493,
                 "roses": 0,
                 "candies": 1,
-                "ideas": 10,
+                "ideas": 20,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -458,12 +458,12 @@
             },
             "454318083876847616": {
                 "level": 2,
-                "timely": 1699424832,
-                "roses": 0,
+                "timely": 1700274201,
+                "roses": -1490,
                 "candies": 1,
                 "ideas": 0,
                 "bank": {
-                    "roses": -390,
+                    "roses": 0,
                     "candies": 0,
                     "ideas": 0
                 },
@@ -472,8 +472,8 @@
             },
             "553163806600331284": {
                 "level": 5,
-                "timely": 1700163815,
-                "roses": 0,
+                "timely": 1700692339,
+                "roses": 355,
                 "candies": 1,
                 "ideas": 0,
                 "bank": {
@@ -556,8 +556,8 @@
             },
             "341613738622713856": {
                 "level": 0,
-                "timely": 1699933821,
-                "roses": 120,
+                "timely": 1700632776,
+                "roses": 0,
                 "candies": 0,
                 "ideas": 0,
                 "tech": 0,
@@ -569,8 +569,8 @@
                 "achievements": []
             },
             "303485893317230593": {
-                "level": 0,
-                "timely": 1700013678,
+                "level": 1,
+                "timely": 1700691288,
                 "roses": 0,
                 "candies": 0,
                 "ideas": 0,
@@ -584,11 +584,11 @@
             },
             "411881842439094272": {
                 "level": 2,
-                "timely": 1700175660,
-                "roses": 0,
+                "timely": 1700693858,
+                "roses": 584,
                 "candies": 0,
                 "ideas": 0,
-                "tech": 1,
+                "tech": 2,
                 "bank": {
                     "roses": 0,
                     "candies": 0,
@@ -598,8 +598,8 @@
             },
             "290494427330510849": {
                 "level": 0,
-                "timely": 1700088652,
-                "roses": 350,
+                "timely": 1700619119,
+                "roses": -880,
                 "candies": 0,
                 "ideas": 0,
                 "tech": 0,
