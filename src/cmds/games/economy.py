@@ -250,15 +250,15 @@ class Bank(app_commands.Group):
 			E.color = discord.Color.red()
 			return await inter.followup.send(embed=E)
 		
-		user_data[translate(currency)] += amount
-		user_data["bank"][translate(currency)] -= amount
-		upd_data(user_data, f"games/users/{inter.user.id}")
-
 		# check if they can withdraw that amount
 		if user_data["bank"][translate(currency)] < amount:
 			E.description = f"{inter.user.mention}, You don't have enough {currency} in your bank account"
 			E.color = discord.Color.red()
 			return await inter.followup.send(embed=E)
+
+		user_data[translate(currency)] += amount
+		user_data["bank"][translate(currency)] -= amount
+		upd_data(user_data, f"games/users/{inter.user.id}")
 
 		E.description = f"{inter.user.mention}, You withdrew {amount}{currency} from your bank account"
 		await inter.followup.send(embed=E)
