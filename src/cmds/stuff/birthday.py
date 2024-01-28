@@ -65,7 +65,7 @@ class Birthday(commands.Cog):
 			await inter.response.send_message("This date does not exist")
 			return
 
-		data[name] = {"year": year, "month": month, "day": day}
+		data[name] = {"year": year, "month": month_index, "day": day}
 		upd_data(data, "birthday")
 
 		birthdays_loop.restart(self.bot)
