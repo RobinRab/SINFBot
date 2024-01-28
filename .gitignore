@@ -5,5 +5,5 @@ Thumbs.db
 
 achievements.py
 
-src/data/bot.log
+./src/data/bot.log
 src/data/datasinf.json
