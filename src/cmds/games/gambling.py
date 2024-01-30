@@ -67,7 +67,8 @@ class Gambling(commands.Cog):
 			cash = amount*2
 			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎉"
 		elif r==1:
-			E.description = f"{inter.user.mention}, You rolled a 1 and kept your 🌹!** ✨"
+			E.description = f"{inter.user.mention}, You rolled a 1 and kept your **{cash}🌹!** ✨"
+			E.color = discord.Color.dark_purple()
 		else: 
 			cash = 0
 			E.color = discord.Color.red()
