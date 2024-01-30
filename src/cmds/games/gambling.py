@@ -55,6 +55,7 @@ class Gambling(commands.Cog):
 			return await inter.followup.send(embed=E)
 
 		r = random.randint(1,100)
+		cash=amount
 		if r == 100:
 			cash = amount*10
 			E.description = f"{inter.user.mention}, You rolled a 100 and won **{cash}🌹!** 👑"
@@ -65,6 +66,8 @@ class Gambling(commands.Cog):
 		elif r >= 70:
 			cash = amount*2
 			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎉"
+		elif r==1:
+			E.description = f"{inter.user.mention}, You rolled a 1 and kept your 🌹!** ✨"
 		else: 
 			cash = 0
 			E.color = discord.Color.red()
