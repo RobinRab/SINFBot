@@ -131,27 +131,26 @@ async def birthdays_loop(*, bot:commands.Bot):
 	if not isinstance(channel, discord.TextChannel):
 		raise UnexpectedValue("channel is not a discord.TextChannel")
 
-	while 1:
-		data : dict = get_data("birthday")
+	data : dict = get_data("birthday")
 
-		birthdays = sort_bdays(data)
+	birthdays = sort_bdays(data)
 
-		for user, date in birthdays:
-			user = bot.get_user(int(user))
+	for user, date in birthdays:
+		user = bot.get_user(int(user))
 
-			if user is None:
-				continue
+		if user is None:
+			continue
 
-			left = int(date.timestamp() - dt.datetime.now(dt.timezone.utc).timestamp())
+		left = int(date.timestamp() - dt.datetime.now(dt.timezone.utc).timestamp())
 
-			await asyncio.sleep(left+1)
+		await asyncio.sleep(left+1)
 
-			year = get_belgian_time().year
-			age = year - data[str(user.id)]["year"]
+		year = get_belgian_time().year
+		age = year - data[str(user.id)]["year"]
 
-			await channel.send(f"Happy birthday {user.mention}, You are {age} years old today! :tada:")
+		await channel.send(f"Happy birthday {user.mention}, You are {age} years old today! :tada:")
 
-			await asyncio.sleep(43200) #sleep 12h to skip timezones issues
+		await asyncio.sleep(43200) #sleep 12h to skip timezones issues
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Birthday(bot))
