@@ -406,6 +406,41 @@ class Gambling(commands.Cog):
 				E.description += f"<@!{user_id}> : +{int(prop_amount) + amount}🌹\n"
 
 		await secondView.message.reply(embed=E)
+"""
+	@app_commands.command(description="Swirl the Roulette")
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	@app_commands.describe(bet="The amount to bet", guess="Your guess")
+	async def Roulette(self, inter:discord.Interaction, bet:str, guess:Literal["1-18", "Even", "Red", "Black", "Odd", "19-36", "1st 12", "2nd 12", "3rd 12"]):
+		await inter.response.defer()
 
+		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
+
+		# if the already has a description, an issue was found
+		if E.description is not None:
+			return await inter.followup.send(embed=E)
+
+		choice = random.choice(["heads", "tails"])
+		if choice == "tails":
+			image = "https://media.discordapp.net/attachments/709313685226782751/1126924584973774868/ttails.png"
+		else:
+			image = "https://media.discordapp.net/attachments/709313685226782751/1126924585191882833/hheads.png"
+
+		E.title = f"{choice.capitalize()}!"
+		E.set_image(url=image)
+
+		if guess == choice:
+			cash = int(amount*1.8)
+			E.description = f"You guessed it right and won **{cash}🌹!** 🎉"
+		else:
+			cash = 0
+			E.color = discord.Color.red()
+			E.description = f"You guessed it wrong..."
+
+		user_data["roses"] += - amount + cash
+		upd_data(user_data, f"games/users/{inter.user.id}")
+
+		await inter.followup.send(embed=E)
+"""
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Gambling(bot))
