@@ -1,131 +1,189 @@
-import discord 
-from discord.ext import commands
+import discord
 from discord import app_commands
+from discord.ext import commands, tasks
 
-import random
-from typing import Optional, Literal
 import csv
+import random
+import asyncio
+import datetime as dt
 
 from settings import DATA_DIR
-from utils import log, get_data, upd_data, get_value, new_user, GetLogLink
+from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink
 
+#! fonction 'get_words' accepts 4 columns csv
 class Wordle(commands.Cog):
+	active_games = {}
+
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
-	async def utils_wordle(self, inter:discord.Interaction) -> tuple[discord.Embed, dict]:
-		E = discord.Embed()
-		E.color = discord.Color.green()
-		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
+		choose_todays_word.start(bot=self.bot)
 
+	async def get_data_wordle(self, inter:discord.Interaction) -> dict:
+		# check if account exists
 		try :
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			# create wordle if never played
+			if "wordle" not in user_data:
+				user_data["wordle"] = {}
 		except :
-			E.description = f"{inter.user.mention}, You have to collect before to play"
-			E.color = discord.Color.red()
-			return E, {}
-		return E, user_data
-	
+			user_data = new_user()
+
+		upd_data(user_data, f"games/users/{inter.user.id}")
+
+		return user_data
+
 	@app_commands.command(description="Play today's wordle!")
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
-	async def wordle(self, inter: discord.Interaction): 
-		win=False
-		guess_wordle, wordle_list = list_of_words()
-		number=random.randint(1, len(wordle_list)-1)
-		wordle_word = wordle_list[number]
-		print(wordle_word)
-		E, user_data = await self.utils_wordle(inter)
-		nombre_guess_actuel = len(user_data["wordle"])
-		if nombre_guess_actuel != 0:
-				print(0)
-				already_guessed = ""
-				for word in user_data["wordle"]:
-					already_guessed+=word+"\n"+user_data["wordle"][word]+"\n\n"
-				print(1)
-				await inter.followup.send(f"Welcome back ! You're on guess {nombre_guess_actuel}, here are the words you alreday guessed : ", ephemeral=True)
-				await inter.followup.send(f"{already_guessed}", ephemeral=True)
+	async def wordle(self, inter: discord.Interaction):
+		E = discord.Embed()
+		E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
+		user_data = await self.get_data_wordle(inter)
+
+		user_id = inter.user.id
+
+		if user_id in Wordle.active_games and Wordle.active_games[user_id]:
+			await inter.response.send_message("You are already playing Wordle.", ephemeral=True)
+			return
+		
+		Wordle.active_games[user_id] = True
+		
+		has_won = False
+		guess_list = get_words()[0]
+		wordle_word : str = get_data("games/todays_word")
+		current_number_guess = len(user_data["wordle"])
+		
+		already_won = False
+		if "🟩🟩🟩🟩🟩" in user_data["wordle"].values():
+			already_won = True
+
+		#Check if the person already played today to continue the game
+		if current_number_guess>=6 or already_won:
+			del Wordle.active_games[user_id]
+			return await inter.response.send_message(f"You already played today, see you tomorrow ", ephemeral=True)
+
+		if current_number_guess == 0:
+			await inter.response.send_message('''Welcome to wordle!\nWrite your guess to start playing. 
+			\nType *stop* to pause the game, recall the function to *restart*.''')
+
 		else:
-			print(2)
-			await inter.response.send_message("Welcome to wordle!")
+			already_guessed = ""
 
-		while nombre_guess_actuel<5:
-			is_allowed_to_wordle=True
+			for word in user_data["wordle"]:
+				spaced_word = ""
+				for letter in word[1:].upper():
+					spaced_word += f"{letter:^4}"
 
-			#on attend la réponse de l'user
+				already_guessed += "# " + spaced_word + "\n" + space(user_data["wordle"][word])+"\n"
+			await inter.response.send_message( f"Welcome back ! You're on guess {current_number_guess}, here are the words you already guessed : ", ephemeral = True)
+			await inter.followup.send(f"{already_guessed}", ephemeral = True)
+			await inter.followup.send("Type *stop* to pause the game.", ephemeral = True)
+
+		#The user has 6 chances
+		while current_number_guess<6:
+
+			#Waiting for the user's response
 			def check(message: discord.Message):
 				return message.author == inter.user and message.channel == inter.channel
-			
-			message = await self.bot.wait_for("message", check = check)
+
+			message = await self.bot.wait_for("message", timeout = 180, check = check)
 			guess_word = message.content.lower()
+			await message.delete()
+			
+			#In case the person wants to stop playing
 			if guess_word == "stop":
-				await inter.followup.send("Interaction stopped", ephemeral=True)
-				break
-			#mot doit contenir 5 lettres
+				Wordle.active_games[user_id] = False
+				return await inter.followup.send("See you later", ephemeral=True)
+				
+
+			#Word has to be a five letter word
 			if len(guess_word) != 5:
 				await inter.followup.send("This is not a five letter word", ephemeral=True)
-				is_allowed_to_wordle=False
 				continue
 			
-			#mot pas dans la liste
-			elif guess_word not in guess_wordle: 
+			#Word not int the list
+			elif guess_word not in guess_list: 
 				await inter.followup.send("This word is not in the list", ephemeral=True)
-				is_allowed_to_wordle=False
 				continue
-			if is_allowed_to_wordle:
-				nombre_guess_actuel = len(user_data["wordle"])
-				#appelle de l'autre fonction pour avoir les couleurs
-				colors = color_function(wordle_word, guess_word)
-				current=""
-				current+=guess_word.upper()+"\n"+colors
-				await inter.followup.send(f"{current}", ephemeral=True)
-				user_data["wordle"][f"{nombre_guess_actuel}"]=colors
-				current=""
-				print(guess_word)
-				print(wordle_word == guess_word)
-				print("nombre guess_actuel : ",nombre_guess_actuel, user_data["wordle"])
 
-				if wordle_word == guess_word:
-					win=True
-					print(1)
-					today_colors=""
-					for color in user_data["wordle"].values():
-						today_colors+=color+"\n"
-					nombre_guess_actuel = len(user_data["wordle"])
-					print("wtf")
-					await inter.followup.send("You won!", ephemeral=True)
-					E.description = f"{inter.user.mention} solved today's wordle in {nombre_guess_actuel} guesses ! \n ||{today_colors}||"
-					E.color = discord.Color.green()
-					print("print")
-					break
-		if win==False:
-			print(f"user_data: {user_data}")
-			print(f"inter: {inter}")
-			today_colors=""
-			for color in user_data["wordle"].values():
-				today_colors+=color+"\n"
-			await inter.followup.send(f"You lot, the word was {wordle_word}", ephemeral=True)
+			#Gets the colors corresponding to the word and print them
 
-			E.description = f"{inter.user.mention} lost today. \n ||{today_colors}||"
-			E.color = discord.Color.red()
+			spaced_word = ""
+			for letter in guess_word.upper():
+				spaced_word += f"{letter:^4}"
+
+			colors = color_function(wordle_word, guess_word)
+			already_guessed = "# " + spaced_word + "\n" + space(colors)+"\n"
+
+			await inter.followup.send(f"{already_guessed}", ephemeral=True)
 			
-def list_of_words()->tuple[list[str], list[str]]:
-	guess_wordle : list[str]=[]
+			current_number_guess = len(user_data["wordle"])
+			user_data["wordle"][f"{current_number_guess}{guess_word}"]=colors
+
+			upd_data(user_data, f"games/users/{inter.user.id}")
+			current_number_guess = len(user_data["wordle"])
+			
+			#Check if the user won 
+			if wordle_word == guess_word:
+				has_won=True
+				todays_colors=""
+				for color in user_data["wordle"].values():
+					todays_colors+=color+"\n"
+
+				#Updates the roses of the user
+				user_data = await self.get_data_wordle(inter)
+				value = get_value(user_data)
+				user_data["roses"] += value
+				upd_data(user_data, f"games/users/{inter.user.id}")
+
+				#Sends the has_won message
+				current_number_guess = len(user_data["wordle"])
+				await inter.followup.send("You won!", ephemeral=True)
+				E.description = f"{inter.user.mention} solved today's wordle in {current_number_guess} guesses ! \n\n ||{todays_colors}||"
+				E.add_field(name="Reward", value=f"You won {value} 🌹!")
+				E.color = discord.Color.green()
+				await inter.followup.send(embed = E)
+				break
+		
+		if not has_won:
+			todays_colors=""
+			for color in user_data["wordle"].values():
+				todays_colors+=color+"\n"
+			await inter.followup.send(f"You lost, the word was **{wordle_word}**", ephemeral=True)
+			
+			E.description = f"{inter.user.mention} lost today. \n\n ||{todays_colors}||"
+			E.color = discord.Color.red()
+			await inter.followup.send(embed = E)
+			
+		del Wordle.active_games[user_id]
+
+#Puts spaces between letters of guessed word and colors
+def space(content : str):
+	spaced_word = ""
+	for letter in content:
+		spaced_word += f"{letter:^3}"
+	return spaced_word
+
+
+
+#Function that creates the lists from the csv
+def get_words()->tuple[list[str], list[str]]:
+	guess_list : list[str]=[]
 	wordle_list : list[str]=[]
 	with open(DATA_DIR/"wordle_words.csv", "r") as f:
 		for i in csv.reader(f, delimiter=','):
-			guess_wordle.append(i[0])
+			guess_list.append(i[0])
 			if len(i[1]) == 6:
 				wordle_list.append(i[1].strip())
-				
 	
-	print(guess_wordle)
-	print(wordle_list)
-	return guess_wordle,wordle_list
+	#guess_list are the words you can guess (all of the 5 letter words)
+	#wordle_list are the words that can be the answer
+	return guess_list,wordle_list
 
 def color_function(wordle_word:str, guess_word:str) -> str:
 	dico_occurences : dict[str, int] = {}
-	#petit dico pour savoir que les doubles lettres soient pas comptées deux fois
+	#Dictionnary to check repeated letters
 	for letter in wordle_word: 
 		if letter not in dico_occurences.keys():
 			dico_occurences[letter] = 1
@@ -134,37 +192,49 @@ def color_function(wordle_word:str, guess_word:str) -> str:
 	colors = ""
 	colors_list : list[str] = []
 
-	#j'itère dans les lettres paralleles de chaque mot, si la lettre est la même que l'autre c'est vert
+	#Iteration in the words to check the green letters
 	for letter_guess, letter_wordle_word in zip(guess_word, wordle_word): 
 		if letter_guess == letter_wordle_word: 
 			colors_list.append("🟩")
 			dico_occurences[letter_guess] -= 1
 		else:
 			colors_list.append("1")
-	#j'itère dans les lettres paralleles de chaque mot
+
 	for letter_guess, letter_wordle_word, color_test in zip(guess_word, wordle_word, colors_list) : 
 
-		#si c'est "1" (donc pas vert) on check si c'est jaune ou gris
+		#if it is "1" (not green) -> check if it is yellow or grey
 		if color_test == "1": 
 			index_1 = colors_list.index("1")
 
-			#vérification des conditions pour qu'une lettre soit jaune 
-			#lettre dans le mot && nombre d'occurence check -> yellow
+			#check the conditions for a letter to be yellow
+			#letter in the words && occurence count check -> yellow
 			if letter_guess in wordle_word and dico_occurences[letter_guess] != 0: 
 				colors_list[index_1]="🟨"
-				#colors_list = colors_list[:index_1] + ["🟨"] + colors_list[index_1 + 1:]
 				dico_occurences[letter_guess] -= 1 
-
 			else:
 				colors_list[index_1]="🟥"
-				#colors_list = colors_list[:index_1] + ["🟥"] + colors_list[index_1 + 1:]
 
 	for color in colors_list:
 		colors += color
 
 	return colors
 
-async def setup(bot:commands.Bot):
-	await bot.add_cog(Wordle(bot))
+@tasks.loop()
+async def choose_todays_word(bot:commands.Bot) -> None:
+	wordle_list = get_words()[1]
+	today = get_belgian_time().today()
+	tomorrow = today + dt.timedelta(days=1)
+	tomorrow_midnight = dt.datetime(year=tomorrow.year, day=tomorrow.day, month= tomorrow.month)
+
+	sleep_time = tomorrow_midnight - today
+	wordle_word = random.choice(wordle_list)
+
+	await asyncio.sleep(sleep_time.total_seconds())
+
+	upd_data(wordle_word, "games/todays_word")
+	for user_id in get_data("games/users").keys():
+		upd_data({}, f"games/users/{user_id}/wordle")
 		
 
+async def setup(bot:commands.Bot):
+	await bot.add_cog(Wordle(bot))
