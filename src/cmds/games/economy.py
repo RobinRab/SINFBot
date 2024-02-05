@@ -139,11 +139,6 @@ class Economy(commands.Cog):
 		tech = user_data["tech"] + 1
 		price = tech*10
 
-		if tech > 10:
-			E.description = f"{inter.user.mention}, You are already max tech"
-			E.color = discord.Color.red()
-			return await inter.followup.send(embed=E)
-
 		if user_data["ideas"] < price:
 			E.description = f"{inter.user.mention}, You need {price}💡 to upgrade your tech"
 			E.color = discord.Color.red()

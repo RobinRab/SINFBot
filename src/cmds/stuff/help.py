@@ -16,7 +16,7 @@ bot_commands = {
 	"Infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
 	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun" : [is_member, "/confession", "/apoll"],
-	"Fun"        : [None, "/poll", "!/ping"],
+	"Fun"        : [None, "/poll", "!/ping", "/wordle"],
 	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
 	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
 }
@@ -259,10 +259,18 @@ class Help(commands.Cog):
 
 				# fun commands
 				elif query == "poll":
-					E.description = "**Sends a polll**\nquestion = question to ask"
+					E.description = "**Sends a poll**\nquestion = question to ask"
 					E.add_field(name="**Example**", value="```/poll <question>```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
+
+				elif query == "wordle":
+					E.description = "**To play wordle**\nWrite your word after sending /wordle"
+					E.add_field (name="How to play",  value="```You have 3 minutes to write to your guess.\n\
+				  												To pause the game, write *stop*. Recall the function to *restart*.```")
+					E.add_field (name = "**Meaning of colors**", value = "```🟩 : The letter in in the right place\n\
+				  															 🟨 : The letter is in the word but not in the right place\n\
+				  															 🟥 : The letter is not in the word```")
 
 				# economy commands
 				elif query == "collect":
@@ -432,11 +440,11 @@ class Help(commands.Cog):
 		You can sell your ressources for another ressource
 		### Maths
 		your base value (used for **/collect** and the traveller) is calculated like this: ```py
-		int((150 * (1 + (level/4)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
+		int((120 * (1 + (level/4.5)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
 		if level < 10:
-		    price = int((level/1.25) * 1000)
+		    price = int((level/1.7) * 1000)
 		else:
-		    price = int((((level**2)/25) + 4) * 1000)```
+		    price = int((((level**2)/34) + 4) * 1000)```
 		""".replace("\t", "")
 
 		await inter.response.send_message(embed=E)

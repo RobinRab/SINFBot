@@ -618,7 +618,8 @@
                     "candies": 0,
                     "ideas": 0
                 },
-                "achievements": []
+                "achievements": [],
+                "wordle": {}
             },
             "290494427330510849": {
                 "level": 1,
