@@ -86,8 +86,11 @@ class Wordle(commands.Cog):
 			#Waiting for the user's response
 			def check(message: discord.Message):
 				return message.author == inter.user and message.channel == inter.channel
-
-			message = await self.bot.wait_for("message", timeout = 180, check = check)
+			try:
+				message = await self.bot.wait_for("message", timeout = 10, check = check)
+			except asyncio.TimeoutError:
+				Wordle.active_games[user_id] = False
+				return await inter.followup.send("See you later", ephemeral=True)
 			guess_word = message.content.lower()
 			await message.delete()
 			
@@ -174,8 +177,8 @@ def get_words()->tuple[list[str], list[str]]:
 	with open(DATA_DIR/"wordle_words.csv", "r") as f:
 		for i in csv.reader(f, delimiter=','):
 			guess_list.append(i[0])
-			if len(i[1]) == 6:
-				wordle_list.append(i[1].strip())
+			if len(i[2]) == 6:
+				wordle_list.append(i[2].strip())
 	
 	#guess_list are the words you can guess (all of the 5 letter words)
 	#wordle_list are the words that can be the answer
