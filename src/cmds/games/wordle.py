@@ -273,7 +273,7 @@ async def choose_todays_word(bot:commands.Bot) -> None:
 	upd_data(wordle_word_fr, "games/todays_word_fr")
 	for user_id in get_data("games/users").keys():
 		upd_data({}, f"games/users/{user_id}/wordle_en")
-		upd_data({}, f"games/users/{user_id}/wordle_en")
+		upd_data({}, f"games/users/{user_id}/wordle_fr")
 		
 
 async def setup(bot:commands.Bot):
