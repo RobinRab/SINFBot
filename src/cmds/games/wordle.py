@@ -87,7 +87,7 @@ class Wordle(commands.Cog):
 			def check(message: discord.Message):
 				return message.author == inter.user and message.channel == inter.channel
 			try:
-				message = await self.bot.wait_for("message", timeout = 10, check = check)
+				message = await self.bot.wait_for("message", timeout = 180, check = check)
 			except asyncio.TimeoutError:
 				Wordle.active_games[user_id] = False
 				return await inter.followup.send("See you later", ephemeral=True)
@@ -143,7 +143,7 @@ class Wordle(commands.Cog):
 				#Sends the has_won message
 				current_number_guess = len(user_data["wordle"])
 				await inter.followup.send("You won!", ephemeral=True)
-				E.description = f"{inter.user.mention} solved today's wordle in {current_number_guess} guesses ! \n\n ||{todays_colors}||"
+				E.description = f"{inter.user.mention} solved today's wordle in {current_number_guess} guesses ! \n\n||{todays_colors}||"
 				E.add_field(name="Reward", value=f"You won {value} 🌹!")
 				E.color = discord.Color.green()
 				await inter.followup.send(embed = E)
