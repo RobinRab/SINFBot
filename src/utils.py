@@ -198,7 +198,6 @@ def is_owner(inter: commands.Context | discord.Interaction ) -> bool:
 
 
 def is_summer_time(date:dt.datetime) -> bool:
-	#prend l'heure locale de la machine
 	date = dt.datetime.fromtimestamp(date.timestamp())
 	start_dst = dt.datetime(date.year, 3, 31) - dt.timedelta(days=(dt.datetime(date.year, 3, 31).weekday() + 1) % 7)
 	end_dst = dt.datetime(date.year, 10, 31) - dt.timedelta(days=(dt.datetime(date.year, 10, 31).weekday() + 1) % 7)
