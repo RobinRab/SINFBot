@@ -57,7 +57,9 @@ class GeneralCM(commands.Cog):
 		month = int(data["month"])
 		day = int(data["day"])
 
-		diff = dt.timedelta(hours=2 if is_summer_time() else 1)
+		date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc)
+
+		diff = dt.timedelta(hours=2 if is_summer_time(date) else 1)
 
 		date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc) - diff
 		if date < dt.datetime.now(tz=dt.timezone.utc) - diff:
