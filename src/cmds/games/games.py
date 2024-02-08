@@ -14,7 +14,7 @@ class Games(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
-		#traveler.start(bot=self.bot)
+		traveler.start(bot=self.bot)
 
 
 @tasks.loop()
