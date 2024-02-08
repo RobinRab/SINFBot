@@ -252,22 +252,17 @@ async def choose_todays_word(bot:commands.Bot) -> None:
 	wordle_list_en = get_words()[2]
 	wordle_list_fr = get_words()[3]
 
-	today = get_belgian_time().today()
-	tomorrow = today + dt.timedelta(days=1)
-	tomorrow_midnight = dt.datetime(year=tomorrow.year, day=tomorrow.day, month= tomorrow.month)
+	now = get_belgian_time()
+	tomorrow = now + dt.timedelta(days=1)
 
+	date = dt.datetime(tomorrow.year, tomorrow.month, tomorrow.day)
 
-	date = dt.datetime(today.year, today.month, today.day, tzinfo=dt.timezone.utc)
+	sleep = (date - now).total_seconds()
 
-	diff = dt.timedelta(hours=2 if is_summer_time(date) else 1)
-
-	date -= diff
-
-	sleep_time = tomorrow_midnight - date
 	wordle_word_en = random.choice(wordle_list_en)
 	wordle_word_fr = random.choice(wordle_list_fr)
 
-	await asyncio.sleep(sleep_time.total_seconds())
+	await asyncio.sleep(sleep)
 
 	upd_data(wordle_word_en, "games/todays_word_en")
 	upd_data(wordle_word_fr, "games/todays_word_fr")
