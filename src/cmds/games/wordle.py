@@ -11,7 +11,7 @@ from typing import Literal
 
 
 from settings import DATA_DIR
-from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, is_summer_time
+from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, is_summer_time, simplify
 
 #! fonction 'get_words' accepts 4 columns csv
 class Wordle(commands.Cog):
@@ -105,7 +105,7 @@ class Wordle(commands.Cog):
 			except asyncio.TimeoutError:
 				Wordle.active_games[user_id] = False
 				return await inter.followup.send("See you later", ephemeral=True)
-			guess_word = message.content.lower()
+			guess_word = simplify(message.content.lower())
 			await message.delete()
 			
 			#In case the person wants to stop playing
@@ -120,7 +120,7 @@ class Wordle(commands.Cog):
 				continue
 			
 			#Word not int the list
-			elif guess_word not in guess_list: 
+			elif guess_word not in guess_list and guess_word != wordle_word: 
 				await inter.followup.send("This word is not in the list", ephemeral=True)
 				continue
 
