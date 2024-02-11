@@ -64,9 +64,9 @@ async def traveler(*, bot: commands.Bot):
 	elif difficulty == "hard":
 		E.color = discord.Color.red()
 	
-	# check if it will be a traveler or a robber : travaler = 1 and robber = 0
-	traveler_or_robber = random.getrandbits(1)
-	if traveler_or_robber:
+	# check if it will be a traveler or a robber : traveler = 1 and robber = 0
+	traveler = random.getrandbits(1)
+	if traveler:
 		photo = "https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png"
 	else:
 		photo = "https://cdn.discordapp.com/attachments/709313685226782751/1205143937052839946/bandit.png"
@@ -81,7 +81,7 @@ async def traveler(*, bot: commands.Bot):
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
 			user_data = new_user()
-		if traveler_or_robber:
+		if traveler:
 			value = get_value(user_data) 
 		else:
 			value = get_value(user_data)*1.5
@@ -90,7 +90,8 @@ async def traveler(*, bot: commands.Bot):
 		user_data["ideas"] += 7
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
-		E.description = f"{'' if traveler_or_robber else 'The robber is impressed by your knowledge! '}You earned **{value}🌹** and **7💡**"
+		if not traveler:
+			E.description = f"The robber is impressed by your knowledge! You earned **{value}🌹** and **7💡**"
 	
 		await inter.followup.send(inter.user.mention, embed=E)
 
@@ -105,7 +106,7 @@ async def traveler(*, bot: commands.Bot):
 			user_data = new_user()
 
 		E.description = f"The correct answer was **{correct_answer}**\n"
-		if traveler_or_robber:
+		if traveler:
 			value = 50
 			E.description += "The traveler left **50🌹** by accident on the ground" 
 		else:
