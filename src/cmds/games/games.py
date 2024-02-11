@@ -63,31 +63,40 @@ async def traveler(*, bot: commands.Bot):
 		E.color = discord.Color.gold()
 	elif difficulty == "hard":
 		E.color = discord.Color.red()
+	
+	# check if it will be a traveler or a robber : travaler = 1 and robber = 0
+	traveler_or_robber = random.getrandbits(1)
+	if traveler_or_robber:
+		photo = "https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png"
+	else:
+		photo = "https://cdn.discordapp.com/attachments/709313685226782751/1205143937052839946/bandit.png"
 
 	# handle the correct and incorrect cases
 	async def correct(inter:discord.Interaction):
 		E = discord.Embed(title="Correct!", color=discord.Color.green())
-		E.set_thumbnail(url="https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png")
+		E.set_thumbnail(url=photo)
 
 		# user_id : {user data}
 		try: 
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
 			user_data = new_user()
-		
-		value = get_value(user_data)
+		if traveler_or_robber:
+			value = get_value(user_data) 
+		else:
+			value = get_value(user_data)*1.5
 
 		user_data["roses"] += value
 		user_data["ideas"] += 7
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
-		E.description = f"You earned **{value}🌹** and **7💡**"
+		E.description = f"{'' if traveler_or_robber else 'The robber is impressed by your knowledge! '}You earned **{value}🌹** and **7💡**"
 	
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	async def incorrect(inter:discord.Interaction):
 		E = discord.Embed(title="Incorrect!", color=discord.Color.red())
-		E.set_thumbnail(url="https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png")
+		E.set_thumbnail(url=photo)
 
 		# user_id : {user data}
 		try: 
@@ -95,12 +104,20 @@ async def traveler(*, bot: commands.Bot):
 		except :
 			user_data = new_user()
 
-		user_data["roses"] += 50
-		upd_data(user_data, f"games/users/{inter.user.id}")
-
 		E.description = f"The correct answer was **{correct_answer}**\n"
-		E.description += f"The traveler left **50🌹** by accident on the ground"
+		if traveler_or_robber:
+			value = 50
+			E.description += "The traveler left **50🌹** by accident on the ground" 
+		else:
+			if get_value(user_data)<=get_value(user_data)*(2):
+				value = get_value(user_data)*(-1)
+			else:
+				double_collect_value = get_value(user_data)*2
+				value = get_value(user_data)*(-2)
+			E.description += f"The robber took you **{double_collect_value}** 🌹"
 
+		user_data["roses"] += value
+		upd_data(user_data, f"games/users/{inter.user.id}")
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	# subclass of discord.ui.Button, all buttons will have the same callback (no need for functions)
