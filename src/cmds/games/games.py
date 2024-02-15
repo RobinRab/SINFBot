@@ -84,15 +84,18 @@ async def traveler(*, bot: commands.Bot):
 		if traveler:
 			value = get_value(user_data) 
 		else:
-			value = get_value(user_data)*1.5
+			value = round(get_value(user_data)*1.5)
 
 		user_data["roses"] += value
 		user_data["ideas"] += 7
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
-		if not traveler:
+		
+		if traveler:
+			E.description = f"You earned **{value}🌹** and **7💡**"
+		else:
 			E.description = f"The robber is impressed by your knowledge! You earned **{value}🌹** and **7💡**"
-	
+
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	async def incorrect(inter:discord.Interaction):
