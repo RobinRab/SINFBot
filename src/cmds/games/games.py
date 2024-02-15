@@ -23,15 +23,17 @@ async def traveler(*, bot: commands.Bot):
 	bot_channel = await bot.fetch_channel(BOT_CHANNEL_ID)
 	assert isinstance(bot_channel, discord.TextChannel)
 
-	# make the request and check it is valid
-	r = random.choice([18,19])
+	# 17 science&nature, 18 computer, 19 maths, 22 geography, 24 politics, 27 animals
+	r = random.choice([17, 18, 19, 22, 24, 27])
 	url = f"https://opentdb.com/api.php?amount=1&category={r}"
 
 	response = requests.get(url)
 	data = response.json()
 
 	if data["response_code"] != 0:
+
 		return log('WARNING', "opentdb api returned 0 response code")
+	
 	
 	# extract the data
 	category:str = data["results"][0]["category"]
@@ -84,7 +86,7 @@ async def traveler(*, bot: commands.Bot):
 		if traveler:
 			value = get_value(user_data) 
 		else:
-			value = round(get_value(user_data)*1.5)
+			value = int(get_value(user_data)*1.5)
 
 		user_data["roses"] += value
 		user_data["ideas"] += 7
