@@ -90,7 +90,7 @@ async def traveler(*, bot: commands.Bot):
 		user_data["ideas"] += 7
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
-		
+
 		if traveler:
 			E.description = f"You earned **{value}🌹** and **7💡**"
 		else:
@@ -115,6 +115,7 @@ async def traveler(*, bot: commands.Bot):
 		else:
 			if get_value(user_data)<=get_value(user_data)*(2):
 				value = get_value(user_data)*(-1)
+				double_collect_value = get_value(user_data)
 			else:
 				double_collect_value = get_value(user_data)*2
 				value = get_value(user_data)*(-2)
