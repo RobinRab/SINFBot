@@ -42,7 +42,7 @@ class Wordle(commands.Cog):
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
 	@app_commands.describe(language = "The language you choose")
-	async def wordle(self, inter: discord.Interaction, language:Literal["English", "Français"]):
+	async def wordle(self, inter: discord.Interaction, language:Literal["English", "French"]):
 		user_data = await self.get_data_wordle(inter)
 
 		user_id = inter.user.id
@@ -78,7 +78,7 @@ class Wordle(commands.Cog):
 			return await inter.response.send_message(f"You already played today, see you tomorrow ", ephemeral=True)
 
 		if current_number_guess == 0:
-			await inter.response.send_message('''Welcome to wordle!\nWrite your guess to start playing. 
+			await inter.response.send_message('''Welcome to {language} wordle!\nWrite your guess to start playing. 
 			\nType *stop* to pause the game, recall the function to *restart*.''')
 
 		else:
@@ -174,7 +174,7 @@ class Wordle(commands.Cog):
 				todays_colors+=color+"\n"
 			await inter.followup.send(f"You lost, the word was **{wordle_word}**", ephemeral=True)
 			
-			E.description = f"{inter.user.mention} lost today. \n\n||{todays_colors}||"
+			E.description = f"{inter.user.mention} lost {language} wordle today. \n\n||{todays_colors}||"
 			E.color = discord.Color.red()
 			await inter.followup.send(embed = E)
 			
