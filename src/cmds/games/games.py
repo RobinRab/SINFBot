@@ -115,9 +115,9 @@ async def traveler(*, bot: commands.Bot):
 			value = 50
 			E.description += "The traveler left **50🌹** by accident on the ground" 
 		else:
-			if get_value(user_data)<=get_value(user_data)*(2):
-				value = get_value(user_data)*(-1)
-				double_collect_value = get_value(user_data)
+			if user_data["roses"]<=get_value(user_data)*(2):
+				value = user_data["roses"]*(-1)
+				double_collect_value = user_data["roses"]
 			else:
 				double_collect_value = get_value(user_data)*2
 				value = get_value(user_data)*(-2)
