@@ -78,7 +78,7 @@ class Wordle(commands.Cog):
 			return await inter.response.send_message(f"You already played today, see you tomorrow ", ephemeral=True)
 
 		if current_number_guess == 0:
-			await inter.response.send_message('''Welcome to {language} wordle!\nWrite your guess to start playing. 
+			await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
 			\nType *stop* to pause the game, recall the function to *restart*.''')
 
 		else:
