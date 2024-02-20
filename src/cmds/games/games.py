@@ -115,16 +115,21 @@ async def traveler(*, bot: commands.Bot):
 			value = 50
 			E.description += "The traveler left **50🌹** by accident on the ground" 
 		else:
-			if user_data["roses"]<=get_value(user_data)*(2):
-				value = user_data["roses"]*(-1)
-				double_collect_value = user_data["roses"]
-			else:
-				double_collect_value = get_value(user_data)*2
-				value = get_value(user_data)*(-2)
-			E.description += f"The robber took you **{double_collect_value}** 🌹"
-
-		user_data["roses"] += value
-		upd_data(user_data, f"games/users/{inter.user.id}")
+			double_collect_value = get_value(user_data)*2
+			value = get_value(user_data)*(-2)
+		
+		
+		if user_data["roses"]<0 and not traveler:
+			E.description += f"You're already in debt so the robber didn't take you anything"
+		else:
+			user_data["roses"] += value
+			if not traveler:
+				if user_data["roses"]<0:
+					user_data["roses"]=-1
+					E.description += f"The robber took you all of your roses 🌹"
+				else:
+					E.description += f"The robber took you **{double_collect_value}** 🌹"
+			upd_data(user_data, f"games/users/{inter.user.id}")
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	# subclass of discord.ui.Button, all buttons will have the same callback (no need for functions)
