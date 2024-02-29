@@ -75,7 +75,16 @@ class Wordle(commands.Cog):
 		#Check if the person already played today to continue the game
 		if current_number_guess>=6 or already_won:
 			del Wordle.active_games[user_id]
-			return await inter.response.send_message(f"You already played today, see you tomorrow ", ephemeral=True)
+			already_guessed = ""
+
+			for word in user_data[current_w]:
+				spaced_word = ""
+				for letter in word[1:].upper():
+					spaced_word += f"{letter:^4}"
+
+				already_guessed += "# " + spaced_word + "\n" + space(user_data[current_w][word])+"\n"
+			await inter.response.send_message(f"You already played today, but here are your stats for today \nSee you tomorrow!", ephemeral=True)
+			return await inter.followup.send(f"{already_guessed}", ephemeral=True)
 
 		if current_number_guess == 0:
 			await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
