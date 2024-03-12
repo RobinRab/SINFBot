@@ -14,15 +14,10 @@ class Games(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
-		traveler.start(bot=self.bot)
+		traveler_loop.start(bot=self.bot)
 
 
-@tasks.loop()
-async def traveler(*, bot: commands.Bot):
-	# get the bot channel and make sure it is not none
-	bot_channel = await bot.fetch_channel(BOT_CHANNEL_ID)
-	assert isinstance(bot_channel, discord.TextChannel)
-
+async def traveler(*, bot_channel: discord.TextChannel):
 	# 17 science&nature, 18 computer, 19 maths, 22 geography, 24 politics, 27 animals
 	r = random.choice([17, 18, 19, 22, 24, 27])
 	url = f"https://opentdb.com/api.php?amount=1&category={r}"
@@ -182,6 +177,14 @@ async def traveler(*, bot: commands.Bot):
 	b_choices.message = await bot_channel.send(embed=E, view=b_choices, silent=True)
 
 	await b_choices.wait()
+
+@tasks.loop()
+async def traveler_loop(*, bot: commands.Bot):
+	# get the bot channel and make sure it is not none
+	bot_channel = await bot.fetch_channel(BOT_CHANNEL_ID)
+	assert isinstance(bot_channel, discord.TextChannel)
+
+	await traveler(bot_channel=bot_channel)
 
 	# come back in 2 to 10 hours
 	random_time = random.randint(7200, 36000)
