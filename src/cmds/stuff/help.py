@@ -267,10 +267,10 @@ class Help(commands.Cog):
 				elif query == "wordle":
 					E.description = "**To play wordle**\nWrite your word after sending /wordle"
 					E.add_field (name="How to play",  value="```You have 3 minutes to write to your guess.\n\
-				  												To pause the game, write *stop*. Recall the function to *restart*.```")
+																To pause the game, write *stop*. Recall the function to *restart*.```")
 					E.add_field (name = "**Meaning of colors**", value = "```🟩 : The letter in in the right place\n\
-				  															 🟨 : The letter is in the word but not in the right place\n\
-				  															 🟥 : The letter is not in the word```")
+																			🟨 : The letter is in the word but not in the right place\n\
+																			🟥 : The letter is not in the word```")
 
 				# economy commands
 				elif query == "collect":

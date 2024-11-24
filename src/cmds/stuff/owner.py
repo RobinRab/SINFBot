@@ -4,7 +4,7 @@ from discord.ext import commands
 
 import os
 import settings
-from utils import log, SelectView, is_owner
+from utils import log, SelectView, is_owner, upd_data, new_update
 
 class Owner(commands.Cog):
 	def __init__(self, bot:commands.Bot) -> None:
@@ -116,6 +116,12 @@ class Owner(commands.Cog):
 		await inter.response.send_message(embed=E)
 
 
+	@app_commands.command(description="Resets the list of users that have seen the update")
+	@app_commands.check(is_owner)
+	async def new_update(self, inter:discord.Interaction):
+		upd_data([], "has_seen_update")
+		await inter.response.send_message(embed=new_update(), ephemeral=True)
+
+
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Owner(bot))
-

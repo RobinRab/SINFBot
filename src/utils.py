@@ -113,7 +113,10 @@ def get_data(path: Optional[str]=None) -> Any:
 			try: 
 				data = data[opt]
 			except KeyError:
-				data = data[int(opt)]
+				try: 
+					data = data[int(opt)]
+				except KeyError:
+					raise UnexpectedValue(f"Key {opt} not found in data")
 	return data
 
 def upd_data(new_data: Any, path: Optional[str]=None) -> None:
@@ -332,7 +335,7 @@ def get_amount(cash: int, txt: str) -> Optional[int]:
 
 def get_value(user_data:dict) -> int:
 	"""Calculates the value of the timely reward. \n
-	Level 0 starts with 150. Each level grants 40% of that each time \n
+	Level 0 starts with 120. Each level grants 40% of that each time \n
 	Each achievement adds 1% bonus, 2% if all achievements are unlocked"""
 	level:int = user_data["level"]
 	achievements:list = user_data["achievements"]
@@ -340,8 +343,6 @@ def get_value(user_data:dict) -> int:
 
 def get_collect_time(is_cutie:bool, tech:int) -> int:
 	base = dt.timedelta(hours=12).total_seconds()
-	if is_cutie:
-		base = dt.timedelta(hours=10).total_seconds()
 
 	# 1% less for each tech level
 	time = base - (base*tech)/100
@@ -351,3 +352,18 @@ def get_collect_time(is_cutie:bool, tech:int) -> int:
 def translate(txt: str) -> str:
 	"""Translates choice emojis to their names"""
 	return {"🌹": "roses","🍬": "candies","💡": "ideas"}[txt]
+
+### UPDATE MSG
+def new_update() -> discord.Embed:
+	E = discord.Embed(color=discord.Color.green())
+	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
+	E.title = "**Reset"
+	E.set_author(name="SINF illégal family bot")
+	E.description = "- Economy reset\n"
+	E.description += "- Max tech is now 20\n"
+	E.description += "- % of 🍬 no longer increases after 500🌹/collect\n"
+	E.description += "- Removed cutie perks\n"
+
+	E.add_field(name="Authors", value="<@!271305579698323456> & <@!346945067975704577>")
+
+	return E

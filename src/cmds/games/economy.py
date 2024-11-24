@@ -71,7 +71,7 @@ class Economy(commands.Cog):
 		time_to_wait = get_collect_time(is_cutie(inter), user_data["tech"])
 
 		# value/100 % to win a candy
-		candy = random.random()*100 <= value/100
+		candy = random.random()*100 <= min(value,500)/100
 		if candy:
 			user_data["candies"] += 1
 
@@ -137,6 +137,13 @@ class Economy(commands.Cog):
 			return await inter.followup.send(embed=E)
 
 		tech = user_data["tech"] + 1
+
+		# cap tech to level 20
+		if tech > 20:
+			E.description = f"{inter.user.mention}, You can't upgrade your tech anymore"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E)
+
 		price = tech*10
 
 		if user_data["ideas"] < price:

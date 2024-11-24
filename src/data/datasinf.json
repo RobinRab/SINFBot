@@ -1,5 +1,5 @@
 {
-    "phrasesID": 118,
+    "phrasesID": 125,
     "phrases": [
         {
             "mot": "avatar",
@@ -252,6 +252,42 @@
             "text": "Aw man",
             "time": 3,
             "id": 117
+        },
+        {
+            "mot": "!typechart",
+            "text": "https://cdn.discordapp.com/attachments/1125069945080905738/1216729661485092924/file.webp?ex=660172cd&is=65eefdcd&hm=1419b423e1e6f172163cfb91dc1fffb62bd857300c5ea137c55d755da462c2e2&",
+            "time": null,
+            "id": 118
+        },
+        {
+            "mot": "f",
+            "text": "https://tenor.com/view/solid-snake-salute-gif-24255323",
+            "time": 5,
+            "id": 120
+        },
+        {
+            "mot": "rage",
+            "text": "(\u256f\u00b0\u25a1\u00b0)\u256f\ufe35 \u253b\u2501\u253b",
+            "time": 5,
+            "id": 121
+        },
+        {
+            "mot": "454318083876847616",
+            "text": "\ud83c\udff3\ufe0f\u200d\ud83c\udf08",
+            "time": 1,
+            "id": 122
+        },
+        {
+            "mot": "1036549365071876126",
+            "text": "<:bi_flag:1172546899279106079>",
+            "time": 1,
+            "id": 123
+        },
+        {
+            "mot": "269210243093889028",
+            "text": "\ud83c\udf4c\ud83d\udca6\ud83c\udf51",
+            "time": 1,
+            "id": 124
         }
     ],
     "tetris": {
@@ -270,11 +306,6 @@
             "year": 2022,
             "month": 12,
             "day": 3
-        },
-        "346945067975704577": {
-            "year": 2004,
-            "month": 10,
-            "day": 2
         },
         "443867585075871767": {
             "year": 2005,
@@ -358,380 +389,9 @@
         }
     },
     "games": {
-        "todays_word_en": "itchy",
-        "todays_word_fr": "etant",
-        "users": {
-            "560155603574718475": {
-                "level": 22,
-                "timely": 1709489828,
-                "roses": 0,
-                "candies": 14,
-                "ideas": 60,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 8,
-                "wordle_en": {
-                    "0stare": "\ud83d\udfe5\ud83d\udfe9\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5",
-                    "1itchy": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
-                },
-                "wordle_fr": {
-                    "0livre": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
-                    "1etape": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe5",
-                    "2etang": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5",
-                    "3etant": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
-                }
-            },
-            "366975965601071104": {
-                "level": 15,
-                "timely": 1709425687,
-                "roses": 3550,
-                "candies": 5,
-                "ideas": 34,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 5,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "443867585075871767": {
-                "level": 6,
-                "timely": 1709421354,
-                "roses": 79,
-                "candies": 4,
-                "ideas": 12,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 6,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "346945067975704577": {
-                "level": 19,
-                "timely": 1709488130,
-                "roses": 4908,
-                "candies": 11,
-                "ideas": 3,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 8,
-                "wordle_en": {
-                    "0slate": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8\ud83d\udfe5",
-                    "1choir": "\ud83d\udfe8\ud83d\udfe8\ud83d\udfe5\ud83d\udfe8\ud83d\udfe5",
-                    "2itchy": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
-                },
-                "wordle_fr": {
-                    "0tarie": "\ud83d\udfe8\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
-                    "1balte": "\ud83d\udfe5\ud83d\udfe8\ud83d\udfe5\ud83d\udfe8\ud83d\udfe8",
-                    "2etant": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
-                }
-            },
-            "627431499960156161": {
-                "level": 19,
-                "timely": 1709485571,
-                "roses": 10000,
-                "candies": 12,
-                "ideas": 60,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 10,
-                "wordle_en": {
-                    "0swift": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8\ud83d\udfe5\ud83d\udfe8",
-                    "1intel": "\ud83d\udfe9\ud83d\udfe5\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5"
-                },
-                "wordle_fr": {}
-            },
-            "183259368286978048": {
-                "level": 13,
-                "timely": 1709489776,
-                "roses": 0,
-                "candies": 5,
-                "ideas": 15,
-                "bank": {
-                    "roses": 3728,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 9,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "752574610666684426": {
-                "level": 2,
-                "timely": 1709364826,
-                "roses": 894,
-                "candies": 0,
-                "ideas": 1,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 2,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "271305579698323456": {
-                "level": 16,
-                "timely": 1709406075,
-                "roses": 0,
-                "candies": 9,
-                "ideas": 41,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 11,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "269210243093889028": {
-                "level": 15,
-                "timely": 1709432018,
-                "roses": 0,
-                "candies": 4,
-                "ideas": 61,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 6,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "454318083876847616": {
-                "level": 4,
-                "timely": 1709248246,
-                "roses": 0,
-                "candies": 2,
-                "ideas": 2,
-                "bank": {
-                    "roses": 1966,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 1,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "553163806600331284": {
-                "level": 10,
-                "timely": 1709341416,
-                "roses": 0,
-                "candies": 10,
-                "ideas": 19,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 4,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "936185870724239402": {
-                "level": 0,
-                "timely": 1695333801,
-                "roses": 290,
-                "candies": 0,
-                "ideas": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 0,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "415538227705806850": {
-                "level": 1,
-                "timely": 1698386482,
-                "roses": 0,
-                "candies": 0,
-                "ideas": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 1,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "350595760703930368": {
-                "level": 0,
-                "timely": 1695428421,
-                "roses": 0,
-                "candies": 0,
-                "ideas": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "tech": 0,
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "406852476763897877": {
-                "level": 0,
-                "timely": 1695958971,
-                "roses": 140,
-                "candies": 0,
-                "ideas": 0,
-                "tech": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "351454846014062592": {
-                "level": 0,
-                "timely": 1696057373,
-                "roses": 60,
-                "candies": 0,
-                "ideas": 0,
-                "tech": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "341613738622713856": {
-                "level": 0,
-                "timely": 1700632776,
-                "roses": 0,
-                "candies": 0,
-                "ideas": 0,
-                "tech": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "303485893317230593": {
-                "level": 4,
-                "timely": 1709246042,
-                "roses": 0,
-                "candies": 0,
-                "ideas": 8,
-                "tech": 2,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "411881842439094272": {
-                "level": 16,
-                "timely": 1709431211,
-                "roses": 545,
-                "candies": 7,
-                "ideas": 65,
-                "tech": 8,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "290494427330510849": {
-                "level": 4,
-                "timely": 1709072737,
-                "roses": 2344,
-                "candies": 0,
-                "ideas": 11,
-                "tech": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "356148005767741448": {
-                "level": 0,
-                "timely": 1704330503,
-                "roses": 0,
-                "candies": 0,
-                "ideas": 0,
-                "tech": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            },
-            "567371317678964736": {
-                "level": 0,
-                "timely": 1709082326,
-                "roses": 0,
-                "candies": 0,
-                "ideas": 3,
-                "tech": 0,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {},
-                "wordle_fr": {}
-            }
-        }
+        "has_seen_upd": [],
+        "todays_word_en": "broil",
+        "todays_word_fr": "syrie",
+        "users": {}
     }
 }
