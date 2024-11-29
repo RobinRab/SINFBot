@@ -68,7 +68,7 @@ class Economy(commands.Cog):
 			E.color = discord.Color.red()
 			return await inter.followup.send(embed=E)
 
-		time_to_wait = get_collect_time(is_cutie(inter), user_data["tech"])
+		time_to_wait = get_collect_time(user_data["tech"])
 
 		# value/100 % to win a candy
 		candy = random.random()*100 <= min(value,500)/100
@@ -103,9 +103,9 @@ class Economy(commands.Cog):
 
 		level = user_data["level"] + 1
 		if level < 10:
-			price = int((level/1.7) * 1000)
+			price = int((level/2.5) * 1000)
 		else:
-			price = int((((level**2)/34) + 3) * 1000)
+			price = int((((level**2)/40) + 1.5) * 1000)
 
 		if user_data["roses"] < price:
 			E.description = f"{inter.user.mention}, You need {price}🌹 to level up"

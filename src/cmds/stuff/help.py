@@ -274,11 +274,9 @@ class Help(commands.Cog):
 
 				# economy commands
 				elif query == "collect":
-					E.description = "**Collects your ressources each 12h**"
-					if is_cutie(inter):
-						E.description += "\n**CUTIE BONUS :** 10h cooldown instead of 12h"
+					E.description = "**Collects your ressources each 10h**"
 					E.add_field(name="**Example**", value="```/collect```")
-					E.add_field(name="**Cooldown**", value="```12h / user```")
+					E.add_field(name="**Cooldown**", value="```10h / user```")
 					E.add_field(name="**Requirement**", value="```None```")
 				elif query == "balance":
 					E.description = "**Displays a user's ressources (yours if user is None)*"
@@ -417,7 +415,7 @@ class Help(commands.Cog):
 		Based on 3 ressources: 
 		🌹 roses, 💡 ideas and 🍬 candies
 
-		You can collect roses with **/collect** every 12h
+		You can collect roses with **/collect** every 10h
 		- Your **/collect** value is used as a base for all earnings
 		- You can increase earnings by leveling up with **/levelup**
 		- You can also increase earnings by earning achievements, granting 1% bonus each
@@ -440,11 +438,11 @@ class Help(commands.Cog):
 		You can sell your ressources for another ressource
 		### Maths
 		your base value (used for **/collect** and the traveller) is calculated like this: ```py
-		int((120 * (1 + (level/4.5)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
+		int((120 * (1 + (level/7)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
 		if level < 10:
-		    price = int((level/1.7) * 1000)
+		    price = int((level/2.5) * 1000)
 		else:
-		    price = int((((level**2)/34) + 4) * 1000)```
+		    price = int((((level**2)/40) + 1.5) * 1000)```
 		""".replace("\t", "")
 
 		await inter.response.send_message(embed=E)
