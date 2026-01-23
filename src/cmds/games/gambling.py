@@ -145,6 +145,9 @@ class GamblingHelper:
 		if "change_bet_method" in user_data["effects"]:
 			user_data["effects"].remove("change_bet_method")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E.colour = discord.Colour.purple()
+			E.description = f"{inter.user.mention} hmmm no thanks I don't feel like rolling rn..."
+			await inter.followup.send(embed=E)
 			return await self.change_next_method(inter, bet, self.roll)
 
 		if r >= 70:
@@ -216,6 +219,9 @@ class GamblingHelper:
 		if "change_bet_method" in user_data["effects"]:
 			user_data["effects"].remove("change_bet_method")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E.colour = discord.Colour.purple()
+			E.description = f"{inter.user.mention} hmmm no thanks I don't feel like flipping rn..."
+			await inter.followup.send(embed=E)
 			return await self.change_next_method(inter, bet, self.flip)
 			
 		multiplicator=1
@@ -306,6 +312,9 @@ class GamblingHelper:
 		if "change_bet_method" in user_data["effects"]:
 			user_data["effects"].remove("change_bet_method")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E.colour = discord.Colour.purple()
+			E.description = f"{inter.user.mention} hmmm no thanks I don't feel like laddering rn..."
+			await inter.followup.send(embed=E)
 			return await self.change_next_method(inter, bet, self.ladder)
 
 		elif r>=6:

@@ -176,7 +176,7 @@ class Roulette:
 
 		consequences = {
 			"level_up" : 2, # testé
-			"level_down" : 2,
+			"level_down" : 2, # testé
 			"tech_up" : 5,
 			"tech_down" : 5,
 			"timeout_someone" : 5,
@@ -205,7 +205,7 @@ class Roulette:
 
 		#Modify this line to make tests.
 		cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
-		cons = "level_down"
+		cons = "traveler_spawn"
 		print(cons) 
 		has_been_answered = False
 		url = random_avatar()
@@ -280,7 +280,8 @@ class Roulette:
 			E.colour = discord.Colour.purple()
 			E.description = f"Look, there, a traveler!" 
 			await inter.followup.send(embed=E)
-			traveler.start(bot=self.bot)
+			asyncio.create_task(traveler(bot=self.bot))
+
 			return 
 		
 		elif cons=="timeout_myself":
@@ -417,7 +418,7 @@ class Roulette_bis(commands.Cog):
 	def __init__(self, bot):
 		self.bot : commands.Bot = bot
 		self.R = Roulette(bot)
-		free_sunday_roll.start(bot=self.bot)
+		#free_sunday_roll.start(bot=self.bot)
 
 	@app_commands.command(description="Spins the wheel")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))

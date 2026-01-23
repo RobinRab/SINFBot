@@ -18,7 +18,7 @@ class Games(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
-		#traveler.start(bot=self.bot)
+		traveler_loop.start(bot=self.bot)
 		#wordle_traveler.start(bot=self.bot)
 
 	@app_commands.command(description="Play Amazons!")
@@ -264,10 +264,8 @@ class Games(commands.Cog):
 
 		button.message = await inter.followup.send(txt, embed=E, view=button)
 
-		
 
 
-@tasks.loop()
 async def traveler(*, bot: commands.Bot):
 	# get the bot channel and make sure it is not none
 	bot_channel = await bot.fetch_channel(BOT_CHANNEL_ID)
@@ -283,7 +281,6 @@ async def traveler(*, bot: commands.Bot):
 	if data["response_code"] != 0:
 
 		return log('WARNING', "opentdb api returned 0 response code")
-	
 	
 	# extract the data
 	category:str = data["results"][0]["category"]
@@ -308,7 +305,6 @@ async def traveler(*, bot: commands.Bot):
 		incorrect_answers = new_traveler[2:-1]
 		upd_data([], "games/created_traveler")
 		difficulty = "Random"
-
 	# create a list of answers and randomize them
 	answers = []
 	answers.append(correct_answer)
@@ -460,6 +456,7 @@ async def traveler(*, bot: commands.Bot):
 			if difficulty != "Random" or inter.user.name != creator:
 				if isinstance(self.parent_view.message, discord.Message):
 					await self.parent_view.message.delete()
+			print("stopping")
 			self.parent_view.stop()
 
 	class B_choices(discord.ui.View):
@@ -488,6 +485,12 @@ async def traveler(*, bot: commands.Bot):
 	b_choices.message = await bot_channel.send(embed=E, view=b_choices, silent=True)
 
 	await b_choices.wait()
+
+
+
+@tasks.loop()
+async def traveler_loop(*, bot: commands.Bot):
+	await traveler(bot=bot)
 
 	# come back in 2 to 10 hours
 	random_time = random.randint(7200, 36000)
