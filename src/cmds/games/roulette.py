@@ -125,9 +125,29 @@ class Roulette:
 		has_been_answered = False
 
 		E, user_data = await self.GH.check(inter)
+
+		class FreeSpin(ui.View):
+			def __init__(self):
+				super().__init__(timeout=60)
+				self.clicked = asyncio.Future()
+
+			@discord.ui.button(label="🎰 Free spin!", style=discord.ButtonStyle.green)
+			async def free_spin(self, inter: discord.Interaction, button: ui.Button):
+				if not self.clicked.done():
+					self.clicked.set_result(inter)
+
+				button.disabled = True
+				await inter.response.edit_message(view=self)
+
+
 		
+
 		try:
 			await inter.response.defer()
+			if dt.datetime.now().timestamp() - get_data(f"games/users/{inter.user.id}/last_roulette") < 60 and get_data(f"games/users/{inter.user.id}/last_roulette") != -1:
+				E.description = f"Be patient, you have to wait a minute before using the roulette again :)"
+				E.color = discord.Color.red()
+				return await inter.followup.send(embed=E, ephemeral=True)
 			if user_data["candies"]<1 and user_data["free_sunday_roll"] == 0:
 				E.description = f"{inter.user.mention}, You don't have enough 🍬"
 				E.color = discord.Color.red()
@@ -140,6 +160,7 @@ class Roulette:
 			
 			if other_user_data==user_data:
 				return await inter.followup.send("You can't choose yourself", ephemeral=True)
+
 			
 			#Are those three lines needed ? Url avatar is done previously with 
 			#inter.user.display_avatar.url in self.check definition
@@ -152,23 +173,58 @@ class Roulette:
 			E = discord.Embed(title="Roulette")
 			E.color = discord.Color.purple()
 
-			if user_data["free_sunday_roll"] == 0:
-				E.description = f"{inter.user.mention} used the roulette! It costs only one 🍬."
+			if get_data((f"games/users/{inter.user.id}/last_roulette")) == -1:
+				upd_data(dt.datetime.now().timestamp(), f"games/users/{inter.user.id}/last_roulette")
 
+				print("first time")   
+				E.colour = discord.Colour.gold()
+				E.description = f"Welcome to the Roulette, {inter.user.mention}! As it's your first time, you get a free spin! \nYou can consult the help command to know more about this feature.\n Enjoy!"
+
+				view = FreeSpin()
+				await inter.followup.send(embed=E, view=view)
+				try:
+					interaction = await asyncio.wait_for(view.clicked, timeout=60)
+				except asyncio.TimeoutError:
+					await inter.followup.send(
+						"Are you still here? You can try again later",
+						ephemeral=True
+					)
+					upd_data(-1, f"games/users/{inter.user.id}/last_roulette")
+
+					return
+
+			elif user_data["free_sunday_roll"] == 0:
+				E.description = f"{inter.user.mention} used the roulette! It costs only one 🍬."
 				await inter.followup.send(embed = E)
 				upd_data(user_data["candies"]-1, f"games/users/{inter.user.id}/candies")
 				print("updated")
+
 			else:
+				E.colour = discord.Colour.gold()
 				E.description = f"{inter.user.mention} used the roulette! Free sunday roll!"
 
-				await inter.followup.send(embed = E)
+				view = FreeSpin()
+				await inter.followup.send(embed=E, view=view)
+				try:
+					interaction = await asyncio.wait_for(view.clicked, timeout=60)
+				except asyncio.TimeoutError:
+					await inter.followup.send(
+						"Are you still here? You can try again later",
+						ephemeral=True
+					)
+					upd_data(-1, f"games/users/{inter.user.id}/last_roulette")
+
+					return
 				#Il faut une variable free_sunday_roll globale, qui indique si c'est dimanche.
 				#et une variable free_roll individuelle, qui indique si le free roll du 
 				#dimanche a déjà été utilisé ou pas.
 				upd_data(0, f"games/users/{inter.user.id}/free_sunday_roll")
 
+
 		except:
 			pass
+		upd_data(dt.datetime.now().timestamp(), f"games/users/{inter.user.id}/last_roulette")
+
 		current_created_traveler = 1
 		if get_data(f"games/created_traveler")!=[]:
 			current_created_traveler = 0
@@ -204,7 +260,7 @@ class Roulette:
 
 		#Modify this line to make tests.
 		cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
-		cons = "traveler_spawn"
+		cons = "create_next_traveler"
 		print(cons) 
 		has_been_answered = False
 		url = random_avatar()
@@ -394,16 +450,23 @@ class Roulette:
 
 		upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 
+
+
 @tasks.loop()
 async def free_sunday_roll() -> None:
-	now = get_belgian_time()
-	next_week = now + dt.timedelta(days=7)
 
-	date = dt.datetime(next_week.year, next_week.month, day=4)
-	sleep = (date - now).total_seconds()
+	now = get_belgian_time()
+
+
+	if 6-now.weekday()!=0:
+		for user_id in get_data("games/users").keys():
+			upd_data(0, f"games/users/{user_id}/free_sunday_roll")
+
+	next_sunday = now + dt.timedelta(days = 6-now.weekday())
+	next_sunday_midnight = dt.datetime(next_sunday.year, next_sunday.month, next_sunday.day, 0, 0, 0)
+	sleep = (next_sunday_midnight - now).total_seconds()
 
 	await asyncio.sleep(sleep)
-	print(2)
 
 	for user_id in get_data("games/users").keys():
 		upd_data(1, f"games/users/{user_id}/free_sunday_roll")
@@ -418,6 +481,7 @@ class Roulette_bis(commands.Cog):
 		self.bot : commands.Bot = bot
 		self.R = Roulette(bot)
 		#free_sunday_roll.start(bot=self.bot)
+		free_sunday_roll.start()
 
 	@app_commands.command(description="Spins the wheel")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
