@@ -315,6 +315,7 @@ def new_user():
 			"ideas"   : 0
 		},
 		"effects" : [],
+		"last_roulette": -1,
 		"achievements" : [],
 		"wordle_en" : {},
 		"wordle_fr" : {},
@@ -336,7 +337,9 @@ def new_user():
 			"4":0,
 			"5":0,
 			"6":0,
-			"lost":0
+			"lost":0,
+			"streak":0,
+			"max_streak":0
 		},
 		"free_sunday_roll" : 0
 	}
