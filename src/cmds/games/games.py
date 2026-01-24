@@ -18,7 +18,7 @@ class Games(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
-		traveler_loop.start(bot=self.bot)
+		#traveler_loop.start(bot=self.bot)
 		#wordle_traveler.start(bot=self.bot)
 
 	@app_commands.command(description="Play Amazons!")
