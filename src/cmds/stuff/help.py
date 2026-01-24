@@ -18,7 +18,7 @@ bot_commands = {
 	"Member Fun" : [is_member, "/confession", "/apoll"],
 	"Fun"        : [None, "/poll", "!/ping", "/wordle"],
 	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
-	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
+	"Gambling"   : [None, "/roll", "/flip", "/ladder", "/roulette"]
 }
 
 class Help(commands.Cog):
@@ -271,7 +271,7 @@ class Help(commands.Cog):
 					E.add_field (name = "**Meaning of colors**", value = "```🟩 : The letter in in the right place\n\
 				  															 🟨 : The letter is in the word but not in the right place\n\
 				  															 🟥 : The letter is not in the word```")
-
+					
 				# economy commands
 				elif query == "collect":
 					E.description = "**Collects your ressources each 12h**"
@@ -364,7 +364,9 @@ class Help(commands.Cog):
 					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
-
+				elif query == "roulette":
+					E.description = "**Affects a random effect to you or another person of your choice**\n Effects can be good or bad, for you or someone else...\nWhen spinning the roulette, you choose another user, and the effect will be affected to one of you, randomly. \n You have a free sunday roll every week! Other than that, the roulette cots 1 🍬 candy, and can be spinned every minute."
+					
 				else:
 					await inter.followup.send(f"{inter.user.name} Help page for command {query} not found")
 			# if the user doesn't have the perms
@@ -428,10 +430,14 @@ class Help(commands.Cog):
 		- A good answer will give you 10💡 ideas and the value of a **/collect**
 		- The traveller randomly spawns withing 2 to 10 hours
 		- The traveller will leave after 1h if no one answered his question
+		### Wordle
+		You can play wordle every day to win 🌹 roses and 💡 ideas! 
+
 		### Gambling
 		You can gamble your 🌹 roses with **/roll**, **/flip** and **/ladder**
 		Each earning is specific to the game
 		Though all gambling games have an average of return of 90% of the bet
+		You can use **/roulette** to be affected a mysterious effect...
 		### Bank
 		You can deposit your ressources to your bank account with **/bank deposit**
 		This is used to protect your ressources from gambling
