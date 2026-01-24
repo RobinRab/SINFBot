@@ -34,7 +34,7 @@ class Roulette:
 		wrong_answer3 = ui.TextInput(label="Wrong answer3", style=discord.TextStyle.paragraph)
 
 		async def on_submit(self, interaction: discord.Interaction):
-			await interaction.response.send_message(f'Thanks for your response!', ephemeral=True)
+			await interaction.response.send_message(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
 			next_traveler : list[str] = []
 			next_traveler.append(str(self.question))
 			next_traveler.append(str(self.correct_answer))
@@ -171,7 +171,6 @@ class Roulette:
 			pass
 		current_created_traveler = 1
 		if get_data(f"games/created_traveler")!=[]:
-			print("test")
 			current_created_traveler = 0
 
 		consequences = {
@@ -233,7 +232,7 @@ class Roulette:
 				await inter.followup.send(embed=E)
 			else:
 				E.colour = discord.Colour.red()
-				E.description = f"You didn't level down cause you're already level 0..."
+				E.description = f"You didn't level down because you're already level 0..."
 				await inter.followup.send(embed=E)
 
 		elif cons=="tech_up":
@@ -254,7 +253,7 @@ class Roulette:
 				await inter.followup.send(embed=E)
 			else:
 				E.colour = discord.Colour.purple()
-				E.description = f"You didn't tech level down cause you're already level 0..."
+				E.description = f"You didn't tech level down because you're already level 0..."
 				await inter.followup.send(embed=E)
 
 		elif cons=="timeout_someone": #inter user -> discord member 
