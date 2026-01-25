@@ -17,69 +17,16 @@ class Roulette:
 		self.bot : commands.Bot = bot
 		self.GH = GamblingHelper(bot)
 
-	class Traveler_true_or_false(ui.Modal, title = "True or false"):
-		question = ui.TextInput(label='Question')
-
-		async def on_submit(self, interaction: discord.Interaction):
-			await interaction.response.send_message(f'Choose the right answer:', view = Roulette.Choose_correct_answer(),ephemeral=True)
-			next_traveler : list[str] = []
-			next_traveler.append(str(self.question))
-			upd_data(next_traveler, f"games/created_traveler")
-
-	class Traveler_MCQ(discord.ui.Modal, title = "MCQ"):
-		question = ui.TextInput(label='Question')
-		correct_answer = ui.TextInput(label='Correct answer', style=discord.TextStyle.paragraph)
-		wrong_answer1 = ui.TextInput(label="Wrong answer1", style=discord.TextStyle.paragraph)
-		wrong_answer2 = ui.TextInput(label="Wrong answer2", style=discord.TextStyle.paragraph)
-		wrong_answer3 = ui.TextInput(label="Wrong answer3", style=discord.TextStyle.paragraph)
-
-		async def on_submit(self, interaction: discord.Interaction):
-			await interaction.response.send_message(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
-			next_traveler : list[str] = []
-			next_traveler.append(str(self.question))
-			next_traveler.append(str(self.correct_answer))
-			next_traveler.append(str(self.wrong_answer1))
-			next_traveler.append(str(self.wrong_answer2))
-			next_traveler.append(str(self.wrong_answer3))
-			next_traveler.append(interaction.user.name)
+	# Create next traveler  
+	async def create_next_traveler(self, inter:discord.Interaction):
+		E = discord.Embed()
+		E.color = discord.Color.purple()
+		E.set_author(name = "Roulette")
+		E.description = ("Create the next traveler!\nChoose the question type.")
 			
-			upd_data(next_traveler, f"games/created_traveler")
+		await inter.followup.send(embed=E, view = self.Create_next_traveler(), ephemeral = True)
 
-	class Choose_correct_answer(ui.View):
-		def __init__(self):
-			super().__init__(timeout=None)
-			self.answer = None
-
-		def disable_all_items(self):
-			for item in self.children:
-				if isinstance(item, discord.ui.Button):
-					item.disabled = True
-	
-		@discord.ui.button(label = "True", style = discord.ButtonStyle.green)
-		async def true(self, inter:discord.Interaction, Button: ui.Button):
-			self.disable_all_items()
-			await inter.response.edit_message(view=self)
-			self.answer = True
-			await inter.followup.send(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
-			next_traveler : list[str] = get_data(f"games/created_traveler")
-			next_traveler.append("True")
-			next_traveler.append("False")
-			next_traveler.append(inter.user.name)
-			upd_data(next_traveler, "games/created_traveler")
-			
-
-		@discord.ui.button(label = "False", style = discord.ButtonStyle.red)
-		async def false(self, inter:discord.Interaction, Button: ui.Button):
-			self.disable_all_items()
-			await inter.response.edit_message(view=self)
-			self.answer = False
-			await inter.followup.send(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
-			next_traveler : list[str] = get_data(f"games/created_traveler")
-			next_traveler.append("False")
-			next_traveler.append("True")
-			next_traveler.append(inter.user.name)
-			upd_data(next_traveler, "games/created_traveler")
-
+	# When we have a create nex traveler, we choose between "True or False" or "MCQ"
 	class Create_next_traveler(ui.View):
 		def __init__(self):
 			super().__init__(timeout=None)
@@ -101,14 +48,73 @@ class Roulette:
 			self.disable_all_items()
 			await inter.edit_original_response(view=self)
 
-	async def create_next_traveler(self, inter:discord.Interaction):
-		E = discord.Embed()
-		E.color = discord.Color.purple()
-		E.set_author(name = "Roulette")
-		E.description = ("Create the next traveler!\nChoose the question type.")
-			
-		await inter.followup.send(embed=E, view = self.Create_next_traveler(), ephemeral = True)
+	# Create a True or False traveler
+	class Traveler_true_or_false(ui.Modal, title = "True or false"):
+		question = ui.TextInput(label='Question')
+		
+		# After clicking on the "True or False" button we choose the right answer
+		async def on_submit(self, interaction: discord.Interaction):
+			await interaction.response.send_message(f'Choose the right answer:', view = Roulette.Choose_correct_answer(),ephemeral=True)
+			next_traveler : list[str] = []
+			next_traveler.append(str(self.question))
+			upd_data(next_traveler, f"games/created_traveler")
 
+	# Create a MCQ traveler
+	class Traveler_MCQ(discord.ui.Modal, title = "MCQ"):
+		question = ui.TextInput(label='Question')
+		correct_answer = ui.TextInput(label='Correct answer', style=discord.TextStyle.paragraph)
+		wrong_answer1 = ui.TextInput(label="Wrong answer1", style=discord.TextStyle.paragraph)
+		wrong_answer2 = ui.TextInput(label="Wrong answer2", style=discord.TextStyle.paragraph)
+		wrong_answer3 = ui.TextInput(label="Wrong answer3", style=discord.TextStyle.paragraph)
+
+		# After clicking on the "MCQ" button we choose the right answer and the wrong ones
+		async def on_submit(self, interaction: discord.Interaction):
+			await interaction.response.send_message(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
+			next_traveler : list[str] = []
+			next_traveler.append(str(self.question))
+			next_traveler.append(str(self.correct_answer))
+			next_traveler.append(str(self.wrong_answer1))
+			next_traveler.append(str(self.wrong_answer2))
+			next_traveler.append(str(self.wrong_answer3))
+			next_traveler.append(interaction.user.name)
+			
+			upd_data(next_traveler, f"games/created_traveler")
+
+	class Choose_correct_answer(ui.View):
+		def __init__(self):
+			super().__init__(timeout=None)
+			self.answer = None
+
+		def disable_all_items(self):
+			for item in self.children:
+				if isinstance(item, discord.ui.Button):
+					item.disabled = True
+
+		# Choosing "True" as the right answer
+		@discord.ui.button(label = "True", style = discord.ButtonStyle.green)
+		async def true(self, inter:discord.Interaction, Button: ui.Button):
+			self.disable_all_items()
+			await inter.response.edit_message(view=self)
+			self.answer = True
+			await inter.followup.send(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
+			next_traveler : list[str] = get_data(f"games/created_traveler")
+			next_traveler.append("True")
+			next_traveler.append("False")
+			next_traveler.append(inter.user.name)
+			upd_data(next_traveler, "games/created_traveler")
+			
+		# Choosing "False" as the right answer
+		@discord.ui.button(label = "False", style = discord.ButtonStyle.red)
+		async def false(self, inter:discord.Interaction, Button: ui.Button):
+			self.disable_all_items()
+			await inter.response.edit_message(view=self)
+			self.answer = False
+			await inter.followup.send(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
+			next_traveler : list[str] = get_data(f"games/created_traveler")
+			next_traveler.append("False")
+			next_traveler.append("True")
+			next_traveler.append(inter.user.name)
+			upd_data(next_traveler, "games/created_traveler")
 	
 	async def embed(self, inter : discord.Interaction, E : discord.Embed):
 		url = random_avatar()
@@ -139,9 +145,6 @@ class Roulette:
 				button.disabled = True
 				await inter.response.edit_message(view=self)
 
-
-		
-
 		try:
 			await inter.response.defer()
 			if dt.datetime.now().timestamp() - get_data(f"games/users/{inter.user.id}/last_roulette") < 60 and get_data(f"games/users/{inter.user.id}/last_roulette") != -1:
@@ -161,7 +164,6 @@ class Roulette:
 			if other_user_data==user_data:
 				return await inter.followup.send("You can't choose yourself", ephemeral=True)
 
-			
 			#Are those three lines needed ? Url avatar is done previously with 
 			#inter.user.display_avatar.url in self.check definition
 			url = random_avatar()
@@ -206,7 +208,7 @@ class Roulette:
 				view = FreeSpin()
 				await inter.followup.send(embed=E, view=view)
 				try:
-					interaction = await asyncio.wait_for(view.clicked, timeout=60)
+					await asyncio.wait_for(view.clicked, timeout=60)
 				except asyncio.TimeoutError:
 					await inter.followup.send(
 						"Are you still here? You can try again later",
@@ -220,7 +222,6 @@ class Roulette:
 				#dimanche a déjà été utilisé ou pas.
 				upd_data(0, f"games/users/{inter.user.id}/free_sunday_roll")
 
-
 		except:
 			pass
 		upd_data(dt.datetime.now().timestamp(), f"games/users/{inter.user.id}/last_roulette")
@@ -230,8 +231,8 @@ class Roulette:
 			current_created_traveler = 0
 
 		consequences = {
-			"level_up" : 2, # testé
-			"level_down" : 2, # testé
+			"level_up" : 2,
+			"level_down" : 2,
 			"tech_up" : 5,
 			"tech_down" : 5,
 			"timeout_someone" : 5,
@@ -260,16 +261,18 @@ class Roulette:
 
 		#Modify this line to make tests.
 		cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
-		cons = "create_next_traveler"
+		cons = "create_next_traveler" 
 		print(cons) 
 		has_been_answered = False
 		url = random_avatar()
 
+		# Roulette's header
 		if inter.user.avatar:
 			url = inter.user.avatar.url
 		E.set_author(name=inter.user.display_name, url = await GetLogLink(self.bot, url))
 		E.set_footer(text="Roulette by Scylla and Ceisal")
 		E = discord.Embed(title="Roulette")
+
 		if cons == "level_up":
 			has_been_answered = True
 			user_data["level"]+=1
@@ -287,6 +290,7 @@ class Roulette:
 				E.description = f"Haha noob you leveled-down to level **{user_data['level']}**"
 				await inter.followup.send(embed=E)
 			else:
+				# If the user is at level 0 they're note leveled down
 				E.colour = discord.Colour.red()
 				E.description = f"You didn't level down because you're already level 0..."
 				await inter.followup.send(embed=E)
@@ -308,6 +312,7 @@ class Roulette:
 				E.description = f"Haha noob you downgraded your tech to level **{user_data['tech']}**:gear:!"
 				await inter.followup.send(embed=E)
 			else:
+				# If the user is at level 0 they're note teched down
 				E.colour = discord.Colour.purple()
 				E.description = f"You didn't tech level down because you're already level 0..."
 				await inter.followup.send(embed=E)
@@ -320,6 +325,7 @@ class Roulette:
 				E.description = f"{inter.user.mention} got {other_user.mention} timed out! I see some beef coming." 
 				return await inter.followup.send(embed=E)
 			elif not inter.permissions.administrator: 
+				# If the user is an admin they cannot be timed out
 				member = inter.guild.get_member(inter.user.id)
 				assert member
 				await member.timeout(dt.timedelta(minutes=30), reason="haha mskn encore plus")
@@ -336,7 +342,6 @@ class Roulette:
 			E.description = f"Look, there, a traveler!" 
 			await inter.followup.send(embed=E)
 			asyncio.create_task(traveler(bot=self.bot))
-
 			return 
 		
 		elif cons=="timeout_myself":
@@ -350,6 +355,7 @@ class Roulette:
 			else:
 				await self.roulette(inter, other_user)
 
+		# The robber steals the roses in the user's bank and puts it in robber_total
 		elif cons == "bank_robbery":
 			has_been_answered = True
 			robber_money : int = get_data(f"games/users/{inter.user.id}/bank/roses")
@@ -451,17 +457,21 @@ class Roulette:
 		upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 
 
-
+# Every user has a free roll every sunday
 @tasks.loop()
 async def free_sunday_roll() -> None:
-
+	# Current day and time
 	now = get_belgian_time()
 
-
+	# Puts the right value in free_sunday_roll depending on the day (Sunday/Other day that Sunday)
 	if 6-now.weekday()!=0:
 		for user_id in get_data("games/users").keys():
 			upd_data(0, f"games/users/{user_id}/free_sunday_roll")
+	else:
+		for user_id in get_data("games/users").keys():
+			upd_data(1, f"games/users/{user_id}/free_sunday_roll")
 
+	# Next Sunday and the sleep needed between now and next_sunday_midnight
 	next_sunday = now + dt.timedelta(days = 6-now.weekday())
 	next_sunday_midnight = dt.datetime(next_sunday.year, next_sunday.month, next_sunday.day, 0, 0, 0)
 	sleep = (next_sunday_midnight - now).total_seconds()
@@ -471,6 +481,7 @@ async def free_sunday_roll() -> None:
 	for user_id in get_data("games/users").keys():
 		upd_data(1, f"games/users/{user_id}/free_sunday_roll")
 	
+	# Sleeps for a day then puts free_sunday_roll to 0
 	await asyncio.sleep(86400)
 
 	for user_id in get_data("games/users").keys():
@@ -480,7 +491,6 @@ class Roulette_bis(commands.Cog):
 	def __init__(self, bot):
 		self.bot : commands.Bot = bot
 		self.R = Roulette(bot)
-		#free_sunday_roll.start(bot=self.bot)
 		free_sunday_roll.start()
 
 	@app_commands.command(description="Spins the wheel")
