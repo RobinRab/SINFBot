@@ -10,15 +10,16 @@ from utils import is_member, is_cutie, is_owner, GetLogLink
 class MissingCommand(Exception):pass
 
 bot_commands = {
-	"Owner"      : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
-	"Cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
-	"Tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
-	"Infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
-	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
-	"Member Fun" : [is_member, "/confession", "/apoll"],
-	"Fun"        : [None, "/poll", "!/ping", "/wordle"],
-	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
-	"Gambling"   : [None, "/roll", "/flip", "/ladder"]
+	"Owner"           : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
+	"Cuties"          : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
+	"Tetrio"          : [is_member, "/register", "/profile", "/leaderboard"],
+	"Infos"           : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
+	"Birthdays"       : [is_member, "/set_birthday", "/birthdays"],
+	"Member Fun"      : [is_member, "/confession", "/apoll"],
+	"Fun"             : [None, "/poll", "!/ping", "/wordle"],
+	"Economy"         : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
+	"Gambling"        : [None, "/roll", "/flip", "/ladder"],
+	"Animal Crossing" : [None, "/stalk", "/meet", "/village"]
 }
 
 class Help(commands.Cog):
@@ -362,6 +363,22 @@ class Help(commands.Cog):
 					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
+
+				# animal crossing commands
+				elif query == "stalk":
+					E.description = "**Get the info of an Animal Crossing character**\n"
+					E.add_field(name="**Example**", value="```/stalk <character>```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+
+				elif query == "meet":
+					E.description = "**Meet a new villager every day!**\n"
+					E.add_field(name="**Example**", value="```/meet```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+
+				elif query == "village":
+					E.description = "**Displays your villagers or someon's villagers**\n"
+					E.add_field(name="**Example**", value="```/village (user)```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
 
 				else:
 					await inter.followup.send(f"{inter.user.name} Help page for command {query} not found")

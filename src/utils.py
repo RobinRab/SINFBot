@@ -237,13 +237,13 @@ def random_avatar() -> str:
 
 #only use through SelectView.get_app_choice
 class ChoiceSelect(discord.ui.Select):
-	view: 'SelectView'
+	view: 'SelectView' #type: ignore
 
 	def __init__(self, options: list[Any]) -> None:
 		options = [discord.SelectOption(label=label, value=value) for label, value in options]
 		super().__init__(options=options, placeholder="Choose an option", min_values=1, max_values=1)
 
-	async def callback(self, inter:discord.Interaction):
+	async def callback(self, inter:discord.Interaction): #type:ignore
 		self.view.chosen = self.values[0]
 		for option in self.options:
 			if option.value == self.values[0]:
@@ -312,7 +312,9 @@ def new_user():
 		},
 		"achievements" : [],
 		"wordle_en" : {},
-		"wordle_fr" : {}
+		"wordle_fr" : {},
+		"villager_of_the_day": "",
+		"villagers" : []
 	}
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
@@ -353,15 +355,27 @@ def translate(txt: str) -> str:
 	"""Translates choice emojis to their names"""
 	return {"🌹": "roses","🍬": "candies","💡": "ideas"}[txt]
 
+def get_acnh_data() -> dict[str, dict[str, str]]:
+	"""Retrieve data from a JSON file using a path."""
+	with open(f"{DATA_DIR}/villagers.json", 'r') as f:
+		acnh = json.load(f)
+	return acnh
+
+def get_acnh_musics() -> dict[str, str]:
+	"""Retrieve data from a JSON file using a path."""
+	with open(f"{DATA_DIR}/acnh_musics.json", 'r') as f:
+		acnh_musics = json.load(f)
+	return acnh_musics
+
 ### UPDATE MSG
 def new_update() -> discord.Embed:
 	E = discord.Embed(color=discord.Color.green())
 	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
-	E.title = "**Reset"
+	E.title = "Reset!"
 	E.set_author(name="SINF illégal family bot")
 	E.description = "- Economy reset\n"
+	E.description += "- Animal crossing !! \n"
 	E.description += "- Max tech is now 20\n"
-	E.description += "- % of 🍬 no longer increases after 500🌹/collect\n"
 	E.description += "- Removed cutie perks\n"
 
 	E.add_field(name="Authors", value="<@!271305579698323456> & <@!346945067975704577>")

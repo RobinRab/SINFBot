@@ -7,3 +7,10 @@ achievements.py
 
 ./src/data/bot.log
 ./src/data/datasinf.json
+
+# ignore the venv folder
+.venv/
+
+# ignore test files
+testing.py
+testing.txt

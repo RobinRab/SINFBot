@@ -29,7 +29,6 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 		return log('WARNING', "opentdb api returned 0 response code")
 	
-	
 	# extract the data
 	category:str = data["results"][0]["category"]
 	difficulty:str = data["results"][0]["difficulty"]
@@ -106,6 +105,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 			user_data = new_user()
 
 		E.description = f"The correct answer was **{correct_answer}**\n"
+		double_collect_value = 0
 		if traveler:
 			value = 50
 			E.description += "The traveler left **50🌹** by accident on the ground" 
@@ -133,7 +133,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 			super().__init__(*args, **kwargs)
 			self.parent_view = parent_view
 
-		async def callback(self, inter: discord.Interaction):
+		async def callback(self, inter: discord.Interaction): #type: ignore
 			await inter.response.defer()
 			if question_type == "boolean":
 				if correct_answer.upper() == self.label:
@@ -173,6 +173,9 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		for i in range(4):
 			E.description += f"{i+1}. {answers[i]}\n"
 			b_choices.add_item(CallbackButton(parent_view=b_choices, label=str(i+1), style=discord.ButtonStyle.blurple))
+
+	#TODO; add the acnh help button
+	
 
 	b_choices.message = await bot_channel.send(embed=E, view=b_choices, silent=True)
 

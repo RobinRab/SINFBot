@@ -117,6 +117,8 @@ class Economy(commands.Cog):
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
 		E.description = f"{inter.user.mention}, You are now level **{level}**!"
+		if level in [5, 10, 15, 20]:
+			E.description += "\n Congratulations, you can now have one more villager in your island!"
 
 		await inter.followup.send(embed=E)
 
