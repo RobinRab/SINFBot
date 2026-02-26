@@ -7,7 +7,12 @@ import datetime as dt
 from typing import List, Optional
 
 from utils import is_member, get_data, upd_data, nospecial, GetLogLink
-
+ 
+# Use a realistic User-Agent to avoid API blocking for default clients
+DEFAULT_HEADERS = {
+	"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+	"Accept": "application/json",
+}
 class Tetrio(commands.Cog):
 	def __init__(self, bot:commands.Bot):
 		self.bot = bot
@@ -32,106 +37,158 @@ class Tetrio(commands.Cog):
 
 		name = data[user_id]
 		
-		r1= requests.get(f"https://ch.tetr.io/api/users/{name}")
-		r2 = requests.get(f"https://ch.tetr.io/api/users/{name}/records")
+		
 
 		try :
-			data = r1.json()
-			datarecords = r2.json()
+			rmain = requests.get(f"https://ch.tetr.io/api/users/{name}", headers=DEFAULT_HEADERS, timeout=10)
+			rrecords = requests.get(f"https://ch.tetr.io/api/users/{name}/summaries", headers=DEFAULT_HEADERS, timeout=10)
 
-			if all([data["success"], datarecords["success"]]):
-				top = len(requests.get(f"https://ch.tetr.io/api/users/lists/league/all?country={data['data']['user']['country'].upper()}").json()['data']['users'])
-			else:
-				raise ValueError
-
-		except:
-			return await inter.response.send_message("An error occured while fetching data", ephemeral=True)
+			main = rmain.json()["data"]
+			records = rrecords.json()["data"]
+		except :
+			return await inter.followup.send("An error occured while fetching data", ephemeral=True)
+		
+		l40 = records['40l']
+		blitz = records['blitz']
+		league = records['league']
+		zenith = records['zenith']
 
 		#if they have a country
 		flag = ""
-		if data['data']['user']['country'] is not None:
-			flag = f" :flag_{data['data']['user']['country'].lower()}:"
+		if main['country'] is not None:
+			flag = f" :flag_{main['country'].lower()}:"
 
 		#get level by xp
-		xp = data["data"]["user"]["xp"]
+		xp = int(main["xp"])
 		level = round((xp/500)**0.6 + (xp/(5000+(max(0, xp-4*10^6)/5000))) + 1)
 
-		ranks = {
-			"z" : "<:z_:1054519813164245042>",
-			"d" : "<:d:1054510687612833912>",
-			"d+" : "<:dp:1054510720693321768>",
-			"c-" : "<:cm:1054510750921654402>",
-			"c" : "<:c:1054510835453665410>",
-			"c+" : "<:cp:1054510870723563551>",
-			"b-" : "<:bm:1054510901237141594>",
-			"b" : "<:b:1054511014386876560>",
-			"b+" : "<:bp:1054511043407257690>",
-			"a-" : "<:am:1054511090156961912>",
-			"a" : "<:a:1054511789959815249>",
-			"a+" : "<:ap:1054511812445478923>",
-			"s-" : "<:sm:1054511832544587886>",
-			"s" : "<:s:1054511852509474927>",
-			"s+" : "<:sp:1054511871836835880>",
-			"ss" : "<:ss:1054511896088293556>",
-			"u" : "<:u:1054511917726699645>",
-			"x" : "<:x_:1054511941114150995>"
-		}
-
-		#number of players in their country
-		top = len(requests.get(f"https://ch.tetr.io/api/users/lists/league/all?country={data['data']['user']['country'].upper()}").json()['data']['users'])
-
 		# gets datetime object from string
-		date = f" joined <t:{round(dt.datetime.strptime(data['data']['user']['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
-
-		glob = "Unranked"
-		local = ""
-		if data['data']['user']['league']['standing'] != -1:
-			glob = f"\n Global : {data['data']['user']['league']['standing']} top {round(data['data']['user']['league']['percentile']*100,2)}%"
-			local = f"\n Local: {data['data']['user']['league']['standing_local']}/{top} top {round((data['data']['user']['league']['standing_local'])/top*100, 2)}%"
+		date = f"<t:{round(dt.datetime.strptime(main['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
 
 		E = discord.Embed(
-			title = f"__**{data['data']['user']['username'].upper()}**__" + flag,
-			description=f"level {level} \n **{round(data['data']['user']['league']['rating'])}** TR {ranks[data['data']['user']['league']['rank']]} {glob} {local}\n{date}",
+			title = f"__**{main['username'].upper()}**__" + flag,
+			description = f"**Level**: {level}\n**Joined**: {date}",
 			colour = discord.Colour.random(),
-			url = f"https://ch.tetr.io/u/{data['data']['user']['username']}"
+			url = f"https://ch.tetr.io/u/{main['username']}"
 		)
 
-		if 'avatar_revision' in data['data']['user']:
-			E.set_thumbnail(url=await GetLogLink(self.bot, f"https://tetr.io/user-content/avatars/{data['data']['user']['_id']}.jpg?rv={data['data']['user']['avatar_revision']}"))
+		#! tetra league stats
+		if league['gamesplayed'] >= 1:
+			league_rank = league['rank']
+			league_best = league['bestrank']
+			league_tr = round(league['tr'])
+			league_pps = league['pps']
+			league_apm = league['apm']
+			league_played = league['gamesplayed'] + league["past"].get("gamesplayed", 0)
+			league_won = league['gameswon'] + league["past"].get("gameswon", 0)
+			league_winrate = round(league_won/league_played*100, 2) if league_played != 0 else 0
+			# top = league["standing"]
+			# local_tol = league["standing_local"]
+
+			E.add_field(name="**Tetra League**", value=f"{league_tr} TR \nRank: {league_rank}\nBest: {league_best}\nPPS: {league_pps}\nAPM: {league_apm}\nWins: {league_won}/{league_played}: {league_winrate}%")
+
+		#! current zenith stats (quick play)
+		if zenith['record'] != None:
+			zenith_rank = zenith['rank']
+			zenith_localrank = zenith['rank_local']
+
+			# format the time from ms to min:sec.ms
+			_ms_total = round(zenith['record']['results']['stats']['finaltime'])
+			_secs_total = _ms_total // 1000
+			_ms = _ms_total % 1000
+			_mins = _secs_total // 60
+			_secs = _secs_total % 60
+			zenith_time = f"{_mins}:{_secs:02d}.{_ms:03d}"
+
+			zenith_apm = round(zenith['record']['results']['aggregatestats']['apm'], 2)
+			zenith_pps = round(zenith['record']['results']['aggregatestats']['pps'], 2)
+			zenith_altitude = round(zenith['record']['results']['stats']['zenith']['altitude'])
+			zenith_replay = f"https://tetr.io/#R:{zenith['record']['replayid']}"
+			zenith_piecesgood = zenith['record']['results']['stats']['finesse']["perfectpieces"]
+			zenith_piecesbad = zenith['record']['results']['stats']['finesse']["faults"]
+			zenith_finesse = round(zenith_piecesgood/(zenith_piecesgood+zenith_piecesbad)*100, 2) if zenith_piecesgood+zenith_piecesbad != 0 else 0
+			zenith_date = f"<t:{round(dt.datetime.strptime(zenith['record']['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
+
+			E.add_field(name="**Zenith**", value=f"Altitude: [{zenith_altitude}]({zenith_replay})m\nRank: #{zenith_rank} (#{zenith_localrank} {flag})\nTime: {zenith_time}\nAPM: {zenith_apm}\nPPS: {zenith_pps}\nFinesse: {zenith_finesse}%\nDate: {zenith_date}")
+
+		#! best zenith stats (quick play)
+		if zenith['best'] != {}:
+			zenith_rank = zenith["best"]['rank']
+
+			# format the time from ms to min:sec.ms
+			_ms_total = round(zenith["best"]['record']['results']['stats']['finaltime'])
+			_secs_total = _ms_total // 1000
+			_ms = _ms_total % 1000
+			_mins = _secs_total // 60
+			_secs = _secs_total % 60
+			zenith_time = f"{_mins}:{_secs:02d}.{_ms:03d}"
+
+			zenith_apm = round(zenith["best"]['record']['results']['aggregatestats']['apm'], 2)
+			zenith_pps = round(zenith["best"]['record']['results']['aggregatestats']['pps'], 2)
+			zenith_altitude = round(zenith["best"]['record']['results']['stats']['zenith']['altitude'])
+			zenith_replay = f"https://tetr.io/#R:{zenith["best"]['record']['replayid']}"
+			zenith_piecesgood = zenith["best"]['record']['results']['stats']['finesse']["perfectpieces"]
+			zenith_piecesbad = zenith["best"]['record']['results']['stats']['finesse']["faults"]
+			zenith_finesse = round(zenith_piecesgood/(zenith_piecesgood+zenith_piecesbad)*100, 2) if zenith_piecesgood+zenith_piecesbad != 0 else 0
+			zenith_date = f"<t:{round(dt.datetime.strptime(zenith["best"]['record']['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
+
+			E.add_field(name="**Zenith Best**", value=f"Altitude: [{zenith_altitude}]({zenith_replay})m\nRank: #{zenith_rank}\nTime: {zenith_time}\nAPM: {zenith_apm}\nPPS: {zenith_pps}\nFinesse: {zenith_finesse}%\nDate: {zenith_date}")
+
+		#! 40L stats
+		if l40['rank'] != -1:
+			l40_rank = l40['rank']
+			l40_localrank = l40['rank_local']
+			
+			# format the time from ms to min:sec.ms
+			_ms_total = round(l40['record']['results']['stats']['finaltime'])
+			_secs_total = _ms_total // 1000
+			_ms = _ms_total % 1000
+			_mins = _secs_total // 60
+			_secs = _secs_total % 60
+			if _mins > 0:
+				l40_time = f"{_mins}:{_secs:02d}.{_ms:03d}"
+			else:
+				l40_time = f"{_secs}.{_ms:03d}"
+
+			l40_pps = round(l40['record']['results']['aggregatestats']['pps'], 2)
+			l40_piecesgood = l40['record']['results']['stats']['finesse']["perfectpieces"]
+			l40_piecesbad = l40['record']['results']['stats']['finesse']["faults"]
+			l40_finesse = round(l40_piecesgood/(l40_piecesgood+l40_piecesbad)*100, 2) if l40_piecesgood+l40_piecesbad != 0 else 0
+			l40_date = f"<t:{round(dt.datetime.strptime(l40['record']['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
+			l40_replay = f"https://tetr.io/#R:{l40['record']['replayid']}"
+
+			E.add_field(name="**40L**", value=f"Time: [{l40_time}]({l40_replay})\nRank: #{l40_rank} (#{l40_localrank} {flag})\nPPS: {l40_pps}\nFinesse: {l40_finesse}%\nDate: {l40_date}")
+
+		#! Blitz stats
+		if blitz['rank'] != -1:
+			blitz_rank = blitz['rank']
+			blitz_localrank = blitz['rank_local']
+			blitz_score = blitz['record']['results']['stats']['score']
+			blitz_pieces = blitz['record']['results']['stats']['piecesplaced']
+			blitz_piecesgood = blitz['record']['results']['stats']['finesse']["perfectpieces"]
+			blitz_piecesbad = blitz['record']['results']['stats']['finesse']["faults"]
+			blitz_finesse = round(blitz_piecesgood/(blitz_piecesgood+blitz_piecesbad)*100, 2) if blitz_piecesgood+blitz_piecesbad != 0 else 0
+		
+			blitz_pps = round(blitz['record']['results']['aggregatestats']['pps'], 2)
+			blitz_date = f"<t:{round(dt.datetime.strptime(blitz['record']['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
+			blitz_replay = f"https://tetr.io/#R:{blitz['record']['replayid']}"
+
+			E.add_field(name="**Blitz**", value=f"Score: [{blitz_score:,}]({blitz_replay})\nRank: #{blitz_rank} (#{blitz_localrank} {flag})\nPlaced pieces: {blitz_pieces}\nPPS: {blitz_pps}\nFinesse: {blitz_finesse}%\nDate: {blitz_date}")
+
+
+		# used if the user set an avatar
+		if 'avatar_revision' in main.keys():
+			E.set_thumbnail(url=await GetLogLink(self.bot, f"https://tetr.io/user-content/avatars/{main['_id']}.jpg?rv={main['avatar_revision']}"))
 		else:
+			# no avatar, I can't use SVG so error image
 			E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png")
 
 
 		#time format the time they have been playing for
-		timeplayed = dt.timedelta(seconds=data['data']['user']['gametime'])
+		timeplayed = dt.timedelta(seconds=main['gametime'])
 		timeplayed = f"{f'{timeplayed.days}d, ' if timeplayed.days != 0 else ''}{f'{timeplayed.seconds//3600}h' if timeplayed.seconds//3600 != 0 else ''}{f'{(timeplayed.seconds//60)%60}m' if (timeplayed.seconds//60)%60 != 0 else ''}{f'{(timeplayed.seconds//3600)%60}s' if (timeplayed.seconds//3600)%60 != 0 else ''}"
 
 		E.set_footer(text=f"played for : {timeplayed}")
-
-		stats = f"""
-				**Wins**  : {data['data']['user']['league']['gameswon']}/{data['data']['user']['league']['gamesplayed']} : {round(data['data']['user']['league']['gameswon']/data['data']['user']['league']['gamesplayed']*100,2)}%
-				**APM**   : {data['data']['user']['league']['apm']}
-				**PPS**   : {data['data']['user']['league']['pps']}
-				**Score** : {data['data']['user']['league']['vs']}
-		"""
-		E.add_field(name="__**TETRA STATS**__", value=stats)
-		E.add_field(name="** **", value="** **")
-
-		id = datarecords["data"]["records"]['40l']['record']["replayid"]
-		url = f"https://tetr.io/#r:{id}"
-		records = f"**40L**   : [{round(datarecords['data']['records']['40l']['record']['endcontext']['finalTime']/1000, 3)}]({url})s"
-
-		if datarecords['data']['records']['40l']['rank'] is not None:
-			records += f"\n**Rank**  : {datarecords['data']['records']['40l']['rank']}"
-
-		id = datarecords["data"]["records"]['blitz']['record']["replayid"]
-		url = f"https://tetr.io/#r:{id}"
-		records += f"\n**Blitz** : [{datarecords['data']['records']['blitz']['record']['endcontext']['score']:,}]({url})"
-
-		if datarecords['data']['records']['blitz']['rank'] is not None:
-			records += f"\n**Rank**  : {datarecords['data']['records']['blitz']['rank']}"
-
-		E.add_field(name="__**RECORDS**__", value=records)
 
 		await inter.followup.send(embed=E)
 
@@ -152,7 +209,7 @@ class Tetrio(commands.Cog):
 			return
 
 
-		Tdata = requests.get(f"https://ch.tetr.io/api/users/{name}").json()
+		Tdata = requests.get(f"https://ch.tetr.io/api/users/{name}", headers=DEFAULT_HEADERS, timeout=10).json()
 		if not Tdata['success']:
 			await inter.response.send_message(f"The user {name.upper()} does not exist", ephemeral=True)
 			return
@@ -192,119 +249,128 @@ class Tetrio(commands.Cog):
 		await inter.response.defer()
 		data = get_data("tetris")
 		
-		datatr = {}
-		data40 = {}
-		datablitz = {}
-		userranks = {}
-
-		ranks = {
-			"z" : "<:z_:1054519813164245042>",
-			"d" : "<:d:1054510687612833912>",
-			"d+" : "<:dp:1054510720693321768>",
-			"c-" : "<:cm:1054510750921654402>",
-			"c" : "<:c:1054510835453665410>",
-			"c+" : "<:cp:1054510870723563551>",
-			"b-" : "<:bm:1054510901237141594>",
-			"b" : "<:b:1054511014386876560>",
-			"b+" : "<:bp:1054511043407257690>",
-			"a-" : "<:am:1054511090156961912>",
-			"a" : "<:a:1054511789959815249>",
-			"a+" : "<:ap:1054511812445478923>",
-			"s-" : "<:sm:1054511832544587886>",
-			"s" : "<:s:1054511852509474927>",
-			"s+" : "<:sp:1054511871836835880>",
-			"ss" : "<:ss:1054511896088293556>",
-			"u" : "<:u:1054511917726699645>",
-			"x" : "<:x_:1054511941114150995>"
-		}
+		# key = username, value = (record value, replay id)
+		league_scores = {}
+		zenith_scores = {}
+		zenith_best_scores = {}
+		l40_scores = {}
+		blitz_scores = {}
 
 		for user in data.values():
-			get = requests.get(f"https://ch.tetr.io/api/users/{user}").json()
-			getr = requests.get(f"https://ch.tetr.io/api/users/{user}/records").json()
-
-			if not all([get['success'] , getr['success']]) :
-				await inter.response.send_message("An error occured while fetching the data")
-				return
-
-			datatr[user] = round(get['data']['user']['league']['rating'])
-
-			# if the user has no record in 40l, it will throw an error
 			try:
-				url = f"https://tetr.io/#r:{getr['data']['records']['40l']['record']['replayid']}"
-				data40[user] = (round(getr['data']['records']['40l']['record']['endcontext']['finalTime']/1000, 3), url)
-			except:
-				pass
+				r = requests.get(f"https://ch.tetr.io/api/users/{user}/summaries", headers=DEFAULT_HEADERS, timeout=10)
+				r.raise_for_status()
+				data : dict = r.json().get("data", {})
+			except Exception:
+				continue
 
-			# if the user has no record in blitz, it will throw an error
-			try: 
-				url = f"https://tetr.io/#r:{getr['data']['records']['blitz']['record']['replayid']}"
-				datablitz[user] = (getr['data']['records']['blitz']['record']['endcontext']['score'], url)
-			except:
-				pass
+			# league TR (higher is better)
+			league = data.get("league", {})
+			if league:
+				tr = league.get("tr")
+				if tr != -1:
+					league_scores[user] = round(tr)
 
-			userranks[user] = ranks[get['data']['user']['league']['rank']]
+			# zenith current (altitude, higher is better)
+			zen = data.get("zenith", {})
+			if zen and zen.get("record"):
+				try:
+					alt = zen["record"]["results"]["stats"]["zenith"]["altitude"]
+					replay = zen["record"].get("replayid")
+					zenith_scores[user] = (round(alt), f"https://tetr.io/#R:{replay}" if replay else None)
+				except Exception:
+					pass
 
-		datatr = dict(sorted(datatr.items(),key=lambda x:x[1],reverse = True))
-		data40 = dict(sorted(data40.items(),key=lambda x:x[1][0],reverse = False))
-		datablitz = dict(sorted(datablitz.items(),key=lambda x:x[1][0],reverse = True))
+			# zenith best (altitude, higher is better)
+			if zen and zen.get("best"):
+				try:
+					alt = zen["best"]["record"]["results"]["stats"]["zenith"]["altitude"]
+					replay = zen["best"]["record"].get("replayid")
+					zenith_best_scores[user] = (round(alt), f"https://tetr.io/#R:{replay}" if replay else None)
+				except Exception:
+					pass
 
-		tr_E = discord.Embed(
-			title="RANK LEADERBOARD",
-			description="",
-			color=discord.Colour.blurple()
-		)
+			# 40L (time in seconds with ms precision, lower is better)
+			l40 = data.get("40l", {})
+			if l40 and l40.get("record"):
+				try:
+					ms = l40["record"]["results"]["stats"]["finaltime"]
+					seconds = round(ms / 1000, 3)
+					replay = l40["record"].get("replayid")
+					l40_scores[user] = (seconds, f"https://tetr.io/#R:{replay}" if replay else None)
+				except Exception:
+					pass
 
-		l40_E = discord.Embed(
-			title="40L LEADERBOARD",
-			description="",
-			color=discord.Colour.green()
-		)
+			# blitz (score, higher is better)
+			bl = data.get("blitz", {})
+			if bl and bl.get("record"):
+				try:
+					score = bl["record"]["results"]["stats"]["score"]
+					replay = bl["record"].get("replayid")
+					blitz_scores[user] = (score, f"https://tetr.io/#R:{replay}" if replay else None)
+				except Exception:
+					pass
 
-		blitz_E = discord.Embed(
-			title="BLITZ LEADERBOARD",
-			description="",
-			color=discord.Color.red()
-		)
+		# sort leaderboards
+		top_n = 10
+		league_sorted = sorted(league_scores.items(), key=lambda x: x[1], reverse=True)[:top_n]
+		zenith_sorted = sorted(zenith_scores.items(), key=lambda x: x[1][0], reverse=True)[:top_n]
+		zenith_best_sorted = sorted(zenith_best_scores.items(), key=lambda x: x[1][0], reverse=True)[:top_n]
+		l40_sorted = sorted(l40_scores.items(), key=lambda x: x[1][0])[:top_n]
+		blitz_sorted = sorted(blitz_scores.items(), key=lambda x: x[1][0], reverse=True)[:top_n]
 
-		tr_E_desc = l40_E_desc = blitz_E_desc = ""
+		def make_embed(title: str, rows: list, formatter):
+			emb = discord.Embed(title=title, description="", color=discord.Colour.blurple())
+			if not rows:
+				emb.description = "No data."
+				return emb
+			desc = ""
+			for i, (name, val) in enumerate(rows):
+				medal = "🥇" if i == 0 else "🥈" if i == 1 else "🥉" if i == 2 else str(i + 1)
+				desc += f"\n**{medal}) {name.upper()}**: {formatter(name, val)}"
+			emb.description = desc
+			return emb
 
-		for index, (tr, l40, blitz) in enumerate(zip(datatr, data40, datablitz)):
-			medal = "🥇" if index == 0 else "🥈" if index == 1 else "🥉" if index == 2 else index+1
-			tr_E_desc += f"\n**{medal}) {tr.upper()}**: {datatr[tr]:,} TR {userranks[tr]}"
-			l40_E_desc += f"\n**{medal}) {l40.upper()}**: [{data40[l40][0]}]({data40[l40][1]})s"
-			blitz_E_desc += f"\n**{medal}) {blitz.upper()}**: [{datablitz[blitz][0]:,}]({datablitz[blitz][1]})"
-
-		tr_E.description = tr_E_desc
-		l40_E.description = l40_E_desc
-		blitz_E.description = blitz_E_desc
+		league_emb = make_embed("RANK LEADERBOARD", league_sorted, lambda n, v: f"[{v:,} TR](https://ch.tetr.io/u/{n})")
+		zenith_emb = make_embed("ZENITH LEADERBOARD", zenith_sorted, lambda n, v: f"[{v[0]}]({v[1]})m")
+		zenith_best_emb = make_embed("ZENITH BEST LEADERBOARD", zenith_best_sorted, lambda n, v: f"[{v[0]}]({v[1]})m")
+		l40_emb = make_embed("40L LEADERBOARD", l40_sorted, lambda n, v: f"[{v[0]}s]({v[1]})")
+		blitz_emb = make_embed("BLITZ LEADERBOARD", blitz_sorted, lambda n, v: f"[{v[0]:,}]({v[1]})")
 
 		class LeaderBoard(discord.ui.View):
-			def __init__(self, timeout=15):
+			def __init__(self, timeout=30):
 				super().__init__(timeout=timeout)
-				self.message : Optional[discord.Message]
+				self.message: Optional[discord.Message] = None
 
-			@discord.ui.button(label="Rank",style=discord.ButtonStyle.primary)
-			async def t1(self, inter: discord.Interaction, button: discord.ui.Button):
-				await inter.response.edit_message(embed=tr_E)
+			@discord.ui.button(label="League", style=discord.ButtonStyle.primary)
+			async def league_btn(self, inter: discord.Interaction, button: discord.ui.Button):
+				await inter.response.edit_message(embed=league_emb, view=self)
 
-			@discord.ui.button(label="40L",style=discord.ButtonStyle.success)
-			async def t3(self, inter: discord.Interaction, button: discord.ui.Button):
-				await inter.response.edit_message(embed=l40_E)
+			@discord.ui.button(label="Zenith", style=discord.ButtonStyle.secondary)
+			async def zenith_btn(self, inter: discord.Interaction, button: discord.ui.Button):
+				await inter.response.edit_message(embed=zenith_emb, view=self)
 
-			@discord.ui.button(label="Blitz",style=discord.ButtonStyle.danger)
-			async def t4(self, inter: discord.Interaction, button: discord.ui.Button):
-				await inter.response.edit_message(embed=blitz_E)
+			@discord.ui.button(label="Zenith Best", style=discord.ButtonStyle.secondary)
+			async def zenith_best_btn(self, inter: discord.Interaction, button: discord.ui.Button):
+				await inter.response.edit_message(embed=zenith_best_emb, view=self)
+
+			@discord.ui.button(label="40L", style=discord.ButtonStyle.success)
+			async def l40_btn(self, inter: discord.Interaction, button: discord.ui.Button):
+				await inter.response.edit_message(embed=l40_emb, view=self)
+
+			@discord.ui.button(label="Blitz", style=discord.ButtonStyle.danger)
+			async def blitz_btn(self, inter: discord.Interaction, button: discord.ui.Button):
+				await inter.response.edit_message(embed=blitz_emb, view=self)
 
 			async def on_timeout(self):
 				for item in self.children:
 					if isinstance(item, discord.ui.Button):
 						item.disabled = True
-
 				if isinstance(self.message, discord.Message):
 					await self.message.edit(view=self)
 
-		leaderboard = LeaderBoard()
-		leaderboard.message = await inter.followup.send(embed=tr_E, view=leaderboard)
+		view = LeaderBoard()
+		view.message = await inter.followup.send(embed=league_emb, view=view)
 
 
 async def setup(bot:commands.Bot):

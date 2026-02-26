@@ -296,10 +296,11 @@
         "443867585075871767": "s_17",
         "457594644495073280": "silversci777",
         "183259368286978048": "dan1259",
-        "627431499960156161": "leonielc",
+        "627431499960156161": "scylla1823",
         "269210243093889028": "poirefruit",
         "366975965601071104": "clonmell",
-        "411881842439094272": "ceisal"
+        "411881842439094272": "ceisal",
+        "346945067975704577": "smaudoggo"
     },
     "birthday": {
         "1048717154922541217": {
@@ -389,9 +390,30 @@
         }
     },
     "games": {
-        "has_seen_upd": [],
+        "has_seen_upd": [
+            346945067975704577
+        ],
         "todays_word_en": "count",
         "todays_word_fr": "mille",
-        "users": {}
+        "users": {
+            "346945067975704577": {
+                "level": 0,
+                "timely": 1772151927,
+                "roses": 240,
+                "candies": 0,
+                "ideas": 7,
+                "tech": 0,
+                "bank": {
+                    "roses": 0,
+                    "candies": 0,
+                    "ideas": 0
+                },
+                "achievements": [],
+                "wordle_en": {},
+                "wordle_fr": {},
+                "villager_of_the_day": "",
+                "villagers": []
+            }
+        }
     }
 }

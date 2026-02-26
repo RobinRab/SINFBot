@@ -372,6 +372,8 @@ class Help(commands.Cog):
 
 				elif query == "meet":
 					E.description = "**Meet a new villager every day!**\n"
+					E.description += "You start with 1 villagers, and gain a new spot every 5 levels up to 5 villagers\n"
+					E.description += "Each villager gives you a collect on your birthday!\n"
 					E.add_field(name="**Example**", value="```/meet```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 

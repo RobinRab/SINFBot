@@ -161,7 +161,7 @@ class AnimalCrossing(commands.Cog):
 					embeds = kickView.embeds
 					first_name = villagers[0]
 					kickView.message = self.message
-					await inter2.response.edit_message(content=f"You cannot have more than 5 villagers! Please free up some space before adding {villager_name}.",embed=embeds[first_name],  view=kickView)
+					await inter2.response.edit_message(content=f"You cannot have more than {allowed_number_of_villagers} villagers! Please free up some space before adding {villager_name}.",embed=embeds[first_name],  view=kickView)
 					return
 				
 

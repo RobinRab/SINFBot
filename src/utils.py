@@ -27,17 +27,30 @@ async def GetLogLink(bot: commands.Bot, link:str) -> str:
 	LogPic = bot.get_channel(LOG_PIC_CHANNEL_ID)
 	if not isinstance(LogPic, discord.TextChannel):
 		raise UnexpectedValue("LogPic was not found")
-	
-	for format in [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]:
-		if format in link:
+
+	# Add a User-Agent and be more robust when fetching remote content.
+	headers = {"User-Agent": "Mozilla/5.0 (compatible; SINFBot/1.0)"}
+	for fmt in [".gif", ".png", ".jpg", ".jpeg", ".webp", ".mp3", ".ogg", ".wav", ".flac", ".mp4", ".webm", ".mov"]:
+		if fmt in link:
 			try:
-				async with aiohttp.ClientSession() as cs:
-					async with cs.get(link) as resp:
-						file = discord.File(io.BytesIO(await resp.content.read()), filename=f"file{format}")
+				async with aiohttp.ClientSession(headers=headers) as cs:
+					async with cs.get(link, timeout=10) as resp: #type: ignore
+						# only accept successful responses
+						if resp.status != 200:
+							continue
+						data = await resp.read()
+						if not data:
+							continue
+						buf = io.BytesIO(data)
+						buf.seek(0)
+						filename = f"file{fmt}"
+						file = discord.File(buf, filename=filename)
 						msg = await LogPic.send(file=file)
 						return msg.attachments[0].url
-			except:
-				break
+			except Exception:
+				# try the next format instead of bailing out completely
+				continue
+	# fallback image if nothing worked
 	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 
 
