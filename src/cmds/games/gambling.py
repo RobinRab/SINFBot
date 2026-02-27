@@ -35,9 +35,10 @@ class GamblingHelper:
 			E.color = discord.Color.red()
 			return 0, E, {}
 
-		
+		next_bet_all = False
 		if "next_bet_all" in user_data["effects"] and bet!="all":
 			bet="all"
+			next_bet_all = True
 
 
 		# translate the user request into a number
@@ -76,7 +77,10 @@ class GamblingHelper:
 	async def change_next_method(self, inter : discord.Interaction, bet : str, gambling_func):
 		gambling_funcs = ["roll", "flip", "ladder"]
 		gambling_funcs.remove(gambling_func.__name__)
-		choice = random.choice(gambling_funcs)
+		for i in range(10):
+
+			choice = random.choice(gambling_funcs)
+			print(choice)
 		if choice=="ladder":
 			await self.ladder(inter, bet)
 		elif choice == "flip":
@@ -126,6 +130,7 @@ class GamblingHelper:
 			pass
 
 		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
+		print("current_roses: ", user_data["roses"])
 		# if the already has a description, an issue was found
 		if E.description is not None:
 			return await inter.followup.send(embed=E)
@@ -149,10 +154,8 @@ class GamblingHelper:
 			E.description = f"{inter.user.mention} hmmm no thanks I don't feel like rolling rn..."
 			await inter.followup.send(embed=E)
 			return await self.change_next_method(inter, bet, self.roll)
-
-		if r >= 70:
-			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
-		elif "chances_next_bet_x2" in user_data["effects"]:
+		
+		if "chances_next_bet_x2" in user_data["effects"]:
 			user_data["effects"].remove("chances_next_bet_x2")
 			double=True
 			E.color = discord.Color.purple()
@@ -164,11 +167,21 @@ class GamblingHelper:
 			E.color = discord.Color.purple()
 			E.description = "Well, you had half the chance to win this one"
 			await inter.followup.send(embed=E)
-		
+
+		if "next_bet_all" in user_data["effects"]:	
+			user_data["effects"].remove("next_bet_all")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E.description = f"Oops you accidently bet all"
+			E.colour = discord.Colour.purple()
+			await inter.followup.send(embed=E)
+
 		if double:
 			r = max(random.randint(1,100),random.randint(1,100))
 		elif divide:
 			r = min(random.randint(1,100),random.randint(1,100))
+
+		if r >= 70:
+			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
 		cash=amount
 		if r == 100:
 			#Il y a 2 int, un pour arrondir le résultat, un autre pour la division
@@ -203,6 +216,7 @@ class GamblingHelper:
 			pass
 
 		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
+		print("amount?: ", amount, "roses: ", user_data["roses"])
 
 		# if the already has a description, an issue was found
 		if E.description is not None:
@@ -227,24 +241,25 @@ class GamblingHelper:
 		multiplicator=1
 		divide=False
 		double=False
-
+		
+			
+		if "chances_next_bet_x2" in user_data["effects"]:
+			double=True
+			user_data["effects"].remove("chances_next_bet_x2")
+			E.color = discord.Color.purple()
+			E.description = "Wow! You had twice the chance to win!"
+		elif "chances_next_bet_/2" in user_data["effects"]:
+			divide=True
+			user_data["effects"].remove("chances_next_bet_/2")
+			E.color = discord.Color.purple()
+			E.description = "Well, you had half the chance to win this one"
+			await inter.followup.send(embed=E)
 		if "next_bet_all" in user_data["effects"]:	
 			user_data["effects"].remove("next_bet_all")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 			E.description = f"Oops you accidently bet all"
 			E.colour = discord.Colour.purple()
 			await inter.followup.send(embed=E)
-		
-		elif guess==choice and "next_gain" in user_data["effects"]:
-			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
-			
-		elif "chances_next_bet_x2" in user_data["effects"]:
-			double=True
-			user_data["effects"].remove("chances_next_bet_x2")
-		elif "chances_next_bet_/2" in user_data["effects"]:
-			divide=True
-			user_data["effects"].remove("chances_next_bet_/2")
-		
 		double_tails=0
 		double_heads=0
 		divide_heads=0
@@ -263,6 +278,9 @@ class GamblingHelper:
 
 		if double or divide:
 			choice = random.choices(["heads", "tails"], [1 + double_heads + divide_heads, 1 + double_tails + divide_tails])[0]
+		# If effect include "next_gain" and it's winning, gain changed
+		if guess==choice and "next_gain" in user_data["effects"]:
+			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
 
 		if choice == "tails":
 			image = "https://media.discordapp.net/attachments/709313685226782751/1126924584973774868/ttails.png"
@@ -280,8 +298,10 @@ class GamblingHelper:
 			cash = 0
 			E.color = discord.Color.red()
 			E.description = f"You guessed it wrong..."
-			
+		if "free_flip_when_collect" in user_data["effects"]:
+			amount = 0
 		user_data["roses"] += - amount + cash
+
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
 		await inter.followup.send(embed=E)
@@ -317,18 +337,30 @@ class GamblingHelper:
 			await inter.followup.send(embed=E)
 			return await self.change_next_method(inter, bet, self.ladder)
 
-		elif r>=6:
-			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
-		elif "chances_next_bet_x2" in user_data["effects"]:
+
+		if "chances_next_bet_x2" in user_data["effects"]:
 			user_data["effects"].remove("chances_next_bet_x2")
 			double=True
+			E.color = discord.Color.purple()
+			E.description = "Wow! You had twice the chance to win!"
 		elif "chances_next_bet_/2" in user_data["effects"]:
 			user_data["effects"].remove("chances_next_bet_/2")
 			divide=True
+			E.color = discord.Color.purple()
+			E.description = "Well, you had half the chance to win this one"
+			await inter.followup.send(embed=E)
 		if double:
 			r = max(random.randint(1,8),random.randint(1,8))
 		elif divide:
 			r = min(random.randint(1,8),random.randint(1,8))
+		elif r>=6:
+			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
+		if "next_bet_all" in user_data["effects"]:	
+			user_data["effects"].remove("next_bet_all")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E.description = f"Oops you accidently bet all"
+			E.colour = discord.Colour.purple()
+			await inter.followup.send(embed=E)
 
 		if r <= 4:
 			E.color = discord.Color.red()

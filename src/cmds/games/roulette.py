@@ -48,24 +48,13 @@ class Roulette:
 			self.disable_all_items()
 			await inter.edit_original_response(view=self)
 
-	# Create a True or False traveler
-	class Traveler_true_or_false(ui.Modal, title = "True or false"):
-		question = ui.TextInput(label='Question')
-		
-		# After clicking on the "True or False" button we choose the right answer
-		async def on_submit(self, interaction: discord.Interaction):
-			await interaction.response.send_message(f'Choose the right answer:', view = Roulette.Choose_correct_answer(),ephemeral=True)
-			next_traveler : list[str] = []
-			next_traveler.append(str(self.question))
-			upd_data(next_traveler, f"games/created_traveler")
-
 	# Create a MCQ traveler
 	class Traveler_MCQ(discord.ui.Modal, title = "MCQ"):
-		question = ui.TextInput(label='Question')
-		correct_answer = ui.TextInput(label='Correct answer', style=discord.TextStyle.paragraph)
-		wrong_answer1 = ui.TextInput(label="Wrong answer1", style=discord.TextStyle.paragraph)
-		wrong_answer2 = ui.TextInput(label="Wrong answer2", style=discord.TextStyle.paragraph)
-		wrong_answer3 = ui.TextInput(label="Wrong answer3", style=discord.TextStyle.paragraph)
+		question = ui.TextInput(label='Question', min_length=1, max_length=200)
+		correct_answer = ui.TextInput(label='Correct answer', style=discord.TextStyle.paragraph, min_length=1, max_length=100)
+		wrong_answer1 = ui.TextInput(label="Wrong answer1", style=discord.TextStyle.paragraph, min_length=1, max_length=100)
+		wrong_answer2 = ui.TextInput(label="Wrong answer2", style=discord.TextStyle.paragraph, min_length=1, max_length=100)
+		wrong_answer3 = ui.TextInput(label="Wrong answer3", style=discord.TextStyle.paragraph, min_length=1, max_length=100)
 
 		# After clicking on the "MCQ" button we choose the right answer and the wrong ones
 		async def on_submit(self, interaction: discord.Interaction):
@@ -80,6 +69,19 @@ class Roulette:
 			
 			upd_data(next_traveler, f"games/created_traveler")
 
+	# Create a True or False traveler
+	class Traveler_true_or_false(ui.Modal, title = "True or false"):
+		question = ui.TextInput(label='Question', min_length=1, max_length=200)
+		
+		# After clicking on the "True or False" button we choose the right answer
+		async def on_submit(self, interaction: discord.Interaction):
+			await interaction.response.send_message(f'Choose the right answer:', view = Roulette.Choose_correct_answer(),ephemeral=True)
+			next_traveler : list[str] = []
+			next_traveler.append(str(self.question))
+
+			upd_data(next_traveler, f"games/created_traveler")
+
+	# Choosing correct answer between "True" and "False"
 	class Choose_correct_answer(ui.View):
 		def __init__(self):
 			super().__init__(timeout=None)
@@ -101,6 +103,7 @@ class Roulette:
 			next_traveler.append("True")
 			next_traveler.append("False")
 			next_traveler.append(inter.user.name)
+
 			upd_data(next_traveler, "games/created_traveler")
 			
 		# Choosing "False" as the right answer
@@ -114,6 +117,7 @@ class Roulette:
 			next_traveler.append("False")
 			next_traveler.append("True")
 			next_traveler.append(inter.user.name)
+
 			upd_data(next_traveler, "games/created_traveler")
 	
 	async def embed(self, inter : discord.Interaction, E : discord.Embed):
@@ -178,7 +182,6 @@ class Roulette:
 			if get_data((f"games/users/{inter.user.id}/last_roulette")) == -1:
 				upd_data(dt.datetime.now().timestamp(), f"games/users/{inter.user.id}/last_roulette")
 
-				print("first time")   
 				E.colour = discord.Colour.gold()
 				E.description = f"Welcome to the Roulette, {inter.user.mention}! As it's your first time, you get a free spin! \nYou can consult the help command to know more about this feature.\n Enjoy!"
 
@@ -199,7 +202,6 @@ class Roulette:
 				E.description = f"{inter.user.mention} used the roulette! It costs only one 🍬."
 				await inter.followup.send(embed = E)
 				upd_data(user_data["candies"]-1, f"games/users/{inter.user.id}/candies")
-				print("updated")
 
 			else:
 				E.colour = discord.Colour.gold()
@@ -232,13 +234,13 @@ class Roulette:
 
 		consequences = {
 			"level_up" : 2,
-			"level_down" : 2,
-			"tech_up" : 5,
-			"tech_down" : 5,
-			"timeout_someone" : 5,
+			"level_down" : 1.5,
+			"tech_up" : 4,
+			"tech_down" : 3,
+			"timeout_someone" : 5, #à finir
 			"timeout_myself" : 7.5,
 			"next_bet_all" : 5,
-			"wordle_guess_reduced" : 5,
+			"wordle_guess_reduced" : 5, #encore à tester
 			"traveler_spawn" : 5.5, 
 			"create_next_traveler" : 8 * current_created_traveler,
 			"fail_next_traveler" : 5, 
@@ -246,10 +248,10 @@ class Roulette:
 			"chances_next_bet_/2" : 4, 
 			"next_gain_x3" : 4, 
 			"next_gain_/3" : 4, 
-			"next_bet_someone_else" : 3, 
+			"next_bet_someone_else" : 3,
 			"steal_collect_x2" : 3, 
-			"choose_name_level_up" : 3, 
-			"choose_name_level_down" : 3, 
+			"choose_name_level_up" : 4, 
+			"choose_name_level_down" : 2, 
 			"next_collect_x3" : 3, 
 			"next_gain_x10" : 2, 
 			"next_gain_/10" : 2, 
@@ -261,7 +263,7 @@ class Roulette:
 
 		#Modify this line to make tests.
 		cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
-		cons = "create_next_traveler" 
+		cons = "wordle_guess_reduced" 
 		print(cons) 
 		has_been_answered = False
 		url = random_avatar()
@@ -320,7 +322,7 @@ class Roulette:
 		elif cons=="timeout_someone": #inter user -> discord member 
 			has_been_answered = True
 			if not other_user.guild_permissions.administrator:
-				await other_user.timeout(dt.timedelta(minutes=30), reason="haha mskn")
+				await other_user.timeout(dt.timedelta(minutes=60), reason="haha mskn")
 				E.colour = discord.Colour.green()
 				E.description = f"{inter.user.mention} got {other_user.mention} timed out! I see some beef coming." 
 				return await inter.followup.send(embed=E)
@@ -334,7 +336,7 @@ class Roulette:
 				await inter.followup.send(embed=E)
 				return 
 			else:
-				await self.roulette(inter, other_user)
+				return await self.roulette(inter, other_user)
 
 		elif cons == "traveler_spawn":
 			has_been_answered = True
@@ -353,7 +355,7 @@ class Roulette:
 				E.description = f"{inter.user.mention} got themselves timed out. See you later!" 
 				await inter.followup.send(embed=E)
 			else:
-				await self.roulette(inter, other_user)
+				return await self.roulette(inter, other_user)
 
 		# The robber steals the roses in the user's bank and puts it in robber_total
 		elif cons == "bank_robbery":
@@ -372,20 +374,35 @@ class Roulette:
 			double_money+=double_money
 			upd_data(double_money, f"games/users/{inter.user.id}/bank/roses")
 			E.colour = discord.Colour.purple()
-			E.description = f"{inter.user.mention} your bank got multiplied by two!"
+			E.description = f"{inter.user.mention} your roses in bank got multiplied by two!"
 			await inter.followup.send(embed=E)
 
 		elif cons == "steal_collect_x2":
 			has_been_answered = True
 			value = get_value(other_user_data)*2
-			user_data["roses"] += value
-			other_user_data["roses"] -= value
+
+			if other_user_data["roses"] == 0:
+				E.colour = discord.Colour.purple()
+				E.description = f"{other_user.mention} is poor so {inter.user.mention} stole nothing..."
+				await inter.followup.send(embed=E)
+
+			elif other_user_data["roses"] < value:
+				E.colour = discord.Colour.purple()
+				E.description = f"{other_user.mention} is poor so {inter.user.mention} stole less than {value} roses..."
+				await inter.followup.send(embed=E)
+				user_data["roses"] += other_user_data["roses"]
+				other_user_data["roses"] = 0
+
+			else:
+				user_data["roses"] += value
+				other_user_data["roses"] -= value
+				E.colour = discord.Colour.purple()
+				E.description = f"{inter.user.mention} stole two collects from {other_user.mention}!"
+				await inter.followup.send(embed=E)
+
 			upd_data(other_user_data["roses"], f"games/users/{other_user.id}/roses")
 			upd_data(user_data["roses"], f"games/users/{inter.user.id}/roses")
 
-			E.colour = discord.Colour.purple()
-			E.description = f"{inter.user.mention} stole two collects from {other_user.mention}!"
-			await inter.followup.send(embed=E)
 
 		elif cons=="choose_name_level_up":
 			has_been_answered = True
@@ -397,17 +414,25 @@ class Roulette:
 
 		elif cons=="choose_name_level_down":
 			has_been_answered = True
-			other_user_data["level"]-=1
-			upd_data(other_user_data["level"], f"games/users/{other_user.id}/level")
-			E.colour = discord.Colour.purple()
-			E.description = f"Haha, you leveled-down {other_user.mention} to level **{other_user_data['level']}**!"
-			await inter.followup.send(embed=E)
-
+			if other_user_data["level"]>0:
+				other_user_data["level"]-=1
+				upd_data(other_user_data["level"], f"games/users/{other_user.id}/level")
+				E.colour = discord.Colour.purple()
+				E.description = f"Haha, you leveled-down {other_user.mention} to level **{other_user_data['level']}**!"
+				await inter.followup.send(embed=E)
+			else:
+				# If the user is at level 0 they're not leveled down
+				E.colour = discord.Colour.red()
+				E.description = f"{other_user.mention} didn't level down because they're already level 0..."
+				await inter.followup.send(embed=E)
+				
 		elif cons=="next_bet_all":
 			user_data["effects"].append("next_bet_all")
 
 		elif cons=="wordle_guess_reduced":
-			user_data["effects"].append("wordle_guess_reduced")
+			print(1)
+			user_data["wordle_num_of_guess"] = 5
+			upd_data(user_data["wordle_num_of_guess"], f"games/users/{inter.user.id}/wordle_num_of_guess")
 
 		elif cons == "next_gain_x3":
 			user_data["effects"].append("next_gain_x3")

@@ -1,6 +1,7 @@
 import discord 
 from discord import app_commands
 from discord.ext import commands
+import pathlib
 
 import random
 import datetime as dt
@@ -93,14 +94,14 @@ class Economy(commands.Cog):
 		if "free_flip_when_collect" in user_data["effects"]:
 			GH = GamblingHelper(self.bot)
 			guess : Literal["heads", "tails"] = random.choice(["heads", "tails"])
-			user_data["effects"].append("current_collect")
 			E = await GH.embed(inter,E)
 			E.description = f"Congratulations! You won a free flip !"
 			E.color = discord.Color.purple()
 			await inter.followup.send(embed=E)
 			await GH.flip(inter, str(value), guess)
 			user_data["effects"].remove("free_flip_when_collect")
-		
+			
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 
 	@app_commands.command(description="Allows you to upgrade your level")
 	@app_commands.checks.cooldown(1, 3, key=lambda i: (i.guild_id, i.user.id))

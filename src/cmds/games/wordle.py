@@ -65,14 +65,9 @@ class Wordle(commands.Cog):
 		
 		Wordle.active_games[user_id] = True
 		has_won = False
-		num_of_guess=6
+		num_of_guess=user_data["wordle_num_of_guess"]
 		
 		current_number_guess = len(user_data[current_w])
-		wordle_reduced = False
-		if "wordle_guess_reduced" in user_data["effects"]:
-			user_data["effects"].remove("wordle_guess_reduced")
-			num_of_guess=5
-			wordle_reduced = True
 		
 		already_won = False
 		if "🟩🟩🟩🟩🟩" in user_data[current_w].values():
@@ -109,7 +104,7 @@ class Wordle(commands.Cog):
 			await inter.followup.send(f"{already_guessed}", ephemeral = True)
 			await inter.followup.send("Type *stop* to pause the game.", ephemeral = True)
 
-		#The user has 6 chances
+		#The user has 6 or 5 chances
 		while current_number_guess<num_of_guess:
 
 			#Waiting for the user's response
@@ -119,6 +114,7 @@ class Wordle(commands.Cog):
 				message = await self.bot.wait_for("message", timeout = 180, check = check)
 			except asyncio.TimeoutError:
 				Wordle.active_games[user_id] = False 
+
 				return await inter.followup.send("See you later", ephemeral=True)
 			guess_word = simplify(message.content.lower())
 			await message.delete()
@@ -205,7 +201,7 @@ class Wordle(commands.Cog):
 			E.color = discord.Color.red()
 			await inter.followup.send(embed = E)
 
-		if wordle_reduced:
+		if num_of_guess == 5:
 			E.title = "Roulette"
 			E.description = f"Oops you only had 5 guesses today...\n"
 			E.color = discord.Color.purple()

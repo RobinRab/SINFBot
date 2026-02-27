@@ -20,7 +20,7 @@ class Games(commands.Cog):
 
 		#traveler_loop.start(bot=self.bot)
 		#wordle_traveler.start(bot=self.bot)
-
+	"""
 	@app_commands.command(description="Play Amazons!")
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
@@ -263,7 +263,7 @@ class Games(commands.Cog):
 		button = Button(timeout_date)
 
 		button.message = await inter.followup.send(txt, embed=E, view=button)
-
+	"""
 
 
 async def traveler(*, bot: commands.Bot):
@@ -433,7 +433,7 @@ async def traveler(*, bot: commands.Bot):
 
 			user_data = get_user_data(inter.user.id)
 			fail_next = False
-			if "fail_next_traveler" in user_data["effects"]:
+			if "fail_next_traveler" in user_data["effects"] and correct_answer.upper() == self.label:
 				user_data["effects"].remove("fail_next_traveler")
 				upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 				await incorrect(inter)
@@ -452,7 +452,7 @@ async def traveler(*, bot: commands.Bot):
 					else:
 						await incorrect(inter)
 			if fail_next:
-				await inter.followup.send("You had 100% chances of losing today... ", ephemeral=True)
+				await inter.followup.send("Because of the roulette, had 100% chances of losing this one... ", ephemeral=True)
 			if difficulty != "Random" or inter.user.name != creator:
 				if isinstance(self.parent_view.message, discord.Message):
 					await self.parent_view.message.delete()
