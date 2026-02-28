@@ -46,7 +46,7 @@ class Economy(commands.Cog):
 		E.description += f"- **{user_data['ideas']}💡**\n"
 		await inter.followup.send(embed=E)
 
-	@app_commands.command(description="Collects your ressources each 12h")
+	@app_commands.command(description="Collects your ressources each 10h")
 	@app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
 	async def collect(self, inter:discord.Interaction):
