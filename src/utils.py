@@ -391,13 +391,12 @@ def get_acnh_musics() -> dict[str, str]:
 def new_update() -> discord.Embed:
 	E = discord.Embed(color=discord.Color.green())
 	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
-	E.title = "Reset!"
+	E.title = "New update !"
 	E.set_author(name="SINF illégal family bot")
-	E.description = "- Economy reset\n"
-	E.description += "- Animal crossing !! \n"
-	E.description += "- Max tech is now 20\n"
-	E.description += "- Removed cutie perks\n"
+	E.description = "- Gamble autocomplete\n"
+	E.description += "- Better roll information\n"
 
-	E.add_field(name="Authors", value="<@!271305579698323456> & <@!346945067975704577>")
+	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
+	E.add_field(name="Authors", value="<@!346945067975704577>")
 
 	return E
