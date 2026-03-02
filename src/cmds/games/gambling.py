@@ -115,6 +115,7 @@ class GamblingHelper():
 			return await inter.followup.send(embed=E)
 
 		r = random.randint(1,100)
+		E.add_field(name="Roll:", value=f"**{r}**")
 		cash=amount
 		if r == 100:
 			cash = amount*10
@@ -122,10 +123,10 @@ class GamblingHelper():
 			E.color = discord.Color.gold()
 		elif r >= 90:
 			cash = amount*4
-			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎯"
+			E.description = f"{inter.user.mention}, You rolled 90 or above and won x4 **{cash}🌹!** 🎯"
 		elif r >= 70:
 			cash = amount*2
-			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎉"
+			E.description = f"{inter.user.mention}, You rolled 70 or above and won x2 **{cash}🌹!** 🎉"
 		elif r==1:
 			E.description = f"{inter.user.mention}, You rolled a 1 and kept your **{cash}🌹!** ✨"
 			E.color = discord.Color.dark_purple()
