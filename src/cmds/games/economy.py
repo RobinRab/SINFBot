@@ -6,9 +6,7 @@ import random
 import datetime as dt
 from typing import Optional, Literal
 
-from cmds.games.games import traveler
-
-from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time
+from utils import get_data, upd_data, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time
 
 class Economy(commands.Cog):
 	def __init__(self,bot):

@@ -1,4 +1,4 @@
-import discord
+import discord 
 from discord.ext import commands
 from discord.ext.commands import MemberConverter, EmojiConverter
 
@@ -331,6 +331,13 @@ def new_user():
 	}
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
+	"""Translates a user input into an amount of cash. \n
+	Accepts : \n
+	- A number (e.g. 100) \n
+	- "all" to bet all the cash \n
+	- A percentage (e.g. 50%) to bet a percentage of the cash
+	only used for the bank
+	"""
 	txt = txt.lower().replace(" ", "")
 	# Check if txt is a valid number
 	try: 

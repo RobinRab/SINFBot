@@ -5,8 +5,9 @@ from discord.ext import commands
 import random
 import datetime as dt
 from typing import Literal
+import re
 
-from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie, UnexpectedValue
+from utils import get_data, upd_data, GetLogLink
 
 class Gambling(commands.Cog):
 	def __init__(self,bot):
@@ -36,6 +37,33 @@ class Gambling(commands.Cog):
 		GH = GamblingHelper(self.bot)
 		await GH.ladder(inter, bet)
 
+	@roll.autocomplete("bet")
+	@flip.autocomplete("bet")
+	@ladder.autocomplete("bet")
+	async def gamble_autocomplete(self, inter:discord.Interaction, current:str):
+		try :
+			user_data : dict = get_data(f"games/users/{inter.user.id}")
+		except :
+			if current.isdigit():
+				return [app_commands.Choice(name=f"({current}🌹)", value=f"({current}🌹)")]
+			return []
+
+		roses = user_data["roses"]
+
+		options:list[str] = []
+
+		if current.isdigit() and int(current) <= roses:
+			options.append(f"{current}🌹")
+		
+		options.extend([
+			f"10% ({roses//10}🌹)",
+			f"25% ({roses//4}🌹)",
+			f"50% ({roses//2}🌹)",
+			f"all ({roses}🌹)"
+		])
+
+		return [app_commands.Choice(name=opt, value=opt) for opt in options]
+
 
 class GamblingHelper():
 	def __init__(self, bot:commands.Bot):
@@ -49,12 +77,19 @@ class GamblingHelper():
 		try :
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
-			E.description = f"{inter.user.mention}, You don't have any 🌹"
+			E.description = f"{inter.user.mention}, You don't have any 🌹, get some using **/collect**"
 			E.color = discord.Color.red()
 			return 0, E, {}
+		
+		# if the user sent the command too quickly
+		if '🌹' not in bet:
+			bet += "🌹"
 
-		# translate the user request into a number
-		amount = get_amount(user_data["roses"], bet)
+		amount_match = re.search(r"(\d+)🌹", bet)
+		if amount_match:
+			amount = int(amount_match.group(1))
+		else: 
+			amount = None
 
 		if amount is None or amount < 0:
 			E.description = f"{inter.user.mention}, You need to bet a valid amount of 🌹"
