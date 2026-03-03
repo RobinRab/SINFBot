@@ -1,8 +1,9 @@
+.vscode/
 __pycache__
 .DS_Store
-Thumbs.db
-.env
 
+.env
+Thumbs.db
 achievements.py
 
 src/data/bot.log
