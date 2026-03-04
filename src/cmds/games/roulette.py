@@ -431,8 +431,6 @@ class Roulette:
 
         elif cons=="wordle_guess_reduced":
             user_data["effects"].append("wordle_guess_reduced")
-            user_data["wordle_num_of_guess"] = 5
-            upd_data(user_data["wordle_num_of_guess"], f"games/users/{inter.user.id}/wordle_num_of_guess")
 
         elif cons == "next_gain_x3":
             user_data["effects"].append("next_gain_x3")

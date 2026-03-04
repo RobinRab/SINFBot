@@ -95,13 +95,14 @@ class Wordle(commands.Cog):
             await inter.followup.send("Type *stop* to pause the game.", ephemeral = True)
 
         guess_limit = 6
-        
-        if "wordle_guess_reduced" in user_data["effects"]:
-            guess_limit -=1
 
         has_won = False
         
-        #The user has 6 or 5 chances
+        #User got cursed by roulette
+        if "wordle_guess_reduced" in user_data["effects"]:
+            guess_limit = 5
+
+        #The user has 5 or 6 chances
         while current_number_guess<guess_limit:
 
             #Waiting for the user's response
@@ -121,7 +122,6 @@ class Wordle(commands.Cog):
                 Wordle.active_games[user_id] = False
                 return await inter.followup.send("See you later", ephemeral=True)
                 
-
             #Word has to be a five letter word
             if len(guess_word) != 5:
                 await inter.followup.send("This is not a five letter word", ephemeral=True)
@@ -133,7 +133,6 @@ class Wordle(commands.Cog):
                 continue
 
             #Gets the colors corresponding to the word and print them
-
             spaced_word = ""
             for letter in guess_word.upper():
                 spaced_word += f"{letter:^4}"
@@ -143,11 +142,10 @@ class Wordle(commands.Cog):
 
             await inter.followup.send(f"{already_guessed}", ephemeral=True)
             
-            current_number_guess = len(user_data[current_w])
             user_data[current_w][f"{current_number_guess}{guess_word}"]=colors
 
-            upd_data(user_data, f"games/users/{inter.user.id}")
-            current_number_guess = len(user_data[current_w])
+            upd_data(user_data[current_w], f"games/users/{inter.user.id}/{current_w}")
+            current_number_guess += 1
             
             #The users wins
             if wordle_word == guess_word:
@@ -202,8 +200,11 @@ class Wordle(commands.Cog):
         upd_data(user_data[f"wordle_stats_{l_abbr}"], f"games/users/{inter.user.id}/wordle_stats_{l_abbr}")
 
         if guess_limit == 5:
+            user_data["cursed_wordle"] = 1
+            upd_data(user_data["cursed_wordle"], f"games/users/{user_id}/cursed_wordle")
             E.title = "Roulette"
             E.description = f"Oops you only had 5 guesses today...\n"
+            # E.set_thumbnail(url="https://media.discordapp.net/attachments/1090314687620583467/1478506972767850689/Gemini_Generated_Image_jlgs21jlgs21jlgs.png?ex=69a8a66b&is=69a754eb&hm=d9cf9e3628c144e0d4aecbf9468b31938b860f4c9edb5c7b074bc784cc84e682&=&format=webp&quality=lossless&width=1843&height=1384")
             E.color = discord.Color.purple()
             await inter.followup.send(embed = E)
 
@@ -309,7 +310,6 @@ def color_function(wordle_word:str, guess_word:str) -> str:
 @tasks.loop()
 async def choose_todays_word(bot:commands.Bot) -> None:
     #user_data = await self.get_data_wordle(inter)
-
     w_data = get_words()
     wordle_list_en = w_data["wordle_list_en"]
     wordle_list_fr = w_data["wordle_list_fr"]
@@ -348,7 +348,11 @@ async def choose_todays_word(bot:commands.Bot) -> None:
         #upd_data(user_data, f"games/users/{inter.user.id}")
         upd_data({}, f"games/users/{user_id}/wordle_en")
         upd_data({}, f"games/users/{user_id}/wordle_fr")
-        
+        user_data = get_data(f"games/users/{user_id}")
+        if "wordle_guess_reduced" in user_data["effects"] and user_data["cursed_wordle"] == 1:
+            user_data["cursed_wordle"] = 0
+            user_data["effects"].remove("wordle_guess_reduced")
+            upd_data(user_data, f"games/users/{user_id}")
 
 async def setup(bot:commands.Bot):
     await bot.add_cog(Wordle(bot))
