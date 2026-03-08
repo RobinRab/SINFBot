@@ -196,7 +196,10 @@ class AnimalCrossing(commands.Cog):
 						item.disabled = True
 				self.stop()
 
-		button = Button(timeout=180)
+				if self.message:
+					self.message = await self.message.edit(view=self) 
+
+		button = Button(timeout=120)
 		button.message = await inter.followup.send(view=button, embed=embed, content=f"{villager_name} wants to join your villagers! Do you accept?")
 
 
@@ -229,7 +232,7 @@ class AnimalCrossing(commands.Cog):
 				return await inter.followup.send(f"{user} has no villagers yet!", ephemeral=True)
 		
 		
-		view = AnimalCrossing.VillagersView(viewUserID=inter.user.id, villagers=villagers, timeout=180)
+		view = AnimalCrossing.VillagersView(viewUserID=inter.user.id, villagers=villagers, timeout=120)
 		#setup view close button
 		if 1: 
 			# add a close button (row 3 will always be empty, so bottom)
@@ -261,12 +264,13 @@ class AnimalCrossing(commands.Cog):
 		"Alligator": "🐊",
 		"Anteater": "🐜",
 		"Bear": "🐻",
+		"Bear cub": "🐻",
+		"Cub": "🐻",
 		"Bird": "🐦",
 		"Bull": "🐂",
 		"Cat": "🐈",
 		"Chicken": "🐔",
 		"Cow": "🐮",
-		"Cub": "🐻",
 		"Deer": "🦌",
 		"Dog": "🐶",
 		"Duck": "🦆",
@@ -401,8 +405,8 @@ class AnimalCrossing(commands.Cog):
 				if isinstance(item, discord.ui.Button):
 					item.disabled = True
 				
-			# remove the close button
-			# self.remove_item(self.children[-1])
+			#remove the close button
+			self.remove_item(self.children[-1])
 
 			if self.message:
 				await self.message.edit(view=self)
