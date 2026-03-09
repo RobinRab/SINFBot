@@ -54,13 +54,36 @@ class Gambling(commands.Cog):
 
 		if current.isdigit() and int(current) <= roses:
 			options.append(f"{current}🌹")
-		
-		options.extend([
-			f"10% ({roses//10}🌹)",
-			f"25% ({roses//4}🌹)",
-			f"50% ({roses//2}🌹)",
-			f"all ({roses}🌹)"
-		])
+
+		# if user wants all
+		if current.startswith("25%"):
+			options.extend([
+				f"25% ({roses//4}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"50% ({roses//2}🌹)",
+				f"all ({roses}🌹)", 
+			])
+		elif current.startswith("50%"):
+			options.extend([
+				f"50% ({roses//2}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"all ({roses}🌹)", 
+			])
+		elif current.startswith("a"):
+			options.extend([
+				f"all ({roses}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"50% ({roses//2}🌹)"
+			])
+		else:
+			options.extend([
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"50% ({roses//2}🌹)",
+				f"all ({roses}🌹)"
+			])
 
 		return [app_commands.Choice(name=opt, value=opt) for opt in options]
 
