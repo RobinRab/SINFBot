@@ -7,9 +7,9 @@ import datetime as dt
 from typing import Literal
 import asyncio
 
+import re
 from settings import BOT_CHANNEL_ID
 from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie, UnexpectedValue, get_value, random_avatar, get_belgian_time, get_user_data
-import re
 
 
 class GamblingHelper:
@@ -55,7 +55,6 @@ class GamblingHelper:
 			amount = int(amount_match.group(1))
 		else: 
 			amount = None
-
 
 		if amount is None or amount < 0:
 			E.description = f"{inter.user.mention}, You need to bet a valid amount of 🌹"
@@ -420,6 +419,80 @@ class Gambling(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 		self.GH = GamblingHelper(bot)
+
+	@app_commands.command(description="Rolls a dice")
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	@app_commands.describe(bet="The amount to bet")
+	async def roll(self, inter:discord.Interaction, bet:str):
+		GH = GamblingHelper(self.bot)
+		await GH.roll(inter, bet)
+
+	@app_commands.command(description="Flips a coin")
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	@app_commands.describe(bet="The amount to bet", guess="Your guess")
+	async def flip(self, inter:discord.Interaction, bet:str, guess:Literal["heads", "tails"]):
+		GH = GamblingHelper(self.bot)
+		await GH.flip(inter, bet, guess)
+
+	@app_commands.command(description="Lucky Ladder, each step has equal chances of occuring")
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	@app_commands.describe(bet="The amount to bet")
+	async def ladder(self, inter:discord.Interaction, bet:str):
+		GH = GamblingHelper(self.bot)
+		await GH.ladder(inter, bet)
+
+	@roll.autocomplete("bet")
+	@flip.autocomplete("bet")
+	@ladder.autocomplete("bet")
+	async def gamble_autocomplete(self, inter:discord.Interaction, current:str):
+		try :
+			user_data : dict = get_data(f"games/users/{inter.user.id}")
+		except :
+			if current.isdigit():
+				return [app_commands.Choice(name=f"({current}🌹)", value=f"({current}🌹)")]
+			return []
+
+		roses = user_data["roses"]
+
+		options:list[str] = []
+
+		if current.isdigit() and int(current) <= roses:
+			options.append(f"{current}🌹")
+
+		# if user wants all
+		if current.startswith("25%"):
+			options.extend([
+				f"25% ({roses//4}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"50% ({roses//2}🌹)",
+				f"all ({roses}🌹)", 
+			])
+		elif current.startswith("50%"):
+			options.extend([
+				f"50% ({roses//2}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"all ({roses}🌹)", 
+			])
+		elif current.startswith("a"):
+			options.extend([
+				f"all ({roses}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"50% ({roses//2}🌹)"
+			])
+		else:
+			options.extend([
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"50% ({roses//2}🌹)",
+				f"all ({roses}🌹)"
+			])
+
+		return [app_commands.Choice(name=opt, value=opt) for opt in options]
 
 	@app_commands.command(description="Rolls a dice")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))

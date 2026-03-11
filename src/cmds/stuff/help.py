@@ -10,17 +10,6 @@ from utils import is_member, is_cutie, is_owner, GetLogLink
 class MissingCommand(Exception):pass
 
 bot_commands = {
-<<<<<<< HEAD
-	"Owner"      : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
-	"Cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
-	"Tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
-	"Infos"      : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
-	"Birthdays"  : [is_member, "/set_birthday", "/birthdays"],
-	"Member Fun" : [is_member, "/confession", "/apoll"],
-	"Fun"        : [None, "/poll", "!/ping", "/wordle"],
-	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
-	"Gambling"   : [None, "/roll", "/flip", "/ladder", "/roulette"]
-=======
 	"Owner"           : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
 	"Cuties"          : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
 	"Tetrio"          : [is_member, "/register", "/profile", "/leaderboard"],
@@ -29,9 +18,8 @@ bot_commands = {
 	"Member Fun"      : [is_member, "/confession", "/apoll"],
 	"Fun"             : [None, "/poll", "!/ping", "/wordle"],
 	"Economy"         : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
-	"Gambling"        : [None, "/roll", "/flip", "/ladder"],
+	"Gambling"        : [None, "/roll", "/flip", "/ladder", "/roulette"],
 	"Animal Crossing" : [None, "/stalk", "/meet", "/village"]
->>>>>>> upstream/main
 }
 
 class Help(commands.Cog):
@@ -282,15 +270,9 @@ class Help(commands.Cog):
 					E.add_field (name="How to play",  value="```You have 3 minutes to write to your guess.\n\
 																To pause the game, write *stop*. Recall the function to *restart*.```")
 					E.add_field (name = "**Meaning of colors**", value = "```🟩 : The letter in in the right place\n\
-<<<<<<< HEAD
-				  															 🟨 : The letter is in the word but not in the right place\n\
-				  															 🟥 : The letter is not in the word```")
-					
-=======
-																			🟨 : The letter is in the word but not in the right place\n\
-																			🟥 : The letter is not in the word```")
+																			 🟨 : The letter is in the word but not in the right place\n\
+																			 🟥 : The letter is not in the word```")
 
->>>>>>> upstream/main
 				# economy commands
 				elif query == "collect":
 					E.description = "**Collects your ressources each 10h**"
@@ -381,11 +363,9 @@ class Help(commands.Cog):
 					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
-<<<<<<< HEAD
+					
 				elif query == "roulette":
 					E.description = "**Affects a random effect to you or another person of your choice**\n Effects can be good or bad, for you or someone else...\nWhen spinning the roulette, you choose another user, and the effect will be affected to one of you, randomly. \n You have a free sunday roll every week! Other than that, the roulette cots 1 🍬 candy, and can be spinned every minute."
-					
-=======
 
 				# animal crossing commands
 				elif query == "stalk":
@@ -405,7 +385,6 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/village (user)```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 
->>>>>>> upstream/main
 				else:
 					await inter.followup.send(f"{inter.user.name} Help page for command {query} not found")
 			# if the user doesn't have the perms

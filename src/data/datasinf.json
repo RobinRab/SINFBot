@@ -1,0 +1,419 @@
+{
+    "phrasesID": 125,
+    "phrases": [
+        {
+            "mot": "avatar",
+            "text": "best movie ever",
+            "time": 5,
+            "id": 1
+        },
+        {
+            "mot": "kevin",
+            "text": " On ne parle pas de kevin. ",
+            "time": 5,
+            "id": 5
+        },
+        {
+            "mot": "dan",
+            "text": " addict \u00e0 tetris depuis 1978 ",
+            "time": 2,
+            "id": 7
+        },
+        {
+            "mot": "b&w",
+            "text": " J'arrive! ",
+            "time": 1,
+            "id": 11
+        },
+        {
+            "mot": "eau",
+            "text": " Dans 20-30 ans il y en aura plus ",
+            "time": 2,
+            "id": 12
+        },
+        {
+            "mot": "ping",
+            "text": " pong! ",
+            "time": 5,
+            "id": 16
+        },
+        {
+            "mot": "J'ai faim",
+            "text": " mange ",
+            "time": 5,
+            "id": 19
+        },
+        {
+            "mot": "kiet",
+            "text": " Salut c'est Ki\u00eat ",
+            "time": 1,
+            "id": 23
+        },
+        {
+            "mot": "oolong",
+            "text": " https://tenor.com/view/fire-drink-burn-alcohol-gif-15842781 ",
+            "time": 1,
+            "id": 29
+        },
+        {
+            "mot": "Hello there",
+            "text": " General Kenobi ",
+            "time": 30,
+            "id": 30
+        },
+        {
+            "mot": "bubble tea",
+            "text": " \ud83e\uddcb ",
+            "time": 1,
+            "id": 33
+        },
+        {
+            "mot": "resto u",
+            "text": " beurk ",
+            "time": 1,
+            "id": 35
+        },
+        {
+            "mot": "dormir",
+            "text": " dors ",
+            "time": 1,
+            "id": 36
+        },
+        {
+            "mot": "matteo",
+            "text": "https://cdn.discordapp.com/attachments/709313685226782751/1085171228748292197/matteo.png",
+            "time": 1,
+            "id": 54
+        },
+        {
+            "mot": "wazzup",
+            "text": "https://tenor.com/view/whats-up-wazzup-scary-movie-scream-gif-16474707",
+            "time": null,
+            "id": 63
+        },
+        {
+            "mot": "sus",
+            "text": "https://tenor.com/view/among-us-sus-yhk-among-twerk-among-us-twerk-gif-23335803",
+            "time": 2,
+            "id": 67
+        },
+        {
+            "mot": "kiet",
+            "text": "https://tenor.com/view/amouranth-horse-mask-dramateam-gif-22030881",
+            "time": 2,
+            "id": 68
+        },
+        {
+            "mot": "PTK",
+            "text": "https://tenor.com/view/amouranth-horse-mask-dramateam-gif-22030881",
+            "time": 2,
+            "id": 69
+        },
+        {
+            "mot": "gsm",
+            "text": "13 tels : 14.7cm",
+            "time": null,
+            "id": 71
+        },
+        {
+            "mot": "Simon",
+            "text": "https://cdn.discordapp.com/attachments/709313685226782751/1089889812305162300/imh.jpg",
+            "time": 1,
+            "id": 78
+        },
+        {
+            "mot": "Emma",
+            "text": "https://cdn.discordapp.com/attachments/709313685226782751/1090233426797400084/emma.jpeg",
+            "time": 1,
+            "id": 79
+        },
+        {
+            "mot": "harc\u00e8le",
+            "text": "Petit rappel : c\u2019est pas bien d\u2019\u00eatre m\u00e9chant",
+            "time": 5,
+            "id": 85
+        },
+        {
+            "mot": "Bizarre",
+            "text": "https://tenor.com/view/suspect-jdg-joueur-du-grenier-louche-gif-25493922",
+            "time": 5,
+            "id": 89
+        },
+        {
+            "mot": "merci",
+            "text": "https://tenor.com/view/welcome-bitch-youre-welcome-the-rock-dwayne-johnson-gif-17767003",
+            "time": 1,
+            "id": 90
+        },
+        {
+            "mot": "Robin",
+            "text": "https://tenor.com/view/hi-hello-herro-wru-scooby-doo-gif-15747987",
+            "time": 5,
+            "id": 92
+        },
+        {
+            "mot": "@183259368286978048",
+            "text": "https://tenor.com/view/kevyn-monkey-kevyntth-gif-24951593",
+            "time": 5,
+            "id": 93
+        },
+        {
+            "mot": "@329571940476125185",
+            "text": "https://tenor.com/view/sleep-will-ferrell-elf-how-did-you-sleep-last-night-got-a-full40minutes-gif-10508562",
+            "time": 5,
+            "id": 96
+        },
+        {
+            "mot": "@346945067975704577",
+            "text": "https://tenor.com/view/dog-gif-26024604",
+            "time": 10,
+            "id": 97
+        },
+        {
+            "mot": "<@271305579698323456>",
+            "text": "<:john:1095327420145483786>",
+            "time": 3,
+            "id": 99
+        },
+        {
+            "mot": "john",
+            "text": "<:john:1095327420145483786>",
+            "time": 4,
+            "id": 100
+        },
+        {
+            "mot": "tg",
+            "text": "tg toi m\u00eame",
+            "time": 3,
+            "id": 101
+        },
+        {
+            "mot": "Audrey",
+            "text": "<:audreydegout:1105462628484141116>",
+            "time": 1,
+            "id": 104
+        },
+        {
+            "mot": "<@560155603574718475>",
+            "text": "https://tenor.com/view/triggered-eevee-glaceon-pokemon-angry-gif-16123164",
+            "time": 2,
+            "id": 105
+        },
+        {
+            "mot": "family",
+            "text": "https://tenor.com/view/family-toretto-dominic-gif-23895685",
+            "time": 5,
+            "id": 109
+        },
+        {
+            "mot": "!manger",
+            "text": "!manger ,,O\u00f9 manger \u00e0 Louvain-la-Neuve ? \n**__Fast-food :__**\n```\u2022 \ud83c\udf54 Burger King  \u20ac\u20ac\n\u2022 \ud83c\udf54 Black and white \u20ac\u20ac\n\u2022 \ud83c\udf54 Quick \u20ac\u20ac\n\u2022 \ud83c\udf57 Faux KFC \u20ac\u20ac\n\u2022 \ud83c\udf2e O tacos \u20ac\u20ac```\n**__Healthy : __**\n```\u2022 \ud83e\udd57 Poke house \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf63 Taki Maki \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf2f Mex and go \u20ac\u20ac\n\u2022 \ud83c\udf63 Sushi world \u20ac\u20ac\u20ac\n\u2022 \ud83c\udf72 Resto u \u20ac\n\u2022 \ud83c\udf58 Itadaki Max \u20ac\u20ac\n\u2022 \ud83e\udd57 Woke \u20ac\u20ac\u20ac\n\u2022 \ud83e\udddc\u200d\u2642\ufe0f  Simon \u2205\n\u2022 \ud83d\udc27 Pingouin \u2205```\n**__Pates : __**\n```\u2022 \ud83c\udf5d Nulles pates ailleurs \u20ac\u20ac\n\u2022 \ud83c\udf5d Fantasia \u20ac\u20ac\n\u2022 \ud83c\udf5d Pates du resto u \u20ac\n\u2022 \ud83c\udf5d Chez toi \u20ac```\n**__Sandwich : __ ** \n```\u2022 \ud83e\udd6a Kafette (Barbe) \u20ac\n\u2022 \ud83e\udd6a SOS Sandwich \u20ac\n\u2022 \ud83e\udd6a La sandwicherie \u20ac\u20ac\n\u2022 \ud83e\udd6a Cyclofette (Cyclotron) \u20ac\n\u2022 \ud83e\udd6a Chez Lisa \u20ac\n\u2022 \ud83e\udd6a Crousti \u20ac\n\u2022 \ud83e\udd6a Chez moi \u20ac```\n**__Sucr\u00e9 : __ ** \n```\u2022 \ud83e\uddc7 Gofidor \u20ac\n\u2022 \ud83c\udf69 Dunkin Donut \u20ac\n\u2022 \ud83c\udf79 Guapa \u20ac\u20ac\n\u2022 \ud83c\udf75 Bubble tea \u20ac\u20ac```",
+            "time": null,
+            "id": 110
+        },
+        {
+            "mot": "egg",
+            "text": "https://tenor.com/view/can-i-offer-you-a-nice-egg-egg-offer-gif-16874341",
+            "time": 3,
+            "id": 111
+        },
+        {
+            "mot": "Lei-Jie",
+            "text": "\u2665\ufe0f",
+            "time": 1,
+            "id": 112
+        },
+        {
+            "mot": "violence",
+            "text": "VIOLENCE",
+            "time": 1,
+            "id": 113
+        },
+        {
+            "mot": "627431499960156161",
+            "text": "https://tenor.com/view/skeletor-wordle-awoo-gif-24848356",
+            "time": 5,
+            "id": 114
+        },
+        {
+            "mot": "photo",
+            "text": "LEI-JIE SORT LE TEL",
+            "time": null,
+            "id": 115
+        },
+        {
+            "mot": "Zi-QI",
+            "text": "menace pour la soci\u00e9t\u00e9",
+            "time": 1,
+            "id": 116
+        },
+        {
+            "mot": "creeper",
+            "text": "Aw man",
+            "time": 3,
+            "id": 117
+        },
+        {
+            "mot": "!typechart",
+            "text": "https://cdn.discordapp.com/attachments/1125069945080905738/1216729661485092924/file.webp?ex=660172cd&is=65eefdcd&hm=1419b423e1e6f172163cfb91dc1fffb62bd857300c5ea137c55d755da462c2e2&",
+            "time": null,
+            "id": 118
+        },
+        {
+            "mot": "f",
+            "text": "https://tenor.com/view/solid-snake-salute-gif-24255323",
+            "time": 5,
+            "id": 120
+        },
+        {
+            "mot": "rage",
+            "text": "(\u256f\u00b0\u25a1\u00b0)\u256f\ufe35 \u253b\u2501\u253b",
+            "time": 5,
+            "id": 121
+        },
+        {
+            "mot": "454318083876847616",
+            "text": "\ud83c\udff3\ufe0f\u200d\ud83c\udf08",
+            "time": 1,
+            "id": 122
+        },
+        {
+            "mot": "1036549365071876126",
+            "text": "<:bi_flag:1172546899279106079>",
+            "time": 1,
+            "id": 123
+        },
+        {
+            "mot": "269210243093889028",
+            "text": "\ud83c\udf4c\ud83d\udca6\ud83c\udf51",
+            "time": 1,
+            "id": 124
+        }
+    ],
+    "tetris": {
+        "723244609597341748": "csromega",
+        "329571940476125185": "uwubereats",
+        "443867585075871767": "s_17",
+        "457594644495073280": "silversci777",
+        "183259368286978048": "dan1259",
+        "627431499960156161": "scylla1823",
+        "269210243093889028": "poirefruit",
+        "366975965601071104": "clonmell",
+        "411881842439094272": "ceisal",
+        "346945067975704577": "smaudoggo"
+    },
+    "birthday": {
+        "1048717154922541217": {
+            "year": 2022,
+            "month": 12,
+            "day": 3
+        },
+        "443867585075871767": {
+            "year": 2005,
+            "month": 1,
+            "day": 2
+        },
+        "627431499960156161": {
+            "year": 2003,
+            "month": 12,
+            "day": 29
+        },
+        "271305579698323456": {
+            "year": 2003,
+            "month": 2,
+            "day": 17
+        },
+        "303485893317230593": {
+            "year": 2002,
+            "month": 1,
+            "day": 8
+        },
+        "560155603574718475": {
+            "year": 2003,
+            "month": 2,
+            "day": 26
+        },
+        "330670074320912384": {
+            "year": 2004,
+            "month": 1,
+            "day": 20
+        },
+        "183259368286978048": {
+            "year": 2003,
+            "month": 2,
+            "day": 4
+        },
+        "723244609597341748": {
+            "year": 2004,
+            "month": 8,
+            "day": 23
+        },
+        "329571940476125185": {
+            "year": 2004,
+            "month": 8,
+            "day": 3
+        },
+        "752574610666684426": {
+            "year": 2004,
+            "month": 8,
+            "day": 28
+        },
+        "454318083876847616": {
+            "year": 2003,
+            "month": 10,
+            "day": 12
+        },
+        "411881842439094272": {
+            "year": 2002,
+            "month": 4,
+            "day": 11
+        },
+        "366975965601071104": {
+            "year": 2004,
+            "month": 5,
+            "day": 31
+        },
+        "269210243093889028": {
+            "year": 2002,
+            "month": 10,
+            "day": 18
+        },
+        "553163806600331284": {
+            "year": 2004,
+            "month": 11,
+            "day": 2
+        },
+        "290494427330510849": {
+            "year": 2004,
+            "month": 2,
+            "day": 14
+        }
+    },
+    "games": {
+        "has_seen_upd": [
+            346945067975704577
+        ],
+        "todays_word_en": "count",
+        "todays_word_fr": "mille",
+        "users": {
+            "346945067975704577": {
+                "level": 0,
+                "timely": 1772151927,
+                "roses": 240,
+                "candies": 0,
+                "ideas": 7,
+                "tech": 0,
+                "bank": {
+                    "roses": 2,
+                    "candies": 0,
+                    "ideas": 0
+                },
+                "achievements": [],
+                "wordle_en": {},
+                "wordle_fr": {},
+                "villager_of_the_day": "",
+                "villagers": []
+            }
+        }
+    }
+}
