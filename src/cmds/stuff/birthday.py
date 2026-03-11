@@ -6,7 +6,7 @@ import asyncio
 import datetime as dt
 from typing import Optional, Literal
 from settings import GENERAL_ID
-from utils import UnexpectedValue, is_member, get_data, upd_data, get_belgian_time, is_summer_time
+from utils import UnexpectedValue, is_member, get_data, upd_data, get_belgian_time, is_summer_time, get_value
 
 months = Literal["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -15,9 +15,9 @@ def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
 	year = get_belgian_time().year
 	birthdays = {}
 
-	for user in data.keys():
-		month = int(data[user]["month"])
-		day = int(data[user]["day"])
+	for user_id in data.keys():
+		month = int(data[user_id]["month"])
+		day = int(data[user_id]["day"])
 
 		date = dt.datetime(year, month, day, tzinfo=dt.timezone.utc)
 
@@ -27,7 +27,7 @@ def sort_bdays(data : dict) -> list[tuple[str, dt.datetime]]:
 		if date < dt.datetime.now(tz=dt.timezone.utc) - diff:
 			date = dt.datetime(year+1, month, day, tzinfo=dt.timezone.utc) - diff
 
-		birthdays[user] = date
+		birthdays[user_id] = date
 
 	return sorted(birthdays.items(), key=lambda x: birthdays[x[0]])
 
@@ -135,20 +135,33 @@ async def birthdays_loop(*, bot:commands.Bot):
 
 	birthdays = sort_bdays(data)
 
-	for user, date in birthdays:
-		user = bot.get_user(int(user))
+	for user_id, date in birthdays:
+		user = bot.get_user(int(user_id))
 
 		if user is None:
 			continue
 
 		left = int(date.timestamp() - dt.datetime.now(dt.timezone.utc).timestamp())
-
 		await asyncio.sleep(left+1)
 
 		year = get_belgian_time().year
 		age = year - data[str(user.id)]["year"]
 
-		await channel.send(f"Happy birthday {user.mention}, You are {age} years old today! :tada:")
+		txt = f"Happy birthday {user.mention}, You are {age} years old today! :tada:"
+
+		# each villager give you a collect on your birthday
+		try : 
+			user_data = get_data(f"games/users/{user_id}")
+			nb_villagers = user_data.get("villagers", [])
+			amount = get_value(user_data) * len(nb_villagers)
+			user_data["roses"] += amount
+			upd_data(user_data, f"games/users/{user_id}")
+
+			txt += f"\nYou have {len(nb_villagers)} villagers in your island, they wish to give you {amount} 🌹 as a gift!"
+		except :
+			pass
+
+		await channel.send(txt)
 
 		await asyncio.sleep(43200) #sleep 12h to skip timezones issues
 

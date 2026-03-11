@@ -2,10 +2,10 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-print(discord.__version__)
+print(f"discord -v: {discord.__version__}")
 
 import settings
-from utils import log, is_owner
+from utils import log, is_owner, get_data, upd_data, new_update
 
 intents = discord.Intents.all()
 
@@ -18,7 +18,6 @@ bot = commands.Bot(
 )
 bot.description = "" # not synced
 
-
 @bot.event
 async def on_ready():
 	log("INFO", f"Logged in as {bot.user}")
@@ -28,17 +27,25 @@ async def on_ready():
 
 	print("SINF illégal family bot online\n")
 
-# #only allow app_commands in bot channel
-# async def interaction_check(inter:discord.Interaction, /) -> bool:
-# 	if isinstance(inter.guild, discord.Guild) and isinstance(inter.user, discord.Member):
-# 		cutie = inter.guild.get_role(settings.CUTIE_ID)
-# 		assert isinstance(inter.channel, discord.TextChannel)
-# 		if inter.channel.id != settings.BOT_CHANNEL_ID: 
-# 			if not cutie in inter.user.roles and inter.user.id != settings.OWNER_ID:
-# 				return False
-# 	return True
 
-# bot.tree.interaction_check = interaction_check
+# dict for all users that have seen the update
+has_seen_upd : list[int] = get_data("games/has_seen_upd")
+
+#check if there was a new update
+async def interaction_check(inter:discord.Interaction, /) -> bool:
+	if inter.user.id in has_seen_upd:
+		return True
+
+	# send new update message
+	await inter.response.send_message(ephemeral=True, embed=new_update())
+
+	# update people that have seen the update
+	has_seen_upd.append(inter.user.id)
+	upd_data(has_seen_upd, "games/has_seen_upd")
+
+	return False
+
+bot.tree.interaction_check = interaction_check
 
 #only allow commands in bot channel
 @bot.check

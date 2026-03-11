@@ -1,4 +1,4 @@
-import discord
+import discord 
 from discord.ext import commands
 from discord.ext.commands import MemberConverter, EmojiConverter
 
@@ -27,17 +27,30 @@ async def GetLogLink(bot: commands.Bot, link:str) -> str:
 	LogPic = bot.get_channel(LOG_PIC_CHANNEL_ID)
 	if not isinstance(LogPic, discord.TextChannel):
 		raise UnexpectedValue("LogPic was not found")
-	
-	for format in [".gif",".png",".jpg",".jpeg",".webp", ".mp3",".ogg",".wav",".flac", ".mp4",".webm",".mov"]:
-		if format in link:
+
+	# Add a User-Agent and be more robust when fetching remote content.
+	headers = {"User-Agent": "Mozilla/5.0 (compatible; SINFBot/1.0)"}
+	for fmt in [".gif", ".png", ".jpg", ".jpeg", ".webp", ".mp3", ".ogg", ".wav", ".flac", ".mp4", ".webm", ".mov"]:
+		if fmt in link:
 			try:
-				async with aiohttp.ClientSession() as cs:
-					async with cs.get(link) as resp:
-						file = discord.File(io.BytesIO(await resp.content.read()), filename=f"file{format}")
+				async with aiohttp.ClientSession(headers=headers) as cs:
+					async with cs.get(link, timeout=10) as resp: #type: ignore
+						# only accept successful responses
+						if resp.status != 200:
+							continue
+						data = await resp.read()
+						if not data:
+							continue
+						buf = io.BytesIO(data)
+						buf.seek(0)
+						filename = f"file{fmt}"
+						file = discord.File(buf, filename=filename)
 						msg = await LogPic.send(file=file)
 						return msg.attachments[0].url
-			except:
-				break
+			except Exception:
+				# try the next format instead of bailing out completely
+				continue
+	# fallback image if nothing worked
 	return "https://cdn.discordapp.com/attachments/709313685226782751/830935863893950464/discordFail.png"
 
 
@@ -113,7 +126,10 @@ def get_data(path: Optional[str]=None) -> Any:
 			try: 
 				data = data[opt]
 			except KeyError:
-				data = data[int(opt)]
+				try: 
+					data = data[int(opt)]
+				except KeyError:
+					raise UnexpectedValue(f"Key {opt} not found in data")
 	return data
 
 def upd_data(new_data: Any, path: Optional[str]=None) -> None:
@@ -241,13 +257,13 @@ def random_avatar() -> str:
 
 #only use through SelectView.get_app_choice
 class ChoiceSelect(discord.ui.Select):
-	view: 'SelectView'
+	view: 'SelectView' #type: ignore
 
 	def __init__(self, options: list[Any]) -> None:
 		options = [discord.SelectOption(label=label, value=value) for label, value in options]
 		super().__init__(options=options, placeholder="Choose an option", min_values=1, max_values=1)
 
-	async def callback(self, inter:discord.Interaction):
+	async def callback(self, inter:discord.Interaction): #type:ignore
 		self.view.chosen = self.values[0]
 		for option in self.options:
 			if option.value == self.values[0]:
@@ -341,10 +357,19 @@ def new_user():
 			"streak":0,
 			"max_streak":0
 		},
-		"free_sunday_roll" : 0
+		"free_sunday_roll" : 0,
+		"villager_of_the_day": "",
+		"villagers" : []
 	}
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
+	"""Translates a user input into an amount of cash. \n
+	Accepts : \n
+	- A number (e.g. 100) \n
+	- "all" to bet all the cash \n
+	- A percentage (e.g. 50%) to bet a percentage of the cash
+	only used for the bank
+	"""
 	txt = txt.lower().replace(" ", "")
 	# Check if txt is a valid number
 	try: 
@@ -365,16 +390,14 @@ def get_amount(cash: int, txt: str) -> Optional[int]:
 
 def get_value(user_data:dict) -> int:
 	"""Calculates the value of the timely reward. \n
-	Level 0 starts with 150. Each level grants 40% of that each time \n
+	Level 0 starts with 120. Each level grants 40% of that each time \n
 	Each achievement adds 1% bonus, 2% if all achievements are unlocked"""
 	level:int = user_data["level"]
 	achievements:list = user_data["achievements"]
-	return int((120 * (1 + (level/4.5)))*(1 + (len(achievements)/100)))
+	return int((120 * (1 + (level/7)))*(1 + (len(achievements)/100)))
 
-def get_collect_time(is_cutie:bool, tech:int) -> int:
-	base = dt.timedelta(hours=12).total_seconds()
-	if is_cutie:
-		base = dt.timedelta(hours=10).total_seconds()
+def get_collect_time(tech:int) -> int:
+	base = dt.timedelta(hours=10).total_seconds()
 
 	# 1% less for each tech level
 	time = base - (base*tech)/100
@@ -384,3 +407,29 @@ def get_collect_time(is_cutie:bool, tech:int) -> int:
 def translate(txt: str) -> str:
 	"""Translates choice emojis to their names"""
 	return {"🌹": "roses","🍬": "candies","💡": "ideas"}[txt]
+
+def get_acnh_data() -> dict[str, dict[str, str]]:
+	"""Retrieve data from a JSON file using a path."""
+	with open(f"{DATA_DIR}/villagers.json", 'r') as f:
+		acnh = json.load(f)
+	return acnh
+
+def get_acnh_musics() -> dict[str, str]:
+	"""Retrieve data from a JSON file using a path."""
+	with open(f"{DATA_DIR}/acnh_musics.json", 'r') as f:
+		acnh_musics = json.load(f)
+	return acnh_musics
+
+### UPDATE MSG
+def new_update() -> discord.Embed:
+	E = discord.Embed(color=discord.Color.green())
+	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
+	E.title = "New update !"
+	E.set_author(name="SINF illégal family bot")
+	E.description = "- Gamble autocomplete\n"
+	E.description += "- Better roll information\n"
+
+	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
+	E.add_field(name="Authors", value="<@!346945067975704577>")
+
+	return E

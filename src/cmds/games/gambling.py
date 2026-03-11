@@ -9,6 +9,8 @@ import asyncio
 
 from settings import BOT_CHANNEL_ID
 from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie, UnexpectedValue, get_value, random_avatar, get_belgian_time, get_user_data
+import re
+
 
 class GamblingHelper:
 	def __init__(self, bot:commands.Bot):
@@ -22,7 +24,7 @@ class GamblingHelper:
 		E.set_footer(text="Roulette by Scylla and Ceisal")
 		E = discord.Embed(title="Roulette")
 		return E
-	
+
 	async def is_allowed_to_bet(self, inter:discord.Interaction, bet:str) -> tuple[int, discord.Embed, dict]:
 		E = discord.Embed()
 		E.color = discord.Color.green()
@@ -31,10 +33,15 @@ class GamblingHelper:
 		try :
 			user_data : dict = get_data(f"games/users/{inter.user.id}")
 		except :
-			E.description = f"{inter.user.mention}, You don't have an account yet"
+			E.description = f"{inter.user.mention}, You don't have an account yet, get one using **/collect**"
 			E.color = discord.Color.red()
 			return 0, E, {}
+		
+		# if the user sent the command too quickly
+		if '🌹' not in bet:
+			bet += "🌹"
 
+        #-------------- Merge conflict --------------
 		next_bet_all = False
 		if "next_bet_all" in user_data["effects"] and bet!="all":
 			bet="all"
@@ -43,6 +50,11 @@ class GamblingHelper:
 
 		# translate the user request into a number
 		amount = get_amount(user_data["roses"], bet)
+		amount_match = re.search(r"(\d+)🌹", bet)
+		if amount_match:
+			amount = int(amount_match.group(1))
+		else: 
+			amount = None
 
 
 		if amount is None or amount < 0:
@@ -182,6 +194,7 @@ class GamblingHelper:
 
 		if r >= 70:
 			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
+		E.add_field(name="Roll:", value=f"**{r}**")
 		cash=amount
 		if r == 100:
 			#Il y a 2 int, un pour arrondir le résultat, un autre pour la division
@@ -190,12 +203,10 @@ class GamblingHelper:
 			E.color = discord.Color.gold()
 		elif r >= 90:
 			cash = int(int(amount*4)*multiplicator)
-			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎯"
-			E.color = discord.Color.green()
+			E.description = f"{inter.user.mention}, You rolled 90 or above and won x4 **{cash}🌹!** 🎯"
 		elif r >= 70:
 			cash = int(int(amount*2)*multiplicator)
-			E.description = f"{inter.user.mention}, You rolled a {r} and won **{cash}🌹!** 🎉"
-			E.color = discord.Color.green()
+			E.description = f"{inter.user.mention}, You rolled 70 or above and won x2 **{cash}🌹!** 🎉"
 		elif r==1:
 			E.description = f"{inter.user.mention}, You rolled a 1 and kept your **{cash}🌹!** ✨"
 			E.color = discord.Color.dark_purple()
@@ -415,21 +426,74 @@ class Gambling(commands.Cog):
 	@app_commands.guild_only()
 	@app_commands.describe(bet="The amount to bet")
 	async def roll(self, inter:discord.Interaction, bet:str):
-		await self.GH.roll(inter, bet)
+		GH = GamblingHelper(self.bot)
+		await GH.roll(inter, bet)
 
 	@app_commands.command(description="Flips a coin")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
 	@app_commands.describe(bet="The amount to bet", guess="Your guess")
 	async def flip(self, inter:discord.Interaction, bet:str, guess:Literal["heads", "tails"]):
-		await self.GH.flip(inter, bet, guess)
+		GH = GamblingHelper(self.bot)
+		await GH.flip(inter, bet, guess)
 
 	@app_commands.command(description="Lucky Ladder, each step has equal chances of occuring")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
 	@app_commands.describe(bet="The amount to bet")
 	async def ladder(self, inter:discord.Interaction, bet:str):
-		await self.GH.ladder(inter, bet)
+		GH = GamblingHelper(self.bot)
+		await GH.ladder(inter, bet)
+
+	@roll.autocomplete("bet")
+	@flip.autocomplete("bet")
+	@ladder.autocomplete("bet")
+	async def gamble_autocomplete(self, inter:discord.Interaction, current:str):
+		try :
+			user_data : dict = get_data(f"games/users/{inter.user.id}")
+		except :
+			if current.isdigit():
+				return [app_commands.Choice(name=f"({current}🌹)", value=f"({current}🌹)")]
+			return []
+
+		roses = user_data["roses"]
+
+		options:list[str] = []
+
+		if current.isdigit() and int(current) <= roses:
+			options.append(f"{current}🌹")
+
+		# if user wants all
+		if current.startswith("25%"):
+			options.extend([
+				f"25% ({roses//4}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"50% ({roses//2}🌹)",
+				f"all ({roses}🌹)", 
+			])
+		elif current.startswith("50%"):
+			options.extend([
+				f"50% ({roses//2}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"all ({roses}🌹)", 
+			])
+		elif current.startswith("a"):
+			options.extend([
+				f"all ({roses}🌹)",
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"50% ({roses//2}🌹)"
+			])
+		else:
+			options.extend([
+				f"10% ({roses//10}🌹)",
+				f"25% ({roses//4}🌹)",
+				f"50% ({roses//2}🌹)",
+				f"all ({roses}🌹)"
+			])
+
+		return [app_commands.Choice(name=opt, value=opt) for opt in options]
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Gambling(bot))

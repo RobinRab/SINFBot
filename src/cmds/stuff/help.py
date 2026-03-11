@@ -10,6 +10,7 @@ from utils import is_member, is_cutie, is_owner, GetLogLink
 class MissingCommand(Exception):pass
 
 bot_commands = {
+<<<<<<< HEAD
 	"Owner"      : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
 	"Cuties"     : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
 	"Tetrio"     : [is_member, "/register", "/profile", "/leaderboard"],
@@ -19,6 +20,18 @@ bot_commands = {
 	"Fun"        : [None, "/poll", "!/ping", "/wordle"],
 	"Economy"    : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
 	"Gambling"   : [None, "/roll", "/flip", "/ladder", "/roulette"]
+=======
+	"Owner"           : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
+	"Cuties"          : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
+	"Tetrio"          : [is_member, "/register", "/profile", "/leaderboard"],
+	"Infos"           : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
+	"Birthdays"       : [is_member, "/set_birthday", "/birthdays"],
+	"Member Fun"      : [is_member, "/confession", "/apoll"],
+	"Fun"             : [None, "/poll", "!/ping", "/wordle"],
+	"Economy"         : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
+	"Gambling"        : [None, "/roll", "/flip", "/ladder"],
+	"Animal Crossing" : [None, "/stalk", "/meet", "/village"]
+>>>>>>> upstream/main
 }
 
 class Help(commands.Cog):
@@ -267,18 +280,22 @@ class Help(commands.Cog):
 				elif query == "wordle":
 					E.description = "**To play wordle**\nWrite your word after sending /wordle"
 					E.add_field (name="How to play",  value="```You have 3 minutes to write to your guess.\n\
-				  												To pause the game, write *stop*. Recall the function to *restart*.```")
+																To pause the game, write *stop*. Recall the function to *restart*.```")
 					E.add_field (name = "**Meaning of colors**", value = "```🟩 : The letter in in the right place\n\
+<<<<<<< HEAD
 				  															 🟨 : The letter is in the word but not in the right place\n\
 				  															 🟥 : The letter is not in the word```")
 					
+=======
+																			🟨 : The letter is in the word but not in the right place\n\
+																			🟥 : The letter is not in the word```")
+
+>>>>>>> upstream/main
 				# economy commands
 				elif query == "collect":
-					E.description = "**Collects your ressources each 12h**"
-					if is_cutie(inter):
-						E.description += "\n**CUTIE BONUS :** 10h cooldown instead of 12h"
+					E.description = "**Collects your ressources each 10h**"
 					E.add_field(name="**Example**", value="```/collect```")
-					E.add_field(name="**Cooldown**", value="```12h / user```")
+					E.add_field(name="**Cooldown**", value="```10h / user```")
 					E.add_field(name="**Requirement**", value="```None```")
 				elif query == "balance":
 					E.description = "**Displays a user's ressources (yours if user is None)*"
@@ -364,9 +381,31 @@ class Help(commands.Cog):
 					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
+<<<<<<< HEAD
 				elif query == "roulette":
 					E.description = "**Affects a random effect to you or another person of your choice**\n Effects can be good or bad, for you or someone else...\nWhen spinning the roulette, you choose another user, and the effect will be affected to one of you, randomly. \n You have a free sunday roll every week! Other than that, the roulette cots 1 🍬 candy, and can be spinned every minute."
 					
+=======
+
+				# animal crossing commands
+				elif query == "stalk":
+					E.description = "**Get the info of an Animal Crossing character**\n"
+					E.add_field(name="**Example**", value="```/stalk <character>```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+
+				elif query == "meet":
+					E.description = "**Meet a new villager every day!**\n"
+					E.description += "You start with 1 villagers, and gain a new spot every 5 levels up to 5 villagers\n"
+					E.description += "Each villager gives you a collect on your birthday!\n"
+					E.add_field(name="**Example**", value="```/meet```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+
+				elif query == "village":
+					E.description = "**Displays your villagers or someon's villagers**\n"
+					E.add_field(name="**Example**", value="```/village (user)```")
+					E.add_field(name="**Cooldown**", value="```5s / user```")
+
+>>>>>>> upstream/main
 				else:
 					await inter.followup.send(f"{inter.user.name} Help page for command {query} not found")
 			# if the user doesn't have the perms
@@ -419,7 +458,7 @@ class Help(commands.Cog):
 		Based on 3 ressources: 
 		🌹 roses, 💡 ideas and 🍬 candies
 
-		You can collect roses with **/collect** every 12h
+		You can collect roses with **/collect** every 10h
 		- Your **/collect** value is used as a base for all earnings
 		- You can increase earnings by leveling up with **/levelup**
 		- You can also increase earnings by earning achievements, granting 1% bonus each
@@ -446,11 +485,11 @@ class Help(commands.Cog):
 		You can sell your ressources for another ressource
 		### Maths
 		your base value (used for **/collect** and the traveller) is calculated like this: ```py
-		int((120 * (1 + (level/4.5)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
+		int((120 * (1 + (level/7)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
 		if level < 10:
-		    price = int((level/1.7) * 1000)
+		    price = int((level/2.5) * 1000)
 		else:
-		    price = int((((level**2)/34) + 4) * 1000)```
+		    price = int((((level**2)/40) + 1.5) * 1000)```
 		""".replace("\t", "")
 
 		await inter.response.send_message(embed=E)

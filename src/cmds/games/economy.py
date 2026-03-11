@@ -8,7 +8,6 @@ import datetime as dt
 from typing import Optional, Literal
 
 from cmds.games.gambling import GamblingHelper
-from cmds.games.games import traveler
 
 from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time, get_user_data
 
@@ -121,9 +120,9 @@ class Economy(commands.Cog):
 
 		level = user_data["level"] + 1
 		if level < 10:
-			price = int((level/1.7) * 1000)
+			price = int((level/2.5) * 1000)
 		else:
-			price = int((((level**2)/34) + 3) * 1000)
+			price = int((((level**2)/40) + 1.5) * 1000)
 
 		if user_data["roses"] < price:
 			E.description = f"{inter.user.mention}, You need {price}🌹 to level up"
@@ -135,6 +134,8 @@ class Economy(commands.Cog):
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
 		E.description = f"{inter.user.mention}, You are now level **{level}**!"
+		if level in [5, 10, 15, 20]:
+			E.description += "\n Congratulations, you can now have one more villager in your island!"
 
 		await inter.followup.send(embed=E)
 
@@ -157,6 +158,13 @@ class Economy(commands.Cog):
 			E.description = f"{inter.user.mention}, You can't upgrade your tech, you're maxed already"
 			return await inter.followup.send(embed=E)
 		tech = user_data["tech"] + 1
+
+		# cap tech to level 20
+		if tech > 20:
+			E.description = f"{inter.user.mention}, You can't upgrade your tech anymore"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E)
+
 		price = tech*10
 
 		if user_data["ideas"] < price:
