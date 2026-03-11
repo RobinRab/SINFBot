@@ -73,7 +73,7 @@ class Economy(commands.Cog):
 			E.description = f"Congratulation, you multiplied your collect by three!"
 			E.color = discord.Color.purple()
 			await inter.followup.send(embed=E)
-		time_to_wait = get_collect_time(is_cutie(inter), user_data["tech"])
+		time_to_wait = get_collect_time(user_data["tech"])
 
 		# value/100 % to win a candy, capped at 5%
 		candy = random.random()*100 <= min(500,value)/100

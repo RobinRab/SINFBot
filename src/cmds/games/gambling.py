@@ -42,15 +42,14 @@ class GamblingHelper:
 			bet += "🌹"
 
         #-------------- Merge conflict --------------
-		next_bet_all = False
-		if "next_bet_all" in user_data["effects"] and bet!="all":
-			bet="all"
-			next_bet_all = True
+		if "next_bet_all" in user_data["effects"] and bet!=f"all ({user_data['roses']}🌹)":
+			bet=f"all ({user_data['roses']}🌹)"
 
 
 		# translate the user request into a number
 		amount = get_amount(user_data["roses"], bet)
 		amount_match = re.search(r"(\d+)🌹", bet)
+
 		if amount_match:
 			amount = int(amount_match.group(1))
 		else: 
@@ -226,7 +225,6 @@ class GamblingHelper:
 			pass
 
 		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
-		print("amount?: ", amount, "roses: ", user_data["roses"])
 
 		# if the already has a description, an issue was found
 		if E.description is not None:

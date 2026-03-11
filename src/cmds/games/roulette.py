@@ -155,11 +155,11 @@ class Roulette:
                 E.description = f"Be patient, you have to wait a minute before using the roulette again :)"
                 E.color = discord.Color.red()
                 return await inter.followup.send(embed=E, ephemeral=True)
-            if user_data["candies"]<1 and user_data["free_sunday_roll"] == 0:
+            if user_data["candies"]<1 and user_data["free_sunday_roll"] == 0 and get_data((f"games/users/{inter.user.id}/last_roulette")) != -1:
                 E.description = f"{inter.user.mention}, You don't have enough 🍬"
                 E.color = discord.Color.red()
                 return await inter.followup.send(embed=E)
-            
+
             try :
                 other_user_data : dict = get_data(f"games/users/{other_user.id}")
             except :
@@ -263,7 +263,7 @@ class Roulette:
 
         #Modify this line to make tests.
         cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
-        cons = "wordle_guess_reduced" 
+        cons = "traveler_spawn" 
         print(cons) 
         has_been_answered = False
         url = random_avatar()
