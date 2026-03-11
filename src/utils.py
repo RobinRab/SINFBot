@@ -370,6 +370,7 @@ def get_amount(cash: int, txt: str) -> Optional[int]:
 	- A percentage (e.g. 50%) to bet a percentage of the cash
 	only used for the bank
 	"""
+
 	txt = txt.lower().replace(" ", "")
 	# Check if txt is a valid number
 	try: 
@@ -378,11 +379,12 @@ def get_amount(cash: int, txt: str) -> Optional[int]:
 		pass
 	
 
-	if txt == "all":
-		return cash
+	#if txt == "all":
+	#	return cash
 
 	# Check if txt is a valid percentage
-	elif re.match(r'^([1-9]|[1-9]\d|100)%$', txt):
+	#refaire elif si besoin
+	if re.match(r'^([1-9]|[1-9]\d|100)%$', txt):
 		percentage = int(txt[:-1]) / 100
 		return int(cash * percentage)
 
