@@ -16,7 +16,7 @@ class GamblingHelper:
 	def __init__(self, bot:commands.Bot):
 		self.bot : commands.Bot = bot
 	
-	async def embed(self, inter : discord.Interaction, E : discord.Embed):
+	async def embed_roulette(self, inter : discord.Interaction, E : discord.Embed):
 		url = random_avatar()
 		if inter.user.avatar:
 			url = inter.user.avatar.url
@@ -148,11 +148,11 @@ class GamblingHelper:
 		r = random.randint(1,100)
 		roulette = False
 		for element in user_data["effects"]:
-			if "gain" or "bet" in element:
+			if "gain" in "bet" in element or "bet" in element:
 				roulette = True
 
 		if roulette:
-			E = await self.embed(inter, E)
+			E = await self.embed_roulette(inter, E)
 
 		multiplicator = 1
 		double = False
@@ -231,11 +231,11 @@ class GamblingHelper:
 			return await inter.followup.send(embed=E)
 		roulette=False
 		for element in user_data["effects"]:
-			if "gain" or "bet" in element:
+			if "gain" in element or "bet" in element:
 				roulette = True
 				
 		if roulette:
-			E = await self.embed(inter, E)
+			E = await self.embed_roulette(inter, E)
 		choice = random.choice(["heads", "tails"])
 
 		if "change_bet_method" in user_data["effects"]:
@@ -327,11 +327,11 @@ class GamblingHelper:
 			
 		roulette = False
 		for element in user_data["effects"]:
-			if "gain" or "bet" in element:
+			if "gain" in element or "bet" in element:
 				roulette = True
 				
 		if roulette:
-			E = await self.embed(inter, E)
+			E = await self.embed_roulette(inter, E)
 
 		r = random.randint(1,8)
 		multiplicator=1
