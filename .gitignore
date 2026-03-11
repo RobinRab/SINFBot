@@ -14,7 +14,7 @@ src/data/bot.log
 src/data/datasinf.json
 
 # ignore the venv folder
-.venv/
+venv/
 
 # ignore test files / drafs
 testing.py
