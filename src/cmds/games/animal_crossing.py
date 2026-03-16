@@ -32,6 +32,13 @@ class AnimalCrossing(commands.Cog):
 	@app_commands.guild_only()
 	@app_commands.describe(name="The name of the villager")
 	async def stalk(self, inter:discord.Interaction, name:str):
+		acnh = get_acnh_data()
+		# just in case the user sent too quickly
+		name = name.capitalize() 
+
+		if name not in acnh:
+			return await inter.response.send_message("Villager not found! Please enter a valid villager name.", ephemeral=True)
+
 		embed = self.build_embed_from_name(name)
 		await inter.response.send_message(embed=embed)
 
