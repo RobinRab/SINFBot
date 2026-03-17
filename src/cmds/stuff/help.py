@@ -17,8 +17,9 @@ bot_commands = {
 	"Birthdays"       : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun"      : [is_member, "/confession", "/apoll"],
 	"Fun"             : [None, "/poll", "!/ping", "/wordle"],
-	"Economy"         : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade"],
+	"Economy"         : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade", "Traveler"],
 	"Gambling"        : [None, "/roll", "/flip", "/ladder"],
+	"Multiplayer"     : [None, "/shifumi", "/connect4"],
 	"Animal Crossing" : [None, "/stalk", "/meet", "/village"]
 }
 
@@ -64,7 +65,9 @@ class Help(commands.Cog):
 					E.add_field(name=f"**{key}**", value=f"```{txt}```")
 
 		remplace = lambda string: string.replace("/", "").replace("!", "")
-		all_commands = []
+
+		# manually add the traveler help since it's not a command
+		all_commands = ["Traveler"]
 		for value in bot_commands.values():
 			for val in value:
 				if isinstance(val, str):
@@ -83,6 +86,9 @@ class Help(commands.Cog):
 
 				for command in commands:
 					E.description += f"{command.mention} - {command.description}\n"
+
+				if query == "Economy":
+					E.description += "Traveler event"
 			else:
 				general_page()
 		# if the query is one of the commands
@@ -96,7 +102,10 @@ class Help(commands.Cog):
 			
 			# if the user has the perms or the command doesn't need perms
 			if (isinstance(perms, Callable) and perms(inter)) or (perms is None):
-				E.title = (await get_app_commands([query[1:]]))[0].mention
+				if query == "Traveler":
+					E.title = "Traveler / Robber"
+				else:
+					E.title = (await get_app_commands([query[1:]]))[0].mention
 
 				query = remplace(query)
 
@@ -294,6 +303,11 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/tech```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
+				elif query == "Traveler":
+					E.description = """**Not a command, but a random event that can happen every 2 to 10 hours**
+					\nAnswer the traveler's question correctly to earn 💡 ideas and 🌹 roses
+					\nBe careful and think carefully, as the traveler can be a robber in disguise, and a wrong answer will make you lose 🌹 roses!
+					\n The robber gets upset when he has to takes roses from your bank, so he will steal more"""
 
 				elif query == "bank":
 					E_check = discord.Embed(title="/bank check")
@@ -364,19 +378,27 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
 
+				# multiplayer gambling commands
+				elif query == "shifumi":
+					E.description = "**Play shifumi against another user**"
+					E.add_field(name="**Example**", value="```/shifumi <bet> <currency> (user)```")
+					E.add_field(name="**Cooldown**", value="```1s / user```")
+				elif query == "connect4":
+					E.description = "**Play connect4 against another user**"
+					E.add_field(name="**Example**", value="```/connect4 <bet> <currency> (user)```")
+					E.add_field(name="**Cooldown**", value="```1s / user```")
+
 				# animal crossing commands
 				elif query == "stalk":
 					E.description = "**Get the info of an Animal Crossing character**\n"
 					E.add_field(name="**Example**", value="```/stalk <character>```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
-
 				elif query == "meet":
 					E.description = "**Meet a new villager every day!**\n"
 					E.description += "You start with 1 villagers, and gain a new spot every 5 levels up to 5 villagers\n"
 					E.description += "Each villager gives you a collect on your birthday!\n"
 					E.add_field(name="**Example**", value="```/meet```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
-
 				elif query == "village":
 					E.description = "**Displays your villagers or someon's villagers**\n"
 					E.add_field(name="**Example**", value="```/village (user)```")
@@ -442,7 +464,7 @@ class Help(commands.Cog):
 		- Your tech can be upgraded using 💡 ideas
 		### Traveller
 		You can earn 💡 ideas by answering the traveller's questions
-		- A good answer will give you 10💡 ideas and the value of a **/collect**
+		- A good answer will give you 5💡 ideas and the value of a **/collect**
 		- The traveller randomly spawns withing 2 to 10 hours
 		- The traveller will leave after 1h if no one answered his question
 		### Gambling
