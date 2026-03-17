@@ -16,7 +16,6 @@ class Games(commands.Cog):
 
 		traveler_loop.start(bot=self.bot)
 
-
 async def traveler(*, bot_channel: discord.TextChannel):
 	# 17 science&nature, 18 computer, 19 maths, 22 geography, 24 politics, 27 animals
 	r = random.choice([17, 18, 19, 22, 24, 27])
@@ -83,14 +82,14 @@ async def traveler(*, bot_channel: discord.TextChannel):
 			value = int(get_value(user_data)*1.5)
 
 		user_data["roses"] += value
-		user_data["ideas"] += 7
+		user_data["ideas"] += 5
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
 		if traveler:
-			E.description = f"You earned **{value}🌹** and **7💡**"
+			E.description = f"You earned **{value}🌹** and **5💡**"
 		else:
-			E.description = f"The robber is impressed by your knowledge! You earned **{value}🌹** and **7💡**"
+			E.description = f"The robber is impressed by your knowledge! You earned **{value}🌹** and **5💡**"
 
 		await inter.followup.send(inter.user.mention, embed=E)
 
@@ -112,19 +111,35 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		else:
 			double_collect_value = get_value(user_data)*2
 			value = get_value(user_data)*(-2)
-		
-		
-		if user_data["roses"]<0 and not traveler:
-			E.description += f"You're already in debt so the robber didn't take you anything"
-		else:
+
+		if traveler:
 			user_data["roses"] += value
-			if not traveler:
-				if user_data["roses"]<0:
-					user_data["roses"]=-1
-					E.description += f"The robber took you all of your roses 🌹"
-				else:
-					E.description += f"The robber took you **{double_collect_value}** 🌹"
 			upd_data(user_data, f"games/users/{inter.user.id}")
+		else:
+			total_stolen = 0
+
+			# First, take from regular roses
+			if user_data["roses"] >= double_collect_value:
+				user_data["roses"] -= double_collect_value
+				total_stolen += double_collect_value
+			else:
+				total_stolen += user_data["roses"]
+				remaing_to_steal = double_collect_value - user_data["roses"]
+				double_collect_value -= user_data["roses"]
+				user_data["roses"] = -1
+
+				# Then, take from the bank
+				if user_data["bank"]["roses"] >= remaing_to_steal * 2:
+					user_data["bank"]["roses"] -= remaing_to_steal * 2
+					total_stolen += remaing_to_steal * 2
+				else:
+					total_stolen += user_data["bank"]["roses"]
+					user_data["bank"]["roses"] = -1
+
+			upd_data(user_data, f"games/users/{inter.user.id}")
+
+			E.description += f"The robber stole a total of **{total_stolen}🌹** from you."
+
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	# subclass of discord.ui.Button, all buttons will have the same callback (no need for functions)
