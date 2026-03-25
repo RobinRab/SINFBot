@@ -83,6 +83,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 		user_data["roses"] += value
 		user_data["ideas"] += 5
+		user_data["has_got_daily_traveler"] = True
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
@@ -155,6 +156,11 @@ async def traveler(*, bot_channel: discord.TextChannel):
 				return await inter.response.defer()
 	
 			self.has_been_answered = True
+
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
+			if user_data.get("has_got_daily_traveler", True):
+				E = discord.Embed(title="You have already helped the traveler today!", color=discord.Color.red())
+				return await inter.response.send_message(inter.user.mention, embed=E, ephemeral=True)
 
 			await inter.response.defer()
 			if question_type == "boolean":

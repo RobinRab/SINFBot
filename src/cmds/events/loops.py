@@ -26,6 +26,14 @@ def reset_daily_villagers() -> None:
 
 	upd_data(data, 'games/users')
 
+def reset_daily_traveler() -> None:
+	data = get_data('games/users')
+
+	for user_id, _ in data.items():
+		data[user_id]['has_got_daily_traveler'] = False
+
+	upd_data(data, 'games/users')
+
 class Loops(commands.Cog):
 	def __init__(self, bot:commands.Bot):
 		self.bot : commands.Bot = bot
