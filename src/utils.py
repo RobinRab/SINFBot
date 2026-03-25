@@ -11,6 +11,7 @@ import unicodedata
 import datetime as dt
 from typing import Any, Optional
 from settings import DATA_DIR, MEMBER_ID, CUTIE_ID, OWNER_ID, LOG_PIC_CHANNEL_ID
+from typing import TypedDict
 
 #!!WARNING!! Any edits in this file can break commands
 
@@ -310,7 +311,28 @@ class SelectView(discord.ui.View):
 		return view, view.chosen
 
 # games
-def new_user():
+class Bank(TypedDict):
+	roses: int
+	candies: int
+	ideas: int
+
+# TypedDict is just dict with type hints
+class UserAccount(TypedDict):
+	level: int
+	timely: int # timestamp
+	roses: int
+	candies: int
+	ideas: int
+	tech: int
+	bank: Bank
+	achievements: list[str]
+	wordle_en: dict[str, str]
+	wordle_fr: dict[str, str]
+	villager_of_the_day: str
+	villagers: list[str]
+	has_got_daily_traveler : bool
+
+def new_user() -> UserAccount:
 	return {
 		"level"   : 0,
 		"timely"  : int(dt.datetime.now().timestamp()),
@@ -327,7 +349,8 @@ def new_user():
 		"wordle_en" : {},
 		"wordle_fr" : {},
 		"villager_of_the_day": "",
-		"villagers" : []
+		"villagers" : [],
+		"has_got_daily_traveler" : False
 	}
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
@@ -355,7 +378,7 @@ def get_amount(cash: int, txt: str) -> Optional[int]:
 
 	return None
 
-def get_value(user_data:dict) -> int:
+def get_value(user_data:UserAccount) -> int:
 	"""Calculates the value of the timely reward. \n
 	Level 0 starts with 120. Each level grants 40% of that each time \n
 	Each achievement adds 1% bonus, 2% if all achievements are unlocked"""

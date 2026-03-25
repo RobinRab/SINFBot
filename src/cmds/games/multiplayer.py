@@ -7,7 +7,7 @@ import datetime as dt
 from typing import Optional, Literal
 currencies = Literal["🌹", "🍬", "💡"]
 
-from utils import get_data, upd_data, GetLogLink, translate
+from utils import get_data, upd_data, UserAccount, GetLogLink, translate
 
 class Multiplayer(commands.Cog):
 	def __init__(self,bot):
@@ -150,7 +150,7 @@ class Multiplayer(commands.Cog):
 		await inter.edit_original_response(embed=embed, view=None)
 
 		# Award the winnings to the winner
-		winner_data = get_data(f"games/users/{winner.id}")
+		winner_data : UserAccount = get_data(f"games/users/{winner.id}")
 		winner_data[translate(currency)] += 2 * bet
 		
 		upd_data(winner_data, f"games/users/{winner.id}")
@@ -314,7 +314,7 @@ class Multiplayer(commands.Cog):
 				await inter.edit_original_response(embed=embed, view=None, content=f"{players[winner-1].mention} wins! 🎉")
 				
 				# give the winnings to the winner
-				winner_data = get_data(f"games/users/{players[winner-1].id}")
+				winner_data : UserAccount = get_data(f"games/users/{players[winner-1].id}")
 				winner_data[translate(currency)] += 2*bet
 				upd_data(winner_data, f"games/users/{players[winner-1].id}")
 				return
@@ -327,7 +327,7 @@ class Multiplayer(commands.Cog):
 				
 				# refund both players
 				for refund_player in players:
-					player_data = get_data(f"games/users/{refund_player.id}")
+					player_data : UserAccount = get_data(f"games/users/{refund_player.id}")
 					player_data[translate(currency)] += bet
 					upd_data(player_data, f"games/users/{refund_player.id}")
 				return
@@ -338,7 +338,7 @@ class Multiplayer(commands.Cog):
 
 	async def user_check(self, inter: discord.Interaction, bet:int, currency:currencies) -> bool:
 		try : 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			await inter.followup.send("You don't have an account yet")
 			return False
@@ -353,7 +353,7 @@ class Multiplayer(commands.Cog):
 			return False
 		
 		# subtract the bet from the user
-		data = get_data(f"games/users/{inter.user.id}")
+		data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		data[translate(currency)] -= bet
 		upd_data(data, f"games/users/{inter.user.id}")
 
@@ -408,7 +408,7 @@ class Multiplayer(commands.Cog):
 				await inter2.response.defer() # mark as answered
 
 				try: 
-					player_data = get_data(f"games/users/{inter2.user.id}")
+					player_data : UserAccount = get_data(f"games/users/{inter2.user.id}")
 				except:
 					return await inter2.followup.send("You don't have an account yet, do **/collect** to create one", ephemeral=True)
 				
@@ -427,7 +427,7 @@ class Multiplayer(commands.Cog):
 				@discord.ui.button(label=f"Refuse",style=discord.ButtonStyle.danger)
 				async def sell(self2, inter2: discord.Interaction, _: discord.ui.Button):
 					# refund the item from the user that requested
-					data = get_data(f"games/users/{inter.user.id}")
+					data : UserAccount= get_data(f"games/users/{inter.user.id}")
 					data[translate(currency)] += bet
 					upd_data(data, f"games/users/{inter.user.id}")
 
@@ -436,7 +436,7 @@ class Multiplayer(commands.Cog):
 
 			async def on_timeout(self2):#type:ignore[no-self-arg]
 				# refund the item from the seller
-				data = get_data(f"games/users/{inter.user.id}")
+				data : UserAccount = get_data(f"games/users/{inter.user.id}")
 				data[translate(currency)] += bet
 				upd_data(data, f"games/users/{inter.user.id}")
 

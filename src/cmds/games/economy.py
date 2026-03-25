@@ -6,7 +6,7 @@ import random
 import datetime as dt
 from typing import Optional, Literal
 
-from utils import get_data, upd_data, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time
+from utils import get_data, upd_data, GetLogLink, new_user, UserAccount, get_amount, translate, get_value, get_collect_time
 
 class Economy(commands.Cog):
 	def __init__(self,bot):
@@ -29,7 +29,7 @@ class Economy(commands.Cog):
 		E.set_author(name=target.name, icon_url=await GetLogLink(self.bot, target.display_avatar.url))
 
 		try: 
-			user_data : dict = get_data(f"games/users/{target.id}")
+			user_data : UserAccount = get_data(f"games/users/{target.id}")
 		except :
 			E.description = f"{target.mention} has never played"
 			E.color = discord.Color.red()
@@ -53,7 +53,7 @@ class Economy(commands.Cog):
 
 		# user_id : {user data}
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			user_data = new_user()
 
@@ -94,7 +94,7 @@ class Economy(commands.Cog):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't level up, you have never played"
 			return await inter.followup.send(embed=E)
@@ -131,7 +131,7 @@ class Economy(commands.Cog):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't upgrade your tech, you have never played"
 			return await inter.followup.send(embed=E)
@@ -177,7 +177,7 @@ class Bank(app_commands.Group):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't manage your bank account you have never played"
 			return await inter.followup.send(embed=E)
@@ -214,7 +214,7 @@ class Bank(app_commands.Group):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't manage your bank account you have never played"
 			return await inter.followup.send(embed=E)
@@ -255,7 +255,7 @@ class Bank(app_commands.Group):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't manage your bank account you have never played"
 			return await inter.followup.send(embed=E)

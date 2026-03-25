@@ -5,14 +5,14 @@ import random
 import asyncio
 import datetime as dt
 
-from utils import get_data, upd_data, get_belgian_time, get_acnh_data
+from utils import get_data, upd_data, get_belgian_time, get_acnh_data, UserAccount
 
 def reset_wordle_choice() -> None:
 	return None
 
 def reset_daily_villagers() -> None:
 	# empty the list of the people who have stopped the meeting today
-	data = get_data('games/users')
+	data : dict[str, UserAccount]= get_data('games/users')
 
 	for user_id, user_data in data.items():
 		user_villagers = user_data.get('villagers', [])

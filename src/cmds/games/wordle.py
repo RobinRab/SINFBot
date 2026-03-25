@@ -11,7 +11,7 @@ from typing import Literal
 
 
 from settings import DATA_DIR
-from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, is_summer_time, simplify
+from utils import get_data, upd_data, UserAccount, get_value, get_belgian_time, new_user, GetLogLink, is_summer_time, simplify
 
 #! fonction 'get_words' accepts 4 columns csv
 class Wordle(commands.Cog):
@@ -22,10 +22,10 @@ class Wordle(commands.Cog):
 
 		choose_todays_word.start(bot=self.bot)
 
-	async def get_data_wordle(self, inter:discord.Interaction) -> dict:
+	async def get_data_wordle(self, inter:discord.Interaction) -> UserAccount:
 		# check if account exists
 		try :
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 			# create wordle if never played
 			if "wordle_en" not in user_data:
 				user_data["wordle_en"] = {}

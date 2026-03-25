@@ -6,7 +6,7 @@ import asyncio
 import datetime as dt
 from typing import Optional, Literal
 from settings import GENERAL_ID
-from utils import UnexpectedValue, is_member, get_data, upd_data, get_belgian_time, is_summer_time, get_value
+from utils import UnexpectedValue, is_member, get_data, upd_data, UserAccount, get_belgian_time, is_summer_time, get_value
 
 months = Literal["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -151,7 +151,7 @@ async def birthdays_loop(*, bot:commands.Bot):
 
 		# each villager give you a collect on your birthday
 		try : 
-			user_data = get_data(f"games/users/{user_id}")
+			user_data : UserAccount = get_data(f"games/users/{user_id}")
 			nb_villagers = user_data.get("villagers", [])
 			amount = get_value(user_data) * len(nb_villagers)
 			user_data["roses"] += amount

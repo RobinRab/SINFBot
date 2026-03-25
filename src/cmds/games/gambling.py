@@ -7,7 +7,8 @@ import datetime as dt
 from typing import Literal
 import re
 
-from utils import get_data, upd_data, GetLogLink
+from utils import UserAccount, get_data, upd_data, GetLogLink, new_user
+# new user only used to fake an account and avoid using a None type check
 
 class Gambling(commands.Cog):
 	def __init__(self,bot):
@@ -42,7 +43,7 @@ class Gambling(commands.Cog):
 	@ladder.autocomplete("bet")
 	async def gamble_autocomplete(self, inter:discord.Interaction, current:str):
 		try :
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			if current.isdigit():
 				return [app_commands.Choice(name=f"({current}🌹)", value=f"({current}🌹)")]
@@ -92,17 +93,17 @@ class GamblingHelper():
 	def __init__(self, bot:commands.Bot):
 		self.bot : commands.Bot = bot
 
-	async def is_allowed_to_bet(self, inter:discord.Interaction, bet:str) -> tuple[int, discord.Embed, dict]:
+	async def is_allowed_to_bet(self, inter:discord.Interaction, bet:str) -> tuple[int, discord.Embed, UserAccount]:
 		E = discord.Embed()
 		E.color = discord.Color.green()
 		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
 
 		try :
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You don't have any 🌹, get some using **/collect**"
 			E.color = discord.Color.red()
-			return 0, E, {}
+			return 0, E, new_user()
 		
 		# if the user sent the command too quickly
 		if '🌹' not in bet:

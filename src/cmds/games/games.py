@@ -8,7 +8,7 @@ import requests
 from typing import Optional
 
 from settings import BOT_CHANNEL_ID
-from utils import log, get_data, upd_data, get_value, new_user
+from utils import log, get_data, upd_data, get_value, new_user, UserAccount
 
 class Games(commands.Cog):
 	def __init__(self,bot):
@@ -73,7 +73,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 		# user_id : {user data}
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			user_data = new_user()
 		if traveler:
@@ -99,7 +99,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 		# user_id : {user data}
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			user_data = new_user()
 
