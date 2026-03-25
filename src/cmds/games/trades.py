@@ -49,8 +49,15 @@ class Trades(commands.Cog):
 				self.timeout_date = timeout_date
 				super().__init__(timeout=60)
 				self.message : Optional[discord.Message]
+				self.has_been_answered = False
 
 			async def interaction_check(self, inter2: discord.Interaction):
+				# prevent duping
+				if self.has_been_answered:
+					await inter2.response.defer()
+					return False
+				self.has_been_answered = True
+
 				self.upd_timeout()
 
 				if inter.user == inter2.user:

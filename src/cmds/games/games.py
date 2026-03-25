@@ -147,8 +147,15 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		def __init__(self, parent_view:'B_choices', *args, **kwargs):
 			super().__init__(*args, **kwargs)
 			self.parent_view = parent_view
+			self.has_been_answered = False
 
 		async def callback(self, inter: discord.Interaction): #type: ignore
+			# prevent duping
+			if self.has_been_answered:
+				return await inter.response.defer()
+	
+			self.has_been_answered = True
+
 			await inter.response.defer()
 			if question_type == "boolean":
 				if correct_answer.upper() == self.label:
