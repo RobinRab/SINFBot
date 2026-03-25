@@ -159,9 +159,21 @@ class Multiplayer(commands.Cog):
 	@app_commands.command(description="Play connect 4 against a friend!")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
-	@app_commands.describe(bet="The amount to bet", currency="The currency to bet with", player="The player you want to play against")
-	async def connect4(self, inter:discord.Interaction, bet:int, currency:currencies, player:Optional[discord.Member]):
+	@app_commands.describe(
+						bet="The amount to bet",
+						currency="The currency to bet with",
+						player="The player you want to play against",
+						turn_timeout="Time per move in seconds (default 30, between 10 and 60)")
+	async def connect4(self, inter:discord.Interaction, bet:int, currency:currencies, player:Optional[discord.Member], turn_timeout: Optional[int] = 30):
 		await inter.response.defer()
+
+		# fix turn_timeout if it's out of bounds or None
+		if turn_timeout is None:
+			turn_timeout = 30
+		if turn_timeout < 10:
+			turn_timeout = 10
+		elif turn_timeout > 60:
+			turn_timeout = 60
 
 		# current user check
 		if not await self.user_check(inter, bet, currency):
@@ -179,8 +191,8 @@ class Multiplayer(commands.Cog):
 		player2 = return_player
 
 		players_data = {
-			player1: {"member": player1, "emoji": "🟢", "embed_color":discord.Color.green(), "url":await GetLogLink(self.bot, player1.display_avatar.url)},
-			player2: {"member": player2, "emoji": "🔴", "embed_color":discord.Color.red(), "url":await GetLogLink(self.bot, player2.display_avatar.url)}
+			player1: {"member": player1, "emoji": "🟢", "current_move": "❎", "embed_color":discord.Color.green(), "url":await GetLogLink(self.bot, player1.display_avatar.url)},
+			player2: {"member": player2, "emoji": "🔴", "current_move": "❌", "embed_color":discord.Color.red(), "url":await GetLogLink(self.bot, player2.display_avatar.url)}
 		}
 
 		players = [player1, player2]
@@ -191,6 +203,7 @@ class Multiplayer(commands.Cog):
 			txt = f"{player1.mention}🟢 vs {player2.mention}🔴\n\n"
 			for row in board:
 				txt += "".join(row) + "\n"
+			txt += "1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣"
 			txt += "\n\n"
 			txt += f"{player.mention}'s turn ({players_data[player]['emoji']})"
 			return txt
@@ -244,7 +257,7 @@ class Multiplayer(commands.Cog):
 		while True:
 			# this view has to be recreated every turn to reset the timeout and available columns
 			class ColumnSelect(discord.ui.View):
-				def __init__(self2, *, timeout: float | None = 30): #type:ignore[no-self-arg]
+				def __init__(self2, *, timeout: float = turn_timeout): #type:ignore[no-self-arg]
 					super().__init__(timeout=timeout)
 					# select one default choice, only applied if the user never plays
 					self2.selected_column : int = random.choice(get_available_columns(board))
@@ -274,15 +287,23 @@ class Multiplayer(commands.Cog):
 			embed.set_author(name=players[current_player].name, icon_url=players_data[players[current_player]]["url"])
 			embed.set_footer(text=f"Winner gets {2*bet}{currency}")
 
-			await inter.edit_original_response(embed=embed, view=view, content=f"{players[current_player].mention}, it's your turn! Select a column to drop your piece.\nTimeout in: <t:{int(dt.datetime.now().timestamp()) + 30}:R>")
+			await inter.edit_original_response(embed=embed, view=view, content=f"{players[current_player].mention}, it's your turn! Select a column to drop your piece.\nTimeout in: <t:{int(dt.datetime.now().timestamp()) + turn_timeout}:R>")
 			await view.wait()
 
 			assert isinstance(view.selected_column, int)
 
+			# clear previous play markers
+			for i, row in enumerate(board):
+				for ii, cell in enumerate(row):
+					if cell == "❎":
+						board[i][ii] = "🟢"
+					elif cell == "❌":
+						board[i][ii] = "🔴"
+
 			# drop the piece in the selected column
 			for row in range(5, -1, -1):
 				if board[row][view.selected_column] == "⚪":
-					board[row][view.selected_column] = players_data[players[current_player]]["emoji"]
+					board[row][view.selected_column] = players_data[players[current_player]]["current_move"]
 					break
 
 			winner = someone_won(board)

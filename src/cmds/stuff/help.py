@@ -385,7 +385,7 @@ class Help(commands.Cog):
 					E.add_field(name="**Cooldown**", value="```1s / user```")
 				elif query == "connect4":
 					E.description = "**Play connect4 against another user**"
-					E.add_field(name="**Example**", value="```/connect4 <bet> <currency> (user)```")
+					E.add_field(name="**Example**", value="```/connect4 <bet> <currency> (user) (turn_timeout)```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
 
 				# animal crossing commands
