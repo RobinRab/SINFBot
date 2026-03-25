@@ -167,6 +167,9 @@ class Economy(commands.Cog):
 	async def penality(self, inter: discord.Interaction, user: discord.Member, amount: int, reason:str, proof: discord.Attachment, msg_link: Optional[str]):
 		await inter.response.defer()
 
+		if amount < 100:
+			return await inter.followup.send(content="amount must be at least 100", ephemeral=True)
+
 		E = discord.Embed()
 		E.set_author(name=user.name, icon_url=await GetLogLink(self.bot, user.display_avatar.url))
 		E.color = discord.Color.red()
