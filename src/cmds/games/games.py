@@ -153,12 +153,13 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		async def callback(self, inter: discord.Interaction): #type: ignore
 			# prevent duping
 			if self.has_been_answered:
-				return await inter.response.defer()
+				return await inter.response.send_message("This question has already been answered!", ephemeral=True)
 	
 			self.has_been_answered = True
 
 			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 			if user_data.get("has_got_daily_traveler", True):
+				self.has_been_answered = False
 				E = discord.Embed(title="You have already helped the traveler today!", color=discord.Color.red())
 				return await inter.response.send_message(inter.user.mention, embed=E, ephemeral=True)
 

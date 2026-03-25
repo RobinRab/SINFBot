@@ -181,7 +181,7 @@ class Economy(commands.Cog):
 		user_data["roses"] -= amount
 		upd_data(user_data, f"games/users/{user.id}")
 
-		E.description = f"#{user.mention} has been penalized of {amount}🌹\n{reason}\n"
+		E.description = f"# {user.mention} has been penalized of {amount}🌹\n\n{reason}\n\n"
 		E.description += f"[Jump to message]({msg_link})\n\n" if msg_link else ""
 
 		if proof.content_type.startswith("image/"): #type: ignore
