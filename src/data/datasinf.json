@@ -454,14 +454,15 @@
                 "villagers": [
                     "Ribbot",
                     "Octavian"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "627431499960156161": {
                 "level": 10,
                 "timely": 1774469893,
                 "roses": 0,
                 "candies": 0,
-                "ideas": 49,
+                "ideas": 54,
                 "tech": 4,
                 "bank": {
                     "roses": 3000,
@@ -485,12 +486,13 @@
                     "Whitney",
                     "Sasha",
                     "Raymond"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "346945067975704577": {
                 "level": 8,
                 "timely": 1774472128,
-                "roses": 1565,
+                "roses": 1822,
                 "candies": 1,
                 "ideas": 32,
                 "tech": 4,
@@ -516,7 +518,8 @@
                 "villagers": [
                     "Chief",
                     "Rosie"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "560155603574718475": {
                 "level": 12,
@@ -549,7 +552,8 @@
                     "Apollo",
                     "Petri",
                     "Curt"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "366975965601071104": {
                 "level": 2,
@@ -577,7 +581,8 @@
                 "villager_of_the_day": "Ribbot",
                 "villagers": [
                     "Graham"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "1212879268305043476": {
                 "level": 5,
@@ -608,7 +613,8 @@
                 "villagers": [
                     "Poppy",
                     "Klaus"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "752574610666684426": {
                 "level": 6,
@@ -629,7 +635,8 @@
                 "villagers": [
                     "Phoebe",
                     "Fauna"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "443867585075871767": {
                 "level": 5,
@@ -660,7 +667,8 @@
                 "villager_of_the_day": "[STOP]",
                 "villagers": [
                     "Kabuki"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "183259368286978048": {
                 "level": 0,
@@ -680,12 +688,13 @@
                 "villager_of_the_day": "Olivia",
                 "villagers": [
                     "Jacques"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "269210243093889028": {
                 "level": 6,
-                "timely": 1774455905,
-                "roses": 0,
+                "timely": 1774491233,
+                "roses": 1302,
                 "candies": 0,
                 "ideas": 33,
                 "tech": 3,
@@ -707,7 +716,8 @@
                 "villagers": [
                     "Erik",
                     "Bluebear"
-                ]
+                ],
+                "has_got_daily_traveler": false
             },
             "290494427330510849": {
                 "level": 2,
@@ -729,7 +739,8 @@
                 "villager_of_the_day": "[STOP]",
                 "villagers": [
                     "Bob"
-                ]
+                ],
+                "has_got_daily_traveler": false
             }
         }
     }
