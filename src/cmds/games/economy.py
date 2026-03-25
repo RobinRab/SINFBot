@@ -6,7 +6,7 @@ import random
 import datetime as dt
 from typing import Optional, Literal
 
-from utils import get_data, upd_data, GetLogLink, new_user, UserAccount, get_amount, translate, get_value, get_collect_time
+from utils import get_data, upd_data, GetLogLink, new_user, UserAccount, get_amount, translate, get_value, get_collect_time, is_owner
 
 class Economy(commands.Cog):
 	def __init__(self,bot):
@@ -158,6 +158,39 @@ class Economy(commands.Cog):
 		E.description = f"{inter.user.mention}, You are now tech **{tech}**:gear:!"
 
 		await inter.followup.send(embed=E)
+
+	@app_commands.command()
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	@app_commands.check(is_owner)
+	@app_commands.describe(proof="Attach an image as proof")
+	async def penality(self, inter: discord.Interaction, user: discord.Member, amount: int, reason:str, proof: discord.Attachment, msg_link: Optional[str]):
+		await inter.response.defer()
+
+		E = discord.Embed()
+		E.set_author(name=user.name, icon_url=await GetLogLink(self.bot, user.display_avatar.url))
+		E.color = discord.Color.red()
+
+		try: 
+			user_data: UserAccount = get_data(f"games/users/{user.id}")
+		except:
+			E.description = f"{user.mention} has never played"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E)
+
+		user_data["roses"] -= amount
+		upd_data(user_data, f"games/users/{user.id}")
+
+		E.description = f"#{user.mention} has been penalized of {amount}🌹\n{reason}\n"
+		E.description += f"[Jump to message]({msg_link})\n\n" if msg_link else ""
+
+		if proof.content_type.startswith("image/"): #type: ignore
+			E.set_image(url=proof.url)
+		else:
+			return await inter.followup.send(content="The provided proof is not an image.", ephemeral=True)
+
+		await inter.followup.send(embed=E)
+
 
 class Bank(app_commands.Group):
 	def __init__(self, bot:commands.Bot, *args, **kwargs):
