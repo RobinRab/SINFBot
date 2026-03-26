@@ -55,6 +55,9 @@ class Loops(commands.Cog):
 		# animal crossing villagers
 		reset_daily_villagers()
 
+		# new day, new traveler
+		reset_daily_traveler()
+
 async def setup(bot:commands.Bot):
 	print("started midnight events loop")
 	Loops.midnight_events.start()
