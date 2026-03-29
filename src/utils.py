@@ -212,6 +212,24 @@ def is_owner(inter: commands.Context | discord.Interaction ) -> bool:
 	
 		return inter.user.id == OWNER_ID
 
+async def embed_roulette(bot, inter : discord.Interaction, E : discord.Embed):
+	url = random_avatar()
+	if inter.user.avatar:
+		url = inter.user.avatar.url
+    
+    # On utilise le bot passé en argument
+	log_link = await GetLogLink(bot, url)
+	E = discord.Embed(title="Roulette")
+	E.set_author(name=inter.user.display_name, url=log_link)
+    
+	E.title = "Roulette"
+	E.color = discord.Color.purple()
+	E.set_footer(text="Roulette by Scylla and Ceisal")
+	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/1090314687620583467/1480486031676538920/Roulette.png?ex=69c4f190&is=69c3a010&hm=cfe288daeaa72cef696d4a5d950919b12543428cbb967c60c8b54995af9c476b&")
+	
+	E.color = discord.Color.purple()
+
+	return E
 
 def is_summer_time(date:dt.datetime) -> bool:
 	date = dt.datetime.fromtimestamp(date.timestamp())
@@ -428,8 +446,8 @@ def new_update() -> discord.Embed:
 	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
 	E.title = "New update !"
 	E.set_author(name="SINF illégal family bot")
-	E.description = "- Gamble autocomplete\n"
-	E.description += "- Better roll information\n"
+	E.description = "- Roulette ! (At least :pray:)\n"
+	E.description += "- Wordle debug\n"
 
 	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
 	E.add_field(name="Authors", value="<@!346945067975704577>")

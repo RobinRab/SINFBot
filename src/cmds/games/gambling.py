@@ -9,21 +9,12 @@ import asyncio
 
 import re
 from settings import BOT_CHANNEL_ID
-from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie, UnexpectedValue, get_value, random_avatar, get_belgian_time, get_user_data
+from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie, UnexpectedValue, get_value, random_avatar, get_belgian_time, get_user_data, embed_roulette
 
 
 class GamblingHelper:
 	def __init__(self, bot:commands.Bot):
 		self.bot : commands.Bot = bot
-	
-	async def embed_roulette(self, inter : discord.Interaction, E : discord.Embed):
-		url = random_avatar()
-		if inter.user.avatar:
-			url = inter.user.avatar.url
-		E.set_author(name=inter.user.display_name, url = await GetLogLink(self.bot, url))
-		E.set_footer(text="Roulette by Scylla and Ceisal")
-		E = discord.Embed(title="Roulette")
-		return E
 
 	async def is_allowed_to_bet(self, inter:discord.Interaction, bet:str) -> tuple[int, discord.Embed, dict]:
 		E = discord.Embed()

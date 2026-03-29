@@ -9,7 +9,7 @@ import datetime as dt
 from typing import Literal, Dict
 
 from settings import DATA_DIR
-from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, simplify, is_member
+from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, simplify, is_member, embed_roulette
 
 #! fonction 'get_words' accepts 4 columns csv
 class Wordle(commands.Cog):
@@ -40,6 +40,7 @@ class Wordle(commands.Cog):
     @app_commands.guild_only()
     @app_commands.describe(language = "The language you choose")
     async def wordle(self, inter: discord.Interaction, language:Literal["English", "French"]):
+        await inter.response.defer()
         user_data = await self.get_data_wordle(inter)
         user_id = inter.user.id
 
@@ -54,12 +55,10 @@ class Wordle(commands.Cog):
         
 
         if user_id in Wordle.active_games and Wordle.active_games[user_id]:
-            await inter.response.send_message("You are already playing Wordle.", ephemeral=True)
+            await inter.followup.send("You are already playing Wordle.", ephemeral=True)
             return
         
         Wordle.active_games[user_id] = True
-        
-        current_number_guess = len(user_data[current_w])
         
         result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
 
@@ -74,12 +73,24 @@ class Wordle(commands.Cog):
                     spaced_word += f"{letter:^4}"
 
                 already_guessed += "# " + spaced_word + "\n" + space(user_data[current_w][word])+"\n"
-            await inter.response.send_message(f"You already played today, but here are your stats for today \nSee you tomorrow!", ephemeral=True)
+            await inter.followup.send(f"You already played today, but here are your stats for today \nSee you tomorrow!", ephemeral=True)
             return await inter.followup.send(f"{already_guessed}", ephemeral=True)
 
-        if current_number_guess == 0:
-            await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
-            \nType *stop* to pause the game, recall the function to *restart*.''')
+        current_number_guess = len(user_data[current_w])
+
+        #User got cursed by roulette
+        guess_limit = 6
+        if "wordle_guess_reduced" in user_data["effects"]:
+            guess_limit = 5
+
+        if current_number_guess == 0 and not guess_limit == 5:
+            await inter.followup.send(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
+            \nType 'stop' to *pause* the game, recall the function to *restart*.''')
+
+        elif current_number_guess == 0 and guess_limit == 5:
+            E_roulette = await embed_roulette(self, inter, E)
+            E_roulette.description = f"Welcome to {language} wordle! Something looks strange... You only have 5 guesses today!!"
+            await inter.followup.send(embed = E_roulette, ephemeral=True)
 
         else:
             already_guessed = ""
@@ -90,17 +101,16 @@ class Wordle(commands.Cog):
                     spaced_word += f"{letter:^4}"
 
                 already_guessed += "# " + spaced_word + "\n" + space(user_data[current_w][word])+"\n"
-            await inter.response.send_message( f"Welcome back ! You're on guess {current_number_guess}, here are the words you already guessed : ", ephemeral = True)
+            if guess_limit == 6:
+                await inter.followup.send( f"Welcome back to {language} wordle! Here are the words you already guessed : ", ephemeral = True)
+            else:
+                await inter.followup.send( f"Welcome back to {language} wordle! Something looks strange... You only have 5 guesses today!!\nHere are the words you already guessed : ", ephemeral = True)
             await inter.followup.send(f"{already_guessed}", ephemeral = True)
-            await inter.followup.send("Type *stop* to pause the game.", ephemeral = True)
+            await inter.followup.send("Type 'stop' to pause the game.", ephemeral = True)
 
         guess_limit = 6
 
         has_won = False
-        
-        #User got cursed by roulette
-        if "wordle_guess_reduced" in user_data["effects"]:
-            guess_limit = 5
 
         #The user has 5 or 6 chances
         while current_number_guess<guess_limit:
@@ -202,11 +212,10 @@ class Wordle(commands.Cog):
         if guess_limit == 5:
             user_data["cursed_wordle"] = 1
             upd_data(user_data["cursed_wordle"], f"games/users/{user_id}/cursed_wordle")
-            E.title = "Roulette"
-            E.description = f"Oops you only had 5 guesses today...\n"
-            # E.set_thumbnail(url="https://media.discordapp.net/attachments/1090314687620583467/1478506972767850689/Gemini_Generated_Image_jlgs21jlgs21jlgs.png?ex=69a8a66b&is=69a754eb&hm=d9cf9e3628c144e0d4aecbf9468b31938b860f4c9edb5c7b074bc784cc84e682&=&format=webp&quality=lossless&width=1843&height=1384")
-            E.color = discord.Color.purple()
-            await inter.followup.send(embed = E)
+            E_roulette = await self.embed_roulette(inter, E)
+            E_roulette.description = f"Oops you only had 5 guesses today...\n"
+            
+            await inter.followup.send(embed = E_roulette)
 
         del Wordle.active_games[user_id]
     
@@ -349,10 +358,12 @@ async def choose_todays_word(bot:commands.Bot) -> None:
         upd_data({}, f"games/users/{user_id}/wordle_en")
         upd_data({}, f"games/users/{user_id}/wordle_fr")
         user_data = get_data(f"games/users/{user_id}")
-        if "wordle_guess_reduced" in user_data["effects"] and user_data["cursed_wordle"] == 1:
+        if user_data["cursed_wordle"] == 1:
             user_data["cursed_wordle"] = 0
             user_data["effects"].remove("wordle_guess_reduced")
             upd_data(user_data, f"games/users/{user_id}")
 
 async def setup(bot:commands.Bot):
     await bot.add_cog(Wordle(bot))
+
+
