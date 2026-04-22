@@ -1,16 +1,22 @@
+#Generated files
+.vscode/
 __pycache__
 .DS_Store
-Thumbs.db
-.env
 
+.env
+Thumbs.db
+
+#Super secret file
 achievements.py
 
-./src/data/bot.log
-./src/data/datasinf.json
+#ignore logs and databse
+src/data/bot.log
+src/data/datasinf.json
 
 # ignore the venv folder
-.venv/
+venv/
 
-# ignore test files
+# ignore test files / drafs
 testing.py
 testing.txt
+src/Draft.py
