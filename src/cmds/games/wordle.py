@@ -273,6 +273,7 @@ async def choose_todays_word(bot:commands.Bot) -> None:
 
 	await asyncio.sleep(sleep)
 
+	Wordle.active_games={}
 	upd_data(wordle_word_en, "games/todays_word_en")
 	upd_data(wordle_word_fr, "games/todays_word_fr")
 	for user_id in get_data("games/users").keys():
