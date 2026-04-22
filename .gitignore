@@ -10,6 +10,7 @@ Thumbs.db
 achievements.py
 
 #ignore logs and databse
+#we may not want to ignore database to save it on github, but rather weird if we imagine a wider use (not only SIF)
 src/data/bot.log
 src/data/datasinf.json
 
