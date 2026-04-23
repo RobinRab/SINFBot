@@ -143,7 +143,7 @@ class GamblingHelper:
 				roulette = True
 
 		if roulette:
-			E = await self.embed_roulette(inter, E)
+			E = await embed_roulette(self.bot, inter, E)
 
 		multiplicator = 1
 		double = False
@@ -226,7 +226,7 @@ class GamblingHelper:
 				roulette = True
 				
 		if roulette:
-			E = await self.embed_roulette(inter, E)
+			E = await embed_roulette(self.bot, inter, E)
 		choice = random.choice(["heads", "tails"])
 
 		if "change_bet_method" in user_data["effects"]:
@@ -322,7 +322,7 @@ class GamblingHelper:
 				roulette = True
 				
 		if roulette:
-			E = await self.embed_roulette(inter, E)
+			E = await embed_roulette(self.bot, inter, E)
 
 		r = random.randint(1,8)
 		multiplicator=1

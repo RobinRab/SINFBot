@@ -63,6 +63,7 @@ class Wordle(commands.Cog):
         result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
 
         #Check if results shown have to be ephemeral or not
+        print(result_displayed)
         if result_displayed:
             del Wordle.active_games[user_id]
             already_guessed = ""
@@ -88,7 +89,7 @@ class Wordle(commands.Cog):
             \nType 'stop' to *pause* the game, recall the function to *restart*.''')
 
         elif current_number_guess == 0 and guess_limit == 5:
-            E_roulette = await embed_roulette(self, inter, E)
+            E_roulette = await embed_roulette(self.bot, inter, E)
             E_roulette.description = f"Welcome to {language} wordle! Something looks strange... You only have 5 guesses today!!"
             await inter.followup.send(embed = E_roulette, ephemeral=True)
 
@@ -212,7 +213,7 @@ class Wordle(commands.Cog):
         if guess_limit == 5:
             user_data["cursed_wordle"] = 1
             upd_data(user_data["cursed_wordle"], f"games/users/{user_id}/cursed_wordle")
-            E_roulette = await self.embed_roulette(inter, E)
+            E_roulette = await embed_roulette(self.bot, inter, E)
             E_roulette.description = f"Oops you only had 5 guesses today...\n"
             
             await inter.followup.send(embed = E_roulette)

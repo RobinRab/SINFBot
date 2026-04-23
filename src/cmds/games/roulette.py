@@ -255,7 +255,7 @@ class Roulette:
             "wordle_guess_reduced_other_user" : 5, #other
 
             "traveler_spawn" : 5.5,
-            "create_next_traveler" : 8 * current_created_traveler,
+            "create_next_traveler" : 6 * current_created_traveler,
             "fail_next_traveler" : 5, 
 
             "chances_next_bet_x2" : 4, 
@@ -279,7 +279,7 @@ class Roulette:
 
         #Modify this line to make tests.
         cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
-        cons = "create_next_traveler" 
+        cons = "wordle_guess_reduced"
         print(cons) 
         has_been_answered = False
         url = random_avatar()
@@ -512,6 +512,7 @@ class Roulette:
                 return await self.roulette(inter, other_user)
             has_been_answered = True
             await self.create_next_traveler(inter)
+
         elif cons == "free_roulette":
             has_been_answered = True
             other_user_data["effects"].append("free_roulette")
@@ -519,6 +520,7 @@ class Roulette:
             E.colour = discord.Colour.purple()
             E.description = f"You won a free roulette spin for {other_user.mention}!"
             await inter.followup.send(embed=E)
+
         if not has_been_answered:
             await inter.followup.send("A random effect has been applied to one of you, wait and see", ephemeral=True)
 
@@ -532,7 +534,7 @@ async def free_sunday_roll() -> None:
     now = get_belgian_time()
 
     # Puts the right value in free_sunday_roll depending on the day (Sunday/Other day that Sunday)
-    if now.weekday()!= 6:
+    if now.weekday()!= 4:
         for user_id in get_data("games/users").keys():
             upd_data(0, f"games/users/{user_id}/free_sunday_roll")
     else:

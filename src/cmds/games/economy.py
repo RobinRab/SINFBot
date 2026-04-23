@@ -9,7 +9,7 @@ from typing import Optional, Literal
 
 from cmds.games.gambling import GamblingHelper
 
-from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time, get_user_data
+from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time, get_user_data, embed_roulette
 
 class Economy(commands.Cog):
 	def __init__(self,bot):
@@ -93,7 +93,7 @@ class Economy(commands.Cog):
 		if "free_flip_when_collect" in user_data["effects"]:
 			GH = GamblingHelper(self.bot)
 			guess : Literal["heads", "tails"] = random.choice(["heads", "tails"])
-			E = await GH.embed(inter,E)
+			E = await embed_roulette(self.bot, inter, E)
 			E.description = f"Congratulations! You won a free flip !"
 			E.color = discord.Color.purple()
 			await inter.followup.send(embed=E)
