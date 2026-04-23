@@ -12,7 +12,6 @@ import datetime as dt
 from typing import Any, Optional
 from settings import DATA_DIR, MEMBER_ID, CUTIE_ID, OWNER_ID, LOG_PIC_CHANNEL_ID
 from typing import TypedDict
-
 #!!WARNING!! Any edits in this file can break commands
 
 class UnexpectedValue(Exception):
@@ -328,30 +327,41 @@ class UserAccount(TypedDict):
 	achievements: list[str]
 	wordle_en: dict[str, str]
 	wordle_fr: dict[str, str]
+	wordle_stats_en : dict[str, int]
+	wordle_stats_fr : dict[str, int]
 	villager_of_the_day: str
 	villagers: list[str]
 	has_got_daily_traveler : bool
 
+INPUT_DATA : UserAccount = {
+	"level": 0,
+	"timely": 0,
+	"roses": 0,
+	"candies": 0,
+	"ideas": 0,
+	"tech": 0,
+	"bank" : {
+		"roses": 0,
+		"candies": 0,
+		"ideas": 0
+	},
+	"achievements": [],
+	"wordle_en": {},
+	"wordle_fr": {},
+	"wordle_stats_en": {
+		"todays_w_results_shown": 0
+	},
+	"wordle_stats_fr": {
+		"todays_w_results_shown": 0
+	},
+	"villager_of_the_day": "",
+	"villagers" : [],
+	"has_got_daily_traveler" : False
+}
+
 def new_user() -> UserAccount:
-	return {
-		"level"   : 0,
-		"timely"  : int(dt.datetime.now().timestamp()),
-		"roses"   : 0,
-		"candies" : 0,
-		"ideas"   : 0,
-		"tech"    : 0,
-		"bank"    : {
-			"roses"   : 0,
-			"candies" : 0,
-			"ideas"   : 0
-		},
-		"achievements" : [],
-		"wordle_en" : {},
-		"wordle_fr" : {},
-		"villager_of_the_day": "",
-		"villagers" : [],
-		"has_got_daily_traveler" : False
-	}
+	INPUT_DATA["timely"] = int(dt.datetime.now().timestamp())
+	return INPUT_DATA
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
 	"""Translates a user input into an amount of cash. \n

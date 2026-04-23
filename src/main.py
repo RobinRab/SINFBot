@@ -5,6 +5,7 @@ from discord.ext import commands
 print(f"discord -v: {discord.__version__}")
 
 import settings
+import Users_format
 from utils import log, is_owner, get_data, upd_data, new_update
 
 intents = discord.Intents.all()
