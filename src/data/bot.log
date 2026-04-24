@@ -1707,3 +1707,30 @@ discord.errors.HTTPException: 400 Bad Request (error code: 50006): Cannot send a
 [2026-04-24 21:25:07] [INFO    ] cmds.games.trades loaded 
 [2026-04-24 21:25:07] [INFO    ] cmds.games.gambling loaded 
 [2026-04-24 21:25:07] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 22:17:23] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 22:17:23] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 22:17:23] [INFO    ] discord.client: logging in using static token
+[2026-04-24 22:17:24] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 909fad40139b718ef36f3311683d481a).
+[2026-04-24 22:17:26] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 22:17:26] [INFO    ] adding Avatar to context menu
+[2026-04-24 22:17:26] [INFO    ] adding Birthday to context menu
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.error loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.message loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.games loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.animal_crossing loaded 

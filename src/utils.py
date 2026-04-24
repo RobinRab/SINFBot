@@ -332,36 +332,33 @@ class UserAccount(TypedDict):
 	villager_of_the_day: str
 	villagers: list[str]
 	has_got_daily_traveler : bool
-
-INPUT_DATA : UserAccount = {
-	"level": 0,
-	"timely": 0,
-	"roses": 0,
-	"candies": 0,
-	"ideas": 0,
-	"tech": 0,
-	"bank" : {
-		"roses": 0,
-		"candies": 0,
-		"ideas": 0
-	},
-	"achievements": [],
-	"wordle_en": {},
-	"wordle_fr": {},
-	"wordle_stats_en": {
-		"todays_w_results_shown": 0
-	},
-	"wordle_stats_fr": {
-		"todays_w_results_shown": 0
-	},
-	"villager_of_the_day": "",
-	"villagers" : [],
-	"has_got_daily_traveler" : False
-}
-
+	
 def new_user() -> UserAccount:
-	INPUT_DATA["timely"] = int(dt.datetime.now().timestamp())
-	return INPUT_DATA
+	return 	{
+		"level": 0,
+        "timely": 0,
+        "roses": 0,
+        "candies": 0,
+        "ideas": 0,
+        "tech": 0,
+        "bank" : {
+            "roses": 0,
+            "candies": 0,
+            "ideas": 0
+        },
+        "achievements": [],
+        "wordle_en": {},
+        "wordle_fr": {},
+        "wordle_stats_en": {
+            "todays_w_results_shown": 0
+        },
+        "wordle_stats_fr": {
+            "todays_w_results_shown": 0
+        },
+        "villager_of_the_day": "",
+        "villagers" : [],
+        "has_got_daily_traveler" : False
+}
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
 	"""Translates a user input into an amount of cash. \n
