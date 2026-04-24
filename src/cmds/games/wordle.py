@@ -8,19 +8,17 @@ import asyncio
 import datetime as dt
 from typing import Literal, Dict
 
-from settings import DATA_DIR
+from settings import DATA_DIR, GUILD_ID
 from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, simplify, is_member #, embed_roulette
                                                                                                          #Roulette is comming 👀
 
-#! fonction 'get_words' accepts 4 columns csv
 class Wordle(commands.Cog):
     active_games = {}
 
-    def __init__(self,bot):
+    def __init__(self, bot):
         self.bot : commands.Bot = bot
-
         choose_todays_word.start(bot=self.bot)
-
+    
     async def get_data_wordle(self, inter:discord.Interaction) -> dict:
         # check if account exists
         try :
@@ -39,7 +37,7 @@ class Wordle(commands.Cog):
     @app_commands.command(description="Play today's wordle!")
     @app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
     @app_commands.guild_only()
-    @app_commands.describe(language = "The language you choose")
+    @app_commands.describe(language = "The languag  e you choose")
     async def wordle(self, inter: discord.Interaction, language:Literal["English", "French"]):
         user_data = await self.get_data_wordle(inter)
         user_id = inter.user.id
@@ -54,16 +52,16 @@ class Wordle(commands.Cog):
         E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
         
         #Compute current state of the game
-        current_number_guess = len(user_data[current_w])
-
         if user_id in Wordle.active_games and Wordle.active_games[user_id]:
-            Wordle.active_games[user_id] = False
             await inter.response.send_message("You are already playing Wordle.", ephemeral=True)
             return
 
         Wordle.active_games[user_id] = True
         
-        result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
+        try:
+            result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
+        except:
+            await inter.response.send_message("Connection failure, please try again", ephemeral=True)
 
         #Check if results shown have to be ephemeral or not
         if result_displayed:
@@ -79,6 +77,11 @@ class Wordle(commands.Cog):
             await inter.response.send_message(f"You already played today, but here are your stats for today \nSee you tomorrow!", ephemeral=True)
             return await inter.followup.send(f"{already_guessed}", ephemeral=True)
 
+        try:
+            current_number_guess = len(user_data[current_w])
+        except:
+            await inter.response.send_message("Connection failure, try again", ephemeral=True)
+            
         #User got cursed by roulette
         guess_limit = 6
         # if "wordle_guess_reduced" in user_data["effects"]:
@@ -202,7 +205,11 @@ class Wordle(commands.Cog):
         upd_data(user_data[f"wordle_stats_{l_abbr}"], f"games/users/{inter.user.id}/wordle_stats_{l_abbr}")
 
         del Wordle.active_games[user_id]
-    
+
+#Executes before wordle
+async def before_wordle(self, ctx:commands.Context):
+    print("HIIIIIIII")
+
 #Puts spaces between letters of guessed word and colors
 def space(content : str):
     spaced_word = ""
@@ -210,7 +217,7 @@ def space(content : str):
         spaced_word += f"{letter:^3}"
     return spaced_word
 
-#Function that creates the lists from the csv
+#Function that creates the lists from the csv, accepts 4 columns csv
 def get_words()-> Dict:
     wordle_data = {"guess_list_en": [], "wordle_list_en": [], "guess_list_fr": [], "wordle_list_fr": []}
     with open(DATA_DIR/"wordle_words.csv", "r") as f:
@@ -285,16 +292,19 @@ async def choose_todays_word(bot:commands.Bot) -> None:
     await asyncio.sleep(sleep)
 
     Wordle.active_games={}
+
     upd_data(wordle_word_en, "games/todays_word_en")
     upd_data(wordle_word_fr, "games/todays_word_fr")
 
     for user_id in get_data("games/users").keys():
-        
-        upd_data({}, f"games/users/{user_id}/wordle_en")
-        upd_data({}, f"games/users/{user_id}/wordle_fr")
         user_data = get_data(f"games/users/{user_id}")
+        user_data["wordle_en"] = {}
+        user_data["wordle_fr"] = {}
+        user_data["wordle_stats_en"]["todays_w_results_shown"] = 0
+        user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
+        upd_data(user_data, f"games/users/{user_id}")
 
 async def setup(bot:commands.Bot):
-    await bot.add_cog(Wordle(bot))
-
+    wordle_obj = Wordle(bot)
+    await bot.add_cog(wordle_obj)
 
