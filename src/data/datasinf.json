@@ -427,9 +427,9 @@
             "411881842439094272": {
                 "level": 6,
                 "timely": 1776913315,
-                "roses": 222,
+                "roses": 333,
                 "candies": 0,
-                "ideas": 41,
+                "ideas": 42,
                 "tech": 4,
                 "bank": {
                     "roses": 0,
@@ -439,16 +439,18 @@
                 "achievements": [],
                 "wordle_en": {
                     "0train": "\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
-                    "1unset": "\ud83d\udfe8\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe9",
-                    "2blunt": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8\ud83d\udfe8\ud83d\udfe9",
-                    "3fount": "\ud83d\udfe5\ud83d\udfe9\ud83d\udfe8\ud83d\udfe8\ud83d\udfe9",
-                    "4donut": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
+                    "1train": "\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
+                    "2train": "\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
+                    "3train": "\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
+                    "4train": "\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
+                    "5train": "\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8"
                 },
-                "wordle_fr": {
-                    "0train": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5",
-                    "1poule": "\ud83d\udfe8\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe9",
-                    "2coupe": "\ud83d\udfe5\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9",
-                    "3soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
+                "wordle_fr": {},
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 1
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
                 },
                 "villager_of_the_day": "[STOP]",
                 "villagers": [
@@ -480,6 +482,12 @@
                     "1poule": "\ud83d\udfe8\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe9",
                     "2coupe": "\ud83d\udfe5\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9",
                     "3soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
+                },
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
                 },
                 "villager_of_the_day": "Drift",
                 "villagers": [
@@ -514,6 +522,12 @@
                     "2douce": "\ud83d\udfe5\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe9",
                     "3soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
                 },
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
+                },
                 "villager_of_the_day": "[STOP]",
                 "villagers": [
                     "Chief",
@@ -547,6 +561,12 @@
                     "3soute": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe9",
                     "4soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
                 },
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
+                },
                 "villager_of_the_day": "Admiral",
                 "villagers": [
                     "Apollo",
@@ -578,41 +598,15 @@
                     "1mange": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe9",
                     "2soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
                 },
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
+                },
                 "villager_of_the_day": "Ribbot",
                 "villagers": [
                     "Graham"
-                ],
-                "has_got_daily_traveler": false
-            },
-            "1212879268305043476": {
-                "level": 5,
-                "timely": 1774477273,
-                "roses": 1636,
-                "candies": 3,
-                "ideas": 15,
-                "tech": 3,
-                "bank": {
-                    "roses": 0,
-                    "candies": 0,
-                    "ideas": 0
-                },
-                "achievements": [],
-                "wordle_en": {
-                    "0splat": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe9",
-                    "1mired": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe8",
-                    "2gonch": "\ud83d\udfe5\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe5",
-                    "3donut": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
-                },
-                "wordle_fr": {
-                    "0mardi": "\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5\ud83d\udfe5",
-                    "1poule": "\ud83d\udfe8\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe9",
-                    "2coupe": "\ud83d\udfe5\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9",
-                    "3soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
-                },
-                "villager_of_the_day": "[STOP]",
-                "villagers": [
-                    "Poppy",
-                    "Klaus"
                 ],
                 "has_got_daily_traveler": false
             },
@@ -631,6 +625,12 @@
                 "achievements": [],
                 "wordle_en": {},
                 "wordle_fr": {},
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
+                },
                 "villager_of_the_day": "[STOP]",
                 "villagers": [
                     "Phoebe",
@@ -664,6 +664,12 @@
                     "3somme": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe5\ud83d\udfe5\ud83d\udfe9",
                     "4soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
                 },
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
+                },
                 "villager_of_the_day": "[STOP]",
                 "villagers": [
                     "Kabuki"
@@ -685,6 +691,12 @@
                 "achievements": [],
                 "wordle_en": {},
                 "wordle_fr": {},
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
+                },
                 "villager_of_the_day": "Olivia",
                 "villagers": [
                     "Jacques"
@@ -712,6 +724,12 @@
                     "3lupin": "\ud83d\udfe5\ud83d\udfe8\ud83d\udfe8\ud83d\udfe5\ud83d\udfe5",
                     "4soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
                 },
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
+                },
                 "villager_of_the_day": "[STOP]",
                 "villagers": [
                     "Erik",
@@ -735,6 +753,12 @@
                 "wordle_en": {},
                 "wordle_fr": {
                     "0soupe": "\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9"
+                },
+                "wordle_stats_en": {
+                    "todays_w_results_shown": 0
+                },
+                "wordle_stats_fr": {
+                    "todays_w_results_shown": 0
                 },
                 "villager_of_the_day": "[STOP]",
                 "villagers": [

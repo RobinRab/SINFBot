@@ -26,3 +26,327 @@
 [2026-04-22 19:22:16] [INFO    ] cmds.games.gambling loaded 
 [2026-04-22 19:22:16] [INFO    ] cmds.games.animal_crossing loaded 
 [2026-04-22 19:26:28] [INFO    ] Bot synced
+[2026-04-24 12:24:24] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 12:24:24] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 12:24:24] [INFO    ] discord.client: logging in using static token
+[2026-04-24 12:24:25] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: efb3ab607e4254dad8f6f11b7a795d19).
+[2026-04-24 12:24:27] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 12:24:27] [INFO    ] adding Avatar to context menu
+[2026-04-24 12:24:27] [INFO    ] adding Birthday to context menu
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.error loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.message loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.games loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 12:25:43] [ERROR   ] 400 Bad Request (error code: 50006): Cannot send an empty message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 76, in wordle
+    return await inter.followup.send(f"{already_guessed}", ephemeral=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 1805, in send
+    data = await adapter.execute_webhook(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 221, in request
+    raise HTTPException(response, data)
+
+discord.errors.HTTPException: 400 Bad Request (error code: 50006): Cannot send an empty message
+
+[2026-04-24 12:40:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session efb3ab607e4254dad8f6f11b7a795d19.
+[2026-04-24 12:59:39] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 12:59:39] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 12:59:39] [INFO    ] discord.client: logging in using static token
+[2026-04-24 12:59:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 0e1748cfe9b46e40449aecde198e86bc).
+[2026-04-24 12:59:43] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 12:59:43] [INFO    ] adding Avatar to context menu
+[2026-04-24 12:59:43] [INFO    ] adding Birthday to context menu
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.error loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.message loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.games loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:02:06] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:02:06] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:02:06] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:02:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4fc346dcc9494ad88a2581558ef648bb).
+[2026-04-24 13:02:09] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:02:09] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:02:09] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:02:20] [ERROR   ] This interaction has already been responded to before 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 86, in wordle
+    await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing.
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+[2026-04-24 13:04:31] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:04:31] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:04:31] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:04:32] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e7aa42aaabdcdb8b73423f25eecfa689).
+[2026-04-24 13:04:34] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:04:34] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:04:34] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:04:47] [ERROR   ] This interaction has already been responded to before 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 106, in wordle
+    await inter.response.send_message( f"Welcome back to {language} wordle! Here are the words you already guessed : ", ephemeral = True)
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+[2026-04-24 13:05:45] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:05:45] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:05:45] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:05:46] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 3184c7ae68696978871b9b23f72a0da5).
+[2026-04-24 13:05:48] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:05:48] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:05:48] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:06:11] [ERROR   ] 404 Not Found (error code: 10008): Unknown Message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 127, in wordle
+    await message.delete()
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/message.py", line 859, in delete
+    await self._state.http.delete_message(self.channel.id, self.id)
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/http.py", line 741, in request
+    raise NotFound(response, data)
+
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
+
+[2026-04-24 13:06:12] [ERROR   ] 404 Not Found (error code: 10008): Unknown Message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 127, in wordle
+    await message.delete()
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/message.py", line 859, in delete
+    await self._state.http.delete_message(self.channel.id, self.id)
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/http.py", line 741, in request
+    raise NotFound(response, data)
+
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
+
+[2026-04-24 13:21:47] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:21:47] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:21:47] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:21:48] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 56d5625022ad0b9b844310b48eb2594f).
+[2026-04-24 13:21:50] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:21:50] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:21:50] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:26:07] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:26:07] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:26:07] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:26:09] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 27c93309573da8ca8389a2e45807c75d).
+[2026-04-24 13:26:11] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:26:11] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:26:11] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:41:44] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 13:41:50] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 1eeca93269a112e833d43787cb53e7b5).
+[2026-04-24 13:41:52] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:41:52] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.
+[2026-04-24 13:47:25] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 13:47:31] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: bb22b5a97a6b11c5e5d8eb3ffecb311c).
+[2026-04-24 13:47:33] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:47:33] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.
+[2026-04-24 13:53:29] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 13:53:36] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d58bdfd77f6748f929b1e945e214ca3f).
+[2026-04-24 14:09:03] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 14:09:03] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.
+[2026-04-24 14:23:22] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 14:23:29] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4d3016ca5ab537230a46ccaef59940f7).
+[2026-04-24 14:23:31] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 14:23:31] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.

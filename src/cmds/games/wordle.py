@@ -53,11 +53,14 @@ class Wordle(commands.Cog):
         E = discord.Embed()
         E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
         
+        #Compute current state of the game
+        current_number_guess = len(user_data[current_w])
 
         if user_id in Wordle.active_games and Wordle.active_games[user_id]:
-            await inter.followup.send("You are already playing Wordle.", ephemeral=True)
+            Wordle.active_games[user_id] = False
+            await inter.response.send_message("You are already playing Wordle.", ephemeral=True)
             return
-        
+
         Wordle.active_games[user_id] = True
         
         result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
@@ -75,8 +78,6 @@ class Wordle(commands.Cog):
                 already_guessed += "# " + spaced_word + "\n" + space(user_data[current_w][word])+"\n"
             await inter.response.send_message(f"You already played today, but here are your stats for today \nSee you tomorrow!", ephemeral=True)
             return await inter.followup.send(f"{already_guessed}", ephemeral=True)
-
-        current_number_guess = len(user_data[current_w])
 
         #User got cursed by roulette
         guess_limit = 6
@@ -108,8 +109,6 @@ class Wordle(commands.Cog):
                 await inter.response.send_message( f"Welcome back to {language} wordle! Something looks strange... You only have 5 guesses today!!\nHere are the words you already guessed : ", ephemeral = True)
             await inter.followup.send(f"{already_guessed}", ephemeral = True)
             await inter.followup.send("Type 'stop' to pause the game.", ephemeral = True)
-
-        guess_limit = 6
 
         has_won = False
 
@@ -210,8 +209,6 @@ def space(content : str):
     for letter in content:
         spaced_word += f"{letter:^3}"
     return spaced_word
-
-
 
 #Function that creates the lists from the csv
 def get_words()-> Dict:
