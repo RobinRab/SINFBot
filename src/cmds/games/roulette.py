@@ -8,7 +8,7 @@ from typing import Literal
 import asyncio
 
 from settings import BOT_CHANNEL_ID
-from utils import get_data, upd_data, GetLogLink, get_value, random_avatar, get_belgian_time, embed_roulette
+from utils import get_data, upd_data, GetLogLink, random_avatar, get_belgian_time, embed_roulette
 from cmds.games.games import traveler
 from cmds.games.gambling import GamblingHelper
 
@@ -16,118 +16,6 @@ class Roulette:
     def __init__(self, bot:commands.Bot):
         self.bot : commands.Bot = bot
         self.GH = GamblingHelper(bot)
-
-    # Create next traveler  
-    async def create_next_traveler(self, inter:discord.Interaction):
-        E = discord.Embed()
-        E.color = discord.Color.purple()
-        E.set_author(name = "Roulette")
-        E.description = ("Create the next traveler!\nChoose the question type.")
-            
-        await inter.followup.send(embed=E, view = self.Create_next_traveler(), ephemeral = True)
-
-    # When we have a create nex traveler, we choose between "True or False" or "MCQ"
-    class Create_next_traveler(ui.View):
-        def __init__(self):
-            super().__init__(timeout=None)
-
-        def disable_all_items(self):
-            for item in self.children:
-                if isinstance(item, discord.ui.Button):
-                    item.disabled = True
-    
-        @discord.ui.button(label = "True or False", style = discord.ButtonStyle.green)
-        async def true_or_false(self, inter:discord.Interaction, Button = ui.Button):
-            await inter.response.send_modal(Roulette.Traveler_true_or_false())
-            self.disable_all_items()
-            await inter.edit_original_response(view=self)
-
-        @discord.ui.button(label = "MCQ", style = discord.ButtonStyle.red)
-        async def mcq(self, inter:discord.Interaction, Button = ui.Button):
-            await inter.response.send_modal(Roulette.Traveler_MCQ())
-            self.disable_all_items()
-            await inter.edit_original_response(view=self)
-
-    # Create a MCQ traveler
-    class Traveler_MCQ(discord.ui.Modal, title = "MCQ"):
-        question = ui.TextInput(label='Question', min_length=1, max_length=200)
-        correct_answer = ui.TextInput(label='Correct answer', style=discord.TextStyle.paragraph, min_length=1, max_length=100)
-        wrong_answer1 = ui.TextInput(label="Wrong answer1", style=discord.TextStyle.paragraph, min_length=1, max_length=100)
-        wrong_answer2 = ui.TextInput(label="Wrong answer2", style=discord.TextStyle.paragraph, min_length=1, max_length=100)
-        wrong_answer3 = ui.TextInput(label="Wrong answer3", style=discord.TextStyle.paragraph, min_length=1, max_length=100)
-
-        # After clicking on the "MCQ" button we choose the right answer and the wrong ones
-        async def on_submit(self, interaction: discord.Interaction):
-            await interaction.response.send_message(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
-            next_traveler : list[str] = []
-            next_traveler.append(str(self.question))
-            next_traveler.append(str(self.correct_answer))
-            next_traveler.append(str(self.wrong_answer1))
-            next_traveler.append(str(self.wrong_answer2))
-            next_traveler.append(str(self.wrong_answer3))
-            next_traveler.append(interaction.user.name)
-            
-            upd_data(next_traveler, f"games/created_traveler")
-
-    # Create a True or False traveler
-    class Traveler_true_or_false(ui.Modal, title = "True or false"):
-        question = ui.TextInput(label='Question', min_length=1, max_length=200)
-        
-        # After clicking on the "True or False" button we choose the right answer
-        async def on_submit(self, interaction: discord.Interaction):
-            await interaction.response.send_message(f'Choose the right answer:', view = Roulette.Choose_correct_answer(),ephemeral=True)
-            next_traveler : list[str] = []
-            next_traveler.append(str(self.question))
-
-            upd_data(next_traveler, f"games/created_traveler")
-
-    # Choosing correct answer between "True" and "False"
-    class Choose_correct_answer(ui.View):
-        def __init__(self):
-            super().__init__(timeout=None)
-            self.answer = None
-
-        def disable_all_items(self):
-            for item in self.children:
-                if isinstance(item, discord.ui.Button):
-                    item.disabled = True
-
-        # Choosing "True" as the right answer
-        @discord.ui.button(label = "True", style = discord.ButtonStyle.green)
-        async def true(self, inter:discord.Interaction, Button: ui.Button):
-            self.disable_all_items()
-            await inter.response.edit_message(view=self)
-            self.answer = True
-            await inter.followup.send(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
-            next_traveler : list[str] = get_data(f"games/created_traveler")
-            next_traveler.append("True")
-            next_traveler.append("False")
-            next_traveler.append(inter.user.name)
-
-            upd_data(next_traveler, "games/created_traveler")
-            
-        # Choosing "False" as the right answer
-        @discord.ui.button(label = "False", style = discord.ButtonStyle.red)
-        async def false(self, inter:discord.Interaction, Button: ui.Button):
-            self.disable_all_items()
-            await inter.response.edit_message(view=self)
-            self.answer = False
-            await inter.followup.send(f'Traveler set! You are not allowed to answer it when it arrives, or there will be consequences', ephemeral=True)
-            next_traveler : list[str] = get_data(f"games/created_traveler")
-            next_traveler.append("False")
-            next_traveler.append("True")
-            next_traveler.append(inter.user.name)
-
-            upd_data(next_traveler, "games/created_traveler")
-    
-    async def embed(self, inter : discord.Interaction, E : discord.Embed):
-        url = random_avatar()
-        if inter.user.avatar:
-            url = inter.user.avatar.url
-        E.set_author(name=inter.user.display_name, url = await GetLogLink(self.bot, url))
-        E.set_footer(text="Roulette by Scylla and Ceisal")
-        E = discord.Embed(title="Roulette")
-        return E
     
     async def roulette(self, inter:discord.Interaction, other_user:discord.Member):
         assert inter.guild
@@ -136,6 +24,7 @@ class Roulette:
 
         E, user_data = await self.GH.check(inter)
 
+        #Free spin used for first use and sunday roll
         class FreeSpin(ui.View):
             def __init__(self):
                 super().__init__(timeout=60)
@@ -148,10 +37,18 @@ class Roulette:
 
                 button.disabled = True
                 await inter.response.edit_message(view=self)
+            async def on_timeout(self):
+                await self.close()
+                
+            async def close(self):
+                for item in self.children:
+                    if isinstance(item, discord.ui.Button):
+                        item.disabled = True
+                self.stop()
         try:
             await inter.response.defer()
-
-            if user_data["candies"]<1 and user_data["free_sunday_roll"] == 0 and get_data((f"games/users/{inter.user.id}/last_roulette")) != -1:
+            #Not enough candies and no free spin
+            if user_data["candies"]<1 and user_data["free_sunday_roll"] == 0 and "effects" in user_data:
                 E.description = f"{inter.user.mention}, You don't have enough 🍬"
                 E.color = discord.Color.red()
                 return await inter.followup.send(embed=E)
@@ -173,15 +70,20 @@ class Roulette:
             
             E.set_author(name=inter.user.display_name, url = await GetLogLink(self.bot, url))
 
-            if get_data((f"games/users/{inter.user.id}/last_roulette")) == -1:
 
-                upd_data(dt.datetime.now().timestamp(), f"games/users/{inter.user.id}/last_roulette")
+            #First time using the roulette => free spin
+            if "effects" not in user_data:
+                #effects added to json (so the user can't /roulette more than once)
+                user_data["effects"] = []
+                upd_data(user_data, f"games/users/{inter.user.id}")
 
                 E.colour = discord.Colour.gold()
                 E.description = f"Welcome to the Roulette, {inter.user.mention}!\n As it's your first time, you get a *free spin! \n\nYou can use the `help` command to know more about this feature."
 
                 view = FreeSpin()
-                await inter.followup.send(embed=E, view=view)
+                msg = await inter.followup.send(embed=E, view=view)
+                
+                #if wait > 60s, close the view and return
                 try:
                     await asyncio.wait_for(view.clicked, timeout=60)
                 except asyncio.TimeoutError:
@@ -189,16 +91,22 @@ class Roulette:
                         "Are you still here? You can try again later",
                         ephemeral=True
                     )
-                    upd_data(-1, f"games/users/{inter.user.id}/last_roulette")
-
+                    await view.close()
+                    await msg.edit(view=view)
+                    
+                    #delete effects from json so the user can have a free spin next time
+                    del user_data["effects"]
+                    upd_data(user_data, f"games/users/{inter.user.id}")
                     return
 
+            #The user won a free roulette from another player
             elif "free_roulette" in user_data["effects"]:
                 E.description = f"{inter.user.mention} used the roulette! Free roll!"
                 await inter.followup.send(embed = E)
                 user_data["effects"].remove("free_roulette")
                 upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 
+            #free sunday roll
             elif user_data["free_sunday_roll"] == 0:
                 E.description = f"{inter.user.mention} used the roulette! It costs only one 🍬."
                 await inter.followup.send(embed = E)
@@ -207,10 +115,11 @@ class Roulette:
             else:
                 E.colour = discord.Colour.gold()
                 E.description = f"{inter.user.mention} used the roulette! Free sunday roll!"
+                #free sunday roll to 0 (so the user can't /roulette more than once)
                 upd_data(0, f"games/users/{inter.user.id}/free_sunday_roll")
 
                 view = FreeSpin()
-                await inter.followup.send(embed=E, view=view)
+                msg = await inter.followup.send(embed=E, view=view)
                 try:
                     await asyncio.wait_for(view.clicked, timeout=60)
                 except asyncio.TimeoutError:
@@ -218,69 +127,55 @@ class Roulette:
                         "Are you still here? You can try again later",
                         ephemeral=True
                     )
-                    upd_data(-1, f"games/users/{inter.user.id}/last_roulette")
-
+                    #free sunday roll to 1 so the user can have a free spin next time
+                    upd_data(1, f"games/users/{inter.user.id}/free_sunday_roll")
+                    await view.close()
+                    await msg.edit(view=view)
                     return
-                #Il faut une variable free_sunday_roll globale, qui indique si c'est dimanche.
-                #et une variable free_roll individuelle, qui indique si le free roll du 
-                #dimanche a déjà été utilisé ou pas.
-                upd_data(0, f"games/users/{inter.user.id}/free_sunday_roll")
 
         except:
             pass
         upd_data(dt.datetime.now().timestamp(), f"games/users/{inter.user.id}/last_roulette")
 
-        current_created_traveler = 1
-        if get_data(f"games/created_traveler")!=[]:
-            current_created_traveler = 0
 
+        #consequences + weight (try to keep the total to 100)
         consequences = {
-            "level_up" : 2,
-            "level_down" : 1.5,
-            "choose_name_level_up" : 4, #other
-            "choose_name_level_down" : 2, #other
+            #positive consequences (user)
+            "level_up": 2.0,    
+            "tech_up": 4.0,  
+            "bank_double": 2.5, 
+            "next_gain_x3": 5.0,       
+            "next_gain_x10": 2.5, 
+            "next_collect_x3": 6.0, 
+            "free_flip_when_collect": 6.0,
+            "chances_next_bet_x2": 5.0,
 
-            "tech_up" : 4,
-            "tech_down" : 3,
-            "tech_up_other_user" : 4, #other
-            "tech_down_other_user" : 3, #other
+            #negative consequences (user)
+            "level_down": 3.0,   
+            "tech_down": 4.0,          
+            "bank_robbery": 3.5,  
+            "next_gain_/3": 4.5,
+            "next_gain_/10": 2.0,
+            "chances_next_bet_/2": 5.0,
+            "fail_next_traveler": 4.0,
 
-            "timeout_someone" : 5, #other
-            "timeout_myself" : 7.5,
+            #other user consequences
+            "tech_up_other_user": 5.0, 
+            "tech_down_other_user": 4.0, 
+            "choose_name_level_up": 3.0,
+            "choose_name_level_down": 2.5,
+            "next_bet_someone_else": 4.0,
+            "free_roulette": 6.0,   
 
-            "next_bet_all" : 5,
-            "next_bet_someone_else" : 3, #other
-
-            "wordle_guess_reduced" : 5,
-            "wordle_guess_reduced_other_user" : 5, #other
-
-            "traveler_spawn" : 5.5,
-            "create_next_traveler" : 6 * current_created_traveler,
-            "fail_next_traveler" : 5, 
-
-            "chances_next_bet_x2" : 4, 
-            "chances_next_bet_/2" : 4, 
-
-            "next_gain_x3" : 4, 
-            "next_gain_/3" : 4, 
-            "next_gain_x10" : 2, 
-            "next_gain_/10" : 2,
-                         
-            "steal_collect_x2" : 3, #other
-
-            "next_collect_x3" : 3, 
-            "change_bet_method" : 5, 
-            "free_flip_when_collect" : 5, 
-
-            "bank_double": 2, 
-            "bank_robbery" : 2, 
-            "free_roulette" : 5 #other
+            #other consequences
+            "traveler_spawn": 6.5,  
+            "change_bet_method": 6.0,
+            "next_bet_all": 4.0
         }
 
         #Modify this line to make tests.
         cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
-        cons = "wordle_guess_reduced"
-        print(cons) 
+
         has_been_answered = False
         url = random_avatar()
 
@@ -301,7 +196,7 @@ class Roulette:
                 E.description = f"Haha noob you leveled-down to level **{user_data['level']}**"
                 await inter.followup.send(embed=E)
             else:
-                # If the user is at level 0 they're note leveled down
+                # If the user is at level 0 they're not leveled down
                 E.colour = discord.Colour.red()
                 E.description = f"You didn't level down because you're already level 0..."
                 await inter.followup.send(embed=E)
@@ -323,7 +218,7 @@ class Roulette:
                 E.description = f"Haha noob you downgraded your tech to level **{user_data['tech']}**:gear:!"
                 await inter.followup.send(embed=E)
             else:
-                # If the user is at level 0 they're note teched down
+                # If the user is at level 0 they're not teched down
                 E.colour = discord.Colour.purple()
                 E.description = f"You didn't tech down because you're already level 0..."
                 await inter.followup.send(embed=E)
@@ -345,29 +240,10 @@ class Roulette:
                 E.description = f"Haha, you leveled-down {other_user.mention} to level **{other_user_data['tech']}**:gear:!"
                 await inter.followup.send(embed=E)
             else:
-                # If the user is at level 0 they're note teched down
+                # If the user is at level 0 they're not teched down
                 E.colour = discord.Colour.purple()
                 E.description = f"{other_user.mention} didn't tech down because they're already level 0..."
                 await inter.followup.send(embed=E)
-
-        elif cons=="timeout_someone": #inter user -> discord member 
-            has_been_answered = True
-            if not other_user.guild_permissions.administrator:
-                await other_user.timeout(dt.timedelta(minutes=60), reason="haha mskn")
-                E.colour = discord.Colour.green()
-                E.description = f"{inter.user.mention} got {other_user.mention} timed out! I see some beef coming." 
-                return await inter.followup.send(embed=E)
-            elif not inter.permissions.administrator: 
-                # If the user is an admin they cannot be timed out
-                member = inter.guild.get_member(inter.user.id)
-                assert member
-                await member.timeout(dt.timedelta(minutes=30), reason="haha mskn encore plus")
-                E.colour = discord.Colour.purple()
-                E.description = f"{inter.user.mention} tried to timeout {other_user.mention} and got karmadd"
-                await inter.followup.send(embed=E)
-                return 
-            else:
-                return await self.roulette(inter, other_user)
 
         elif cons == "traveler_spawn":
             has_been_answered = True
@@ -377,63 +253,36 @@ class Roulette:
             bot_channel = await self.bot.fetch_channel(BOT_CHANNEL_ID)
             asyncio.create_task(traveler(bot_channel=bot_channel))
             return 
-        
-        elif cons=="timeout_myself":
-            has_been_answered = True
-            if not inter.permissions.administrator:
-                member = inter.guild.get_member(inter.user.id)
-                assert member 
-                await member.timeout(dt.timedelta(minutes=60), reason="haha mskn encore plus")
-                E.description = f"{inter.user.mention} got themselves timed out. See you later!" 
-                await inter.followup.send(embed=E)
-            else:
-                return await self.roulette(inter, other_user)
 
         # The robber steals the roses in the user's bank and puts it in robber_total
         elif cons == "bank_robbery":
             has_been_answered = True
-            robber_money : int = get_data(f"games/users/{inter.user.id}/bank/roses")
-            robber_money += get_data(f"games/robber_total")
+            value : int = get_data(f"games/users/{inter.user.id}/bank/roses")
+            if value<=0:
+                E.description = f"{inter.user.mention}, your bank is empty so the robber didn't take you anything"
+                E.colour = discord.Colour.purple()
+                await inter.followup.send(embed=E)
+                return
+            robber_money : int = value + get_data(f"games/robber_total")
             upd_data(0, f"games/users/{inter.user.id}/bank/roses")
             upd_data(robber_money, "games/robber_total")
             E.colour = discord.Colour.purple()
-            E.description = f"{inter.user.mention} your bank got robbed.\nThe Robber got all the money you put in there."
+            E.description = f"{inter.user.mention} your bank got robbed.\n\nThe Robber got all the money you put in there."
             await inter.followup.send(embed=E)
 
         elif cons == "bank_double":
             has_been_answered = True
-            double_money = get_data(f"games/users/{inter.user.id}/bank/roses")
+            double_money : int = get_data(f"games/users/{inter.user.id}/bank/roses")
+            if double_money<=0:
+                E.description = f"{inter.user.mention}, your bank is empty so the roulette couldn't double it :("
+                E.colour = discord.Colour.purple()
+                await inter.followup.send(embed=E)
+                return
             double_money+=double_money
             upd_data(double_money, f"games/users/{inter.user.id}/bank/roses")
             E.colour = discord.Colour.purple()
             E.description = f"{inter.user.mention} your roses in bank got multiplied by two!"
             await inter.followup.send(embed=E)
-
-        elif cons == "steal_collect_x2":
-            has_been_answered = True
-            value = get_value(other_user_data)*2
-
-            if other_user_data["roses"] == 0:
-                E.colour = discord.Colour.purple()
-                E.description = f"{other_user.mention} is poor so {inter.user.mention} stole nothing..."
-                await inter.followup.send(embed=E)
-
-            elif other_user_data["roses"] < value:
-                E.colour = discord.Colour.purple()
-                E.description = f"{other_user.mention} is poor so {inter.user.mention} stole less than {value} roses..."
-                await inter.followup.send(embed=E)
-                user_data["roses"] += other_user_data["roses"]
-                other_user_data["roses"] = 0
-
-            else:
-                user_data["roses"] += value
-                other_user_data["roses"] -= value
-                E.colour = discord.Colour.purple()
-                E.description = f"{inter.user.mention} stole two collects from {other_user.mention}!"
-                await inter.followup.send(embed=E)
-
-            upd_data(other_user_data["roses"], f"games/users/{other_user.id}/roses")
-            upd_data(user_data["roses"], f"games/users/{inter.user.id}/roses")
 
         elif cons=="choose_name_level_up":
             has_been_answered = True
@@ -456,15 +305,11 @@ class Roulette:
                 E.colour = discord.Colour.red()
                 E.description = f"{other_user.mention} didn't level down because they're already level 0..."
                 await inter.followup.send(embed=E)
-                
+        
+        #future effects : puts them in the effects list in the json
+
         elif cons=="next_bet_all":
             user_data["effects"].append("next_bet_all")
-
-        elif cons=="wordle_guess_reduced":
-            user_data["effects"].append("wordle_guess_reduced")
-        
-        elif cons=="wordle_guess_reduced_other_user":
-            other_user_data["effects"].append("wordle_guess_reduced")
 
         elif cons == "next_gain_x3":
             user_data["effects"].append("next_gain_x3")
@@ -503,15 +348,6 @@ class Roulette:
 
         elif cons == "next_collect_x3":
             user_data["effects"].append("next_collect_x3")
-            
-        elif cons == "create_next_traveler":
-            if "create_next_traveler" not in user_data["effects"]:
-                user_data["effects"].append("create_next_traveler")
-                upd_data(other_user_data["effects"], f"games/users/{other_user.id}/effects")
-            else:
-                return await self.roulette(inter, other_user)
-            has_been_answered = True
-            await self.create_next_traveler(inter)
 
         elif cons == "free_roulette":
             has_been_answered = True
@@ -526,7 +362,6 @@ class Roulette:
 
         upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 
-
 # Every user has a free roll every sunday
 @tasks.loop()
 async def free_sunday_roll() -> None:
@@ -534,7 +369,7 @@ async def free_sunday_roll() -> None:
     now = get_belgian_time()
 
     # Puts the right value in free_sunday_roll depending on the day (Sunday/Other day that Sunday)
-    if now.weekday()!= 4:
+    if now.weekday() != 6:
         for user_id in get_data("games/users").keys():
             upd_data(0, f"games/users/{user_id}/free_sunday_roll")
     else:

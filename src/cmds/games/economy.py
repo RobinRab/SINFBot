@@ -8,8 +8,7 @@ import datetime as dt
 from typing import Optional, Literal
 
 from cmds.games.gambling import GamblingHelper
-
-from utils import get_data, upd_data, is_cutie, GetLogLink, new_user, get_amount, translate, get_value, get_collect_time, get_user_data, embed_roulette
+from utils import get_data, upd_data, GetLogLink, get_amount, translate, get_value, get_collect_time, get_user_data, embed_roulette
 
 class Economy(commands.Cog):
 	def __init__(self,bot):
@@ -67,10 +66,11 @@ class Economy(commands.Cog):
 			return await inter.followup.send(embed=E)
 		multiplicator = 1
 
+		#Roulette effect : collect multiplied by three
 		if "next_collect_x3" in user_data["effects"]:
 			multiplicator = 3
 			user_data["effects"].remove("next_collect_x3")
-			E.description = f"Congratulation, you multiplied your collect by three!"
+			E.description = f"Congratulation, your collect was multiplied by three!"
 			E.color = discord.Color.purple()
 			await inter.followup.send(embed=E)
 		time_to_wait = get_collect_time(user_data["tech"])
@@ -90,6 +90,7 @@ class Economy(commands.Cog):
 		E.color = discord.Color.green()
 		await inter.followup.send(embed=E)
 		
+		#Roulette effect : free flip of the value of your collect when you collect
 		if "free_flip_when_collect" in user_data["effects"]:
 			GH = GamblingHelper(self.bot)
 			guess : Literal["heads", "tails"] = random.choice(["heads", "tails"])

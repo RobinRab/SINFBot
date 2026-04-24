@@ -8,13 +8,13 @@ from typing import Literal
 import asyncio
 
 import re
-from settings import BOT_CHANNEL_ID
-from utils import get_data, upd_data, GetLogLink, get_amount, is_cutie, UnexpectedValue, get_value, random_avatar, get_belgian_time, get_user_data, embed_roulette
+from utils import get_data, upd_data, GetLogLink, get_amount, embed_roulette
 
 
 class GamblingHelper:
-	def __init__(self, bot:commands.Bot):
+	def __init__(self, bot:commands.Bot, already_all:bool=False):
 		self.bot : commands.Bot = bot
+		self.already_all = already_all
 
 	async def is_allowed_to_bet(self, inter:discord.Interaction, bet:str) -> tuple[int, discord.Embed, dict]:
 		E = discord.Embed()
@@ -33,8 +33,12 @@ class GamblingHelper:
 			bet += "🌹"
 
         #-------------- Merge conflict --------------
-		if "next_bet_all" in user_data["effects"] and bet!=f"all ({user_data['roses']}🌹)":
+		print("bet before: ", bet)
+		if bet==f"all ({user_data['roses']}🌹)":
+			self.already_all = True
+		if "next_bet_all" in user_data["effects"] and not self.already_all:
 			bet=f"all ({user_data['roses']}🌹)"
+
 
 
 		# translate the user request into a number
@@ -90,7 +94,7 @@ class GamblingHelper:
 		elif choice == "roll":
 			await self.roll(inter, bet)
 
-	async def change_next_gain(self, E : discord.Embed, inter:discord.Interaction, multiplicator : float, user_data : dict):
+	async def change_next_gain(self, E : discord.Embed, inter:discord.Interaction, user_data : dict):
 		if "next_gain_x3" in user_data["effects"]:
 			multiplicator = 3
 			user_data["effects"].remove("next_gain_x3")
@@ -122,6 +126,7 @@ class GamblingHelper:
 			E.color = discord.Color.purple()
 			E.description = "Haha, your gain was divided by ten!"
 			await inter.followup.send(embed=E)
+
 		return multiplicator
 
 	async def roll(self, inter:discord.Interaction, bet:str):
@@ -148,6 +153,9 @@ class GamblingHelper:
 		multiplicator = 1
 		double = False
 		divide = False
+		#Roulette effects
+
+		#changes the bet method
 		if "change_bet_method" in user_data["effects"]:
 			user_data["effects"].remove("change_bet_method")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
@@ -156,6 +164,7 @@ class GamblingHelper:
 			await inter.followup.send(embed=E)
 			return await self.change_next_method(inter, bet, self.roll)
 		
+		#Changes the chances of winning
 		if "chances_next_bet_x2" in user_data["effects"]:
 			user_data["effects"].remove("chances_next_bet_x2")
 			double=True
@@ -169,20 +178,24 @@ class GamblingHelper:
 			E.description = "Well, you had half the chance to win this one"
 			await inter.followup.send(embed=E)
 
-		if "next_bet_all" in user_data["effects"]:	
+		#All in effect
+		if "next_bet_all" in user_data["effects"] and not self.already_all:	
 			user_data["effects"].remove("next_bet_all")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 			E.description = f"Oops you accidently bet all"
 			E.colour = discord.Colour.purple()
 			await inter.followup.send(embed=E)
 
+		#if chances*2 : roll twice and take the best result
 		if double:
 			r = max(random.randint(1,100),random.randint(1,100))
+		#if chances/2 : roll twice and take the worst result
 		elif divide:
 			r = min(random.randint(1,100),random.randint(1,100))
 
+		# If effect include "next_gain" and it's winning, gain changed
 		if r >= 70:
-			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
+			multiplicator  = await self.change_next_gain(E, inter, user_data)
 		E.add_field(name="Roll:", value=f"**{r}**")
 		cash=amount
 		if r == 100:
@@ -228,7 +241,9 @@ class GamblingHelper:
 		if roulette:
 			E = await embed_roulette(self.bot, inter, E)
 		choice = random.choice(["heads", "tails"])
+		#Roulette effects
 
+		#changes the bet method
 		if "change_bet_method" in user_data["effects"]:
 			user_data["effects"].remove("change_bet_method")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
@@ -241,7 +256,7 @@ class GamblingHelper:
 		divide=False
 		double=False
 		
-			
+		#Changes the chances of winning
 		if "chances_next_bet_x2" in user_data["effects"]:
 			double=True
 			user_data["effects"].remove("chances_next_bet_x2")
@@ -253,7 +268,9 @@ class GamblingHelper:
 			E.color = discord.Color.purple()
 			E.description = "Well, you had half the chance to win this one"
 			await inter.followup.send(embed=E)
-		if "next_bet_all" in user_data["effects"]:	
+		
+		#All in effect
+		if "next_bet_all" in user_data["effects"] and not self.already_all:	
 			user_data["effects"].remove("next_bet_all")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 			E.description = f"Oops you accidently bet all"
@@ -275,11 +292,12 @@ class GamblingHelper:
 			else:
 				divide_heads=1
 
+		#if chances*2 : flip two times and take the best result, if chances/2 do the opposite
 		if double or divide:
 			choice = random.choices(["heads", "tails"], [1 + double_heads + divide_heads, 1 + double_tails + divide_tails])[0]
 		# If effect include "next_gain" and it's winning, gain changed
-		if guess==choice and "next_gain" in user_data["effects"]:
-			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
+		if guess == choice and "next_gain" in user_data["effects"]:
+			multiplicator = await self.change_next_gain(E, inter, user_data)
 
 		if choice == "tails":
 			image = "https://media.discordapp.net/attachments/709313685226782751/1126924584973774868/ttails.png"
@@ -290,6 +308,7 @@ class GamblingHelper:
 
 
 		if guess == choice:
+			#Il y a 2 int, un pour arrondir le résultat, un autre pour la division
 			cash = int(int(amount*1.8)*multiplicator)
 			E.description = f"You guessed it right and won **{cash}🌹!** 🎉"
 			E.color = discord.Color.green()
@@ -328,6 +347,9 @@ class GamblingHelper:
 		multiplicator=1
 		double=False
 		divide=False
+		#Roulette effects
+
+		#changes the bet method
 		if "change_bet_method" in user_data["effects"]:
 			user_data["effects"].remove("change_bet_method")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
@@ -336,7 +358,7 @@ class GamblingHelper:
 			await inter.followup.send(embed=E)
 			return await self.change_next_method(inter, bet, self.ladder)
 
-
+		#Changes the chances of winning
 		if "chances_next_bet_x2" in user_data["effects"]:
 			user_data["effects"].remove("chances_next_bet_x2")
 			double=True
@@ -348,13 +370,15 @@ class GamblingHelper:
 			E.color = discord.Color.purple()
 			E.description = "Well, you had half the chance to win this one"
 			await inter.followup.send(embed=E)
+
+		#if chances*2 : ladder twice and take the best result, if chances/2 do the opposite
 		if double:
 			r = max(random.randint(1,8),random.randint(1,8))
 		elif divide:
 			r = min(random.randint(1,8),random.randint(1,8))
 		elif r>=6:
-			multiplicator  = await self.change_next_gain(E, inter, multiplicator, user_data)
-		if "next_bet_all" in user_data["effects"]:	
+			multiplicator  = await self.change_next_gain(E, inter, user_data)
+		if "next_bet_all" in user_data["effects"] and not self.already_all:	
 			user_data["effects"].remove("next_bet_all")
 			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 			E.description = f"Oops you accidently bet all"

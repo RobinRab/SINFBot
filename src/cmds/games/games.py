@@ -11,7 +11,7 @@ from typing import Optional
 import numpy as np
 import datetime as dt
 from settings import BOT_CHANNEL_ID
-from utils import log, get_data, upd_data, get_value, new_user, get_user_data, simplify, GetLogLink
+from utils import log, get_data, upd_data, get_value, get_user_data
 #from wordle import get_words, color_function, space
 
 class Games(commands.Cog):
@@ -36,26 +36,12 @@ async def traveler(*, bot_channel: discord.TextChannel):
 	# extract the data
 	category:str = data["results"][0]["category"]
 	difficulty:str = data["results"][0]["difficulty"]
-	new_traveler:list[str] = get_data(f"games/created_traveler")
 	creator:str = ""
-	if len(new_traveler)!=0:
-		if len(new_traveler)==6:
-			question_type:str = "multiple"
-		else:
-			question_type:str = "boolean"
-		creator = new_traveler[-1]
-	else:
-		question_type:str = data["results"][0]["type"]
+	question_type:str = data["results"][0]["type"]
 	# convert html entities to normal unicode text
 	question:str = html.unescape(data["results"][0]["question"])
 	correct_answer:str = html.unescape(data["results"][0]["correct_answer"])
 	incorrect_answers:list = list(map(html.unescape, data["results"][0]["incorrect_answers"]))
-	if len(get_data(f"games/created_traveler"))!=0:
-		question = new_traveler[0]
-		correct_answer = new_traveler[1]
-		incorrect_answers = new_traveler[2:-1]
-		upd_data([], "games/created_traveler")
-		difficulty = "Random"
 	# create a list of answers and randomize them
 	answers = []
 	answers.append(correct_answer)
@@ -67,7 +53,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 	# create embed
 	E = discord.Embed(title='Traveler', description=f"**{question}**")
 	E.description = f"## **{question}**\n\n"
-	E.set_footer(text=f"{f'Created by {creator} | 'if len(new_traveler)!=0 else f'Category: {category} | Difficulty: {difficulty} |' }Type: {question_type}")
+	E.set_footer(text=f"{f'Category: {category} | Difficulty: {difficulty} |' }Type: {question_type}")
 	E.set_thumbnail(url="https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png")
 
 	if difficulty == "easy":
@@ -185,26 +171,32 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 			user_data = get_user_data(inter.user.id)
 			fail_next = False
-			if "fail_next_traveler" in user_data["effects"] and correct_answer.upper() == self.label:
-				user_data["effects"].remove("fail_next_traveler")
-				upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
-				await incorrect(inter)
-				fail_next = True
-			else:
-				if question_type == "boolean":
-					if correct_answer.upper() == self.label:
+			
+			if question_type == "boolean":
+				if correct_answer.upper() == self.label:
+					if "fail_next_traveler" in user_data["effects"] and correct_answer.upper() == self.label:
+						user_data["effects"].remove("fail_next_traveler")
+						upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+						await incorrect(inter)
+						fail_next = True
+					else:
 						await correct(inter) 
-					else:
-						await incorrect(inter)
-
 				else:
-					print(self.label)
-					if str(correct_answer_index+1) == self.label:
-						await correct(inter)
-					else:
+					await incorrect(inter)
+
+			else:
+				if str(correct_answer_index+1) == self.label:
+					if "fail_next_traveler" in user_data["effects"]:
+						user_data["effects"].remove("fail_next_traveler")
+						upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 						await incorrect(inter)
+						fail_next = True
+					else:
+						await correct(inter) 
+				else:
+					await incorrect(inter)
 			if fail_next:
-				await inter.followup.send("Because of the roulette, had 100% chances of losing this one... ", ephemeral=True)
+				await inter.followup.send("Because of the roulette, you had 100% chances of losing this one... ", ephemeral=True)
 			if difficulty != "Random" or inter.user.name != creator:
 				if isinstance(self.parent_view.message, discord.Message):
 					await self.parent_view.message.delete()
@@ -254,26 +246,6 @@ async def traveler_loop(*, bot: commands.Bot):
 	assert isinstance(bot_channel, discord.TextChannel)
 
 	await traveler(bot_channel=bot_channel)
-	
-"""
-@tasks.loop()
-async def wordle_traveler(*, bot: commands.Bot):
-	word = random.choice(get_words()[2])
-	guessed_words = ["STARE", color_function(word, "stare"), "CLOUD", color_function(word, "cloud"), "PINKY", color_function(word, "pinky")]
-	already_guessed = ""
-	
-	for element, index in enumerate(guessed_words):
-		if index%2==0:
-			already_guessed += f"#{element:^4}"
-		else:
-			already_guessed += f"{element:^3}"
-
-	E = discord.Embed(title='Wordle', description=f"**{already_guessed}**")
-	E.description = f"## **{already_guessed}**\n\n"
-
-	#Et là on fait un petit modal pour la réponse mdr
-"""
-
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Games(bot))
