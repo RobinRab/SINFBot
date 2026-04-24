@@ -126,11 +126,11 @@ class Tetrio(commands.Cog):
 			zenith_apm = round(zenith["best"]['record']['results']['aggregatestats']['apm'], 2)
 			zenith_pps = round(zenith["best"]['record']['results']['aggregatestats']['pps'], 2)
 			zenith_altitude = round(zenith["best"]['record']['results']['stats']['zenith']['altitude'])
-			zenith_replay = f"https://tetr.io/#R:{zenith["best"]['record']['replayid']}"
+			zenith_replay = f"https://tetr.io/#R:{zenith['best']['record']['replayid']}"
 			zenith_piecesgood = zenith["best"]['record']['results']['stats']['finesse']["perfectpieces"]
 			zenith_piecesbad = zenith["best"]['record']['results']['stats']['finesse']["faults"]
 			zenith_finesse = round(zenith_piecesgood/(zenith_piecesgood+zenith_piecesbad)*100, 2) if zenith_piecesgood+zenith_piecesbad != 0 else 0
-			zenith_date = f"<t:{round(dt.datetime.strptime(zenith["best"]['record']['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
+			zenith_date = f"<t:{round(dt.datetime.strptime(zenith['best']['record']['ts'],'%Y-%m-%dT%H:%M:%S.%fZ').timestamp())}:R>"
 
 			E.add_field(name="**Zenith Best**", value=f"Altitude: [{zenith_altitude}]({zenith_replay})m\nRank: #{zenith_rank}\nTime: {zenith_time}\nAPM: {zenith_apm}\nPPS: {zenith_pps}\nFinesse: {zenith_finesse}%\nDate: {zenith_date}")
 
