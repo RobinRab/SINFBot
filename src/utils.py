@@ -446,10 +446,10 @@ def new_update() -> discord.Embed:
 	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
 	E.title = "New update !"
 	E.set_author(name="SINF illégal family bot")
-	E.description = "- Roulette ! (At least :pray:)\n"
+	E.description = "- Roulette ! (At last :pray:)\n"
 	E.description += "- Wordle debug\n"
 
 	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
-	E.add_field(name="Authors", value="<@!346945067975704577>")
+	E.add_field(name="Authors", value="<@!627431499960156161> and <@!411881842439094272>")
 
 	return E

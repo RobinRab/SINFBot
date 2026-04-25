@@ -174,6 +174,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 			
 			if question_type == "boolean":
 				if correct_answer.upper() == self.label:
+					#Roulette effect : if the user answers correctly, he will lose anyway
 					if "fail_next_traveler" in user_data["effects"] and correct_answer.upper() == self.label:
 						user_data["effects"].remove("fail_next_traveler")
 						upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
@@ -186,6 +187,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 			else:
 				if str(correct_answer_index+1) == self.label:
+					#Roulette effect : if the user answers correctly, he will lose anyway
 					if "fail_next_traveler" in user_data["effects"]:
 						user_data["effects"].remove("fail_next_traveler")
 						upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
