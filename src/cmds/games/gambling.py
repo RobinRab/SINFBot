@@ -521,10 +521,14 @@ class GamblingHelper:
 			url = inter.user.avatar.url
 		
 		E.set_author(name=inter.user.display_name, url = await GetLogLink(self.bot, url))
+
+		#Checks the validity of the guess
 		if guess<1 or guess>100:
 			E.description = f"{inter.user.mention}, your guess must be between 1 and 100"
 			E.color = discord.Color.red()
 			return await inter.followup.send(embed=E, ephemeral=True)
+		
+		#Each guess can only be picked once
 		for user in users:
 			if get_data(f"games/users/{user}/lotto_guess") == guess:
 				if user == str(inter.user.id):

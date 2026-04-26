@@ -104,21 +104,24 @@ class Loops(commands.Cog):
 
 	async def lotto_results(self) -> None:
 		channel = self.bot.get_channel(BOT_CHANNEL_ID)
+		# Chooses the correct guess for the lotto
 		correct_guess : int = random.randint(1, 100)
-		correct_guess = 9
 		users = get_data("games/users")
 		winner : str = ""
 		E = discord.Embed()
 		E.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1219558860516364302/1497741853024325682/lotto.png?ex=69eea04c&is=69ed4ecc&hm=d20e882a23069218a3fe55a10dd8c39f6d4cef0a6e1413d07a36969d743a64ff&")
 
+		# Check if there is a winner 
 		for user in users:
 			if get_data(f"games/users/{user}/lotto_guess") == correct_guess:
 				winner = user
 		
+		# No winner
 		if len(winner) == 0:
 			E.color = discord.Color.red()
 			E.description = f"Nobody won this week! The correct answer was {correct_guess}\n\nA new lotto will be held next sunday, don't forget to guess! The robber total is now 0"
 
+		# The winner wins the robber's money
 		else:
 			E.color = discord.Color.gold()
 			E.description = f"The winner is <@!{winner}>! They won {get_data('games/robber_total')} roses. Congrats! The correct answer was {correct_guess}\n\nA new lotto will be held next sunday, don't forget to guess! The robber total is now 0"
