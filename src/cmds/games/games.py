@@ -11,15 +11,13 @@ from typing import Optional
 import numpy as np
 import datetime as dt
 from settings import BOT_CHANNEL_ID
-from utils import log, get_data, upd_data, get_value, get_user_data
-#from wordle import get_words, color_function, space
+from utils import log, get_data, upd_data, get_value, get_user_data, new_user, UserAccount
 
 class Games(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
 
 		traveler_loop.start(bot=self.bot)
-
 
 async def traveler(*, bot_channel: discord.TextChannel):
 	# 17 science&nature, 18 computer, 19 maths, 22 geography, 24 politics, 27 animals
@@ -66,8 +64,8 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		E.color = discord.Color.purple()
 	
 	# check if it will be a traveler or a robber : traveler = 1 and robber = 0
-	traveler = random.getrandbits(1)
-	if traveler:
+	is_traveler = random.getrandbits(1)
+	if is_traveler:
 		photo = "https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png"
 	else:
 		photo = "https://cdn.discordapp.com/attachments/709313685226782751/1205143937052839946/bandit.png"
@@ -93,21 +91,25 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		E.set_thumbnail(url=photo)
 
 		# user_id : {user data}
-		user_data = get_user_data(inter.user.id)
-		if traveler:
+		try: 
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
+		except :
+			user_data = new_user()
+		if is_traveler:
 			value = get_value(user_data) 
 		else:
 			value = int(get_value(user_data)*1.5)
 
 		user_data["roses"] += value
-		user_data["ideas"] += 7
+		user_data["ideas"] += 5
+		user_data["has_got_daily_traveler"] = True
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
-		if traveler:
-			E.description = f"You earned **{value}🌹** and **7💡**"
+		if is_traveler:
+			E.description = f"You earned **{value}🌹** and **5💡**"
 		else:
-			E.description = f"The robber is impressed by your knowledge! You earned **{value}🌹** and **7💡**"
+			E.description = f"The robber is impressed by your knowledge! You earned **{value}🌹** and **5💡**"
 
 		await inter.followup.send(inter.user.mention, embed=E)
 
@@ -124,40 +126,54 @@ async def traveler(*, bot_channel: discord.TextChannel):
 			except : 
 				user_data["ideas"] -= 10
 			upd_data(user_data, f"games/users/{inter.user.id}")
-			print(2)
 			return False
 		E = discord.Embed(title="Incorrect!", color=discord.Color.red())
 		E.set_thumbnail(url=photo)
 
 		# user_id : {user data}
-		user_data = get_user_data(inter.user.id)
-		robber_money=0
+		try: 
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
+		except :
+			user_data = new_user()
+
 		E.description = f"The correct answer was **{correct_answer}**\n"
 		double_collect_value = 0
-		if traveler:
+		if is_traveler:
 			value = 50
 			E.description += "The traveler left **50🌹** by accident on the ground" 
 		else:
 
 			double_collect_value = get_value(user_data)*2
 			value = get_value(user_data)*(-2)
-		
-		if user_data["roses"]<0 and not traveler:
-			E.description += f"You're already in debt so the robber didn't take you anything"
-		else:
-			robber_money=(-1)*value
-			if user_data["roses"]+value<=0:
-				robber_money=user_data["roses"]
+
+		if is_traveler:
 			user_data["roses"] += value
-			if not traveler:
-				if user_data["roses"]<0:
-					user_data["roses"]=-1
-					E.description += f"The robber took you all of your roses 🌹"
-				else:
-					E.description += f"The robber took you **{double_collect_value}** 🌹"
-				robber_money += get_data(f"games/robber_total")
-				upd_data(robber_money, "games/robber_total")
 			upd_data(user_data, f"games/users/{inter.user.id}")
+		else:
+			total_stolen = 0
+
+			# First, take from regular roses
+			if user_data["roses"] >= double_collect_value:
+				user_data["roses"] -= double_collect_value
+				total_stolen += double_collect_value
+			else:
+				total_stolen += user_data["roses"]
+				remaing_to_steal = double_collect_value - user_data["roses"]
+				double_collect_value -= user_data["roses"]
+				user_data["roses"] = -1
+
+				# Then, take from the bank
+				if user_data["bank"]["roses"] >= remaing_to_steal * 2:
+					user_data["bank"]["roses"] -= remaing_to_steal * 2
+					total_stolen += remaing_to_steal * 2
+				else:
+					total_stolen += user_data["bank"]["roses"]
+					user_data["bank"]["roses"] = -1
+
+			upd_data(user_data, f"games/users/{inter.user.id}")
+
+			E.description += f"The robber stole a total of **{total_stolen}🌹** from you."
+
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	# subclass of discord.ui.Button, all buttons will have the same callback (no need for functions)
@@ -165,8 +181,21 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		def __init__(self, parent_view:'B_choices', *args, **kwargs):
 			super().__init__(*args, **kwargs)
 			self.parent_view = parent_view
+			self.has_been_answered = False
 
 		async def callback(self, inter: discord.Interaction): #type: ignore
+			# prevent duping
+			if self.has_been_answered:
+				return await inter.response.send_message("This question has already been answered!", ephemeral=True)
+	
+			self.has_been_answered = True
+
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
+			if user_data.get("has_got_daily_traveler", True):
+				self.has_been_answered = False
+				E = discord.Embed(title="You have already helped the traveler today!", color=discord.Color.red())
+				return await inter.response.send_message(inter.user.mention, embed=E, ephemeral=True)
+
 			await inter.response.defer()
 
 			user_data = get_user_data(inter.user.id)
@@ -237,16 +266,14 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 @tasks.loop()
 async def traveler_loop(*, bot: commands.Bot):
-
 	# come back in 2 to 10 hours
 	random_time = random.randint(7200, 36000)
+	await asyncio.sleep(random_time)
 
-	await asyncio.sleep(random_time)	
-	
 	# get the bot channel and make sure it is not none
 	bot_channel = await bot.fetch_channel(BOT_CHANNEL_ID)
 	assert isinstance(bot_channel, discord.TextChannel)
-
+	
 	await traveler(bot_channel=bot_channel)
 
 async def setup(bot:commands.Bot):

@@ -8,7 +8,7 @@ import datetime as dt
 from typing import Optional, Literal
 
 from cmds.games.gambling import GamblingHelper
-from utils import get_data, upd_data, GetLogLink, get_amount, translate, get_value, get_collect_time, get_user_data, embed_roulette
+from utils import get_data, upd_data, GetLogLink, new_user, UserAccount, get_amount, translate, get_value, get_collect_time, is_owner, embed_roulette
 
 class Economy(commands.Cog):
 	def __init__(self,bot):
@@ -31,7 +31,7 @@ class Economy(commands.Cog):
 		E.set_author(name=target.name, icon_url=await GetLogLink(self.bot, target.display_avatar.url))
 
 		try: 
-			user_data : dict = get_data(f"games/users/{target.id}")
+			user_data : UserAccount = get_data(f"games/users/{target.id}")
 		except :
 			E.description = f"{target.mention} has never played"
 			E.color = discord.Color.red()
@@ -54,7 +54,10 @@ class Economy(commands.Cog):
 		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
 
 		# user_id : {user data}
-		user_data = get_user_data(inter.user.id)
+		try: 
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
+		except :
+			user_data = new_user()
 
 		next_timely:int = user_data["timely"]
 
@@ -67,7 +70,7 @@ class Economy(commands.Cog):
 		multiplicator = 1
 
 		#Roulette effect : collect multiplied by three
-		if "next_collect_x3" in user_data["effects"]:
+		if "next_collect_x3" in user_data["effects"]: 
 			multiplicator = 3
 			user_data["effects"].remove("next_collect_x3")
 			E.description = f"Congratulation, your collect was multiplied by three!"
@@ -114,7 +117,7 @@ class Economy(commands.Cog):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't level up, you have never played"
 			return await inter.followup.send(embed=E)
@@ -151,7 +154,7 @@ class Economy(commands.Cog):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't upgrade your tech, you have never played"
 			return await inter.followup.send(embed=E)
@@ -181,6 +184,42 @@ class Economy(commands.Cog):
 
 		await inter.followup.send(embed=E)
 
+	@app_commands.command()
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	@app_commands.check(is_owner)
+	@app_commands.describe(proof="Attach an image as proof")
+	async def penality(self, inter: discord.Interaction, user: discord.Member, amount: int, reason:str, proof: discord.Attachment, msg_link: Optional[str]):
+		await inter.response.defer()
+
+		if amount < 100:
+			return await inter.followup.send(content="amount must be at least 100", ephemeral=True)
+
+		E = discord.Embed()
+		E.set_author(name=user.name, icon_url=await GetLogLink(self.bot, user.display_avatar.url))
+		E.color = discord.Color.red()
+
+		try: 
+			user_data: UserAccount = get_data(f"games/users/{user.id}")
+		except:
+			E.description = f"{user.mention} has never played"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E)
+
+		user_data["roses"] -= amount
+		upd_data(user_data, f"games/users/{user.id}")
+
+		E.description = f"# {user.mention} has been penalized of {amount}🌹\n\n{reason}\n\n"
+		E.description += f"[Jump to message]({msg_link})\n\n" if msg_link else ""
+
+		if proof.content_type.startswith("image/"): #type: ignore
+			E.set_image(url=proof.url)
+		else:
+			return await inter.followup.send(content="The provided proof is not an image.", ephemeral=True)
+
+		await inter.followup.send(embed=E)
+
+
 class Bank(app_commands.Group):
 	def __init__(self, bot:commands.Bot, *args, **kwargs):
 		self.bot : commands.Bot = bot
@@ -199,7 +238,7 @@ class Bank(app_commands.Group):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't manage your bank account you have never played"
 			return await inter.followup.send(embed=E)
@@ -236,7 +275,7 @@ class Bank(app_commands.Group):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't manage your bank account you have never played"
 			return await inter.followup.send(embed=E)
@@ -277,7 +316,7 @@ class Bank(app_commands.Group):
 		E.color = discord.Color.green()
 
 		try: 
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			E.description = f"{inter.user.mention}, You can't manage your bank account you have never played"
 			return await inter.followup.send(embed=E)

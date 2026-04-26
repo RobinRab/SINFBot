@@ -8,18 +8,17 @@ import asyncio
 import datetime as dt
 from typing import Literal, Dict
 
-from settings import DATA_DIR
-from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, simplify, is_member, embed_roulette
+from settings import DATA_DIR, GUILD_ID
+from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, simplify, is_member #, embed_roulette
+                                                                                                         #Roulette is comming 👀
 
-#! fonction 'get_words' accepts 4 columns csv
 class Wordle(commands.Cog):
     active_games = {}
 
-    def __init__(self,bot):
+    def __init__(self, bot):
         self.bot : commands.Bot = bot
-
         choose_todays_word.start(bot=self.bot)
-
+    
     async def get_data_wordle(self, inter:discord.Interaction) -> dict:
         # check if account exists
         try :
@@ -38,9 +37,8 @@ class Wordle(commands.Cog):
     @app_commands.command(description="Play today's wordle!")
     @app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
     @app_commands.guild_only()
-    @app_commands.describe(language = "The language you choose")
+    @app_commands.describe(language = "The languag  e you choose")
     async def wordle(self, inter: discord.Interaction, language:Literal["English", "French"]):
-        await inter.response.defer()
         user_data = await self.get_data_wordle(inter)
         user_id = inter.user.id
 
@@ -53,17 +51,19 @@ class Wordle(commands.Cog):
         E = discord.Embed()
         E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
         
-
+        #Compute current state of the game
         if user_id in Wordle.active_games and Wordle.active_games[user_id]:
-            await inter.followup.send("You are already playing Wordle.", ephemeral=True)
+            await inter.response.send_message("You are already playing Wordle.", ephemeral=True)
             return
-        
+
         Wordle.active_games[user_id] = True
         
-        result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
+        try:
+            result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
+        except:
+            await inter.response.send_message("Connection failure, please try again", ephemeral=True)
 
         #Check if results shown have to be ephemeral or not
-        print(result_displayed)
         if result_displayed:
             del Wordle.active_games[user_id]
             already_guessed = ""
@@ -74,24 +74,28 @@ class Wordle(commands.Cog):
                     spaced_word += f"{letter:^4}"
 
                 already_guessed += "# " + spaced_word + "\n" + space(user_data[current_w][word])+"\n"
-            await inter.followup.send(f"You already played today, but here are your stats for today \nSee you tomorrow!", ephemeral=True)
+            await inter.response.send_message(f"You already played today, but here are your stats for today \nSee you tomorrow!", ephemeral=True)
             return await inter.followup.send(f"{already_guessed}", ephemeral=True)
 
-        current_number_guess = len(user_data[current_w])
-
+        try:
+            current_number_guess = len(user_data[current_w])
+        except:
+            await inter.response.send_message("Connection failure, try again", ephemeral=True)
+            
         #User got cursed by roulette
         guess_limit = 6
-        if "wordle_guess_reduced" in user_data["effects"]:
-            guess_limit = 5
+        # if "wordle_guess_reduced" in user_data["effects"]:
+        #     guess_limit = 5
 
         if current_number_guess == 0 and not guess_limit == 5:
-            await inter.followup.send(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
+            await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
             \nType 'stop' to *pause* the game, recall the function to *restart*.''')
 
         elif current_number_guess == 0 and guess_limit == 5:
-            E_roulette = await embed_roulette(self.bot, inter, E)
-            E_roulette.description = f"Welcome to {language} wordle! Something looks strange... You only have 5 guesses today!!"
-            await inter.followup.send(embed = E_roulette, ephemeral=True)
+            #E_roulette = await embed_roulette(self, inter, E)
+            #E_roulette.description = f"Welcome to {language} wordle! Something looks strange... You only have 5 guesses today!!"
+            #await inter.followup.send(embed = E_roulette, ephemeral=True)
+            print("Currently impossible")
 
         else:
             already_guessed = ""
@@ -103,17 +107,15 @@ class Wordle(commands.Cog):
 
                 already_guessed += "# " + spaced_word + "\n" + space(user_data[current_w][word])+"\n"
             if guess_limit == 6:
-                await inter.followup.send( f"Welcome back to {language} wordle! Here are the words you already guessed : ", ephemeral = True)
+                await inter.response.send_message( f"Welcome back to {language} wordle! Here are the words you already guessed : ", ephemeral = True)
             else:
-                await inter.followup.send( f"Welcome back to {language} wordle! Something looks strange... You only have 5 guesses today!!\nHere are the words you already guessed : ", ephemeral = True)
+                await inter.response.send_message( f"Welcome back to {language} wordle! Something looks strange... You only have 5 guesses today!!\nHere are the words you already guessed : ", ephemeral = True)
             await inter.followup.send(f"{already_guessed}", ephemeral = True)
             await inter.followup.send("Type 'stop' to pause the game.", ephemeral = True)
 
-        guess_limit = 6
-
         has_won = False
 
-        #The user has 5 or 6 chances
+        #The user has 5 or 6 chances (for roulette)
         while current_number_guess<guess_limit:
 
             #Waiting for the user's response
@@ -160,7 +162,6 @@ class Wordle(commands.Cog):
             
             #The users wins
             if wordle_word == guess_word:
-                upd_data(user_data[f"wordle_stats_{l_abbr}"][f"{current_number_guess}"]+1, f"games/users/{inter.user.id}/wordle_stats_{l_abbr}/{current_number_guess}")
 
                 has_won = True
                 todays_colors = ""
@@ -186,17 +187,10 @@ class Wordle(commands.Cog):
             await inter.followup.send("You won!", ephemeral=True)
             E.description = f"{inter.user.mention} solved today's wordle ({language}) in {current_number_guess} guesses ! \n\n||{todays_colors}||"
             E.add_field(name="Reward", value=f"You won {value} 🌹 {'and 2 💡' if both else 'and 1 💡'}!")
-            #stats = get_data(f"games/users/{inter.user.id}/wordle_stats/{current_number_guess}")+1
-            #upd_data(stats, f"games/users/{inter.user.id}/wordle_stats/{current_number_guess}")
             E.color = discord.Color.green()
             await inter.followup.send(embed = E)
         
         if not has_won:
-            if language == "English":
-                upd_data(user_data["wordle_stats_en"][f"{current_number_guess}"]+1, f"games/users/{inter.user.id}/wordle_stats_en/lost")
-            else:
-                upd_data(user_data["wordle_stats_fr"][f"{current_number_guess}"]+1, f"games/users/{inter.user.id}/wordle_stats_fr/lost")
-
             todays_colors=""
             for color in user_data[current_w].values():
                 todays_colors+=color+"\n"
@@ -210,48 +204,11 @@ class Wordle(commands.Cog):
         user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"] = 1
         upd_data(user_data[f"wordle_stats_{l_abbr}"], f"games/users/{inter.user.id}/wordle_stats_{l_abbr}")
 
-        if guess_limit == 5:
-            user_data["cursed_wordle"] = 1
-            upd_data(user_data["cursed_wordle"], f"games/users/{user_id}/cursed_wordle")
-            E_roulette = await embed_roulette(self.bot, inter, E)
-            E_roulette.description = f"Oops you only had 5 guesses today...\n"
-            
-            await inter.followup.send(embed = E_roulette)
-
         del Wordle.active_games[user_id]
-    
-    
-    """@app_commands.command(name="profile", description="Shows the Wordle stats of a user")
-    @app_commands.guild_only()
-    @app_commands.describe(user="The user's stats you want to see")
-    @app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
-    @app_commands.check(is_member)
-    async def profile(self, inter: discord.Interaction, user:Optional[str]):
-        await inter.response.defer()
 
-        # if not target specified, target is the user
-        target = inter.user
-        if user is not None:
-            target = user
-
-        E = discord.Embed()
-        E.color = discord.Color.blurple()
-        E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
-
-        try: 
-            user_data : dict = get_data(f"games/users/{inter.user.id}")
-        except :
-            E.description = f"{inter.user.mention} has never played"
-            E.color = discord.Color.red()
-            return await inter.followup.send(embed=E)
-        
-        played = sum(list(user_data["wordle_stats_en"].values())[:6])
-        win = int(((played-user_data["wordle_stats_en/lost"])/played)*100)
-        E.title = f"{played}  {win}% "
-        E.description  = f"- **{user_data['roses']}🌹**\n"
-        E.description += f"- **{user_data['candies']}🍬**\n"
-        E.description += f"- **{user_data['ideas']}💡**\n"
-        await inter.followup.send(embed=E)"""
+#Executes before wordle
+async def before_wordle(self, ctx:commands.Context):
+    print("HIIIIIIII")
     
 #Puts spaces between letters of guessed word and colors
 def space(content : str):
@@ -260,9 +217,7 @@ def space(content : str):
         spaced_word += f"{letter:^3}"
     return spaced_word
 
-
-
-#Function that creates the lists from the csv
+#Function that creates the lists from the csv, accepts 4 columns csv
 def get_words()-> Dict:
     wordle_data = {"guess_list_en": [], "wordle_list_en": [], "guess_list_fr": [], "wordle_list_fr": []}
     with open(DATA_DIR/"wordle_words.csv", "r") as f:
@@ -337,34 +292,19 @@ async def choose_todays_word(bot:commands.Bot) -> None:
     await asyncio.sleep(sleep)
 
     Wordle.active_games={}
+
     upd_data(wordle_word_en, "games/todays_word_en")
     upd_data(wordle_word_fr, "games/todays_word_fr")
-    """for user_id in get_data("games/users").keys():
-        if "🟩🟩🟩🟩🟩" in user_data["wordle_en"].values():
-            user_data["wordle_stats_en/streak"]+=1
-            if user_data["wordle_stats_en/streak"]>=user_data["wordle_stats_en/max_streak"]:
-                user_data["wordle_stats_en/max_streak"] = user_data["wordle_stats_en/streak"]
-        else:
-            user_data["wordle_stats_en/streak"]=0
-    """
+
     for user_id in get_data("games/users").keys():
-        """if "🟩🟩🟩🟩🟩" in user_data["wordle_fr"].values():
-            user_data["wordle_stats_fr/streak"]+=1
-            if user_data["wordle_stats_fr/streak"]>=user_data["wordle_stats_fr/max_streak"]:
-                user_data["wordle_stats_fr/max_streak"] = user_data["wordle_stats_fr/streak"]
-        else:
-            user_data["wordle_stats_fr/streak"]=0"""
-        
-        #upd_data(user_data, f"games/users/{inter.user.id}")
-        upd_data({}, f"games/users/{user_id}/wordle_en")
-        upd_data({}, f"games/users/{user_id}/wordle_fr")
         user_data = get_data(f"games/users/{user_id}")
-        if user_data["cursed_wordle"] == 1:
-            user_data["cursed_wordle"] = 0
-            user_data["effects"].remove("wordle_guess_reduced")
-            upd_data(user_data, f"games/users/{user_id}")
+        user_data["wordle_en"] = {}
+        user_data["wordle_fr"] = {}
+        user_data["wordle_stats_en"]["todays_w_results_shown"] = 0
+        user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
+        upd_data(user_data, f"games/users/{user_id}")
 
 async def setup(bot:commands.Bot):
-    await bot.add_cog(Wordle(bot))
-
+    wordle_obj = Wordle(bot)
+    await bot.add_cog(wordle_obj)
 

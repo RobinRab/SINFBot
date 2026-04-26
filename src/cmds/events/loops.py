@@ -4,15 +4,38 @@ from discord.ext import commands, tasks
 import random
 import asyncio
 import datetime as dt
+import discord
 
-from utils import get_data, upd_data, get_belgian_time, get_acnh_data
+from cmds.games.wordle import Wordle, get_words
+from utils import get_data, upd_data, get_belgian_time, get_acnh_data, UserAccount
+from settings import BOT_CHANNEL_ID
+
 
 def reset_wordle_choice() -> None:
-	return None
+    #user_data = await self.get_data_wordle(inter)
+    w_data = get_words()
+    wordle_list_en = w_data["wordle_list_en"]
+    wordle_list_fr = w_data["wordle_list_fr"]
+
+    wordle_word_en = random.choice(wordle_list_en)
+    wordle_word_fr = random.choice(wordle_list_fr)
+
+    Wordle.active_games={}
+
+    upd_data(wordle_word_en, "games/todays_word_en")
+    upd_data(wordle_word_fr, "games/todays_word_fr")
+
+    for user_id in get_data("games/users").keys():
+        user_data = get_data(f"games/users/{user_id}")
+        user_data["wordle_en"] = {}
+        user_data["wordle_fr"] = {}
+        user_data["wordle_stats_en"]["todays_w_results_shown"] = 0
+        user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
+        upd_data(user_data, f"games/users/{user_id}")
 
 def reset_daily_villagers() -> None:
 	# empty the list of the people who have stopped the meeting today
-	data = get_data('games/users')
+	data : dict[str, UserAccount]= get_data('games/users')
 
 	for user_id, user_data in data.items():
 		user_villagers = user_data.get('villagers', [])
@@ -26,12 +49,34 @@ def reset_daily_villagers() -> None:
 
 	upd_data(data, 'games/users')
 
+def reset_daily_traveler() -> None:
+	data = get_data('games/users')
+
+	for user_id, _ in data.items():
+		data[user_id]['has_got_daily_traveler'] = False
+
+	upd_data(data, 'games/users')
+
+
+def free_sunday_roll() -> None:
+    # Current day and time
+    now = get_belgian_time()
+
+    # Puts the right value in free_sunday_roll depending on the day (Sunday/Other day that Sunday)
+    if now.weekday() != 6:
+        for user_id in get_data("games/users").keys():
+            upd_data(0, f"games/users/{user_id}/free_sunday_roll")
+    else:
+        for user_id in get_data("games/users").keys():
+            upd_data(1, f"games/users/{user_id}/free_sunday_roll")
+
 class Loops(commands.Cog):
 	def __init__(self, bot:commands.Bot):
 		self.bot : commands.Bot = bot
+		self.midnight_events.start()
 
 	@tasks.loop()
-	async def midnight_events() -> None:
+	async def midnight_events(self) -> None:
 		now = get_belgian_time()
 		tomorrow = now + dt.timedelta(days=1)
 
@@ -47,6 +92,44 @@ class Loops(commands.Cog):
 		# animal crossing villagers
 		reset_daily_villagers()
 
+		# new day, new traveler
+		reset_daily_traveler()
+
+		#if sunday, free sunday roll for everyone
+		free_sunday_roll()
+
+		#Lotto results
+		if now.weekday() == 6:
+			await self.lotto_results()
+
+	async def lotto_results(self) -> None:
+		channel = self.bot.get_channel(BOT_CHANNEL_ID)
+		correct_guess : int = random.randint(1, 100)
+		correct_guess = 9
+		users = get_data("games/users")
+		winner : str = ""
+		E = discord.Embed()
+		E.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1219558860516364302/1497741853024325682/lotto.png?ex=69eea04c&is=69ed4ecc&hm=d20e882a23069218a3fe55a10dd8c39f6d4cef0a6e1413d07a36969d743a64ff&")
+
+		for user in users:
+			if get_data(f"games/users/{user}/lotto_guess") == correct_guess:
+				winner = user
+		
+		if len(winner) == 0:
+			E.color = discord.Color.red()
+			E.description = f"Nobody won this week! The correct answer was {correct_guess}\n\nA new lotto will be held next sunday, don't forget to guess! The robber total is now 0"
+
+		else:
+			E.color = discord.Color.gold()
+			E.description = f"The winner is <@!{winner}>! They won {get_data('games/robber_total')} roses. Congrats! The correct answer was {correct_guess}\n\nA new lotto will be held next sunday, don't forget to guess! The robber total is now 0"
+			roses = get_data(f"games/users/{winner}/roses") + get_data("games/robber_total")
+			upd_data(roses, f"games/users/{winner}/roses")
+		
+		upd_data(0, "games/robber_total")
+		for user_id in get_data("games/users").keys():
+			upd_data(-1, f"games/users/{user_id}/lotto_guess")
+		await channel.send(embed=E)
+
 async def setup(bot:commands.Bot):
 	print("started midnight events loop")
-	Loops.midnight_events.start()
+	await bot.add_cog(Loops(bot))

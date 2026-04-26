@@ -11,7 +11,7 @@ import unicodedata
 import datetime as dt
 from typing import Any, Optional
 from settings import DATA_DIR, MEMBER_ID, CUTIE_ID, OWNER_ID, LOG_PIC_CHANNEL_ID
-
+from typing import TypedDict
 #!!WARNING!! Any edits in this file can break commands
 
 class UnexpectedValue(Exception):
@@ -335,50 +335,57 @@ class SelectView(discord.ui.View):
 		return view, view.chosen
 
 # games
-def new_user():
-	return {
-		"level"   : 0,
-		"timely"  : int(dt.datetime.now().timestamp()),
-		"roses"   : 0,
-		"candies" : 0,
-		"ideas"   : 0,
-		"tech"    : 0,
-		"bank"    : {
-			"roses"   : 0,
-			"candies" : 0,
-			"ideas"   : 0
-		},
-		"effects" : [],
-		"last_roulette": -1,
-		"achievements" : [],
-		"wordle_en" : {},
-		"wordle_fr" : {},
-		"wordle_stats_en" : {
-			"1":0,
-			"2":0,
-			"3":0,
-			"4":0,
-			"5":0,
-			"6":0,
-			"lost":0,
-			"streak":0,
-			"max_streak":0
-		},
-		"wordle_stats_fr" : {
-			"1":0,
-			"2":0,
-			"3":0,
-			"4":0,
-			"5":0,
-			"6":0,
-			"lost":0,
-			"streak":0,
-			"max_streak":0
-		},
-		"free_sunday_roll" : 0,
-		"villager_of_the_day": "",
-		"villagers" : []
-	}
+class Bank(TypedDict):
+	roses: int
+	candies: int
+	ideas: int
+
+# TypedDict is just dict with type hints
+class UserAccount(TypedDict):
+	level: int
+	timely: int # timestamp
+	roses: int
+	candies: int
+	ideas: int
+	tech: int
+	bank: Bank
+	achievements: list[str]
+	wordle_en: dict[str, str]
+	wordle_fr: dict[str, str]
+	wordle_stats_en : dict[str, int]
+	wordle_stats_fr : dict[str, int]
+	villager_of_the_day: str
+	villagers: list[str]
+	has_got_daily_traveler : bool
+	
+def new_user() -> UserAccount:
+	return 	{
+		"level": 0,
+        "timely": 0,
+        "roses": 0,
+        "candies": 0,
+        "ideas": 0,
+        "tech": 0,
+        "bank" : {
+            "roses": 0,
+            "candies": 0,
+            "ideas": 0
+        },
+        "achievements": [],
+        "wordle_en": {},
+        "wordle_fr": {},
+        "wordle_stats_en": {
+            "todays_w_results_shown": 0
+        },
+        "wordle_stats_fr": {
+            "todays_w_results_shown": 0
+        },
+        "villager_of_the_day": "",
+        "villagers" : [],
+        "has_got_daily_traveler" : False, 
+		"free_sunday_roll" : 0, 
+		"effects" : ["never_played"]
+}
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
 	"""Translates a user input into an amount of cash. \n
@@ -408,7 +415,7 @@ def get_amount(cash: int, txt: str) -> Optional[int]:
 
 	return None
 
-def get_value(user_data:dict) -> int:
+def get_value(user_data:UserAccount) -> int:
 	"""Calculates the value of the timely reward. \n
 	Level 0 starts with 120. Each level grants 40% of that each time \n
 	Each achievement adds 1% bonus, 2% if all achievements are unlocked"""
@@ -448,6 +455,7 @@ def new_update() -> discord.Embed:
 	E.set_author(name="SINF illégal family bot")
 	E.description = "- Roulette ! (At last :pray:)\n"
 	E.description += "- Wordle debug\n"
+	E.description += "- Sunday Lotto \n"
 
 	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
 	E.add_field(name="Authors", value="<@!627431499960156161> and <@!411881842439094272>")

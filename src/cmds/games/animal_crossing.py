@@ -11,7 +11,7 @@ from typing import Literal, Optional
 currencies = Literal["🌹", "🍬", "💡"]
 
 from settings import DATA_DIR
-from utils import get_data, upd_data, new_user, get_acnh_data, get_acnh_musics
+from utils import get_data, upd_data, new_user, get_acnh_data, get_acnh_musics, UserAccount
 
 # all data from : https://docs.google.com/spreadsheets/d/13d_LAJPlxMa_DubPTuirkIV4DERBMXbrWQsmSh8ReK4/edit?gid=1289224346#gid=1289224346
 #todo: do something on their birthday? (no abuse)
@@ -32,6 +32,13 @@ class AnimalCrossing(commands.Cog):
 	@app_commands.guild_only()
 	@app_commands.describe(name="The name of the villager")
 	async def stalk(self, inter:discord.Interaction, name:str):
+		acnh = get_acnh_data()
+		# just in case the user sent too quickly
+		name = name.capitalize() 
+
+		if name not in acnh:
+			return await inter.response.send_message("Villager not found! Please enter a valid villager name.", ephemeral=True)
+
 		embed = self.build_embed_from_name(name)
 		await inter.response.send_message(embed=embed)
 
@@ -62,7 +69,7 @@ class AnimalCrossing(commands.Cog):
 		await inter.response.defer()
 
 		try :
-			user_data : dict = get_data(f"games/users/{inter.user.id}")
+			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			user_data = new_user()
 			#
@@ -101,7 +108,7 @@ class AnimalCrossing(commands.Cog):
 
 			@discord.ui.button(label="yes",style=discord.ButtonStyle.green, custom_id="yes")
 			async def yes(self, inter2: discord.Interaction, _: discord.ui.Button):
-				user_data : dict = get_data(f"games/users/{inter.user.id}")
+				user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 
 				villagers = user_data['villagers']
 
@@ -215,7 +222,7 @@ class AnimalCrossing(commands.Cog):
 
 		await inter.response.defer()
 		try:
-			user_data : dict = get_data(f"games/users/{user_id}")
+			user_data : UserAccount = get_data(f"games/users/{user_id}")
 		except:
 			user_data = new_user()
 			upd_data(user_data, f"games/users/{inter.user.id}")

@@ -1,0 +1,1736 @@
+[2026-04-22 19:22:12] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-22 19:22:12] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-22 19:22:12] [INFO    ] discord.client: logging in using static token
+[2026-04-22 19:22:14] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: a65b26757f30823813142fae0c5f27d4).
+[2026-04-22 19:22:16] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-22 19:22:16] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-22 19:22:16] [INFO    ] adding Avatar to context menu
+[2026-04-22 19:22:16] [INFO    ] adding Birthday to context menu
+[2026-04-22 19:22:16] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.stuff.help loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.stuff.info loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.cutie.control loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.events.error loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.events.message loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.events.loops loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.games.economy loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.games.wordle loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.games.games loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.games.trades loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.games.gambling loaded 
+[2026-04-22 19:22:16] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-22 19:26:28] [INFO    ] Bot synced
+[2026-04-24 12:24:24] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 12:24:24] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 12:24:24] [INFO    ] discord.client: logging in using static token
+[2026-04-24 12:24:25] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: efb3ab607e4254dad8f6f11b7a795d19).
+[2026-04-24 12:24:27] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 12:24:27] [INFO    ] adding Avatar to context menu
+[2026-04-24 12:24:27] [INFO    ] adding Birthday to context menu
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 12:24:27] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.error loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.message loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.games loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 12:24:28] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 12:25:43] [ERROR   ] 400 Bad Request (error code: 50006): Cannot send an empty message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 76, in wordle
+    return await inter.followup.send(f"{already_guessed}", ephemeral=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 1805, in send
+    data = await adapter.execute_webhook(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 221, in request
+    raise HTTPException(response, data)
+
+discord.errors.HTTPException: 400 Bad Request (error code: 50006): Cannot send an empty message
+
+[2026-04-24 12:40:41] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session efb3ab607e4254dad8f6f11b7a795d19.
+[2026-04-24 12:59:39] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 12:59:39] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 12:59:39] [INFO    ] discord.client: logging in using static token
+[2026-04-24 12:59:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 0e1748cfe9b46e40449aecde198e86bc).
+[2026-04-24 12:59:43] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 12:59:43] [INFO    ] adding Avatar to context menu
+[2026-04-24 12:59:43] [INFO    ] adding Birthday to context menu
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.error loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.message loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.games loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 12:59:43] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:02:06] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:02:06] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:02:06] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:02:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4fc346dcc9494ad88a2581558ef648bb).
+[2026-04-24 13:02:09] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:02:09] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:02:09] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:02:09] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:02:20] [ERROR   ] This interaction has already been responded to before 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 86, in wordle
+    await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing.
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+[2026-04-24 13:04:31] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:04:31] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:04:31] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:04:32] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e7aa42aaabdcdb8b73423f25eecfa689).
+[2026-04-24 13:04:34] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:04:34] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:04:34] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:04:34] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:04:47] [ERROR   ] This interaction has already been responded to before 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 106, in wordle
+    await inter.response.send_message( f"Welcome back to {language} wordle! Here are the words you already guessed : ", ephemeral = True)
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+[2026-04-24 13:05:45] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:05:45] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:05:45] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:05:46] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 3184c7ae68696978871b9b23f72a0da5).
+[2026-04-24 13:05:48] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:05:48] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:05:48] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:05:48] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:06:11] [ERROR   ] 404 Not Found (error code: 10008): Unknown Message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 127, in wordle
+    await message.delete()
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/message.py", line 859, in delete
+    await self._state.http.delete_message(self.channel.id, self.id)
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/http.py", line 741, in request
+    raise NotFound(response, data)
+
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
+
+[2026-04-24 13:06:12] [ERROR   ] 404 Not Found (error code: 10008): Unknown Message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 127, in wordle
+    await message.delete()
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/message.py", line 859, in delete
+    await self._state.http.delete_message(self.channel.id, self.id)
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/http.py", line 741, in request
+    raise NotFound(response, data)
+
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
+
+[2026-04-24 13:21:47] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:21:47] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:21:47] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:21:48] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 56d5625022ad0b9b844310b48eb2594f).
+[2026-04-24 13:21:50] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:21:50] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:21:50] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:21:50] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:26:07] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 13:26:07] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 13:26:07] [INFO    ] discord.client: logging in using static token
+[2026-04-24 13:26:09] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 27c93309573da8ca8389a2e45807c75d).
+[2026-04-24 13:26:11] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 13:26:11] [INFO    ] adding Avatar to context menu
+[2026-04-24 13:26:11] [INFO    ] adding Birthday to context menu
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.error loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.message loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.games loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 13:26:11] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 13:41:44] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 13:41:50] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 1eeca93269a112e833d43787cb53e7b5).
+[2026-04-24 13:41:52] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:41:52] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.
+[2026-04-24 13:47:25] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 13:47:31] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: bb22b5a97a6b11c5e5d8eb3ffecb311c).
+[2026-04-24 13:47:33] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 13:47:33] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.
+[2026-04-24 13:53:29] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 13:53:36] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d58bdfd77f6748f929b1e945e214ca3f).
+[2026-04-24 14:09:03] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 14:09:03] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.
+[2026-04-24 14:23:22] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2026-04-24 14:23:29] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4d3016ca5ab537230a46ccaef59940f7).
+[2026-04-24 14:23:31] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 14:23:31] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1007, in load_extension
+    raise errors.ExtensionAlreadyLoaded(name)
+discord.ext.commands.errors.ExtensionAlreadyLoaded: Extension 'cmds.stuff.fun' is already loaded.
+[2026-04-24 16:44:03] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 16:44:03] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 16:44:03] [INFO    ] discord.client: logging in using static token
+[2026-04-24 16:44:04] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e1423f77c4cb463f52eda94c0c98360c).
+[2026-04-24 16:44:06] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 16:44:06] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 16:44:06] [INFO    ] adding Avatar to context menu
+[2026-04-24 16:44:06] [INFO    ] adding Birthday to context menu
+[2026-04-24 16:44:06] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.events.error loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.events.message loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.games.games loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 16:44:06] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 16:47:12] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 16:47:12] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 16:47:12] [INFO    ] discord.client: logging in using static token
+[2026-04-24 16:47:13] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8fb4906b6d34a2b0ed59283ae4ad9317).
+[2026-04-24 16:47:15] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 16:47:15] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 16:47:15] [INFO    ] adding Avatar to context menu
+[2026-04-24 16:47:15] [INFO    ] adding Birthday to context menu
+[2026-04-24 16:47:15] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.events.error loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.events.message loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.games.games loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 16:47:15] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:08:47] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:08:47] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:08:47] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:08:49] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e7cc5710b9e2e649a823afdffe6f2785).
+[2026-04-24 17:08:51] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:08:51] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:08:51] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:08:51] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:08:51] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:08:51] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:17:37] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:17:37] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:17:37] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:17:39] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e873d3eb2424d364dd74e176322e8235).
+[2026-04-24 17:17:41] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:17:41] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:17:41] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:17:41] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:17:41] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:17:41] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:18:04] [ERROR   ] 'Bot' object has no attribute 'tree_cls' 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 61, in wordle
+    print(self.bot.tree_cls)
+          ^^^^^^^^^^^^^^^^^
+
+AttributeError: 'Bot' object has no attribute 'tree_cls'
+
+[2026-04-24 17:20:15] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:20:15] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:20:15] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:20:17] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 1dd59866518f9bb15a44aae42b5ade06).
+[2026-04-24 17:20:19] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:20:19] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:20:19] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:20:19] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:20:19] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:20:19] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:20:57] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:20:57] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:20:57] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:20:58] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: f8c0c54c4a569bb893d64cde7a14aba0).
+[2026-04-24 17:21:00] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:21:00] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:21:00] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:21:00] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:21:00] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:21:00] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:21:00] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 935, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1074, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1004, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 60
+    print(self.bot.tree.get_commands(guild=discord.Object(id=GUILD_ID))))
+                                                                        ^
+SyntaxError: unmatched ')'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 938, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: SyntaxError: unmatched ')' (wordle.py, line 60)
+[2026-04-24 17:21:06] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:21:06] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:21:06] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:21:08] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b500f4b93afc443279c6580e537b1473).
+[2026-04-24 17:21:10] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:21:10] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:21:10] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:21:10] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:21:10] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:21:10] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:21:10] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 935, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1074, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1004, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 60
+    print(self.bot.tree.get_commands(guild=discord.Object(id=GUILD_ID))))
+                                                                        ^
+SyntaxError: unmatched ')'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 938, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: SyntaxError: unmatched ')' (wordle.py, line 60)
+[2026-04-24 17:21:28] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:21:28] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:21:28] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:21:29] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d5264d5fce8b49d51c799ff422a95f1f).
+[2026-04-24 17:21:31] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:21:31] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:21:31] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:21:31] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:21:31] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:21:31] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:22:25] [INFO    ] Bot synced
+[2026-04-24 17:26:20] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:26:20] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:26:20] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:26:21] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 2ee8fee967994e9680b5be7c8d4a7bf5).
+[2026-04-24 17:26:23] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:26:23] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:26:23] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:26:23] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:26:23] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:26:23] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:27:27] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:27:27] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:27:27] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:27:28] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 58e2a78c52e9ebf5fa5d2d6606c3a3db).
+[2026-04-24 17:27:30] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:27:30] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:27:30] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:27:30] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:27:30] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:27:30] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:28:07] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:28:07] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:28:07] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:28:08] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 61b3ccd2adf85461b40df1eef388e59f).
+[2026-04-24 17:28:10] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:28:10] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:28:10] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:28:10] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:28:10] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:28:10] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:31:18] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:31:18] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:31:18] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:31:19] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e3c711164270b5bc73a912386c98beea).
+[2026-04-24 17:31:21] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:31:21] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:31:21] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:31:21] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:31:21] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:31:21] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 17:33:39] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 17:33:39] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 17:33:39] [INFO    ] discord.client: logging in using static token
+[2026-04-24 17:33:40] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 1f91ecc5098b151cf7347d25c844a12c).
+[2026-04-24 17:33:42] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 17:33:42] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 17:33:42] [INFO    ] adding Avatar to context menu
+[2026-04-24 17:33:42] [INFO    ] adding Birthday to context menu
+[2026-04-24 17:33:42] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.events.error loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.events.message loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.games.games loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 17:33:42] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 18:00:53] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:00:53] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:00:53] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:00:54] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: dafb4369231abd6ebe85395ce762ec7f).
+[2026-04-24 18:00:56] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:00:56] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:00:56] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:00:56] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:00:56] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.games.games loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 18:00:56] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 18:06:34] [INFO    ] Bot synced
+[2026-04-24 18:21:32] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:21:32] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:21:32] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:21:34] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: cc0918c1c970f69a067d937080af0f40).
+[2026-04-24 18:21:36] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:21:36] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:21:36] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:21:36] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:21:36] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:21:36] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:21:36] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 935, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 16, in <module>
+    class Wordle(commands.Cog):
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 46, in Wordle
+    @commands.Bot.before_invoke(before_wordle)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: BotBase.before_invoke() missing 1 required positional argument: 'coro'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 938, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: TypeError: BotBase.before_invoke() missing 1 required positional argument: 'coro'
+[2026-04-24 18:22:06] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:22:06] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:22:06] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:22:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 732dae84022b99c4db99642cf5554f13).
+[2026-04-24 18:22:09] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:22:09] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:22:09] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:22:09] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:22:09] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:22:09] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:22:09] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 935, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 16, in <module>
+    class Wordle(commands.Cog):
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 46, in Wordle
+    @commands.Bot.before_invoke(self, before_wordle)
+                                ^^^^
+NameError: name 'self' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 938, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: NameError: name 'self' is not defined
+[2026-04-24 18:29:09] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:29:09] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:29:09] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:29:11] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d63a7a6a377e14d3f0b43e5f0b906cac).
+[2026-04-24 18:29:13] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:29:13] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:29:13] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:29:13] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:29:13] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:29:13] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:29:13] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 935, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 15, in <module>
+    class Wordle(commands.Cog):
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 38, in Wordle
+    @wordle.before_invoke
+     ^^^^^^
+NameError: name 'wordle' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 938, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: NameError: name 'wordle' is not defined
+[2026-04-24 18:29:54] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:29:54] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:29:54] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:29:55] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 37ea33bad89f9afadfad8cccc59dad9a).
+[2026-04-24 18:29:57] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:29:57] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:29:57] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:29:57] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:29:57] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:29:57] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:29:57] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 935, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 15, in <module>
+    class Wordle(commands.Cog):
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 214, in Wordle
+    @wordle.before_invoke
+     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Command' object has no attribute 'before_invoke'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 938, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: AttributeError: 'Command' object has no attribute 'before_invoke'
+[2026-04-24 18:35:21] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:35:21] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:35:21] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:35:22] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 56008edf9c0f6235f708c3324aa899ad).
+[2026-04-24 18:35:24] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:35:24] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:35:24] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:35:24] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:35:24] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:35:24] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:35:24] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:35:24] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:35:25] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:35:25] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 947, in _load_from_module_spec
+    await setup(self)
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 311, in setup
+    await bot.add_cog(Wordle(bot))
+                      ^^^^^^^^^^^
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 20, in __init__
+    self.bot.before_invoke()
+TypeError: BotBase.before_invoke() missing 1 required positional argument: 'coro'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 952, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: TypeError: BotBase.before_invoke() missing 1 required positional argument: 'coro'
+[2026-04-24 18:35:55] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:35:55] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:35:55] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:35:57] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: ab9aa96291933dceb123ca34a89f92f4).
+[2026-04-24 18:36:00] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:36:00] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:36:00] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:36:00] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:36:00] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.games.games loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 18:36:00] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 18:36:32] [INFO    ] Bot synced
+[2026-04-24 18:37:06] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:37:06] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:37:06] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:37:09] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: f54a31e48d60b8ffe51782c46073aa1c).
+[2026-04-24 18:37:11] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:37:11] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:37:11] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:37:11] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:37:11] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:37:11] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.games.games loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 18:37:12] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 18:40:40] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:40:40] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:40:40] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:40:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: cc9706925c506906ce2b4861baf0d2a0).
+[2026-04-24 18:40:43] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:40:43] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:40:43] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:40:43] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:40:43] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.games.games loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 18:40:43] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 18:41:10] [INFO    ] Bot synced
+[2026-04-24 18:42:06] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:42:06] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:42:06] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:42:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e78805b4609e6780978a1b1ca66f4eac).
+[2026-04-24 18:42:09] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:42:09] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:42:09] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:42:09] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:42:09] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:42:09] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:42:09] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 935, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 15, in <module>
+    class Wordle(commands.Cog):
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 37, in Wordle
+    @commands.before_invoke(before_wordle)
+                            ^^^^^^^^^^^^^
+NameError: name 'before_wordle' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 938, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: NameError: name 'before_wordle' is not defined
+[2026-04-24 18:43:25] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 18:43:25] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 18:43:25] [INFO    ] discord.client: logging in using static token
+[2026-04-24 18:43:26] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 3fc9355b23a4147e6281a05b1f5ab4d2).
+[2026-04-24 18:43:28] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 18:43:28] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 18:43:28] [INFO    ] adding Avatar to context menu
+[2026-04-24 18:43:28] [INFO    ] adding Birthday to context menu
+[2026-04-24 18:43:28] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.events.error loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.events.message loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.games.games loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 18:43:28] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 18:43:54] [INFO    ] Bot synced
+[2026-04-24 19:43:09] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 19:43:09] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 19:43:09] [INFO    ] discord.client: logging in using static token
+[2026-04-24 19:43:10] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8ac65b2adae203ec40b5218e8c56b462).
+[2026-04-24 19:43:12] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 19:43:12] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 19:43:12] [INFO    ] adding Avatar to context menu
+[2026-04-24 19:43:12] [INFO    ] adding Birthday to context menu
+[2026-04-24 19:43:12] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.events.error loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.events.message loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.games.games loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 19:43:12] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 19:43:49] [INFO    ] Bot synced
+[2026-04-24 19:46:34] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 19:46:34] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 19:46:34] [INFO    ] discord.client: logging in using static token
+[2026-04-24 19:46:35] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: ed51bcce64488e3431cd59d4bf68e3dd).
+[2026-04-24 19:46:37] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 19:46:37] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 19:46:37] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 19:46:37] [INFO    ] adding Avatar to context menu
+[2026-04-24 19:46:37] [INFO    ] adding Birthday to context menu
+[2026-04-24 19:46:37] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 19:46:37] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 19:46:37] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.events.error loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.events.message loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.games.games loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 19:46:38] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 19:47:02] [INFO    ] Bot synced
+[2026-04-24 19:57:16] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 19:57:16] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 19:57:16] [INFO    ] discord.client: logging in using static token
+[2026-04-24 19:57:16] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b17e3681ba8653a1865ac9b146185c0a).
+[2026-04-24 19:57:18] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 19:57:18] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 19:57:18] [INFO    ] adding Avatar to context menu
+[2026-04-24 19:57:18] [INFO    ] adding Birthday to context menu
+[2026-04-24 19:57:18] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.events.error loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.events.message loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 19:57:18] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 19:57:18] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 947, in _load_from_module_spec
+    await setup(self)
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 323, in setup
+    await bot.add_cog(wordle_obj)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 783, in add_cog
+    cog = await cog._inject(self, override=override, guild=guild, guilds=guilds)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/cog.py", line 703, in _inject
+    raise e
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/cog.py", line 694, in _inject
+    bot.add_command(command)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 246, in add_command
+    super().add_command(command)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/core.py", line 1356, in add_command
+    raise CommandRegistrationError(command.name)
+discord.ext.commands.errors.CommandRegistrationError: The command ping is already an existing command or alias.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 952, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: CommandRegistrationError: The command ping is already an existing command or alias.
+[2026-04-24 19:57:28] [INFO    ] Bot synced
+[2026-04-24 19:57:53] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 19:57:53] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 19:57:53] [INFO    ] discord.client: logging in using static token
+[2026-04-24 19:57:54] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: fc54a230aedc936c9a56cdd0e6ed9833).
+[2026-04-24 19:57:56] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 19:57:56] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 19:57:56] [INFO    ] adding Avatar to context menu
+[2026-04-24 19:57:56] [INFO    ] adding Birthday to context menu
+[2026-04-24 19:57:56] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.events.error loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.events.message loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 19:57:56] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 19:57:56] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 947, in _load_from_module_spec
+    await setup(self)
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 323, in setup
+    await bot.add_cog(wordle_obj)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 783, in add_cog
+    cog = await cog._inject(self, override=override, guild=guild, guilds=guilds)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/cog.py", line 703, in _inject
+    raise e
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/cog.py", line 694, in _inject
+    bot.add_command(command)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 246, in add_command
+    super().add_command(command)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/core.py", line 1356, in add_command
+    raise CommandRegistrationError(command.name)
+discord.ext.commands.errors.CommandRegistrationError: The command ping is already an existing command or alias.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 952, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: CommandRegistrationError: The command ping is already an existing command or alias.
+[2026-04-24 19:58:39] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 19:58:39] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 19:58:39] [INFO    ] discord.client: logging in using static token
+[2026-04-24 19:58:42] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: a30406e7d52b70f4eb5f56b55ef6597b).
+[2026-04-24 19:58:44] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 19:58:44] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 19:58:44] [INFO    ] adding Avatar to context menu
+[2026-04-24 19:58:44] [INFO    ] adding Birthday to context menu
+[2026-04-24 19:58:44] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.events.error loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.events.message loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 19:58:44] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 19:58:44] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 947, in _load_from_module_spec
+    await setup(self)
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 323, in setup
+    await bot.add_cog(wordle_obj)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 783, in add_cog
+    cog = await cog._inject(self, override=override, guild=guild, guilds=guilds)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/cog.py", line 703, in _inject
+    raise e
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/cog.py", line 694, in _inject
+    bot.add_command(command)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 246, in add_command
+    super().add_command(command)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/core.py", line 1356, in add_command
+    raise CommandRegistrationError(command.name)
+discord.ext.commands.errors.CommandRegistrationError: The command ping is already an existing command or alias.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "/Users/ernestomendozagomez/My_Anon/src/main.py", line 26, in on_ready
+    await bot.load_extension(ext)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 1013, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/ext/commands/bot.py", line 952, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'cmds.games.wordle' raised an error: CommandRegistrationError: The command ping is already an existing command or alias.
+[2026-04-24 19:58:55] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 19:58:55] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 19:58:55] [INFO    ] discord.client: logging in using static token
+[2026-04-24 19:58:57] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: a2263bdf82bdeff724fef78520d502ef).
+[2026-04-24 19:58:59] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 19:58:59] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 19:58:59] [INFO    ] adding Avatar to context menu
+[2026-04-24 19:58:59] [INFO    ] adding Birthday to context menu
+[2026-04-24 19:58:59] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.events.error loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.events.message loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.games.games loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 19:58:59] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 20:05:10] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 20:05:10] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 20:05:10] [INFO    ] discord.client: logging in using static token
+[2026-04-24 20:05:12] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d74e09644d1e14b94eab591d27ba934e).
+[2026-04-24 20:05:14] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 20:05:14] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 20:05:14] [INFO    ] adding Avatar to context menu
+[2026-04-24 20:05:14] [INFO    ] adding Birthday to context menu
+[2026-04-24 20:05:14] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.events.error loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.events.message loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.games.games loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 20:05:14] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 20:05:42] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 20:05:42] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 20:05:42] [INFO    ] discord.client: logging in using static token
+[2026-04-24 20:05:43] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 74a3a308b1cf67b73db41c3faffa73b2).
+[2026-04-24 20:05:45] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 20:05:45] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 20:05:45] [INFO    ] adding Avatar to context menu
+[2026-04-24 20:05:45] [INFO    ] adding Birthday to context menu
+[2026-04-24 20:05:45] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.events.error loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.events.message loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.games.games loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 20:05:45] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 20:07:06] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 20:07:06] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 20:07:06] [INFO    ] discord.client: logging in using static token
+[2026-04-24 20:07:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 5a19cea39a9e84138bfd3ffc0c6d4863).
+[2026-04-24 20:07:09] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 20:07:09] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 20:07:09] [INFO    ] adding Avatar to context menu
+[2026-04-24 20:07:09] [INFO    ] adding Birthday to context menu
+[2026-04-24 20:07:09] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.events.error loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.events.message loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.games.games loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 20:07:09] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 20:08:40] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 20:08:40] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 20:08:40] [INFO    ] discord.client: logging in using static token
+[2026-04-24 20:08:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d69430e804f4134a270139046b73c81c).
+[2026-04-24 20:08:43] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 20:08:43] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 20:08:43] [INFO    ] adding Avatar to context menu
+[2026-04-24 20:08:43] [INFO    ] adding Birthday to context menu
+[2026-04-24 20:08:43] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.events.error loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.events.message loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.games.games loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 20:08:43] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 20:09:48] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 20:09:48] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 20:09:48] [INFO    ] discord.client: logging in using static token
+[2026-04-24 20:09:49] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 2fd9579f5350ddac4afcbe88141d515d).
+[2026-04-24 20:09:51] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 20:09:51] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 20:09:51] [INFO    ] adding Avatar to context menu
+[2026-04-24 20:09:51] [INFO    ] adding Birthday to context menu
+[2026-04-24 20:09:51] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.events.error loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.events.message loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.games.games loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 20:09:51] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 20:41:21] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 20:41:21] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 20:41:21] [INFO    ] discord.client: logging in using static token
+[2026-04-24 20:41:22] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 7f0490363b4c45ca98efe776d492f6ca).
+[2026-04-24 20:41:24] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 20:41:24] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 20:41:24] [INFO    ] adding Avatar to context menu
+[2026-04-24 20:41:24] [INFO    ] adding Birthday to context menu
+[2026-04-24 20:41:24] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.events.error loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.events.message loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.games.games loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 20:41:24] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 21:00:14] [ERROR   ] 400 Bad Request (error code: 50006): Cannot send an empty message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 93, in wordle
+    return await inter.followup.send(f"{already_guessed}", ephemeral=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 1805, in send
+    data = await adapter.execute_webhook(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 221, in request
+    raise HTTPException(response, data)
+
+discord.errors.HTTPException: 400 Bad Request (error code: 50006): Cannot send an empty message
+
+[2026-04-24 21:07:40] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 21:07:40] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 21:07:40] [INFO    ] discord.client: logging in using static token
+[2026-04-24 21:07:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 5a055e2ffca85503d9fb03a90d829cd7).
+[2026-04-24 21:07:43] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 21:07:43] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 21:07:43] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 21:07:43] [INFO    ] adding Avatar to context menu
+[2026-04-24 21:07:43] [INFO    ] adding Birthday to context menu
+[2026-04-24 21:07:43] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.events.error loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.events.message loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.games.games loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 21:07:44] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 21:08:40] [ERROR   ] 400 Bad Request (error code: 50006): Cannot send an empty message 
+ Traceback (most recent call last):
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/app_commands/commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Users/ernestomendozagomez/My_Anon/src/cmds/games/wordle.py", line 93, in wordle
+    return await inter.followup.send(f"{already_guessed}", ephemeral=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 1805, in send
+    data = await adapter.execute_webhook(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/discord/webhook/async_.py", line 221, in request
+    raise HTTPException(response, data)
+
+discord.errors.HTTPException: 400 Bad Request (error code: 50006): Cannot send an empty message
+
+[2026-04-24 21:08:51] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 21:08:51] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 21:08:51] [INFO    ] discord.client: logging in using static token
+[2026-04-24 21:08:52] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 952bd886f95ceb87b98468810795a4fa).
+[2026-04-24 21:08:54] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 21:08:54] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 21:08:54] [INFO    ] adding Avatar to context menu
+[2026-04-24 21:08:54] [INFO    ] adding Birthday to context menu
+[2026-04-24 21:08:54] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.events.error loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.events.message loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.games.games loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 21:08:54] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 21:25:04] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 21:25:04] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 21:25:04] [INFO    ] discord.client: logging in using static token
+[2026-04-24 21:25:05] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 71771420e6af96b2bcaa99cc6f16e8f2).
+[2026-04-24 21:25:07] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 21:25:07] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 21:25:07] [INFO    ] adding Avatar to context menu
+[2026-04-24 21:25:07] [INFO    ] adding Birthday to context menu
+[2026-04-24 21:25:07] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.events.error loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.events.message loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.games.games loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 21:25:07] [INFO    ] cmds.games.animal_crossing loaded 
+[2026-04-24 22:17:23] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2026-04-24 22:17:23] [DEBUG   ] discord.client: on_ready has successfully been registered as an event
+[2026-04-24 22:17:23] [INFO    ] discord.client: logging in using static token
+[2026-04-24 22:17:24] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 909fad40139b718ef36f3311683d481a).
+[2026-04-24 22:17:26] [INFO    ] Logged in as Ceisal_#3359
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.fun loaded 
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.owner loaded 
+[2026-04-24 22:17:26] [INFO    ] adding Avatar to context menu
+[2026-04-24 22:17:26] [INFO    ] adding Birthday to context menu
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.apps loaded 
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.birthday loaded 
+[2026-04-24 22:17:26] [INFO    ] cmds.stuff.help loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.stuff.info loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.stuff.tetrio loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.cutie.resp loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.cutie.control loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.error loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.message loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.loops loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.events.audit_logs loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.multiplayer loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.economy loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.wordle loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.games loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.trades loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.gambling loaded 
+[2026-04-24 22:17:27] [INFO    ] cmds.games.animal_crossing loaded 

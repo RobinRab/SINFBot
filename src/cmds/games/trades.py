@@ -6,7 +6,7 @@ import datetime as dt
 from typing import Literal, Optional
 currencies = Literal["🌹", "🍬", "💡"]
 
-from utils import get_data, upd_data, GetLogLink, new_user, translate
+from utils import get_data, upd_data, GetLogLink, UserAccount, translate
 
 class Trades(commands.Cog):
 	def __init__(self,bot):
@@ -23,7 +23,7 @@ class Trades(commands.Cog):
 		await inter.response.defer()
 
 		try:
-			data = get_data(f"games/users/{inter.user.id}")
+			data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except KeyError:
 			return await inter.followup.send("You don't have an account yet")
 
@@ -49,8 +49,15 @@ class Trades(commands.Cog):
 				self.timeout_date = timeout_date
 				super().__init__(timeout=60)
 				self.message : Optional[discord.Message]
+				self.has_been_answered = False
 
 			async def interaction_check(self, inter2: discord.Interaction):
+				# prevent duping
+				if self.has_been_answered:
+					await inter2.response.defer()
+					return False
+				self.has_been_answered = True
+
 				self.upd_timeout()
 
 				if inter.user == inter2.user:
@@ -80,7 +87,7 @@ class Trades(commands.Cog):
 			@discord.ui.button(label=f"Buy for {price} {buy_item}",style=discord.ButtonStyle.success)
 			async def buy(self, inter2: discord.Interaction, _: discord.ui.Button):
 				try: 
-					buyer = get_data(f"games/users/{inter2.user.id}")
+					buyer : UserAccount = get_data(f"games/users/{inter2.user.id}")
 				except KeyError:
 					return await inter2.response.send_message("You don't have an account yet", ephemeral=True)
 				
@@ -92,7 +99,7 @@ class Trades(commands.Cog):
 				buyer[translate(sell_item)] += amount
 				upd_data(buyer, f"games/users/{inter2.user.id}")
 
-				seller = get_data(f"games/users/{inter.user.id}")
+				seller : UserAccount = get_data(f"games/users/{inter.user.id}")
 				seller[translate(buy_item)] += price
 				upd_data(seller, f"games/users/{inter.user.id}")
 
@@ -103,7 +110,7 @@ class Trades(commands.Cog):
 				@discord.ui.button(label=f"Refuse",style=discord.ButtonStyle.danger)
 				async def sell(self, inter2: discord.Interaction, _: discord.ui.Button):
 					# refund the item from the seller
-					seller = get_data(f"games/users/{inter.user.id}")
+					seller : UserAccount = get_data(f"games/users/{inter.user.id}")
 					seller[translate(sell_item)] += amount
 					upd_data(seller, f"games/users/{inter.user.id}")
 
@@ -112,7 +119,7 @@ class Trades(commands.Cog):
 
 			async def on_timeout(self):
 				# refund the item from the seller
-				seller = get_data(f"games/users/{inter.user.id}")
+				seller : UserAccount = get_data(f"games/users/{inter.user.id}")
 				seller[translate(sell_item)] += amount
 				upd_data(seller, f"games/users/{inter.user.id}")
 
@@ -126,7 +133,7 @@ class Trades(commands.Cog):
 		txt += f"\nends <t:{int(dt.datetime.now().timestamp()) + 60}:R>"
 
 		# remove the item from the seller
-		seller = get_data(f"games/users/{inter.user.id}")
+		seller : UserAccount = get_data(f"games/users/{inter.user.id}")
 		seller[translate(sell_item)] -= amount
 		upd_data(seller, f"games/users/{inter.user.id}")
 
