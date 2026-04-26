@@ -20,8 +20,6 @@ def reset_wordle_choice() -> None:
     wordle_word_en = random.choice(wordle_list_en)
     wordle_word_fr = random.choice(wordle_list_fr)
 
-    Wordle.active_games={}
-
     upd_data(wordle_word_en, "games/todays_word_en")
     upd_data(wordle_word_fr, "games/todays_word_fr")
 

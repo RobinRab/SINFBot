@@ -13,11 +13,9 @@ from utils import get_data, upd_data, get_value, get_belgian_time, new_user, Get
                                                                                                          #Roulette is comming 👀
 
 class Wordle(commands.Cog):
-    active_games = {}
 
     def __init__(self, bot):
         self.bot : commands.Bot = bot
-        choose_todays_word.start(bot=self.bot)
     
     async def get_data_wordle(self, inter:discord.Interaction) -> dict:
         # check if account exists
@@ -51,13 +49,6 @@ class Wordle(commands.Cog):
         E = discord.Embed()
         E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
         
-        #Compute current state of the game
-        if user_id in Wordle.active_games and Wordle.active_games[user_id]:
-            await inter.response.send_message("You are already playing Wordle.", ephemeral=True)
-            return
-
-        Wordle.active_games[user_id] = True
-        
         try:
             result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
         except:
@@ -65,7 +56,6 @@ class Wordle(commands.Cog):
 
         #Check if results shown have to be ephemeral or not
         if result_displayed:
-            del Wordle.active_games[user_id]
             already_guessed = ""
 
             for word in user_data[current_w]:
@@ -89,7 +79,7 @@ class Wordle(commands.Cog):
 
         if current_number_guess == 0 and not guess_limit == 5:
             await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
-            \nType 'stop' to *pause* the game, recall the function to *restart*.''')
+            \nType 'stop' to *pause* the game, call the function again to *restart*.''')
 
         elif current_number_guess == 0 and guess_limit == 5:
             #E_roulette = await embed_roulette(self, inter, E)
@@ -124,15 +114,16 @@ class Wordle(commands.Cog):
             try:
                 message = await self.bot.wait_for("message", timeout = 180, check = check)
             except asyncio.TimeoutError:
-                Wordle.active_games[user_id] = False 
 
                 return await inter.followup.send("See you later", ephemeral=True)
             guess_word = simplify(message.content.lower())
-            await message.delete()
-            
+            try:
+                await message.delete()
+            except:
+                #in case two instances of wordle are launched at the same time
+                return
             #In case the person wants to stop playing
             if guess_word == "stop":
-                Wordle.active_games[user_id] = False
                 return await inter.followup.send("See you later", ephemeral=True)
                 
             #Word has to be a five letter word
@@ -204,11 +195,10 @@ class Wordle(commands.Cog):
         user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"] = 1
         upd_data(user_data[f"wordle_stats_{l_abbr}"], f"games/users/{inter.user.id}/wordle_stats_{l_abbr}")
 
-        del Wordle.active_games[user_id]
 
 #Executes before wordle
-async def before_wordle(self, ctx:commands.Context):
-    print("HIIIIIIII")
+#async def before_wordle(self, ctx:commands.Context):
+#    print("HIIIIIIII")
     
 #Puts spaces between letters of guessed word and colors
 def space(content : str):
@@ -271,38 +261,6 @@ def color_function(wordle_word:str, guess_word:str) -> str:
         colors += color
 
     return colors
-
-@tasks.loop()
-async def choose_todays_word(bot:commands.Bot) -> None:
-    #user_data = await self.get_data_wordle(inter)
-    w_data = get_words()
-    wordle_list_en = w_data["wordle_list_en"]
-    wordle_list_fr = w_data["wordle_list_fr"]
-
-    now = get_belgian_time()
-    tomorrow = now + dt.timedelta(days=1)
-
-    date = dt.datetime(tomorrow.year, tomorrow.month, tomorrow.day)
-
-    sleep = (date - now).total_seconds()
-
-    wordle_word_en = random.choice(wordle_list_en)
-    wordle_word_fr = random.choice(wordle_list_fr)
-
-    await asyncio.sleep(sleep)
-
-    Wordle.active_games={}
-
-    upd_data(wordle_word_en, "games/todays_word_en")
-    upd_data(wordle_word_fr, "games/todays_word_fr")
-
-    for user_id in get_data("games/users").keys():
-        user_data = get_data(f"games/users/{user_id}")
-        user_data["wordle_en"] = {}
-        user_data["wordle_fr"] = {}
-        user_data["wordle_stats_en"]["todays_w_results_shown"] = 0
-        user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
-        upd_data(user_data, f"games/users/{user_id}")
 
 async def setup(bot:commands.Bot):
     wordle_obj = Wordle(bot)

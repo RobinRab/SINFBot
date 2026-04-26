@@ -383,7 +383,8 @@ def new_user() -> UserAccount:
         "villagers" : [],
         "has_got_daily_traveler" : False, 
 		"free_sunday_roll" : 0, 
-		"effects" : ["never_played"]
+		"effects" : ["never_played"],
+		"lotto_guess" : -1
 }
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
