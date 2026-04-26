@@ -524,8 +524,8 @@ class GamblingHelper:
 		E.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1219558860516364302/1497938622018486373/lotto-2.png?ex=69ef578d&is=69ee060d&hm=950c4d2bf75c0b50ce7073fbf5f7bd7ddc5181abf4b1bfb7af56ebc09e414310&")
 
 		#Checks the validity of the guess
-		if guess<1 or guess>100:
-			E.description = f"{inter.user.mention}, your guess must be between 1 and 100"
+		if guess<1 or guess>15:
+			E.description = f"{inter.user.mention}, your guess must be between 1 and 15"
 			E.color = discord.Color.red()
 			return await inter.followup.send(embed=E, ephemeral=True)
 		

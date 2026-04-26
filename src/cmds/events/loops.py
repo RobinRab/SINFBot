@@ -105,7 +105,7 @@ class Loops(commands.Cog):
 	async def lotto_results(self) -> None:
 		channel = self.bot.get_channel(BOT_CHANNEL_ID)
 		# Chooses the correct guess for the lotto
-		correct_guess : int = random.randint(1, 100)
+		correct_guess : int = random.randint(1, 15)
 		users = get_data("games/users")
 		winner : str = ""
 		E = discord.Embed()
