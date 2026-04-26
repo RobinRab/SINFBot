@@ -521,6 +521,7 @@ class GamblingHelper:
 			url = inter.user.avatar.url
 		
 		E.set_author(name=inter.user.display_name, url = await GetLogLink(self.bot, url))
+		E.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1219558860516364302/1497938622018486373/lotto-2.png?ex=69ef578d&is=69ee060d&hm=950c4d2bf75c0b50ce7073fbf5f7bd7ddc5181abf4b1bfb7af56ebc09e414310&")
 
 		#Checks the validity of the guess
 		if guess<1 or guess>100:

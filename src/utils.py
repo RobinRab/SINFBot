@@ -225,8 +225,7 @@ async def embed_roulette(bot, inter : discord.Interaction, E : discord.Embed):
 	E.title = "Roulette"
 	E.color = discord.Color.purple()
 	E.set_footer(text="Roulette by Scylla and Ceisal")
-	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/1090314687620583467/1480486031676538920/Roulette.png?ex=69c4f190&is=69c3a010&hm=cfe288daeaa72cef696d4a5d950919b12543428cbb967c60c8b54995af9c476b&")
-	
+	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/1090314687620583467/1497886878081224734/Roulette_bot.png?ex=69ef275d&is=69edd5dd&hm=f78d2ca10f3e65af9b70e8ee30f479447be5093832a024ab3e1b177f6ec21dbd&")	
 	E.color = discord.Color.purple()
 
 	return E

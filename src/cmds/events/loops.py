@@ -109,8 +109,8 @@ class Loops(commands.Cog):
 		users = get_data("games/users")
 		winner : str = ""
 		E = discord.Embed()
-		E.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1219558860516364302/1497741853024325682/lotto.png?ex=69eea04c&is=69ed4ecc&hm=d20e882a23069218a3fe55a10dd8c39f6d4cef0a6e1413d07a36969d743a64ff&")
-
+		E.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1219558860516364302/1497938622018486373/lotto-2.png?ex=69ef578d&is=69ee060d&hm=950c4d2bf75c0b50ce7073fbf5f7bd7ddc5181abf4b1bfb7af56ebc09e414310&")
+		E.title = "Lotto day! :sparkles:"
 		# Check if there is a winner 
 		for user in users:
 			if get_data(f"games/users/{user}/lotto_guess") == correct_guess:
@@ -119,7 +119,7 @@ class Loops(commands.Cog):
 		# No winner
 		if len(winner) == 0:
 			E.color = discord.Color.red()
-			E.description = f"Nobody won this week! The correct answer was {correct_guess}\n\nA new lotto will be held next sunday, don't forget to guess! The robber total is now 0"
+			E.description = f"Nobody won this week! The correct answer was {correct_guess}\n\nA new lotto will be held next sunday, don't forget to guess! The robber total is currently {get_data('games/robber_total')} roses!"
 
 		# The winner wins the robber's money
 		else:
@@ -127,8 +127,8 @@ class Loops(commands.Cog):
 			E.description = f"The winner is <@!{winner}>! They won {get_data('games/robber_total')} roses. Congrats! The correct answer was {correct_guess}\n\nA new lotto will be held next sunday, don't forget to guess! The robber total is now 0"
 			roses = get_data(f"games/users/{winner}/roses") + get_data("games/robber_total")
 			upd_data(roses, f"games/users/{winner}/roses")
-		
-		upd_data(0, "games/robber_total")
+			upd_data(0, "games/robber_total")
+
 		for user_id in get_data("games/users").keys():
 			upd_data(-1, f"games/users/{user_id}/lotto_guess")
 		await channel.send(embed=E)
