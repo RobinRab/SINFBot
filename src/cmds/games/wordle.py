@@ -76,6 +76,7 @@ class Wordle(commands.Cog):
         guess_limit = 6
         # if "wordle_guess_reduced" in user_data["effects"]:
         #     guess_limit = 5
+        deleted_message = False
 
         if current_number_guess == 0 and not guess_limit == 5:
             await inter.response.send_message(f'''Welcome to {language} wordle!\nWrite your guess to start playing. 
@@ -119,47 +120,49 @@ class Wordle(commands.Cog):
             guess_word = simplify(message.content.lower())
             try:
                 await message.delete()
+                deleted_message = True
             except:
                 #in case two instances of wordle are launched at the same time
                 return
-            #In case the person wants to stop playing
-            if guess_word == "stop":
-                return await inter.followup.send("See you later", ephemeral=True)
+            if deleted_message:
+                deleted_message = False
+                #In case the person wants to stop playing
+                if guess_word == "stop":
+                    return await inter.followup.send("See you later", ephemeral=True)
+                    
+                #Word has to be a five letter word
+                if len(guess_word) != 5:
+                    await inter.followup.send("This is not a five letter word", ephemeral=True)
+                    continue
                 
-            #Word has to be a five letter word
-            if len(guess_word) != 5:
-                await inter.followup.send("This is not a five letter word", ephemeral=True)
-                continue
-            
-            #Word not int the list
-            elif guess_word not in guess_list and guess_word != wordle_word: 
-                await inter.followup.send("This word is not in the list", ephemeral=True)
-                continue
+                #Word not int the list
+                elif guess_word not in guess_list and guess_word != wordle_word: 
+                    await inter.followup.send("This word is not in the list", ephemeral=True)
+                    continue
 
-            #Gets the colors corresponding to the word and print them
-            spaced_word = ""
-            for letter in guess_word.upper():
-                spaced_word += f"{letter:^4}"
+                #Gets the colors corresponding to the word and print them
+                spaced_word = ""
+                for letter in guess_word.upper():
+                    spaced_word += f"{letter:^4}"
 
-            colors = color_function(wordle_word, guess_word)
-            already_guessed = "# " + spaced_word + "\n" + space(colors)+"\n"
+                colors = color_function(wordle_word, guess_word)
+                already_guessed = "# " + spaced_word + "\n" + space(colors)+"\n"
 
-            await inter.followup.send(f"{already_guessed}", ephemeral=True)
-            
-            user_data[current_w][f"{current_number_guess}{guess_word}"]=colors
+                await inter.followup.send(f"{already_guessed}", ephemeral=True)
+                
+                user_data[current_w][f"{current_number_guess}{guess_word}"]=colors
 
-            upd_data(user_data[current_w], f"games/users/{inter.user.id}/{current_w}")
-            current_number_guess += 1
-            
-            #The users wins
-            if wordle_word == guess_word:
+                upd_data(user_data[current_w], f"games/users/{inter.user.id}/{current_w}")
+                current_number_guess += 1
+                
+                #The users wins
+                if wordle_word == guess_word:
+                    has_won = True
+                    todays_colors = ""
+                    for color in user_data[current_w].values():
+                        todays_colors += color + "\n"
 
-                has_won = True
-                todays_colors = ""
-                for color in user_data[current_w].values():
-                    todays_colors += color + "\n"
-
-                break
+                    break
 
         if has_won:
             #Updates the roses of the user
