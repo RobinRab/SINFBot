@@ -12,24 +12,35 @@ from settings import BOT_CHANNEL_ID
 
 
 def reset_wordle_choice() -> None:
-    #user_data = await self.get_data_wordle(inter)
-    w_data = get_words()
-    wordle_list_en = w_data["wordle_list_en"]
-    wordle_list_fr = w_data["wordle_list_fr"]
+	#user_data = await self.get_data_wordle(inter)
+	w_data = get_words()
+	wordle_list_en = w_data["wordle_list_en"]
+	wordle_list_fr = w_data["wordle_list_fr"]
+	wordle_list_ge = w_data["wordle_list_ge"]
+	wordle_list_sp = w_data["wordle_list_sp"]
+	wordle_word_en = random.choice(wordle_list_en)
+	wordle_word_fr = random.choice(wordle_list_fr)
+	wordle_word_ge = random.choice(wordle_list_ge)
+	wordle_word_sp = random.choice(wordle_list_sp)
 
-    wordle_word_en = random.choice(wordle_list_en)
-    wordle_word_fr = random.choice(wordle_list_fr)
+	upd_data(wordle_word_en, "games/todays_word_en")
+	upd_data(wordle_word_fr, "games/todays_word_fr")
+	upd_data(wordle_word_ge, "games/todays_word_ge")
+	upd_data(wordle_word_sp, "games/todays_word_sp")
 
-    upd_data(wordle_word_en, "games/todays_word_en")
-    upd_data(wordle_word_fr, "games/todays_word_fr")
-
-    for user_id in get_data("games/users").keys():
-        user_data = get_data(f"games/users/{user_id}")
-        user_data["wordle_en"] = {}
-        user_data["wordle_fr"] = {}
-        user_data["wordle_stats_en"]["todays_w_results_shown"] = 0
-        user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
-        upd_data(user_data, f"games/users/{user_id}")
+	for user_id in get_data("games/users").keys():
+		user_data = get_data(f"games/users/{user_id}")
+		user_data["wordle_en"] = {}
+		user_data["wordle_fr"] = {}
+		user_data["wordle_ge"] = {}
+		user_data["wordle_sp"] = {}
+		user_data["wordle_stats_en"]["todays_w_results_shown"] = 0
+		user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
+		user_data["wordle_stats_ge"]["todays_w_results_shown"] = 0
+		user_data["wordle_stats_sp"]["todays_w_results_shown"] = 0
+		if user_data["wordle_ban"] > 0:
+			user_data["wordle_ban"] -= 1
+		upd_data(user_data, f"games/users/{user_id}")
 
 def reset_daily_villagers() -> None:
 	# empty the list of the people who have stopped the meeting today
@@ -77,6 +88,7 @@ class Loops(commands.Cog):
 	async def midnight_events(self) -> None:
 		now = get_belgian_time()
 		tomorrow = now + dt.timedelta(days=1)
+		reset_wordle_choice()
 
 		date = dt.datetime(tomorrow.year, tomorrow.month, tomorrow.day)
 
