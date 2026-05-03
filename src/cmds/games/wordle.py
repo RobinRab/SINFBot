@@ -13,10 +13,6 @@ from settings import DATA_DIR, GUILD_ID
 from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, simplify, is_member, get_user_data,UserAccount #, embed_roulette
                                                                                                          #Roulette is comming 👀
 
-#Executes before wordle
-async def who(inter: discord.Interaction):
-    return inter.user.id == 627431499960156161 or inter.user.id == 411881842439094272
-
 class Wordle(commands.Cog):
     active_games = {}
 
@@ -50,6 +46,9 @@ class Wordle(commands.Cog):
         user_id = inter.user.id
         
         l_abbr = language[:2].lower()
+        bonus = False
+        if l_abbr == "sp" or l_abbr == "ge":
+            bonus = True
             
         current_w = f"wordle_{l_abbr}"
         guess_list = get_words()[f"guess_list_{l_abbr}"]
@@ -57,10 +56,6 @@ class Wordle(commands.Cog):
 
         E = discord.Embed()
         E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
-
-        if user_data["wordle_ban"] > 0:
-            await inter.response.send_message(f"You are banned from playing Wordle for {user_data['wordle_ban']} more days.", ephemeral=True)
-            return
 
         #Compute current state of the game
         if user_id in Wordle.active_games and Wordle.active_games[user_id]:
@@ -70,7 +65,7 @@ class Wordle(commands.Cog):
         try:
             result_displayed : int = user_data[f"wordle_stats_{l_abbr}"]["todays_w_results_shown"]
         except:
-            await inter.response.send_message("Connection failure, please try again", ephemeral=True)
+            return await inter.response.send_message("Connection failure, please try again", ephemeral=True)
 
         #Check if results shown have to be ephemeral or not
         if result_displayed:
@@ -189,27 +184,30 @@ class Wordle(commands.Cog):
         if has_won:
             #Updates the roses of the user
             user_data = await self.get_data_wordle(inter)
-            value = int(get_value(user_data)//2)
-            user_data["roses"] += value
-            user_data["ideas"] += 1
-            both = False
-            #Checks if user finished both English and French wordle to give the bonus idea 💡
-            if "🟩🟩🟩🟩🟩" in user_data["wordle_en"].values() and "🟩🟩🟩🟩🟩" in user_data["wordle_fr"].values() and (l_abbr == "fr" or l_abbr == "en"):
-                both = True
+            if not bonus:
+                value = int(get_value(user_data)//2)
+                user_data["roses"] += value
                 user_data["ideas"] += 1
+                both = False
+                #Checks if user finished both English and French wordle to give the bonus idea 💡
+                if "🟩🟩🟩🟩🟩" in user_data["wordle_en"].values() and "🟩🟩🟩🟩🟩" in user_data["wordle_fr"].values():
+                    both = True
+                    user_data["ideas"] += 1
 
-            #Checks if user finished both Spanish and German wordle to give the bonus idea 💡
-            if "🟩🟩🟩🟩🟩" in user_data["wordle_sp"].values() and "🟩🟩🟩🟩🟩" in user_data["wordle_ge"].values() and (l_abbr == "sp" or l_abbr == "ge"):
-                both = True
-                user_data["ideas"] += 1
-
-            upd_data(user_data, f"games/users/{inter.user.id}")
+                upd_data(user_data, f"games/users/{inter.user.id}")
 
             #Sends the has_won message
             current_number_guess = len(user_data[current_w])
             await inter.followup.send("You won!", ephemeral=True)
             E.description = f"{inter.user.mention} solved today's wordle ({language}) in {current_number_guess} guesses ! \n\n||{todays_colors}||"
-            E.add_field(name="Reward", value=f"You won {value} 🌹 {'and 2 💡' if both else 'and 1 💡'}!")
+            if not bonus:
+                E.add_field(name="Reward", value=f"You won {value} 🌹 {'and 2 💡' if both else 'and 1 💡'} !")
+            else:
+                if l_abbr == "sp":
+                    name = "Gracias"
+                else:
+                    name = "Danke"
+                E.add_field(name=name, value=f"Thank you for playing! :sparkles:")
             E.color = discord.Color.green()
             await inter.followup.send(embed = E)
         
@@ -228,30 +226,6 @@ class Wordle(commands.Cog):
         upd_data(user_data[f"wordle_stats_{l_abbr}"], f"games/users/{inter.user.id}/wordle_stats_{l_abbr}")
         # The user is not playing anymore
         del Wordle.active_games[user_id]
-
-    @app_commands.command(description="Ban someone from wordle")
-    @app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
-    @app_commands.check(who)
-    @app_commands.guild_only()
-    @app_commands.describe(user = "The user to ban", days = "Number of days to ban the user")
-    async def wordle_ban(self, inter: discord.Interaction, user : discord.Member, days : int) -> None:
-        user_id = user.id
-
-        try: 
-            user_data: UserAccount = get_data(f"games/users/{user_id}")
-        except:
-            E.description = f"{user.mention} has never played"
-            E.color = discord.Color.red()
-            return await inter.followup.send(embed=E)
-        
-        user_data["wordle_ban"] = days
-        upd_data(user_data, f"games/users/{user_id}")
-        E = discord.Embed()
-        E.set_author(name=inter.user.name, icon_url = await GetLogLink(self.bot, inter.user.display_avatar.url))
-        E.description = f"{user.mention} has been banned from playing Wordle for {days} days."
-        E.color = discord.Color.red()
-        await inter.response.send_message(embed = E)
-
 
 #Puts spaces between letters of guessed word and colors
 def space(content : str):
