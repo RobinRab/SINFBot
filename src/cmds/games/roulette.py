@@ -149,17 +149,17 @@ class Roulette:
             #negative consequences (user)
             "level_down": 2.5,   
             "tech_down": 4.0,          
-            "bank_robbery": 3.5,  
+            "bank_robbery": 3.5,
             "next_gain_/3": 4.5,
             "next_gain_/10": 2.0,
-            "chances_next_bet_/2": 5.0,
             "fail_next_traveler": 4.0,
+            "chances_next_bet_/2": 5.0,
 
             #other user consequences
-            "tech_up_other_user": 5.0, 
-            "tech_down_other_user": 4.0, 
             "choose_name_level_up": 3.0,
             "choose_name_level_down": 2.5,
+            "tech_up_other_user": 5.0, 
+            "tech_down_other_user": 4.0, 
             "next_bet_someone_else": 4.0,
             "free_roulette": 6.0,   
 
@@ -169,7 +169,6 @@ class Roulette:
             "next_bet_all": 4.0
         }
 
-        #Modify this line to make tests.
         cons = random.choices(list(consequences.keys()), list(consequences.values()))[0]
         has_been_answered = False
         url = random_avatar()
