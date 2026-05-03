@@ -381,6 +381,7 @@ def new_user() -> UserAccount:
         "achievements": [],
         "wordle_en": {},
         "wordle_fr": {},
+		"wordle_sp": {},
 		"wordle_ge": {},
         "wordle_stats_en": {
             "todays_w_results_shown": 0
@@ -388,10 +389,10 @@ def new_user() -> UserAccount:
         "wordle_stats_fr": {
             "todays_w_results_shown": 0
         },
-		"wordle_stats_ge": {
+		"wordle_stats_sp": {
             "todays_w_results_shown": 0
         },
-        "wordle_stats_sp": {
+		"wordle_stats_ge": {
             "todays_w_results_shown": 0
         },
         "villager_of_the_day": "",
