@@ -8,7 +8,6 @@ import asyncio
 import requests
 from typing import Optional
 
-import numpy as np
 import datetime as dt
 from settings import BOT_CHANNEL_ID
 from utils import log, get_data, upd_data, get_value, get_user_data, new_user, UserAccount
@@ -34,6 +33,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 	# extract the data
 	category:str = data["results"][0]["category"]
 	difficulty:str = data["results"][0]["difficulty"]
+	# Not used yet - create next traveler (roulette)
 	creator:str = ""
 	question_type:str = data["results"][0]["type"]
 	# convert html entities to normal unicode text
@@ -51,7 +51,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 	# create embed
 	E = discord.Embed(title='Traveler', description=f"**{question}**")
 	E.description = f"## **{question}**\n\n"
-	E.set_footer(text=f"{f'Category: {category} | Difficulty: {difficulty} |' }Type: {question_type}")
+	E.set_footer(text=f"Category: {category} | Difficulty: {difficulty} | Type: {question_type}")
 	E.set_thumbnail(url="https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png")
 
 	if difficulty == "easy":
@@ -72,7 +72,8 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 	# handle the correct and incorrect cases
 	async def correct(inter:discord.Interaction):
-		# check if the creator of the traveler is trying to answer the traveler
+		# check if the creator of the traveler is trying to answer the traveler 
+		# Not used yet - create next traveler (roulette)
 		if inter.user.name == creator:
 			assert inter.guild
 			await inter.followup.send("You can't answer your own traveler", ephemeral=True)
@@ -114,6 +115,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	async def incorrect(inter:discord.Interaction):
+		# Not used yet - create next traveler (roulette)
 		if inter.user.name == creator:
 			assert inter.guild
 			await inter.followup.send("You can't answer your own traveler", ephemeral=True)

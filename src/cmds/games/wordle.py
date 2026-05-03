@@ -1,16 +1,13 @@
 import discord
 from discord import app_commands
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 import csv
-import random
 import asyncio
 from typing import Literal, Dict
 
-import time
-
 from settings import DATA_DIR, GUILD_ID
-from utils import get_data, upd_data, get_value, get_belgian_time, new_user, GetLogLink, simplify, is_member, get_user_data,UserAccount #, embed_roulette
+from utils import get_data, upd_data, get_value, new_user, GetLogLink, simplify, is_member, get_user_data,UserAccount #, embed_roulette
                                                                                                          #Roulette is comming 👀
 
 class Wordle(commands.Cog):

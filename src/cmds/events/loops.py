@@ -88,7 +88,6 @@ class Loops(commands.Cog):
 	async def midnight_events(self) -> None:
 		now = get_belgian_time()
 		tomorrow = now + dt.timedelta(days=1)
-		reset_wordle_choice()
 
 		date = dt.datetime(tomorrow.year, tomorrow.month, tomorrow.day)
 
