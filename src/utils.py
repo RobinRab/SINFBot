@@ -351,11 +351,19 @@ class UserAccount(TypedDict):
 	achievements: list[str]
 	wordle_en: dict[str, str]
 	wordle_fr: dict[str, str]
-	wordle_stats_en : dict[str, int]
+	wordle_ge: dict[str, str]
+	wordle_sp: dict[str, str]
 	wordle_stats_fr : dict[str, int]
+	wordle_stats_en : dict[str, int]
+	wordle_stats_ge : dict[str, int]
+	wordle_stats_sp : dict[str, int]
 	villager_of_the_day: str
 	villagers: list[str]
 	has_got_daily_traveler : bool
+	free_sunday_roll : int
+	effects : list[str]
+	lotto_guess : int
+	wordle_ban : int
 	
 def new_user() -> UserAccount:
 	return 	{
@@ -373,10 +381,17 @@ def new_user() -> UserAccount:
         "achievements": [],
         "wordle_en": {},
         "wordle_fr": {},
+		"wordle_ge": {},
         "wordle_stats_en": {
             "todays_w_results_shown": 0
         },
         "wordle_stats_fr": {
+            "todays_w_results_shown": 0
+        },
+		"wordle_stats_ge": {
+            "todays_w_results_shown": 0
+        },
+        "wordle_stats_sp": {
             "todays_w_results_shown": 0
         },
         "villager_of_the_day": "",
@@ -384,7 +399,8 @@ def new_user() -> UserAccount:
         "has_got_daily_traveler" : False, 
 		"free_sunday_roll" : 0, 
 		"effects" : ["never_played"],
-		"lotto_guess" : -1
+		"lotto_guess" : -1,
+		"wordle_ban" : 0
 }
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
@@ -455,6 +471,7 @@ def new_update() -> discord.Embed:
 	E.set_author(name="SINF illégal family bot")
 	E.description = "- Roulette ! (At last :pray:)\n"
 	E.description += "- Wordle debug\n"
+	E.description += "- Wordle Spanish and German\n"
 	E.description += "- Sunday Lotto \n"
 
 	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
