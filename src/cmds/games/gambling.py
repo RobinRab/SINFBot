@@ -43,7 +43,7 @@ class Gambling(commands.Cog):
 	@app_commands.command(description="Try to win the robber's money")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
 	@app_commands.guild_only()
-	@app_commands.describe(guess="Your guess for the lotto, between 1 and 100")
+	@app_commands.describe(guess="Your guess for the lotto, between 1 and 15")
 	async def lotto(self, inter:discord.Interaction, guess:int):
 		GH = GamblingHelper(self.bot)
 		await GH.lotto(inter, guess)

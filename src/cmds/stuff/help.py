@@ -381,9 +381,7 @@ class Help(commands.Cog):
 					E.add_field(name="**Cooldown**", value="```1s / user```")
 				elif query == "roulette":
 					#command_id of collect is 1203404492549267493
-					collect : discord.app_commands.AppCommand = await self.bot.tree.fetch_command(1203404492549267493, guild=inter.user.guild)
-					#command_id of roulette is 1219724290518286456
-					roulette : discord.app_commands.AppCommand = await self.bot.tree.fetch_command(1219724290518286456, guild=inter.user.guild)
+					collect, roulette = await get_app_commands(["collect", "roulette"])
 
 					E_home = E
 					E_home.description = "Bring **chaos** to the economy and to your friends ✨.\n"\

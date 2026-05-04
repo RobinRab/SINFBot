@@ -78,7 +78,7 @@ class Roulette:
             upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 
             E.colour = discord.Colour.gold()
-            E.description = f"Welcome to the Roulette, {inter.user.mention}!\n As it's your first time, you get a *free spin! \n\nYou can use the `help` command to know more about this feature."
+            E.description = f"Welcome to the Roulette, {inter.user.mention}!\n As it's your first time, you get a *free spin*! \n\nYou can use the `help` command to know more about this feature."
 
             view = FreeSpin()
             msg = await inter.followup.send(embed=E, view=view)
