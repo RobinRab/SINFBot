@@ -162,7 +162,9 @@ async def traveler(*, bot_channel: discord.TextChannel):
 				total_stolen += user_data["roses"]
 				remaing_to_steal = double_collect_value - user_data["roses"]
 				double_collect_value -= user_data["roses"]
-				user_data["roses"] = -1
+				# only set at -1 if 0, if there is debt we keep it
+				if user_data["roses"] == 0:
+					user_data["roses"] = -1
 
 				# Then, take from the bank
 				if user_data["bank"]["roses"] >= remaing_to_steal * 2:
@@ -170,7 +172,9 @@ async def traveler(*, bot_channel: discord.TextChannel):
 					total_stolen += remaing_to_steal * 2
 				else:
 					total_stolen += user_data["bank"]["roses"]
-					user_data["bank"]["roses"] = -1
+					# only set at -1 if 0, if there is debt we keep it
+					if user_data["bank"]["roses"] == 0:
+						user_data["bank"]["roses"] = -1
 
 			upd_data(user_data, f"games/users/{inter.user.id}")
 
