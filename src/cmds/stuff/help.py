@@ -380,12 +380,14 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
 				elif query == "roulette":
+					#command_id of collect is 1203404492549267493
+					collect, roulette = await get_app_commands(["collect", "roulette"])
 
 					E_home = E
 					E_home.description = "Bring **chaos** to the economy and to your friends ✨.\n"\
 					"Choose a `user` and take a spin! A random effect will be applied to one of you,"\
 					" either immediately or later. You will see it in time ...\n\n"\
-					f"The roulette costs 1 candy 🍬, but every Sunday you get a free spin !"
+					f"The {roulette.mention} costs 1 candy 🍬, but every Sunday you get a free spin !"
 
 					E_1 = discord.Embed(title = "Positive consequences (user)")
 					E_1.add_field(name = "Level up", value = "```2.5%```")
@@ -394,7 +396,7 @@ class Help(commands.Cog):
 					E_1.add_field(name = "Multiplies your next gain by 3", value = "```5%```")
 					E_1.add_field(name = "Multiplies your next gain by 10", value = "```2.5%```")
 					E_1.add_field(name = "Multiplies your next collect by 3", value = "```6%```")
-					E_1.add_field(name = f"Flips the value of your collect after your next collect\*", value = "```6%```")
+					E_1.add_field(name = f"Flips the value of your collect after your next {collect.mention}\*", value = "```6%```")
 					E_1.add_field(name = "Doubles the chances of winning of your next bet", value = "```5%```")
 					E_1.set_footer(text="* No amount of roses is deduced from your account")
 
