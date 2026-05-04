@@ -1,4 +1,5 @@
 import discord 
+from discord import app_commands
 from discord.ext import commands, tasks
 
 import html
@@ -7,8 +8,9 @@ import asyncio
 import requests
 from typing import Optional
 
+import datetime as dt
 from settings import BOT_CHANNEL_ID
-from utils import log, get_data, upd_data, get_value, new_user, UserAccount
+from utils import log, get_data, upd_data, get_value, get_user_data, new_user, UserAccount
 
 class Games(commands.Cog):
 	def __init__(self,bot):
@@ -31,13 +33,13 @@ async def traveler(*, bot_channel: discord.TextChannel):
 	# extract the data
 	category:str = data["results"][0]["category"]
 	difficulty:str = data["results"][0]["difficulty"]
-
+	# Not used yet - create next traveler (roulette)
+	creator:str = ""
 	question_type:str = data["results"][0]["type"]
 	# convert html entities to normal unicode text
 	question:str = html.unescape(data["results"][0]["question"])
 	correct_answer:str = html.unescape(data["results"][0]["correct_answer"])
 	incorrect_answers:list = list(map(html.unescape, data["results"][0]["incorrect_answers"]))
-
 	# create a list of answers and randomize them
 	answers = []
 	answers.append(correct_answer)
@@ -58,16 +60,34 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		E.color = discord.Color.gold()
 	elif difficulty == "hard":
 		E.color = discord.Color.red()
+	else:
+		E.color = discord.Color.purple()
 	
 	# check if it will be a traveler or a robber : traveler = 1 and robber = 0
-	traveler = random.getrandbits(1)
-	if traveler:
+	is_traveler = random.getrandbits(1)
+	if is_traveler:
 		photo = "https://media.discordapp.net/attachments/709313685226782751/1127893104402386966/traveler.png"
 	else:
 		photo = "https://cdn.discordapp.com/attachments/709313685226782751/1205143937052839946/bandit.png"
 
 	# handle the correct and incorrect cases
 	async def correct(inter:discord.Interaction):
+		# check if the creator of the traveler is trying to answer the traveler 
+		# Not used yet - create next traveler (roulette)
+		if inter.user.name == creator:
+			assert inter.guild
+			await inter.followup.send("You can't answer your own traveler", ephemeral=True)
+			user_data = get_user_data(inter.user.id)
+			user_data["ideas"] -= 10
+			try :
+				member = inter.guild.get_member(inter.user.id)
+				assert member
+				await member.timeout(dt.timedelta(minutes=0.1), reason="haha mskn")
+			except : 
+				user_data["ideas"] -= 10
+			upd_data(user_data, f"games/users/{inter.user.id}")
+			return False
+		
 		E = discord.Embed(title="Correct!", color=discord.Color.green())
 		E.set_thumbnail(url=photo)
 
@@ -76,7 +96,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
 			user_data = new_user()
-		if traveler:
+		if is_traveler:
 			value = get_value(user_data) 
 		else:
 			value = int(get_value(user_data)*1.5)
@@ -87,7 +107,7 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
-		if traveler:
+		if is_traveler:
 			E.description = f"You earned **{value}🌹** and **5💡**"
 		else:
 			E.description = f"The robber is impressed by your knowledge! You earned **{value}🌹** and **5💡**"
@@ -95,6 +115,20 @@ async def traveler(*, bot_channel: discord.TextChannel):
 		await inter.followup.send(inter.user.mention, embed=E)
 
 	async def incorrect(inter:discord.Interaction):
+		# Not used yet - create next traveler (roulette)
+		if inter.user.name == creator:
+			assert inter.guild
+			await inter.followup.send("You can't answer your own traveler", ephemeral=True)
+			user_data = get_user_data(inter.user.id)
+			user_data["ideas"] -= 10
+			try :
+				member = inter.guild.get_member(inter.user.id)
+				assert member
+				await member.timeout(dt.timedelta(minutes=0.1), reason="haha mskn")
+			except : 
+				user_data["ideas"] -= 10
+			upd_data(user_data, f"games/users/{inter.user.id}")
+			return False
 		E = discord.Embed(title="Incorrect!", color=discord.Color.red())
 		E.set_thumbnail(url=photo)
 
@@ -106,14 +140,15 @@ async def traveler(*, bot_channel: discord.TextChannel):
 
 		E.description = f"The correct answer was **{correct_answer}**\n"
 		double_collect_value = 0
-		if traveler:
+		if is_traveler:
 			value = 50
 			E.description += "The traveler left **50🌹** by accident on the ground" 
 		else:
+
 			double_collect_value = get_value(user_data)*2
 			value = get_value(user_data)*(-2)
 
-		if traveler:
+		if is_traveler:
 			user_data["roses"] += value
 			upd_data(user_data, f"games/users/{inter.user.id}")
 		else:
@@ -164,20 +199,41 @@ async def traveler(*, bot_channel: discord.TextChannel):
 				return await inter.response.send_message(inter.user.mention, embed=E, ephemeral=True)
 
 			await inter.response.defer()
+
+			user_data = get_user_data(inter.user.id)
+			fail_next = False
+			
 			if question_type == "boolean":
 				if correct_answer.upper() == self.label:
-					await correct(inter)
+					#Roulette effect : if the user answers correctly, he will lose anyway
+					if "fail_next_traveler" in user_data["effects"] and correct_answer.upper() == self.label:
+						user_data["effects"].remove("fail_next_traveler")
+						upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+						await incorrect(inter)
+						fail_next = True
+					else:
+						await correct(inter) 
 				else:
 					await incorrect(inter)
 
 			else:
 				if str(correct_answer_index+1) == self.label:
-					await correct(inter)
+					#Roulette effect : if the user answers correctly, he will lose anyway
+					if "fail_next_traveler" in user_data["effects"]:
+						user_data["effects"].remove("fail_next_traveler")
+						upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+						await incorrect(inter)
+						fail_next = True
+					else:
+						await correct(inter) 
 				else:
 					await incorrect(inter)
-
-			if isinstance(self.parent_view.message, discord.Message):
-				await self.parent_view.message.delete()
+			if fail_next:
+				await inter.followup.send("Because of the roulette, you had 100% chances of losing this one... ", ephemeral=True)
+			if difficulty != "Random" or inter.user.name != creator:
+				if isinstance(self.parent_view.message, discord.Message):
+					await self.parent_view.message.delete()
+			print("stopping")
 			self.parent_view.stop()
 
 	class B_choices(discord.ui.View):

@@ -1,10 +1,11 @@
 import discord
-from discord import app_commands
+from discord import app_commands, ui
 from discord.ext import commands
+import asyncio
 
 from typing import Optional, Callable
 
-from settings import GUILD_ID
+# from settings import GUILD_ID
 from utils import is_member, is_cutie, is_owner, GetLogLink
 
 class MissingCommand(Exception):pass
@@ -18,7 +19,7 @@ bot_commands = {
 	"Member Fun"      : [is_member, "/confession", "/apoll"],
 	"Fun"             : [None, "/poll", "!/ping", "/wordle"],
 	"Economy"         : [None, "/collect", "/balance", "/levelup", "/tech", "/bank", "/trade", "Traveler"],
-	"Gambling"        : [None, "/roll", "/flip", "/ladder"],
+	"Gambling"        : [None, "/roll", "/flip", "/ladder", "/roulette", "/lotto"],
 	"Multiplayer"     : [None, "/shifumi", "/connect4"],
 	"Animal Crossing" : [None, "/stalk", "/meet", "/village"]
 }
@@ -33,7 +34,8 @@ class Help(commands.Cog):
 	@app_commands.guild_only()
 	async def help(self, inter:discord.Interaction, query:Optional[str]):
 		async def get_app_commands(names:list[str]) -> list[app_commands.AppCommand]:
-			guild = await self.bot.fetch_guild(GUILD_ID)
+			# guild = await self.bot.fetch_guild(GUILD_ID)
+			guild = inter.user.guild
 			guild_commands = await self.bot.tree.fetch_commands(guild=guild)
 			found_commands = []
 
@@ -279,8 +281,8 @@ class Help(commands.Cog):
 					E.add_field (name="How to play",  value="```You have 3 minutes to write to your guess.\n\
 																To pause the game, write *stop*. Recall the function to *restart*.```")
 					E.add_field (name = "**Meaning of colors**", value = "```🟩 : The letter in in the right place\n\
-																			🟨 : The letter is in the word but not in the right place\n\
-																			🟥 : The letter is not in the word```")
+																			 🟨 : The letter is in the word but not in the right place\n\
+																			 🟥 : The letter is not in the word```")
 
 				# economy commands
 				elif query == "collect":
@@ -377,6 +379,97 @@ class Help(commands.Cog):
 					E.description = "**Land on a step of the ladder**\nEach step has equal chances"
 					E.add_field(name="**Example**", value="```/ladder```")
 					E.add_field(name="**Cooldown**", value="```1s / user```")
+				elif query == "roulette":
+					#command_id of collect is 1203404492549267493
+					collect : discord.app_commands.AppCommand = await self.bot.tree.fetch_command(1203404492549267493, guild=inter.user.guild)
+					#command_id of roulette is 1219724290518286456
+					roulette : discord.app_commands.AppCommand = await self.bot.tree.fetch_command(1219724290518286456, guild=inter.user.guild)
+
+					E_home = E
+					E_home.description = "Bring **chaos** to the economy and to your friends ✨.\n"\
+					"Choose a `user` and take a spin! A random effect will be applied to one of you,"\
+					" either immediately or later. You will see it in time ...\n\n"\
+					f"The {roulette.mention} costs 1 candy 🍬, but every Sunday you get a free spin !"
+
+					E_1 = discord.Embed(title = "Positive consequences (user)")
+					E_1.add_field(name = "Level up", value = "```2.5%```")
+					E_1.add_field(name = "Tech up", value = "```4%```")
+					E_1.add_field(name = "Doubles your bank", value = "```2.5%```")
+					E_1.add_field(name = "Multiplies your next gain by 3", value = "```5%```")
+					E_1.add_field(name = "Multiplies your next gain by 10", value = "```2.5%```")
+					E_1.add_field(name = "Multiplies your next collect by 3", value = "```6%```")
+					E_1.add_field(name = f"Flips the value of your collect after your next {collect.mention}\*", value = "```6%```")
+					E_1.add_field(name = "Doubles the chances of winning of your next bet", value = "```5%```")
+					E_1.set_footer(text="* No amount of roses is deduced from your account")
+
+					E_2 = discord.Embed(title = "Negative consequences (user)")
+					E_2.add_field(name = "Level down", value = "```2.5%```")
+					E_2.add_field(name = "Tech down", value = "```4%```")
+					E_2.add_field(name = "Your bank get robbed", value = "```3.5%```")
+					E_2.add_field(name = "Divides your next gain by 3", value = "```4.5%```")
+					E_2.add_field(name = "Divides your next gain by 10", value = "```2%```")
+					E_2.add_field(name = "Fails your next correctly answered traveler", value = "```4%```")
+					E_2.add_field(name = "Chances of winning divided by 2 on your next bet", value = "```5%```")
+
+					E_3 = discord.Embed(title = "Consequences (other user)")
+					E_3.add_field(name = "Level up", value = "```3%```")
+					E_3.add_field(name = "Level down", value = "```2.5%```")
+					E_3.add_field(name = "Tech up", value = "```5%```")
+					E_3.add_field(name = "Tech down", value = "```4%```")
+					E_3.add_field(name = "Next bet all", value = "```4%```")
+					E_3.add_field(name = "Free roulette", value = "```6%```")
+
+					E_4 = discord.Embed(title = "Miscellaneous")
+					E_4.add_field(name = "Traveler spawn", value = "```6.5%```")
+					E_4.add_field(name = "Changes bet method (user)", value = "```6%```")
+					E_4.add_field(name = "Next bet all (user)", value = "```4%```")
+
+					class Roulette_help(discord.ui.View):
+						def __init__(self, timeout=60):
+							super().__init__(timeout=timeout)
+							self.message : Optional[discord.Message]
+
+						async def interaction_check(self, inter2: discord.Interaction):
+							return inter2.user.id == inter.user.id
+
+						@discord.ui.button(label="🏠",style=discord.ButtonStyle.blurple)
+						async def page_home(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_home)
+
+						@discord.ui.button(label="1",style=discord.ButtonStyle.blurple)
+						async def page_1(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_1)
+
+						@discord.ui.button(label="2",style=discord.ButtonStyle.blurple)
+						async def page_2(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_2)
+
+						@discord.ui.button(label="3",style=discord.ButtonStyle.blurple)
+						async def page_3(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_3)
+
+						@discord.ui.button(label="4",style=discord.ButtonStyle.blurple)
+						async def page_4(self, inter2: discord.Interaction, _: discord.ui.Button):
+							await inter2.response.edit_message(embed=E_4)
+
+						async def on_timeout(self):
+							for item in self.children:
+								if isinstance(item, discord.ui.Button):
+									item.disabled = True
+
+							if isinstance(self.message, discord.Message):
+								await self.message.edit(view=self)
+
+					roulette_help = Roulette_help()
+					roulette_help.message = await inter.followup.send(embed=E_home, view=roulette_help)
+					return
+
+				elif query == "lotto":
+					E.description = "**Try to win the robber's money**\nEach week, you can guess a number between 1 and 15. "\
+					"You can change your guess as much as you want, but you cannot choose a number already picked by someone else. "\
+					"\nEvery **Sunday at midnight**, a lotto is held. "\
+					"\n\nIf you guess the correct number, all the robber's roses 🌹 are yours!" \
+					"\nIf nobody finds the correct answer, they are added to next week's prize :bubble_tea: "
 
 				# multiplayer gambling commands
 				elif query == "shifumi":
@@ -400,7 +493,7 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/meet```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 				elif query == "village":
-					E.description = "**Displays your villagers or someon's villagers**\n"
+					E.description = "**Displays your villagers or someone's villagers**\n"
 					E.add_field(name="**Example**", value="```/village (user)```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 
@@ -467,10 +560,14 @@ class Help(commands.Cog):
 		- A good answer will give you 5💡 ideas and the value of a **/collect**
 		- The traveller randomly spawns withing 2 to 10 hours
 		- The traveller will leave after 1h if no one answered his question
+		### Wordle
+		You can play wordle every day to win 🌹 roses and 💡 ideas! 
+
 		### Gambling
 		You can gamble your 🌹 roses with **/roll**, **/flip** and **/ladder**
 		Each earning is specific to the game
 		Though all gambling games have an average of return of 90% of the bet
+		You can use **/roulette** to be affected a mysterious effect...
 		### Bank
 		You can deposit your ressources to your bank account with **/bank deposit**
 		This is used to protect your ressources from gambling
@@ -481,9 +578,9 @@ class Help(commands.Cog):
 		your base value (used for **/collect** and the traveller) is calculated like this: ```py
 		int((120 * (1 + (level/7)))*(1 + (len(achievements)/100)))``` The level up price is calculated like this: (level being the target)```py
 		if level < 10:
-		    price = int((level/2.5) * 1000)
+			price = int((level/2.5) * 1000)
 		else:
-		    price = int((((level**2)/40) + 1.5) * 1000)```
+			price = int((((level**2)/40) + 1.5) * 1000)```
 		""".replace("\t", "")
 
 		await inter.response.send_message(embed=E)

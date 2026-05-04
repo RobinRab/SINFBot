@@ -212,6 +212,23 @@ def is_owner(inter: commands.Context | discord.Interaction ) -> bool:
 	
 		return inter.user.id == OWNER_ID
 
+async def embed_roulette(bot, inter : discord.Interaction, E : discord.Embed):
+	url = random_avatar()
+	if inter.user.avatar:
+		url = inter.user.avatar.url
+    
+    # On utilise le bot passé en argument
+	log_link = await GetLogLink(bot, url)
+	E = discord.Embed(title="Roulette")
+	E.set_author(name=inter.user.display_name, url=log_link)
+    
+	E.title = "Roulette"
+	E.color = discord.Color.purple()
+	E.set_footer(text="Roulette by Scylla and Ceisal")
+	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/1090314687620583467/1497886878081224734/Roulette_bot.png?ex=69ef275d&is=69edd5dd&hm=f78d2ca10f3e65af9b70e8ee30f479447be5093832a024ab3e1b177f6ec21dbd&")	
+	E.color = discord.Color.purple()
+
+	return E
 
 def is_summer_time(date:dt.datetime) -> bool:
 	date = dt.datetime.fromtimestamp(date.timestamp())
@@ -232,6 +249,13 @@ def get_belgian_time() -> dt.datetime:
 	belgium_time = utc_time + belgium_offset
 
 	return belgium_time
+
+def get_user_data(user_id:int) -> dict:
+	try: 
+		user_data : dict = get_data(f"games/users/{user_id}")
+	except :
+		user_data = new_user()
+	return user_data
 
 
 def log(type:str, txt:str) -> None:
@@ -327,11 +351,19 @@ class UserAccount(TypedDict):
 	achievements: list[str]
 	wordle_en: dict[str, str]
 	wordle_fr: dict[str, str]
-	wordle_stats_en : dict[str, int]
+	wordle_ge: dict[str, str]
+	wordle_sp: dict[str, str]
 	wordle_stats_fr : dict[str, int]
+	wordle_stats_en : dict[str, int]
+	wordle_stats_ge : dict[str, int]
+	wordle_stats_sp : dict[str, int]
 	villager_of_the_day: str
 	villagers: list[str]
 	has_got_daily_traveler : bool
+	free_sunday_roll : int
+	effects : list[str]
+	lotto_guess : int
+	wordle_ban : int
 	
 def new_user() -> UserAccount:
 	return 	{
@@ -349,15 +381,27 @@ def new_user() -> UserAccount:
         "achievements": [],
         "wordle_en": {},
         "wordle_fr": {},
+		"wordle_sp": {},
+		"wordle_ge": {},
         "wordle_stats_en": {
             "todays_w_results_shown": 0
         },
         "wordle_stats_fr": {
             "todays_w_results_shown": 0
         },
+		"wordle_stats_sp": {
+            "todays_w_results_shown": 0
+        },
+		"wordle_stats_ge": {
+            "todays_w_results_shown": 0
+        },
         "villager_of_the_day": "",
         "villagers" : [],
-        "has_got_daily_traveler" : False
+        "has_got_daily_traveler" : False, 
+		"free_sunday_roll" : 0, 
+		"effects" : ["never_played"],
+		"lotto_guess" : -1,
+		"wordle_ban" : 0
 }
 
 def get_amount(cash: int, txt: str) -> Optional[int]:
@@ -368,18 +412,21 @@ def get_amount(cash: int, txt: str) -> Optional[int]:
 	- A percentage (e.g. 50%) to bet a percentage of the cash
 	only used for the bank
 	"""
+
 	txt = txt.lower().replace(" ", "")
 	# Check if txt is a valid number
 	try: 
 		return int(float(txt))
 	except ValueError:
 		pass
+	
 
-	if txt == "all":
-		return cash
+	#if txt == "all":
+	#	return cash
 
 	# Check if txt is a valid percentage
-	elif re.match(r'^([1-9]|[1-9]\d|100)%$', txt):
+	#refaire elif si besoin
+	if re.match(r'^([1-9]|[1-9]\d|100)%$', txt):
 		percentage = int(txt[:-1]) / 100
 		return int(cash * percentage)
 
@@ -423,10 +470,12 @@ def new_update() -> discord.Embed:
 	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
 	E.title = "New update !"
 	E.set_author(name="SINF illégal family bot")
-	E.description = "- Gamble autocomplete\n"
-	E.description += "- Better roll information\n"
+	E.description = "- Roulette ! (At last :pray:)\n"
+	E.description += "- Wordle debug\n"
+	E.description += "- Wordle Spanish and German\n"
+	E.description += "- Sunday Lotto \n"
 
 	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
-	E.add_field(name="Authors", value="<@!346945067975704577>")
+	E.add_field(name="Authors", value="<@!627431499960156161> and <@!411881842439094272>")
 
 	return E

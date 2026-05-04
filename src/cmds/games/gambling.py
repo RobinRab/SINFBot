@@ -1,18 +1,20 @@
 import discord 
-from discord import app_commands
-from discord.ext import commands
+from discord import app_commands, ui
+from discord.ext import commands, tasks
 
 import random
 import datetime as dt
 from typing import Literal
+import asyncio
 import re
 
-from utils import UserAccount, get_data, upd_data, GetLogLink, new_user
+from utils import UserAccount, get_data, random_avatar, upd_data, GetLogLink, new_user, get_amount, embed_roulette
 # new user only used to fake an account and avoid using a None type check
 
 class Gambling(commands.Cog):
 	def __init__(self,bot):
 		self.bot : commands.Bot = bot
+		self.GH = GamblingHelper(bot)
 
 	@app_commands.command(description="Rolls a dice")
 	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
@@ -37,6 +39,14 @@ class Gambling(commands.Cog):
 	async def ladder(self, inter:discord.Interaction, bet:str):
 		GH = GamblingHelper(self.bot)
 		await GH.ladder(inter, bet)
+	
+	@app_commands.command(description="Try to win the robber's money")
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	@app_commands.describe(guess="Your guess for the lotto, between 1 and 100")
+	async def lotto(self, inter:discord.Interaction, guess:int):
+		GH = GamblingHelper(self.bot)
+		await GH.lotto(inter, guess)
 
 	@roll.autocomplete("bet")
 	@flip.autocomplete("bet")
@@ -88,10 +98,10 @@ class Gambling(commands.Cog):
 
 		return [app_commands.Choice(name=opt, value=opt) for opt in options]
 
-
-class GamblingHelper():
-	def __init__(self, bot:commands.Bot):
+class GamblingHelper:
+	def __init__(self, bot:commands.Bot, already_all:bool=False):
 		self.bot : commands.Bot = bot
+		self.already_all = already_all
 
 	async def is_allowed_to_bet(self, inter:discord.Interaction, bet:str) -> tuple[int, discord.Embed, UserAccount]:
 		E = discord.Embed()
@@ -101,7 +111,7 @@ class GamblingHelper():
 		try :
 			user_data : UserAccount = get_data(f"games/users/{inter.user.id}")
 		except :
-			E.description = f"{inter.user.mention}, You don't have any 🌹, get some using **/collect**"
+			E.description = f"{inter.user.mention}, You don't have an account yet, get one using **/collect**"
 			E.color = discord.Color.red()
 			return 0, E, new_user()
 		
@@ -109,7 +119,18 @@ class GamblingHelper():
 		if '🌹' not in bet:
 			bet += "🌹"
 
+        #-------------- Merge conflict --------------
+		if bet==f"all ({user_data['roses']}🌹)":
+			self.already_all = True
+		if "next_bet_all" in user_data["effects"] and not self.already_all:
+			bet=f"all ({user_data['roses']}🌹)"
+
+
+
+		# translate the user request into a number
+		amount = get_amount(user_data["roses"], bet)
 		amount_match = re.search(r"(\d+)🌹", bet)
+
 		if amount_match:
 			amount = int(amount_match.group(1))
 		else: 
@@ -130,26 +151,147 @@ class GamblingHelper():
 
 		return amount, E, user_data
 
+	async def check(self, inter:discord.Interaction) -> tuple[discord.Embed, dict]:
+		E = discord.Embed()
+		E.color = discord.Color.green()
+		E.set_author(name=inter.user.name, icon_url=await GetLogLink(self.bot, inter.user.display_avatar.url))
+
+		try :
+			user_data : dict = get_data(f"games/users/{inter.user.id}")
+		except :
+			E.description = f"{inter.user.mention}, You don't have an account yet"
+			E.color = discord.Color.red()
+			return E, {}
+
+		return E, user_data
+
+	async def change_next_method(self, inter : discord.Interaction, bet : str, gambling_func):
+		gambling_funcs = ["roll", "flip", "ladder"]
+		gambling_funcs.remove(gambling_func.__name__)
+		for i in range(10):
+
+			choice = random.choice(gambling_funcs)
+			print(choice)
+		if choice=="ladder":
+			await self.ladder(inter, bet)
+		elif choice == "flip":
+			guess : Literal["heads", "tails"] = random.choice(["heads", "tails"])
+			await self.flip(inter, bet, guess)
+		elif choice == "roll":
+			await self.roll(inter, bet)
+
+	async def change_next_gain(self, E : discord.Embed, inter:discord.Interaction, user_data : dict):
+		multiplicator = 1
+		if "next_gain_x3" in user_data["effects"]:
+			multiplicator = 3
+			user_data["effects"].remove("next_gain_x3")
+			user_data["effects"].remove("next_gain")
+			E.color = discord.Color.purple()
+			E.description = "Wow! You tripled your gain!"
+			await inter.followup.send(embed=E)
+
+		elif "next_gain_/3" in user_data["effects"]:
+			multiplicator = 1/3
+			user_data["effects"].remove("next_gain_/3")
+			user_data["effects"].remove("next_gain")
+			E.color = discord.Color.purple()
+			E.description = "Haha, your gain was divided by three!"
+			await inter.followup.send(embed=E)
+
+		elif "next_gain_x10" in user_data["effects"]:
+			multiplicator = 10
+			user_data["effects"].remove("next_gain_x10")
+			user_data["effects"].remove("next_gain")
+			E.color = discord.Color.purple()
+			E.description = "Wow! Your gain has grown by a factor 10!"
+			await inter.followup.send(embed=E)
+			
+		elif "next_gain_/10" in user_data["effects"]:
+			multiplicator = 1/10
+			user_data["effects"].remove("next_gain_/10")
+			user_data["effects"].remove("next_gain")
+			E.color = discord.Color.purple()
+			E.description = "Haha, your gain was divided by ten!"
+			await inter.followup.send(embed=E)
+
+		return multiplicator
+
 	async def roll(self, inter:discord.Interaction, bet:str):
-		await inter.response.defer()
+		try:
+			await inter.response.defer()
+		except:
+			pass
 
 		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
 		# if the already has a description, an issue was found
 		if E.description is not None:
 			return await inter.followup.send(embed=E)
-
+		
 		r = random.randint(1,100)
+
+		multiplicator = 1
+		double = False
+		divide = False
+		#Roulette effects
+
+		#changes the bet method
+		if "change_bet_method" in user_data["effects"]:
+			user_data["effects"].remove("change_bet_method")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E = await embed_roulette(self.bot, inter, E)
+			E.colour = discord.Colour.purple()
+			E.description = f"{inter.user.mention} hmmm no thanks I don't feel like rolling rn..."
+			await inter.followup.send(embed=E)
+			return await self.change_next_method(inter, bet, self.roll)
+		
+		#Changes the chances of winning
+		if "chances_next_bet_x2" in user_data["effects"]:
+			user_data["effects"].remove("chances_next_bet_x2")
+			double=True
+			E = await embed_roulette(self.bot, inter, E)
+			E.color = discord.Color.purple()
+			E.description = "Wow! You had twice the chance to win!"
+			await inter.followup.send(embed=E)
+		elif "chances_next_bet_/2" in user_data["effects"]:
+			user_data["effects"].remove("chances_next_bet_/2")
+			divide=True
+			E = await embed_roulette(self.bot, inter, E)
+			E.color = discord.Color.purple()
+			E.description = "Well, you had half the chance to win this one"
+			await inter.followup.send(embed=E)
+
+		#All in effect
+		if "next_bet_all" in user_data["effects"] and not self.already_all:	
+			user_data["effects"].remove("next_bet_all")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E = await embed_roulette(self.bot, inter, E)
+			E.description = f"Oops you accidently bet all"
+			E.colour = discord.Colour.purple()
+			await inter.followup.send(embed=E)
+
+		#if chances*2 : roll twice and take the best result
+		if double:
+			r = max(random.randint(1,100),random.randint(1,100))
+		#if chances/2 : roll twice and take the worst result
+		elif divide:
+			r = min(random.randint(1,100),random.randint(1,100))
+
+		# If effect include "next_gain" and it's winning, gain changed
+		if r >= 70  and "next_gain" in user_data["effects"]:
+			E = await embed_roulette(self.bot, inter, E)
+			multiplicator  = await self.change_next_gain(E, inter, user_data)
 		E.add_field(name="Roll:", value=f"**{r}**")
 		cash=amount
 		if r == 100:
-			cash = amount*10
+			#Il y a 2 int, un pour arrondir le résultat, un autre pour la division
+			cash = int(int(amount*10)*multiplicator)
 			E.description = f"{inter.user.mention}, You rolled a 100 and won **{cash}🌹!** 👑"
 			E.color = discord.Color.gold()
 		elif r >= 90:
-			cash = amount*4
+			cash = int(int(amount*4)*multiplicator)
 			E.description = f"{inter.user.mention}, You rolled 90 or above and won x4 **{cash}🌹!** 🎯"
 		elif r >= 70:
-			cash = amount*2
+			cash = int(int(amount*2)*multiplicator)
 			E.description = f"{inter.user.mention}, You rolled 70 or above and won x2 **{cash}🌹!** 🎉"
 		elif r==1:
 			E.description = f"{inter.user.mention}, You rolled a 1 and kept your **{cash}🌹!** ✨"
@@ -162,52 +304,174 @@ class GamblingHelper():
 		user_data["roses"] += - amount + cash
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
-		await inter.followup.send(embed=E)
+		await inter.followup.send(embed=E) 
 
 	async def flip(self, inter:discord.Interaction, bet:str, guess:Literal["heads", "tails"]):
-		await inter.response.defer()
+		try:
+			await inter.response.defer()
+		except:
+			pass
 
 		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
 
 		# if the already has a description, an issue was found
 		if E.description is not None:
 			return await inter.followup.send(embed=E)
-
+		
 		choice = random.choice(["heads", "tails"])
+		#Roulette effects
+
+		#changes the bet method
+		if "change_bet_method" in user_data["effects"]:
+			user_data["effects"].remove("change_bet_method")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E = await embed_roulette(self.bot, inter, E)
+			E.colour = discord.Colour.purple()
+			E.description = f"{inter.user.mention} hmmm no thanks I don't feel like flipping rn..."
+			await inter.followup.send(embed=E)
+			return await self.change_next_method(inter, bet, self.flip)
+			
+		multiplicator=1
+		divide=False
+		double=False
+		
+		#Changes the chances of winning
+		if "chances_next_bet_x2" in user_data["effects"]:
+			double=True
+			user_data["effects"].remove("chances_next_bet_x2")
+			E = await embed_roulette(self.bot, inter, E)
+			E.color = discord.Color.purple()
+			E.description = "Wow! You had twice the chance to win!"
+		elif "chances_next_bet_/2" in user_data["effects"]:
+			divide=True
+			user_data["effects"].remove("chances_next_bet_/2")
+			E = await embed_roulette(self.bot, inter, E)
+			E.color = discord.Color.purple()
+			E.description = "Well, you had half the chance to win this one"
+			await inter.followup.send(embed=E)
+		
+		#All in effect
+		if "next_bet_all" in user_data["effects"] and not self.already_all:	
+			user_data["effects"].remove("next_bet_all")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E = await embed_roulette(self.bot, inter, E)
+			E.description = f"Oops you accidently bet all"
+			E.colour = discord.Colour.purple()
+			await inter.followup.send(embed=E)
+		double_tails=0
+		double_heads=0
+		divide_heads=0
+		divide_tails=0
+
+		if double:
+			if guess=="heads":
+				double_heads=1
+			else:
+				double_tails=1
+		elif divide:
+			if guess=="heads":
+				divide_tails=1
+			else:
+				divide_heads=1
+
+		#if chances*2 : flip two times and take the best result, if chances/2 do the opposite
+		if double or divide:
+			choice = random.choices(["heads", "tails"], [1 + double_heads + divide_heads, 1 + double_tails + divide_tails])[0]
+		# If effect include "next_gain" and it's winning, gain changed
+		if guess == choice and "next_gain" in user_data["effects"]:
+			E = await embed_roulette(self.bot, inter, E)
+			multiplicator = await self.change_next_gain(E, inter, user_data)
+
 		if choice == "tails":
 			image = "https://media.discordapp.net/attachments/709313685226782751/1126924584973774868/ttails.png"
 		else:
 			image = "https://media.discordapp.net/attachments/709313685226782751/1126924585191882833/hheads.png"
-
 		E.title = f"{choice.capitalize()}!"
 		E.set_image(url=image)
 
+
 		if guess == choice:
-			cash = int(amount*1.8)
+			#Il y a 2 int, un pour arrondir le résultat, un autre pour la division
+			cash = int(int(amount*1.8)*multiplicator)
 			E.description = f"You guessed it right and won **{cash}🌹!** 🎉"
+			E.color = discord.Color.green()
 		else:
 			cash = 0
 			E.color = discord.Color.red()
 			E.description = f"You guessed it wrong..."
-
+		if "free_flip_when_collect" in user_data["effects"]:
+			amount = 0
 		user_data["roses"] += - amount + cash
+
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
 		await inter.followup.send(embed=E)
 
 	async def ladder(self, inter:discord.Interaction, bet:str):
-		await inter.response.defer()
+		try:
+			await inter.response.defer()
+		except:
+			pass
 
 		amount, E, user_data = await self.is_allowed_to_bet(inter, bet)
 		# if the already has a description, an issue was found
 		if E.description is not None:
 			return await inter.followup.send(embed=E)
 
+
 		r = random.randint(1,8)
+		multiplicator=1
+		double=False
+		divide=False
+		#Roulette effects
+
+		#changes the bet method
+		if "change_bet_method" in user_data["effects"]:
+			user_data["effects"].remove("change_bet_method")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E = await embed_roulette(self.bot, inter, E)
+			E.colour = discord.Colour.purple()
+			E.description = f"{inter.user.mention} hmmm no thanks I don't feel like laddering rn..."
+			await inter.followup.send(embed=E)
+			return await self.change_next_method(inter, bet, self.ladder)
+
+		#Changes the chances of winning
+		if "chances_next_bet_x2" in user_data["effects"]:
+			user_data["effects"].remove("chances_next_bet_x2")
+			double=True
+			E = await embed_roulette(self.bot, inter, E)
+			E.color = discord.Color.purple()
+			E.description = "Wow! You had twice the chance to win!"
+		elif "chances_next_bet_/2" in user_data["effects"]:
+			user_data["effects"].remove("chances_next_bet_/2")
+			divide=True
+			E = await embed_roulette(self.bot, inter, E)
+			E.color = discord.Color.purple()
+			E.description = "Well, you had half the chance to win this one"
+			await inter.followup.send(embed=E)
+
+		#if chances*2 : ladder twice and take the best result, if chances/2 do the opposite
+		if double:
+			r = max(random.randint(1,8),random.randint(1,8))
+		elif divide:
+			r = min(random.randint(1,8),random.randint(1,8))
+		elif r>=6  and "next_gain" in user_data["effects"]:
+			E = await embed_roulette(self.bot, inter, E)
+			multiplicator  = await self.change_next_gain(E, inter, user_data)
+		if "next_bet_all" in user_data["effects"] and not self.already_all:	
+			E = await embed_roulette(self.bot, inter, E)
+			user_data["effects"].remove("next_bet_all")
+			upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
+			E.description = f"Oops you accidently bet all"
+			E.colour = discord.Colour.purple()
+			await inter.followup.send(embed=E)
+
 		if r <= 4:
 			E.color = discord.Color.red()
 		if r == 5: 
 			E.color = discord.Color.blurple()
+		if 8 > r > 5:
+			E.color = discord.Color.green()
 		if r == 8:
 			E.color = discord.Color.gold()
 
@@ -235,7 +499,7 @@ class GamblingHelper():
 		display[8-r] = display[8-r].replace("||", "**") + ' ⬅️'
 		E.description = "\n".join(display)
 
-		cash = int(amount * equivalents[r])
+		cash = int(int(amount * equivalents[r])*multiplicator)
 
 		E.add_field(name="Multiplier", value=f"**x{equivalents[r]}**")
 		E.add_field(name="Won", value=f"**{cash}🌹 **")
@@ -244,8 +508,43 @@ class GamblingHelper():
 		upd_data(user_data, f"games/users/{inter.user.id}")
 
 		await inter.followup.send(embed=E)
+    
+	async def lotto(self, inter:discord.Interaction, guess:int):
+		assert inter.guild
+		await inter.response.defer(ephemeral=True)
 
+		E, user_data = await self.check(inter)
+		users = get_data("games/users")
 
+		url = random_avatar()
+		if inter.user.avatar:
+			url = inter.user.avatar.url
+		
+		E.set_author(name=inter.user.display_name, url = await GetLogLink(self.bot, url))
+		E.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1219558860516364302/1497938622018486373/lotto-2.png?ex=69ef578d&is=69ee060d&hm=950c4d2bf75c0b50ce7073fbf5f7bd7ddc5181abf4b1bfb7af56ebc09e414310&")
+
+		#Checks the validity of the guess
+		if guess<1 or guess>15:
+			E.description = f"{inter.user.mention}, your guess must be between 1 and 15"
+			E.color = discord.Color.red()
+			return await inter.followup.send(embed=E, ephemeral=True)
+		
+		#Each guess can only be picked once
+		for user in users:
+			if get_data(f"games/users/{user}/lotto_guess") == guess:
+				if user == str(inter.user.id):
+					E.color = discord.Color.red()
+					E.description = f"{inter.user.mention}, this is already your current guess"
+					return await inter.followup.send(embed=E, ephemeral=True)
+				else:
+					E.description = f"{inter.user.mention}, this guess has already been taken by another user, please choose another one"
+					E.color = discord.Color.red()
+					return await inter.followup.send(embed=E, ephemeral=True)
+		
+		user_data["lotto_guess"] = guess
+		upd_data(user_data["lotto_guess"], f"games/users/{inter.user.id}/lotto_guess")
+		E.description = f"Your guess has been registered, good luck!"
+		await inter.followup.send(embed=E, ephemeral=True)
 
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Gambling(bot))
