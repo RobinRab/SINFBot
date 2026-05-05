@@ -6,7 +6,7 @@ import asyncio
 import datetime as dt
 import discord
 
-from cmds.games.wordle import Wordle, get_words
+from cmds.games.wordle import get_words
 from utils import get_data, upd_data, get_belgian_time, get_acnh_data, UserAccount
 from settings import BOT_CHANNEL_ID
 
@@ -38,8 +38,6 @@ def reset_wordle_choice() -> None:
 		user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
 		user_data["wordle_stats_ge"]["todays_w_results_shown"] = 0
 		user_data["wordle_stats_sp"]["todays_w_results_shown"] = 0
-		if user_data["wordle_ban"] > 0:
-			user_data["wordle_ban"] -= 1
 		upd_data(user_data, f"games/users/{user_id}")
 
 def reset_daily_villagers() -> None:
