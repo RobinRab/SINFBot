@@ -352,7 +352,7 @@ class Roulette:
             await inter.followup.send(embed=E)
 
         if not has_been_answered:
-            await inter.followup.send("A random effect has been applied to one of you, wait and see", ephemeral=True)
+            await inter.followup.send("A random effect has been applied to one of you, wait and see")
 
         upd_data(user_data["effects"], f"games/users/{inter.user.id}/effects")
 

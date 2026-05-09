@@ -13,7 +13,7 @@ class MissingCommand(Exception):pass
 bot_commands = {
 	"Owner"           : [is_owner, "!/sync", "/reload", "/enable", "/disable", "/debug"],
 	"Cuties"          : [is_cutie, "/say", "/resp", "/rename", "/avatar", "/status", "/activity", "/bpoll"],
-	"Tetrio"          : [is_member, "/register", "/profile", "/leaderboard"],
+	"Tetrio"          : [is_member, "/register", "/profile", "/leaderboard", "/guesses"],
 	"Infos"           : [is_member, "/help", "/file_to_link", "/link_to_file", "/emoji"],
 	"Birthdays"       : [is_member, "/set_birthday", "/birthdays"],
 	"Member Fun"      : [is_member, "/confession", "/apoll"],
@@ -44,7 +44,6 @@ class Help(commands.Cog):
 					if command.name == name.lower():
 						found_commands.append(command)
 						break
-
 			return found_commands
 
 		await inter.response.defer()
@@ -222,6 +221,11 @@ class Help(commands.Cog):
 					E.add_field(name="**Example**", value="```/leaderboard```")
 					E.add_field(name="**Cooldown**", value="```60s / user```")
 					E.add_field(name="**Requirement**", value="```MEMBER```")
+				elif query == "guesses":
+					lotto = (await get_app_commands(["lotto"]))[0]
+					E.description = f"Use this command to find out which {lotto.mention} number is still available!\n"\
+					"Displays a list of everyone's guesses for this week."
+					E.set_footer(text = "Do /help /lotto to learn more about this command")
 
 				# infos commands
 				elif query == "file_to_link":
@@ -291,7 +295,7 @@ class Help(commands.Cog):
 					E.add_field(name="**Cooldown**", value="```10h / user```")
 					E.add_field(name="**Requirement**", value="```None```")
 				elif query == "balance":
-					E.description = "**Displays a user's ressources (yours if user is None)*"
+					E.description = "**Displays a user's ressources (yours if user is None)**"
 					E.add_field(name="**Example**", value="```/balance (user)```")
 					E.add_field(name="**Cooldown**", value="```5s / user```")
 					E.add_field(name="**Requirement**", value="```None```")
