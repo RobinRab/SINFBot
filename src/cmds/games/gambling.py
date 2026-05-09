@@ -569,11 +569,9 @@ class GamblingHelper:
 				return emb
 			desc = ""
 			for lotto_guess in rows:
-				print(user, lotto_guess)
 				desc += f"\n**<@!{lotto_guess[0]}>**: {lotto_guess[1]}"
 			emb.description = desc
 			return emb
-		print(lotto_guesses)
 		lotto_guesses = sorted(lotto_guesses, key=lambda x: x[1])
 		E = make_embed("Current lotto guesses of the week", lotto_guesses)
 		await inter.followup.send(embed=E, ephemeral=True)
