@@ -282,7 +282,7 @@ class Roulette:
             has_been_answered = True
             other_user_data["level"]+=1
             upd_data(other_user_data["level"], f"games/users/{other_user.id}/level")
-            E.colour = discord.Colour.purple()
+            E.colour = discord.Colour.green()
             E.description = f"Congratulations you leveled-up {other_user.mention} to level **{other_user_data['level']}**!"
             await inter.followup.send(embed=E)
 
@@ -291,12 +291,12 @@ class Roulette:
             if other_user_data["level"]>0:
                 other_user_data["level"]-=1
                 upd_data(other_user_data["level"], f"games/users/{other_user.id}/level")
-                E.colour = discord.Colour.purple()
+                E.colour = discord.Colour.red()
                 E.description = f"Haha, you leveled-down {other_user.mention} to level **{other_user_data['level']}**!"
                 await inter.followup.send(embed=E)
             else:
                 # If the user is at level 0 they're not leveled down
-                E.colour = discord.Colour.red()
+                E.colour = discord.Colour.purple()
                 E.description = f"{other_user.mention} didn't level down because they're already level 0..."
                 await inter.followup.send(embed=E)
         
