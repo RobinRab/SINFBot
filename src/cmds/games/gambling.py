@@ -48,6 +48,13 @@ class Gambling(commands.Cog):
 		GH = GamblingHelper(self.bot)
 		await GH.lotto(inter, guess)
 
+	@app_commands.command(description="Which lotto guesses are already taken")
+	@app_commands.checks.cooldown(1, 1, key=lambda i: (i.guild_id, i.user.id))
+	@app_commands.guild_only()
+	async def guesses(self, inter:discord.Interaction):
+		GH = GamblingHelper(self.bot)
+		await GH.guesses(inter)
+
 	@roll.autocomplete("bet")
 	@flip.autocomplete("bet")
 	@ladder.autocomplete("bet")
@@ -544,7 +551,30 @@ class GamblingHelper:
 		user_data["lotto_guess"] = guess
 		upd_data(user_data["lotto_guess"], f"games/users/{inter.user.id}/lotto_guess")
 		E.description = f"Your guess has been registered, good luck!"
+		return await inter.followup.send(embed=E, ephemeral=True)
+	
+	async def guesses(self, inter:discord.Interaction):
+		await inter.response.defer()
+		users = get_data("games/users")
+		lotto_guesses = []
+		for user in users:
+			lotto_guess = get_data(f"games/users/{user}/lotto_guess")
+			if lotto_guess != -1:
+				lotto_guesses.append((user, lotto_guess))
+		
+		def make_embed(title: str, rows: list):
+			emb = discord.Embed(title=title, description="", color=discord.Colour.blurple())
+			if not rows:
+				emb.description = "No one guessed yet! Be the first :)"
+				return emb
+			desc = ""
+			for lotto_guess in rows:
+				desc += f"\n**<@!{lotto_guess[0]}>**: {lotto_guess[1]}"
+			emb.description = desc
+			return emb
+		lotto_guesses = sorted(lotto_guesses, key=lambda x: x[1])
+		E = make_embed("Current lotto guesses of the week", lotto_guesses)
 		await inter.followup.send(embed=E, ephemeral=True)
-
+		
 async def setup(bot:commands.Bot):
 	await bot.add_cog(Gambling(bot))
