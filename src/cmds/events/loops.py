@@ -106,7 +106,7 @@ class Loops(commands.Cog):
 		free_sunday_roll()
 
 		#Lotto results
-		if now.weekday() == 5:
+		if now.weekday() == 6:
 			await self.lotto_results()
 
 	async def lotto_results(self) -> None:
