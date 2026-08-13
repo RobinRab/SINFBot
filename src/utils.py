@@ -224,7 +224,6 @@ async def embed_roulette(bot, inter : discord.Interaction, E : discord.Embed):
     
 	E.title = "Roulette"
 	E.color = discord.Color.purple()
-	E.set_footer(text="Roulette by Scylla and Ceisal")
 	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/1090314687620583467/1497886878081224734/Roulette_bot.png?ex=69ef275d&is=69edd5dd&hm=f78d2ca10f3e65af9b70e8ee30f479447be5093832a024ab3e1b177f6ec21dbd&")	
 	E.color = discord.Color.purple()
 
@@ -384,16 +383,53 @@ def new_user() -> UserAccount:
 		"wordle_sp": {},
 		"wordle_ge": {},
         "wordle_stats_en": {
-            "todays_w_results_shown": 0
+            "todays_w_results_shown": 0,
+			"1" : 0,
+			"2" : 0,
+			"3" : 0,
+			"4" : 0,
+			"5" : 0,
+			"6" : 0,
+			"X" : 0,
+			"streak" : 0,
+			"best_streak": 0
+
         },
         "wordle_stats_fr": {
-            "todays_w_results_shown": 0
+            "todays_w_results_shown": 0,
+			"1" : 0,
+			"2" : 0,
+			"3" : 0,
+			"4" : 0,
+			"5" : 0,
+			"6" : 0,
+			"X" : 0,
+			"streak" : 0,
+			"best_streak": 0
         },
 		"wordle_stats_sp": {
-            "todays_w_results_shown": 0
+            "todays_w_results_shown": 0,
+			"1" : 0,
+			"2" : 0,
+			"3" : 0,
+			"4" : 0,
+			"5" : 0,
+			"6" : 0,
+			"X" : 0,
+			"streak" : 0,
+			"best_streak": 0
         },
 		"wordle_stats_ge": {
-            "todays_w_results_shown": 0
+            "todays_w_results_shown": 0,
+			"1" : 0,
+			"2" : 0,
+			"3" : 0,
+			"4" : 0,
+			"5" : 0,
+			"6" : 0,
+			"X" : 0,
+			"streak" : 0,
+			"best_streak": 0
         },
         "villager_of_the_day": "",
         "villagers" : [],
@@ -470,12 +506,11 @@ def new_update() -> discord.Embed:
 	E.set_thumbnail(url="https://cdn.discordapp.com/attachments/709313685226782751/1224344157854765096/upd.png?ex=661d265a&is=660ab15a&hm=0de144c03536daff3f69408db2013ea4e9088967ce9044fd8220791516d64283")
 	E.title = "New update !"
 	E.set_author(name="SINF illégal family bot")
-	E.description = "- Roulette ! (At last :pray:)\n"
-	E.description += "- Wordle debug\n"
-	E.description += "- Wordle Spanish and German\n"
-	E.description += "- Sunday Lotto \n"
+	E.description = "- Wordles stats are now here ! :sparkles: \n"
+	E.description += "Type /wordles_stats to check your or another user's wordle statistics"
+
 
 	E.description += "\n\nThis message will be shown to everyone the first time they interact with the bot after this update"
-	E.add_field(name="Authors", value="<@!627431499960156161> and <@!411881842439094272>")
+	E.add_field(name="Author", value="<@!627431499960156161>")
 
 	return E

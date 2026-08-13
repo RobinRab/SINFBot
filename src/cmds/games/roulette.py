@@ -30,7 +30,11 @@ class Roulette:
             def __init__(self):
                 super().__init__(timeout=60)
                 self.clicked = asyncio.Future()
-
+            async def interaction_check(self, inter2: discord.Interaction):
+                if inter2.user.id != inter.user.id:
+                    await inter2.response.send_message("❌ You cannot click on this button ❌", ephemeral=True)
+                    return False
+                return True
             @discord.ui.button(label="🎰 Free spin!", style=discord.ButtonStyle.green)
             async def free_spin(self, inter: discord.Interaction, button: ui.Button):
                 if not self.clicked.done():
@@ -48,7 +52,7 @@ class Roulette:
                 self.stop()
 
         #Not enough candies and no free spin
-        if user_data["candies"]<1 and user_data["free_sunday_roll"] == 0 and "never_played" not in user_data["effects"]:
+        if user_data["candies"]<1 and user_data["free_sunday_roll"] == 0 and "never_played" not in user_data["effects"] and "free_roulette" not in user_data["effects"]:
             E.description = f"{inter.user.mention}, You don't have enough 🍬"
             E.color = discord.Color.red()
             return await inter.followup.send(embed=E)
@@ -72,6 +76,8 @@ class Roulette:
 
 
         #First time using the roulette => free spin
+        print(user_data["effects"])
+
         if "never_played" in user_data["effects"]:
             #never_played removed from json (so the user can't /roulette more than once)
             user_data["effects"].remove("never_played")
@@ -79,7 +85,6 @@ class Roulette:
 
             E.colour = discord.Colour.gold()
             E.description = f"Welcome to the Roulette, {inter.user.mention}!\n As it's your first time, you get a *free spin*! \n\nYou can use the `help` command to know more about this feature."
-
             view = FreeSpin()
             msg = await inter.followup.send(embed=E, view=view)
             
@@ -100,6 +105,7 @@ class Roulette:
                 return
 
         #The user won a free roulette from another player
+        
         elif "free_roulette" in user_data["effects"]:
             E.description = f"{inter.user.mention} used the roulette! Free roll!"
             await inter.followup.send(embed = E)

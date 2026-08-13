@@ -13,31 +13,27 @@ from settings import BOT_CHANNEL_ID
 
 def reset_wordle_choice() -> None:
 	#user_data = await self.get_data_wordle(inter)
-	w_data = get_words()
-	wordle_list_en = w_data["wordle_list_en"]
-	wordle_list_fr = w_data["wordle_list_fr"]
-	wordle_list_ge = w_data["wordle_list_ge"]
-	wordle_list_sp = w_data["wordle_list_sp"]
-	wordle_word_en = random.choice(wordle_list_en)
-	wordle_word_fr = random.choice(wordle_list_fr)
-	wordle_word_ge = random.choice(wordle_list_ge)
-	wordle_word_sp = random.choice(wordle_list_sp)
 
-	upd_data(wordle_word_en, "games/todays_word_en")
-	upd_data(wordle_word_fr, "games/todays_word_fr")
-	upd_data(wordle_word_ge, "games/todays_word_ge")
-	upd_data(wordle_word_sp, "games/todays_word_sp")
+	languages = ["en", "fr", "sp", "ge"]
+	w_data = get_words()
+	
+	#Chooses new daily wordle word
+	for l in languages:
+		upd_data(random.choice(w_data[f"wordle_list_{l}"]), f"games/todays_word_{l}")
 
 	for user_id in get_data("games/users").keys():
 		user_data = get_data(f"games/users/{user_id}")
-		user_data["wordle_en"] = {}
-		user_data["wordle_fr"] = {}
-		user_data["wordle_ge"] = {}
-		user_data["wordle_sp"] = {}
-		user_data["wordle_stats_en"]["todays_w_results_shown"] = 0
-		user_data["wordle_stats_fr"]["todays_w_results_shown"] = 0
-		user_data["wordle_stats_ge"]["todays_w_results_shown"] = 0
-		user_data["wordle_stats_sp"]["todays_w_results_shown"] = 0
+		
+		for l in languages:
+			#Resets/increases user's streak + updates best streak
+			if user_data[f"wordle_stats_{l}"]["todays_w_results_shown"] == 0:
+				user_data[f"wordle_stats_{l}"]["streak"] = 0
+			
+			#Resets wordle guesses for every user
+			user_data[f"wordle_{l}"] = {}
+			user_data[f"wordle_stats_{l}"]["todays_w_results_shown"] = 0
+
+
 		upd_data(user_data, f"games/users/{user_id}")
 
 def reset_daily_villagers() -> None:

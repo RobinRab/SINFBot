@@ -4,7 +4,7 @@ from discord.ext import commands
 
 import csv
 import asyncio
-from typing import Literal, Dict
+from typing import Literal, Dict, Optional
 
 from settings import DATA_DIR, GUILD_ID
 from utils import get_data, upd_data, get_value, new_user, GetLogLink, simplify, is_member, get_user_data,UserAccount #, embed_roulette
@@ -179,8 +179,16 @@ class Wordle(commands.Cog):
                 break
 
         if has_won:
-            #Updates the roses of the user
+            #Updates the streak of the user 
             user_data = await self.get_data_wordle(inter)
+
+            user_data[f"wordle_stats_{l_abbr}"][f"{current_number_guess}"] += 1
+            user_data[f"wordle_stats_{l_abbr}"]["streak"] += 1
+            if user_data[f"wordle_stats_{l_abbr}"]["streak"] >= user_data[f"wordle_stats_{l_abbr}"]["best_streak"]:
+                user_data[f"wordle_stats_{l_abbr}"]["best_streak"] = user_data[f"wordle_stats_{l_abbr}"]["streak"]
+                upd_data(user_data, f"games/users/{inter.user.id}")
+            
+            #Updates the roses of the user 
             if not bonus:
                 value = int(get_value(user_data)//2)
                 user_data["roses"] += value
@@ -210,6 +218,8 @@ class Wordle(commands.Cog):
         
         if not has_won:
             todays_colors=""
+            user_data[f"wordle_stats_{l_abbr}"]["X"] += 1
+            user_data[f"wordle_stats_{l_abbr}"]["streak"] = 0
             for color in user_data[current_w].values():
                 todays_colors+=color+"\n"
             await inter.followup.send(f"You lost, the word was **{wordle_word}**", ephemeral=True)
@@ -223,6 +233,99 @@ class Wordle(commands.Cog):
         upd_data(user_data[f"wordle_stats_{l_abbr}"], f"games/users/{inter.user.id}/wordle_stats_{l_abbr}")
         # The user is not playing anymore
         del Wordle.active_games[user_id]
+
+    @app_commands.command(description="Check your's or another user's wordle statistics!")
+    @app_commands.checks.cooldown(1, 5, key=lambda i: (i.guild_id, i.user.id))
+    @app_commands.guild_only()
+    async def wordle_stats(self, inter:discord.Interaction, user:Optional[discord.Member]):
+        await inter.response.defer()
+		# if not target specified, target is the user
+        target = inter.user
+        if user is not None:
+            target = user
+        E = discord.Embed()
+        E.color = discord.Color.blurple()
+        E.set_author(name=target.name, icon_url=await GetLogLink(self.bot, target.display_avatar.url))
+
+        try: 
+            user_data : UserAccount = get_data(f"games/users/{target.id}")
+        except :
+            E.description = f"{target.mention} has never played"
+            E.color = discord.Color.red()
+            return await inter.followup.send(embed=E)   
+        
+        E_en = stats(E, user_data, "en", "English")
+        E_fr = stats(E, user_data, "fr", "French")
+        E_sp = stats(E, user_data, "sp", "Spanish")
+        E_ge = stats(E, user_data, "ge", "German")
+
+        class Stats_language(discord.ui.View):
+            def __init__(self, timeout=120):
+                super().__init__(timeout=timeout)
+                self.message : Optional[discord.Message]
+
+            async def interaction_check(self, inter2: discord.Interaction):
+                return inter2.user.id == inter.user.id
+
+            @discord.ui.button(label="English",style=discord.ButtonStyle.blurple)
+            async def page_home(self, inter2: discord.Interaction, _: discord.ui.Button):
+                await inter2.response.edit_message(embed=E_en)
+
+            @discord.ui.button(label="French",style=discord.ButtonStyle.blurple)
+            async def page_1(self, inter2: discord.Interaction, _: discord.ui.Button):
+                await inter2.response.edit_message(embed=E_fr)
+
+            @discord.ui.button(label="Spanish",style=discord.ButtonStyle.blurple)
+            async def page_2(self, inter2: discord.Interaction, _: discord.ui.Button):
+                await inter2.response.edit_message(embed=E_sp)
+
+            @discord.ui.button(label="German",style=discord.ButtonStyle.blurple)
+            async def page_3(self, inter2: discord.Interaction, _: discord.ui.Button):
+                await inter2.response.edit_message(embed=E_ge)
+        
+            async def on_timeout(self):
+                for item in self.children:
+                    if isinstance(item, discord.ui.Button):
+                        item.disabled = True
+
+                if isinstance(self.message, discord.Message):
+                    await self.message.edit(view=self)
+
+        roulette_help = Stats_language()
+        roulette_help.message = await inter.followup.send(embed=E_en, view=roulette_help)
+        return
+        
+def stats(E: discord.Embed, user_data: UserAccount, language: str, l : str) -> discord.Embed:    
+    E = E.copy()
+    wordle_stats = []
+
+    for i in range (1,7):
+        wordle_stats.append(user_data[f"wordle_stats_{language}"][f"{i}"])
+    streak = user_data[f"wordle_stats_{language}"]["streak"]
+    best_streak = user_data[f"wordle_stats_{language}"]["best_streak"]
+
+    highest_num_guesses = max(wordle_stats)
+    if highest_num_guesses == 0:
+        highest_num_guesses = 1
+    n_bars = 20
+    bars = "█"
+
+    E.title = f"{l} Wordle Statistics"
+    E.add_field(name = "Current Streak", value = f"```{streak}```\n", inline=True)
+    E.add_field(name = "Best Streak", value = f"```{best_streak}```\n", inline=True)
+    E.add_field(name = "Win %", value = f"```{(int) (100 * (sum(wordle_stats) - user_data[f"wordle_stats_{language}"]["X"])/sum(wordle_stats)) if sum(wordle_stats) != 0 else 0} %```", inline=True)
+    E.add_field(name = "Played", value = f"```{sum(wordle_stats) + user_data[f"wordle_stats_{language}"]["X"]}```", inline=True)
+    
+    guess_dis = "```"
+    for i, num_of_guesses in enumerate (wordle_stats):
+        num_of_bars = (int)((num_of_guesses/highest_num_guesses) * n_bars)
+        if num_of_bars == 0: 
+            num_of_bars = 1
+        guess_dis += f"{i+1} : {num_of_bars * bars} {num_of_guesses}\n\n"
+    
+    guess_dis += "```"
+    E.add_field (name = "Guess distribution \n", value = guess_dis, inline = False)
+    return E
 
 #Puts spaces between letters of guessed word and colors
 def space(content : str):
